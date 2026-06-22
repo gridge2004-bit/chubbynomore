@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
 const semaglutideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
-const tirzepatideImg = "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&q=80";
-const step1Img = "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=600&q=80";
-const step2Img = "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80";
-const step3Img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
+const tirzepatideImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80";
+const step1Img = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80";
+const step2Img = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80";
+const step3Img = "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=600&q=80";
 const ctaImg = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
 
 export const Route = createFileRoute("/")({
