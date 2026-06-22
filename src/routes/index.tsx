@@ -318,16 +318,16 @@ function FAQ() {
   return (
     <section id="faq" className="bg-white px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
-        <div>
+        <Reveal>
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
             Weight Loss Treatment <em className="italic">FAQs</em>
           </h2>
-        </div>
+        </Reveal>
         <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={f.q}>
+              <Reveal key={f.q} delay={i * 60}>
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -343,7 +343,7 @@ function FAQ() {
                     <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
