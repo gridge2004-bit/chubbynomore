@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import semaHero from "@/assets/sema-hero.jpg";
-import tirzHero from "@/assets/tirz-hero.jpg";
-import semaProduct from "@/assets/semaglutide.jpg";
-import tirzProduct from "@/assets/tirzepatide.jpg";
+const semaHero = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80";
+const tirzHero = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80";
+const semaProduct = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
+const tirzProduct = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80";
 import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
