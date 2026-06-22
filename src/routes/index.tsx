@@ -346,7 +346,7 @@ function DrugSection({
             <p className="mt-5 max-w-md text-base text-muted-foreground">{body}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="#cta" className="btn-pill">Check If I Qualify →</a>
+            <a href="#cta" className="btn-pill">Check If I Qualify — Free & Fast →</a>
             <a href="#how" className="btn-pill-outline">How it works</a>
           </div>
         </div>
