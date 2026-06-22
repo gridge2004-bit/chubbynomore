@@ -147,7 +147,7 @@ function Hero() {
             src={heroImg}
             alt="Athletic man running on a mountain trail"
             className="absolute h-[160%] w-full object-cover"
-            style={{ top: "-30%", objectPosition: "left center" }}
+            style={{ top: "-30%" }}
             loading="eager"
           />
         </div>
