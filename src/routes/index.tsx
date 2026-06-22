@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
+const heroImg = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
 const semaglutideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
 const tirzepatideImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80";
-const step1Img = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80";
-const step2Img = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80";
-const step3Img = "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=600&q=80";
-const ctaImg = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
+const step1Img = "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80";
+const step2Img = "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80";
+const step3Img = "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80";
+const ctaImg = "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -142,7 +142,7 @@ function Hero() {
     <section className="w-full border-b border-[#E7E8EE]">
       <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
         <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
-          <img src={heroImg} alt="People in athletic wear" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+          <img src={heroImg} alt="Woman stretching in athletic wear" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
         </div>
         <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</span>
