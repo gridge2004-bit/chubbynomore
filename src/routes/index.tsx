@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo.png";
 
 const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
