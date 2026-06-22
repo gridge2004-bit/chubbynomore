@@ -288,12 +288,12 @@ function Testimonials() {
   return (
     <section className="bg-[#F7F7F7] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           <em className="italic">Results</em> that speak louder than promises.
-        </h2>
+        </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <div key={t.name} className="flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
+          {testimonials.map((t, idx) => (
+            <Reveal key={t.name} delay={idx * 150} className="card-lift flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => <Star key={i} />)}
               </div>
@@ -304,7 +304,7 @@ function Testimonials() {
                 </svg>
                 Verified buyer
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
         <p className="mt-8 text-xs text-[#5A6075]">Collected from verified customers. Results vary.</p>
