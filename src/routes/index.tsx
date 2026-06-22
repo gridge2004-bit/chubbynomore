@@ -105,6 +105,7 @@ function Index() {
         goals={tirzGoals}
         formats={["Self-inject pen", "Vial + syringe", "Titration-adjusted dosing"]}
       />
+      <HowItWorks />
       <Credibility />
       <FAQ />
       <CTASection />
