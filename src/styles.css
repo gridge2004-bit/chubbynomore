@@ -78,7 +78,7 @@
   }
   .marquee-track {
     display: inline-flex; gap: 3rem; padding-right: 3rem;
-    animation: marquee 40s linear infinite;
+    animation: marquee 30s linear infinite;
     white-space: nowrap;
   }
   @keyframes marquee {
@@ -87,4 +87,28 @@
   }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    .marquee-track { animation: none; }
+  }
+
+  .card-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -20px rgba(27, 33, 71, 0.25);
+  }
+}
 }
