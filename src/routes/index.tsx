@@ -412,7 +412,7 @@ function CTASection() {
               placeholder="you@email.com"
               className="flex-1 rounded-full border border-border bg-white px-5 py-3.5 text-sm outline-none focus:border-forest"
             />
-            <button className="btn-pill justify-center">Start free eval →</button>
+            <button className="btn-pill justify-center">Get My Free Evaluation →</button>
           </div>
         </form>
 
