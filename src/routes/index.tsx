@@ -58,6 +58,10 @@ const faqs = [
   { q: "Is this covered by HSA or FSA?", a: "Yes. ChubbyNoMore programs are HSA and FSA eligible. We provide itemized receipts for reimbursement." },
   { q: "What are the side effects?", a: "Common side effects include nausea, fatigue, and mild GI discomfort, especially during titration. Your physician will discuss your full risk profile during the evaluation." },
   { q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can pause or cancel your program at any time from your account." },
+  { q: "Is this safe? Are there risks I should know about?", a: "GLP-1 medications like semaglutide and tirzepatide have been FDA-approved and studied extensively. Like all medications, they carry possible side effects (most commonly nausea and fatigue, especially early on). That's exactly why we require a physician evaluation before every prescription — to make sure it's the right fit for your health profile." },
+  { q: "How is this different from getting GLP-1 from my regular doctor?", a: "Most primary care physicians have limited time for weight management and may not be familiar with titration protocols. Our platform is built specifically for GLP-1 care — with physicians who specialize in metabolic health, ongoing dose adjustments, and support throughout your journey." },
+  { q: "What if I don't qualify?", a: "If you don't qualify after your free evaluation, you won't be charged anything. Our physicians will let you know why and may suggest alternatives that could be a better fit for your situation." },
+  { q: "Will insurance cover this?", a: "Most insurance plans do not cover compounded GLP-1 medications. However, our programs are HSA/FSA eligible, and our pricing is transparent with no hidden fees. Many patients find it more affordable than expected." },
 ];
 
 function Index() {
