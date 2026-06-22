@@ -405,6 +405,17 @@ function Credibility() {
       <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
         Built on real medicine, not marketing.
       </h2>
+      <div className="mx-auto mt-12 max-w-3xl text-left">
+        <blockquote className="border-l-[3px] border-[color:var(--forest)] pl-6">
+          <p className="font-serif text-xl leading-relaxed md:text-2xl">
+            "Every patient on our platform is reviewed by a licensed physician before any prescription is written. We treat this like a real clinical practice, not a subscription service."
+          </p>
+          <div className="mt-4 flex items-center gap-3">
+            <img src="https://i.pravatar.cc/48?img=252" alt="Dr. Rachel Kim" className="h-10 w-10 rounded-full object-cover" loading="lazy" />
+            <span className="text-sm font-medium text-muted-foreground">— Dr. Rachel Kim, MD, Internal Medicine</span>
+          </div>
+        </blockquote>
+      </div>
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {credibility.map((c, i) => (
           <div key={c.title} className="card-surface p-8 text-left">
