@@ -139,26 +139,34 @@ function Nav({ scrolled }: { scrolled: boolean }) {
 }
 
 function Hero() {
+  const parallaxRef = useParallax(0.4);
   return (
     <section className="w-full border-b border-[#E7E8EE]">
       <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
         <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
-          <img src={heroImg} alt="Woman stretching in athletic wear" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+          <img
+            ref={parallaxRef as React.RefObject<HTMLImageElement>}
+            src={heroImg}
+            alt="Woman stretching in athletic wear"
+            className="absolute inset-0 h-[120%] w-full object-cover"
+            style={{ top: "-10%" }}
+            loading="eager"
+          />
         </div>
         <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</span>
-          <h1 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
+          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</Reveal>
+          <Reveal as="h1" delay={80} className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
             GLP-1 weight loss,
             <br />
             <em className="font-serif italic text-[#1B2147]">backed by science.</em>
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
+          </Reveal>
+          <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
             Physician-supervised weight loss — personalized to your goals, delivered to your door.
-          </p>
-          <div className="mt-8">
+          </Reveal>
+          <Reveal delay={240} className="mt-8">
             <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
-          </div>
-          <p className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</p>
+          </Reveal>
+          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</Reveal>
         </div>
       </div>
     </section>
