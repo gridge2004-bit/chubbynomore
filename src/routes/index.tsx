@@ -126,7 +126,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           ))}
         </nav>
         <a href="#cta" className="btn-pill">
-          Check If I Qualify <span aria-hidden>→</span>
+          Check If I Qualify — Free & Fast <span aria-hidden>→</span>
         </a>
       </div>
     </header>
@@ -137,15 +137,33 @@ function Hero() {
   return (
     <section className="mx-auto max-w-7xl px-6 pt-10 pb-16 md:pt-16 md:pb-20">
       <div className="grid items-end gap-10 md:grid-cols-[1.4fr_1fr]">
-        <h1 className="font-serif text-5xl leading-[1.02] tracking-tight md:text-7xl">
-          Real GLP-1 care.<br />
-          Physician-led.<br />
-          <span className="text-[color:var(--teal)]">No guesswork.</span>
-        </h1>
+        <div>
+          <h1 className="font-serif text-5xl leading-[1.02] tracking-tight md:text-7xl">
+            Real GLP-1 care.<br />
+            Physician-led.<br />
+            <span className="text-[color:var(--teal)]">No guesswork.</span>
+          </h1>
+          <p className="mt-6 text-sm font-medium text-muted-foreground">
+            Join 10,000+ people already on the program
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#cta" className="btn-pill">
+              Check If I Qualify — Free & Fast <span aria-hidden>→</span>
+            </a>
+            <a href="#how" className="btn-pill-outline">How it works</a>
+          </div>
+          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            {trustBadges.map((b) => (
+              <li key={b} className="flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--teal)]" />
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="flex flex-col items-start gap-3 md:items-end">
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">As featured in</span>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-serif text-xl text-foreground/70 md:justify-end">
-            <span>Forbes</span><span className="opacity-30">|</span>
             <span>SELF</span><span className="opacity-30">|</span>
             <span>Healthline</span>
           </div>
@@ -206,7 +224,7 @@ function MiniCards() {
               href={c.href}
               className="card-surface flex w-56 shrink-0 flex-col gap-2 px-5 py-4 transition hover:-translate-y-0.5 hover:border-forest/30"
             >
-              <span className="text-2xl">{c.emoji}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--teal)]">{String(miniCards.indexOf(c) + 1).padStart(2, "0")}</span>
               <span className="font-button text-sm">{c.title}</span>
               <span className="text-xs text-muted-foreground">{c.desc}</span>
             </a>
