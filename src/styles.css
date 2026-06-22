@@ -23,18 +23,23 @@
 }
 
 :root {
-  --cream: #FAF6EE;
-  --forest: #1A3D2E;
-  --forest-foreground: #FAF6EE;
-  --teal: #3CBFB5;
-  --background: #FAF6EE;
-  --foreground: #1A3D2E;
+  --cream: #FAF8F5;
+  --forest: #1B2147;
+  --forest-foreground: #FFFFFF;
+  --teal: #1B2147;
+  --navy: #1B2147;
+  --ivory: #FAF8F5;
+  --softgray: #F7F7F7;
+  --periwinkle: #E8EDF8;
+  --background: #FFFFFF;
+  --foreground: #1B2147;
   --card: #FFFFFF;
-  --card-foreground: #1A3D2E;
-  --border: #E5EAE7;
-  --muted: #F1ECE2;
-  --muted-foreground: #4A5C53;
+  --card-foreground: #1B2147;
+  --border: #E7E8EE;
+  --muted: #F7F7F7;
+  --muted-foreground: #5A6075;
 }
+
 
 @layer base {
   * { border-color: var(--color-border); }

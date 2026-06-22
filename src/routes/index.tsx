@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-const semaHero = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80";
-const tirzHero = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80";
-const semaProduct = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80";
-const tirzProduct = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80";
 import logo from "@/assets/logo.png";
+
+const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
+const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
+const step1Img = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80";
+const step2Img = "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80";
+const step3Img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
+const ctaImg = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,38 +22,51 @@ export const Route = createFileRoute("/")({
 const navLinks = [
   { label: "Semaglutide", href: "#semaglutide" },
   { label: "Tirzepatide", href: "#tirzepatide" },
-  { label: "Pricing", href: "#pricing" },
   { label: "How It Works", href: "#how" },
   { label: "FAQ", href: "#faq" },
 ];
 
-const miniCards = [
-  { title: "Semaglutide", desc: "Once-weekly GLP-1", href: "#semaglutide" },
-  { title: "Tirzepatide", desc: "Dual GIP/GLP-1", href: "#tirzepatide" },
-  { title: "Pricing & Plans", desc: "Transparent monthly cost", href: "#pricing" },
-  { title: "How It Works", desc: "From eval to delivery", href: "#how" },
-  { title: "FAQ", desc: "Answers in plain language", href: "#faq" },
-];
-
 const marqueeItems = [
-  "Physician-supervised",
+  "Custom dosing",
+  "Physician supervised",
+  "10,000+ members",
   "Clinically proven",
   "Discreet shipping",
   "No hidden fees",
-  "USP 797 pharmacies",
-  "HSA/FSA eligible",
 ];
 
-const semaGoals = ["All of the above", "Lose 15+ lbs", "Curb cravings", "Better blood sugar", "Sustainable habits"];
-const tirzGoals = ["All of the above", "Lose 25+ lbs", "Reduce appetite", "Metabolic reset", "Long-term maintenance"];
-
-const credibility = [
-  { title: "Board-Certified Physicians", desc: "Every program is reviewed and supervised by US-licensed, board-certified physicians." },
-  { title: "Evidence-Based Protocols", desc: "Dosing and titration follow protocols grounded in peer-reviewed GLP-1 clinical research." },
-  { title: "Licensed Compounding Pharmacies", desc: "Medications are dispensed by USP 797-compliant compounding pharmacies in the United States." },
+const products = [
+  {
+    id: "semaglutide",
+    tags: ["COMPOUNDED", "GLP-1"],
+    name: "Semaglutide",
+    desc: "A once-weekly GLP-1 protocol with physician oversight from your first evaluation through every titration step. Steady, predictable results.",
+    bullets: ["Once-weekly injection", "Physician-titrated dosing", "Avg. ↓15% body weight at 6 months"],
+    price: "$229",
+    period: "/28-day supply",
+  },
+  {
+    id: "tirzepatide",
+    tags: ["COMPOUNDED", "GLP-1"],
+    name: "Tirzepatide",
+    desc: "A dual GIP/GLP-1 receptor protocol for patients seeking a stronger metabolic response, with the same physician oversight throughout.",
+    bullets: ["Dual-agonist mechanism", "Physician-titrated dosing", "Avg. ↓22% body weight at 6 months"],
+    price: "$349",
+    period: "/28-day supply",
+  },
 ];
 
-const trustBadges = ["No subscription lock-in", "Results in 4–8 weeks", "Cancel anytime"];
+const steps = [
+  { n: "01", img: step1Img, title: "Complete your evaluation", desc: "Answer a few questions about your health history. The whole thing takes about 5 minutes from your phone." },
+  { n: "02", img: step2Img, title: "Physician review", desc: "A US-licensed physician reviews your submission — usually within 24 hours — and writes the right protocol for you." },
+  { n: "03", img: step3Img, title: "Treatment delivered", desc: "Your medication ships discreetly from a licensed US compounding pharmacy. Ongoing support included." },
+];
+
+const testimonials = [
+  { quote: "I tried everything for years and nothing stuck. With physician supervision and the right medication, I finally have a plan that works. Down 19 lbs in 12 weeks.", name: "Sarah M., 34 — Lost 19 lbs in 12 weeks" },
+  { quote: "The process was so easy — evaluation to delivery in under a week. My doctor adjusts my dose as I go and I never feel alone in this.", name: "James T., 41 — Ongoing physician-adjusted dosing" },
+  { quote: "I was skeptical about GLP-1 but the clinical data is real. I've lost 22 lbs and my blood sugar is the best it's been in years.", name: "Michelle R., 38 — Lost 22 lbs, blood sugar improved" },
+];
 
 const faqs = [
   { q: "Who qualifies for a GLP-1 program?", a: "Eligibility is determined by a licensed physician based on your medical history, current medications, and BMI. The free evaluation takes about 5 minutes." },
@@ -64,6 +80,8 @@ const faqs = [
   { q: "Will insurance cover this?", a: "Most insurance plans do not cover compounded GLP-1 medications. However, our programs are HSA/FSA eligible, and our pricing is transparent with no hidden fees. Many patients find it more affordable than expected." },
 ];
 
+const NAVY = "#1B2147";
+
 function Index() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -74,67 +92,43 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream text-foreground">
+    <div className="min-h-screen bg-white text-[#1B2147]">
       <Nav scrolled={scrolled} />
       <Hero />
-      <Testimonials />
+      <TrustMarquee />
       <ProductCards />
-      <MiniCards />
-      <Marquee />
-      <DrugSection
-        id="semaglutide"
-        eyebrow="Semaglutide"
-        title="Once-weekly Semaglutide, supervised end-to-end."
-        body="A weekly GLP-1 protocol with physician oversight from your first evaluation through every titration step."
-        image={semaHero}
-        reverse={false}
-        statLabel="Avg. body-weight reduction at 6 months"
-        statValue="↓15%"
-        goals={semaGoals}
-        formats={["Self-inject pen", "Vial + syringe", "Sublingual (select states)"]}
-      />
-      <DrugSection
-        id="tirzepatide"
-        eyebrow="Tirzepatide"
-        title="Tirzepatide, the dual-agonist option."
-        body="A dual GIP/GLP-1 receptor protocol for patients seeking a stronger metabolic response, with the same physician oversight."
-        image={tirzHero}
-        reverse={true}
-        statLabel="Avg. body-weight reduction at 6 months"
-        statValue="↓22%"
-        goals={tirzGoals}
-        formats={["Self-inject pen", "Vial + syringe", "Titration-adjusted dosing"]}
-      />
       <HowItWorks />
-      <Credibility />
+      <Testimonials />
       <FAQ />
-      <CTASection />
+      <FinalCTA />
       <Footer />
     </div>
   );
 }
 
+function PillButton({ href, children, variant = "primary" }: { href: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
+  const base = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition";
+  if (variant === "secondary") {
+    return <a href={href} className={`${base} border border-[#1B2147] text-[#1B2147] hover:bg-[#1B2147] hover:text-white`}>{children}</a>;
+  }
+  return <a href={href} className={`${base} bg-[#1B2147] text-white hover:bg-[#0F1432]`}>{children}</a>;
+}
+
 function Nav({ scrolled }: { scrolled: boolean }) {
   return (
-    <header
-      className={`sticky top-0 z-50 bg-cream transition-shadow ${
-        scrolled ? "shadow-[0_1px_0_0_rgba(26,61,46,0.08),0_8px_24px_-16px_rgba(26,61,46,0.25)]" : ""
-      }`}
-    >
+    <header className={`sticky top-0 z-50 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="/" className="flex items-center gap-2">
           <img src={logo} alt="ChubbyNoMore" width={140} height={40} className="h-9 w-auto" />
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-10 md:flex">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-foreground/80 transition hover:text-foreground">
+            <a key={l.href} href={l.href} className="text-sm font-medium text-[#1B2147]/80 transition hover:text-[#1B2147]">
               {l.label}
             </a>
           ))}
         </nav>
-        <a href="#cta" className="btn-pill">
-          Check If I Qualify — Free & Fast <span aria-hidden>→</span>
-        </a>
+        <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
       </div>
     </header>
   );
@@ -142,261 +136,101 @@ function Nav({ scrolled }: { scrolled: boolean }) {
 
 function Hero() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pt-10 pb-16 md:pt-16 md:pb-20">
-      <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-        <div className="flex flex-col justify-center">
-          <h1 className="font-serif text-5xl leading-[1.02] tracking-tight md:text-6xl lg:text-7xl">
-            Lose the weight. Keep it off.{" "}
-            <span className="text-[color:var(--teal)]">With a real physician behind you.</span>
-          </h1>
-          <p className="mt-6 text-sm font-medium text-muted-foreground">
-            Join 10,000+ people already on the program
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#cta" className="btn-pill">
-              Check If I Qualify — Free & Fast <span aria-hidden>→</span>
-            </a>
-            <a href="#how" className="btn-pill-outline">How it works</a>
-          </div>
-          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            {trustBadges.map((b) => (
-              <li key={b} className="flex items-center gap-2">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--teal)]" />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-col items-start gap-3">
-            <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">As featured in</span>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-serif text-xl text-foreground/70">
-              <span>SELF</span><span className="opacity-30">|</span>
-              <span>Healthline</span>
-            </div>
-          </div>
+    <section className="w-full border-b border-[#E7E8EE]">
+      <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
+        <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
+          <img src={heroImg} alt="People in athletic wear" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
         </div>
-        <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] md:min-h-full">
-          <img
-            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80"
-            alt="Woman stretching confidently"
-            className="absolute inset-0 h-full w-full object-cover"
-            loading="eager"
-          />
+        <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
+          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</span>
+          <h1 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
+            GLP-1 weight loss,
+            <br />
+            <em className="font-serif italic text-[#1B2147]">backed by science.</em>
+          </h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
+            Physician-supervised weight loss — personalized to your goals, delivered to your door.
+          </p>
+          <div className="mt-8">
+            <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+          </div>
+          <p className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</p>
         </div>
       </div>
     </section>
   );
 }
 
-function HeroCard({ tint, tag, headline, href, image }: { tint: string; tag: string; headline: string; href: string; image: string }) {
+function TrustMarquee() {
+  const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
   return (
-    <a
-      href={href}
-      className="group relative overflow-hidden rounded-[2rem] border border-border transition hover:-translate-y-1"
-      style={{ backgroundColor: tint }}
-    >
-      <div className="grid grid-cols-2 items-center gap-4 p-7 md:p-9">
-        <div>
-          <span className="inline-block rounded-full bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-forest">{tag}</span>
-          <h3 className="mt-4 font-serif text-3xl leading-tight md:text-4xl">{headline}</h3>
-          <span className="mt-6 inline-flex items-center gap-2 font-button text-sm text-forest">
-            Explore <span className="transition group-hover:translate-x-1">→</span>
+    <section className="overflow-hidden bg-[#1B2147] py-5 text-white">
+      <div className="marquee-track text-sm font-medium uppercase tracking-[0.18em]">
+        {items.map((t, i) => (
+          <span key={i} className="flex items-center gap-12">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {t}
           </span>
-        </div>
-        <div className="aspect-square overflow-hidden rounded-2xl">
-          <img src={image} alt={tag} width={600} height={600} loading="lazy" className="h-full w-full object-cover" />
-        </div>
-      </div>
-    </a>
-  );
-}
-
-function Star({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
-
-const testimonials = [
-  {
-    quote: "I tried everything for years and nothing stuck. With physician supervision and the right medication, I finally have a plan that works. Down 19 lbs in 12 weeks.",
-    name: "Sarah M., 34 — Lost 19 lbs in 12 weeks",
-    avatar: "https://i.pravatar.cc/80?img=1",
-  },
-  {
-    quote: "The process was so easy — evaluation to delivery in under a week. My doctor adjusts my dose as I go and I never feel alone in this.",
-    name: "James T., 41 — Ongoing physician-adjusted dosing",
-    avatar: "https://i.pravatar.cc/80?img=5",
-  },
-  {
-    quote: "I was skeptical about GLP-1 but the clinical data is real. I've lost 22 lbs and my blood sugar is the best it's been in years.",
-    name: "Michelle R., 38 — Lost 22 lbs, blood sugar improved",
-    avatar: "https://i.pravatar.cc/80?img=9",
-  },
-];
-
-function Testimonials() {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">Real Results</span>
-        <h2 className="mt-4 font-serif text-4xl md:text-5xl">People just like you are seeing results.</h2>
-      </div>
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {testimonials.map((t) => (
-          <div key={t.name} className="card-surface flex flex-col p-8">
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-4 w-4 text-[color:var(--forest)]" />
-              ))}
-            </div>
-            <p className="mt-5 flex-1 text-sm leading-relaxed text-foreground/90">"{t.quote}"</p>
-            <div className="mt-6 flex items-center gap-3">
-              <img src={t.avatar} alt={t.name} className="h-10 w-10 rounded-full object-cover" loading="lazy" />
-              <span className="text-xs font-medium text-muted-foreground">{t.name}</span>
-            </div>
-          </div>
         ))}
       </div>
-      <p className="mt-10 text-center text-sm font-medium text-muted-foreground">Rated 4.8/5 by over 2,400 patients</p>
     </section>
   );
 }
 
 function ProductCards() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pt-8 pb-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        <HeroCard
-          tint="#E8F1E8"
-          tag="Semaglutide"
-          headline="Once-weekly. Steady results."
-          href="#semaglutide"
-          image={semaProduct}
-        />
-        <HeroCard
-          tint="#F4ECDD"
-          tag="Tirzepatide"
-          headline="Dual-action. Deeper response."
-          href="#tirzepatide"
-          image={tirzProduct}
-        />
-      </div>
-    </section>
-  );
-}
-
-function MiniCards() {
-  return (
-    <section className="border-y border-border/60 bg-cream">
-      <div className="mx-auto max-w-7xl overflow-x-auto px-6 py-6 no-scrollbar">
-        <div className="flex min-w-max gap-4">
-          {miniCards.map((c) => (
-            <a
-              key={c.title}
-              href={c.href}
-              className="card-surface flex w-56 shrink-0 flex-col gap-2 px-5 py-4 transition hover:-translate-y-0.5 hover:border-forest/30"
-            >
-              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--teal)]">{String(miniCards.indexOf(c) + 1).padStart(2, "0")}</span>
-              <span className="font-button text-sm">{c.title}</span>
-              <span className="text-xs text-muted-foreground">{c.desc}</span>
-            </a>
+    <section className="bg-white px-6 py-24">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+          GLP-1 medications, <em className="italic">in one place.</em>
+        </h2>
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {products.map((p) => (
+            <article key={p.id} id={p.id} className="flex flex-col overflow-hidden rounded-2xl border border-[#E7E8EE] bg-white">
+              <div className="grid grid-cols-[1fr_140px] gap-6 p-8 md:p-10">
+                <div className="flex flex-col">
+                  <div className="flex flex-wrap gap-2">
+                    {p.tags.map((t) => (
+                      <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
+                    ))}
+                  </div>
+                  <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
+                  <ul className="mt-5 space-y-2.5">
+                    {p.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
+                        <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="h-32 w-32 overflow-hidden rounded-xl bg-[#F7F7F7]">
+                    <img src={vialImg} alt={`${p.name} vial`} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-auto border-t border-[#E7E8EE] px-8 py-6 md:px-10">
+                <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
+                    <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
+                      {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5">
+                    <PillButton href="#cta">Start Treatment</PillButton>
+                    <a href={`#${p.id}`} className="text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
+                  </div>
+                </div>
+              </div>
+            </article>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Marquee() {
-  const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
-  return (
-    <section className="overflow-hidden bg-forest py-5 text-forest-foreground">
-      <div className="marquee-track font-button text-sm uppercase tracking-[0.18em]">
-        {items.map((t, i) => (
-          <span key={i} className="flex items-center gap-12">
-            {t}
-            <span className="inline-block h-2 w-2 rounded-full bg-[color:var(--teal)]" />
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function DrugSection({
-  id, eyebrow, title, body, image, reverse, statLabel, statValue, goals, formats,
-}: {
-  id: string; eyebrow: string; title: string; body: string; image: string; reverse: boolean;
-  statLabel: string; statValue: string; goals: string[]; formats: string[];
-}) {
-  const [selected, setSelected] = useState<string>(goals[0]);
-  const pct = statValue.includes("22") ? 78 : 65;
-
-  return (
-    <section id={id} className="mx-auto max-w-7xl px-6 py-20">
-      <div className={`grid items-stretch gap-6 md:grid-cols-2 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
-        <div className="card-surface overflow-hidden">
-          <img src={image} alt={eyebrow} width={1280} height={1024} loading="lazy" className="h-full max-h-[520px] w-full object-cover" />
-        </div>
-        <div className="card-surface flex flex-col justify-between gap-8 p-8 md:p-12">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">{eyebrow}</span>
-            <h2 className="mt-4 font-serif text-4xl leading-[1.05] md:text-5xl">{title}</h2>
-            <p className="mt-5 max-w-md text-base text-muted-foreground">{body}</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a href="#cta" className="btn-pill">Check If I Qualify — Free & Fast →</a>
-            <a href="#how" className="btn-pill-outline">How it works</a>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-6 grid gap-6 md:grid-cols-3">
-        <div className="card-surface p-7">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Treatment formats</span>
-          <ul className="mt-4 space-y-3">
-            {formats.map((f) => (
-              <li key={f} className="flex items-start gap-3">
-                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-[color:var(--teal)]" />
-                <span className="text-sm">{f}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="card-surface p-7">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Clinical signal</span>
-          <div className="mt-3 font-serif text-6xl text-[color:var(--teal)]">{statValue}</div>
-          <p className="mt-1 text-sm text-muted-foreground">{statLabel}</p>
-          <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-muted">
-            <div className="h-full rounded-full bg-[color:var(--teal)] transition-all duration-700" style={{ width: `${pct}%` }} />
-          </div>
-        </div>
-
-        <div className="card-surface p-7">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Your goal</span>
-          <p className="mt-2 text-sm text-muted-foreground">Pick what matters most — we'll tune the protocol with you.</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {goals.map((g) => {
-              const active = g === selected;
-              return (
-                <button
-                  key={g}
-                  type="button"
-                  onClick={() => setSelected(g)}
-                  className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition ${
-                    active
-                      ? "border-forest bg-forest text-forest-foreground"
-                      : "border-border bg-white text-foreground hover:border-forest/40"
-                  }`}
-                >
-                  {g}
-                </button>
-              );
-            })}
-          </div>
         </div>
       </div>
     </section>
@@ -405,61 +239,63 @@ function DrugSection({
 
 function HowItWorks() {
   return (
-    <section id="how" className="mx-auto max-w-7xl px-6 py-20">
-      <div className="text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">The Process</span>
-        <h2 className="mt-4 font-serif text-4xl md:text-5xl">Getting started takes less than 5 minutes.</h2>
-      </div>
-      <div className="mt-12 grid gap-8 md:grid-cols-3">
-        <div className="text-center">
-          <span className="font-serif text-5xl text-[color:var(--forest)]">01</span>
-          <h3 className="mt-4 font-serif text-xl">Complete your free evaluation</h3>
-          <p className="mt-2 text-sm text-muted-foreground">Answer a few questions about your health history. A licensed physician reviews every submission, usually within 24 hours.</p>
+    <section id="how" className="bg-[#FAF8F5] px-6 py-24">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+          It's easy <em className="italic">to get started.</em>
+        </h2>
+        <div className="mt-14 grid gap-10 md:grid-cols-3">
+          {steps.map((s) => (
+            <div key={s.n}>
+              <div className="aspect-square overflow-hidden rounded-2xl bg-white">
+                <img src={s.img} alt={s.title} className="h-full w-full object-cover" loading="lazy" />
+              </div>
+              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9298AB]">Step {s.n}</div>
+              <h3 className="mt-2 font-serif text-2xl text-[#1B2147]">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#5A6075]">{s.desc}</p>
+            </div>
+          ))}
         </div>
-        <div className="text-center">
-          <span className="font-serif text-5xl text-[color:var(--forest)]">02</span>
-          <h3 className="mt-4 font-serif text-xl">Get matched and prescribed</h3>
-          <p className="mt-2 text-sm text-muted-foreground">If you qualify, your physician selects the right protocol and dosage for your goals. No guesswork, no generic plans.</p>
+        <div className="mt-14 text-center">
+          <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
         </div>
-        <div className="text-center">
-          <span className="font-serif text-5xl text-[color:var(--forest)]">03</span>
-          <h3 className="mt-4 font-serif text-xl">Receive your medication at home</h3>
-          <p className="mt-2 text-sm text-muted-foreground">Your medication ships discreetly to your door from a licensed US compounding pharmacy. Ongoing support included.</p>
-        </div>
-      </div>
-      <div className="mt-12 text-center">
-        <a href="#cta" className="btn-pill">Check If I Qualify — Free & Fast →</a>
       </div>
     </section>
   );
 }
 
-function Credibility() {
+function Star() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20 text-center">
-      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">Medical credibility</span>
-      <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">
-        Built on real medicine, not marketing.
-      </h2>
-      <div className="mx-auto mt-12 max-w-3xl text-left">
-        <blockquote className="border-l-[3px] border-[color:var(--forest)] pl-6">
-          <p className="font-serif text-xl leading-relaxed md:text-2xl">
-            "Every patient on our platform is reviewed by a licensed physician before any prescription is written. We treat this like a real clinical practice, not a subscription service."
-          </p>
-          <div className="mt-4 flex items-center gap-3">
-            <img src="https://i.pravatar.cc/48?img=252" alt="Dr. Rachel Kim" className="h-10 w-10 rounded-full object-cover" loading="lazy" />
-            <span className="text-sm font-medium text-muted-foreground">— Dr. Rachel Kim, MD, Internal Medicine</span>
-          </div>
-        </blockquote>
-      </div>
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {credibility.map((c, i) => (
-          <div key={c.title} className="card-surface p-8 text-left">
-            <span className="font-serif text-3xl text-[color:var(--teal)]">{String(i + 1).padStart(2, "0")}</span>
-            <h3 className="mt-5 font-serif text-2xl">{c.title}</h3>
-            <p className="mt-3 text-sm text-muted-foreground">{c.desc}</p>
-          </div>
-        ))}
+    <svg viewBox="0 0 24 24" fill={NAVY} className="h-4 w-4">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section className="bg-[#F7F7F7] px-6 py-24">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+          <em className="italic">Results</em> that speak louder than promises.
+        </h2>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <div key={t.name} className="flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => <Star key={i} />)}
+              </div>
+              <p className="mt-5 flex-1 text-[15px] leading-relaxed text-[#1B2147]">"{t.quote}"</p>
+              <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-[#1B2147]">
+                <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Verified buyer
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 text-xs text-[#5A6075]">Collected from verified customers. Results vary.</p>
       </div>
     </section>
   );
@@ -468,74 +304,74 @@ function Credibility() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-4xl px-6 py-20">
-      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">FAQ</span>
-      <h2 className="mt-4 font-serif text-4xl md:text-5xl">Questions, answered.</h2>
-      <div className="mt-10 divide-y divide-border border-y border-border">
-        {faqs.map((f, i) => {
-          const isOpen = open === i;
-          return (
-            <div key={f.q}>
-              <button
-                type="button"
-                onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left"
-              >
-                <span className="font-serif text-xl md:text-2xl">{f.q}</span>
-                <span
-                  className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-lg transition-transform duration-300 ${
-                    isOpen ? "rotate-45 bg-forest text-forest-foreground border-forest" : ""
-                  }`}
-                  aria-hidden
+    <section id="faq" className="bg-white px-6 py-24">
+      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
+        <div>
+          <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
+            Weight Loss Treatment <em className="italic">FAQs</em>
+          </h2>
+        </div>
+        <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.q}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between gap-6 py-5 text-left"
                 >
-                  +
-                </span>
-              </button>
-              <div
-                className={`grid overflow-hidden transition-all duration-300 ${
-                  isOpen ? "grid-rows-[1fr] pb-6" : "grid-rows-[0fr]"
-                }`}
-              >
-                <div className="min-h-0">
-                  <p className="max-w-2xl text-sm text-muted-foreground md:text-base">{f.a}</p>
+                  <span className="font-serif text-lg text-[#1B2147] md:text-xl">{f.q}</span>
+                  <span className="grid h-7 w-7 shrink-0 place-items-center text-xl text-[#1B2147]" aria-hidden>
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+                <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}>
+                  <div className="min-h-0">
+                    <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 }
 
-function CTASection() {
+function FinalCTA() {
+  const checks = [
+    "Easy online doctor visits",
+    "No appointments, message anytime",
+    "US-based medical providers",
+    "Free expedited shipping",
+  ];
   return (
-    <section id="cta" className="bg-forest text-forest-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div>
-            <h2 className="font-serif text-4xl leading-tight md:text-5xl">
-              Ready to start? Your free evaluation takes 5 minutes.
-            </h2>
-            <p className="mt-4 text-sm text-forest-foreground/70">
-              No credit card required. A licensed physician reviews every submission.
-            </p>
-          </div>
-          <div>
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3 sm:flex-row">
-              <input
-                type="email"
-                required
-                placeholder="you@email.com"
-                className="flex-1 rounded-full bg-white/10 px-5 py-3.5 text-sm text-forest-foreground placeholder:text-forest-foreground/50 outline-none ring-1 ring-white/15 focus:bg-white/20"
-              />
-              <button className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-button text-sm font-extrabold text-forest transition hover:bg-white/90">
-                Get My Free Evaluation →
-              </button>
-            </form>
-            <a href="#faq" className="mt-4 inline-block text-xs text-forest-foreground/60 transition hover:text-forest-foreground">
-              Read the FAQ →
-            </a>
+    <section id="cta" className="w-full bg-[#E8EDF8]">
+      <div className="grid w-full md:grid-cols-[45fr_55fr]">
+        <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
+          <img src={ctaImg} alt="Happy customer on phone" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+        </div>
+        <div className="flex flex-col justify-center px-8 py-16 md:px-16">
+          <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
+            Physician grade health care, <em className="italic">from anywhere.</em>
+          </h2>
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-[#1B2147]/75">
+            Join 10,000+ people who have trusted and transformed their health with ChubbyNoMore.
+          </p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {checks.map((c) => (
+              <li key={c} className="flex items-start gap-3 text-sm text-[#1B2147]">
+                <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-9">
+            <PillButton href="#cta">Get Started</PillButton>
           </div>
         </div>
       </div>
@@ -545,37 +381,26 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="bg-forest text-forest-foreground">
+    <footer className="bg-[#1B2147] text-white">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="font-serif text-3xl">ChubbyNoMore</div>
-            <p className="mt-4 max-w-xs text-sm text-forest-foreground/70">
+            <p className="mt-4 max-w-xs text-sm text-white/70">
               Physician-supervised GLP-1 care. Transparent pricing, discreet shipping, real medicine.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex max-w-sm overflow-hidden rounded-full bg-white/10 ring-1 ring-white/15">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 bg-transparent px-5 py-3 text-sm text-forest-foreground placeholder:text-forest-foreground/50 outline-none"
-              />
-              <button className="m-1 rounded-full bg-[color:var(--teal)] px-5 py-2 font-button text-sm text-forest">Join →</button>
-            </form>
           </div>
           <FooterCol title="Programs" links={["Semaglutide", "Tirzepatide", "Pricing & Plans"]} />
           <FooterCol title="Learn" links={["How It Works", "FAQ", "Knowledge base"]} />
           <FooterCol title="Company" links={["About", "Contact", "Press"]} />
         </div>
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-forest-foreground/60 md:flex-row">
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 md:flex-row">
           <span>© {new Date().getFullYear()} ChubbyNoMore. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-forest-foreground">Privacy</a>
-            <a href="#" className="hover:text-forest-foreground">Terms</a>
-            <a href="#" className="hover:text-forest-foreground">HIPAA</a>
+            <a href="#" className="hover:text-white">Privacy</a>
+            <a href="#" className="hover:text-white">Terms</a>
+            <a href="#" className="hover:text-white">HIPAA</a>
           </div>
-        </div>
-        <div aria-hidden className="pointer-events-none mt-10 select-none overflow-hidden text-center font-serif leading-none text-white/[0.06]" style={{ fontSize: "clamp(80px, 18vw, 240px)" }}>
-          ChubbyNoMore
         </div>
       </div>
     </footer>
@@ -585,10 +410,10 @@ function Footer() {
 function FooterCol({ title, links }: { title: string; links: string[] }) {
   return (
     <div>
-      <div className="font-button text-xs uppercase tracking-[0.2em] text-forest-foreground/60">{title}</div>
+      <div className="text-xs uppercase tracking-[0.2em] text-white/60">{title}</div>
       <ul className="mt-4 space-y-2.5 text-sm">
         {links.map((l) => (
-          <li key={l}><a href="#" className="text-forest-foreground/85 transition hover:text-forest-foreground">{l}</a></li>
+          <li key={l}><a href="#" className="text-white/85 transition hover:text-white">{l}</a></li>
         ))}
       </ul>
     </div>
