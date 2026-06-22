@@ -140,11 +140,12 @@ function Hero() {
   return (
     <section className="w-full border-b border-[#E7E8EE]">
       <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
-        <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
+        <div className="relative h-[360px] overflow-hidden bg-[#F7F7F7] md:h-[580px]">
           <img
             src={heroImg}
             alt="Athletic man running on a mountain trail"
             className="h-full w-full object-cover"
+            style={{ objectPosition: "center 30%" }}
             loading="eager"
           />
         </div>
