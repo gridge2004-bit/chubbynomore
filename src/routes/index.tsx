@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo.png";
 
 const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
@@ -119,7 +118,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
     <header className={`sticky top-0 z-50 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="/" className="flex items-center gap-2">
-          <img src={logo} alt="ChubbyNoMore" width={140} height={40} className="h-9 w-auto" />
+          <span className="font-serif text-[22px] font-bold text-[#1B2147] whitespace-nowrap">ChubbyNoMore</span>
         </a>
         <nav className="hidden items-center gap-10 md:flex">
           {navLinks.map((l) => (
