@@ -337,9 +337,9 @@ function Credibility() {
         Built on real medicine, not marketing.
       </h2>
       <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {credibility.map((c) => (
+        {credibility.map((c, i) => (
           <div key={c.title} className="card-surface p-8 text-left">
-            <span className="text-3xl">{c.emoji}</span>
+            <span className="font-serif text-3xl text-[color:var(--teal)]">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="mt-5 font-serif text-2xl">{c.title}</h3>
             <p className="mt-3 text-sm text-muted-foreground">{c.desc}</p>
           </div>
