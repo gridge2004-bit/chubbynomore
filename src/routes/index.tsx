@@ -145,7 +145,7 @@ function Hero() {
       <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
         <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
           <img
-            ref={parallaxRef as React.RefObject<HTMLImageElement>}
+            ref={parallaxRef as never}
             src={heroImg}
             alt="Woman stretching in athletic wear"
             className="absolute inset-0 h-[120%] w-full object-cover"
