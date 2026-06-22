@@ -25,11 +25,11 @@ const navLinks = [
 ];
 
 const miniCards = [
-  { emoji: "💊", title: "Semaglutide", desc: "Once-weekly GLP-1", href: "#semaglutide" },
-  { emoji: "💉", title: "Tirzepatide", desc: "Dual GIP/GLP-1", href: "#tirzepatide" },
-  { emoji: "🏷️", title: "Pricing & Plans", desc: "Transparent monthly cost", href: "#pricing" },
-  { emoji: "🧭", title: "How It Works", desc: "From eval to delivery", href: "#how" },
-  { emoji: "❓", title: "FAQ", desc: "Answers in plain language", href: "#faq" },
+  { title: "Semaglutide", desc: "Once-weekly GLP-1", href: "#semaglutide" },
+  { title: "Tirzepatide", desc: "Dual GIP/GLP-1", href: "#tirzepatide" },
+  { title: "Pricing & Plans", desc: "Transparent monthly cost", href: "#pricing" },
+  { title: "How It Works", desc: "From eval to delivery", href: "#how" },
+  { title: "FAQ", desc: "Answers in plain language", href: "#faq" },
 ];
 
 const marqueeItems = [
@@ -45,10 +45,12 @@ const semaGoals = ["All of the above", "Lose 15+ lbs", "Curb cravings", "Better 
 const tirzGoals = ["All of the above", "Lose 25+ lbs", "Reduce appetite", "Metabolic reset", "Long-term maintenance"];
 
 const credibility = [
-  { emoji: "🩺", title: "Board-Certified Physicians", desc: "Every program is reviewed and supervised by US-licensed, board-certified physicians." },
-  { emoji: "📊", title: "Evidence-Based Protocols", desc: "Dosing and titration follow protocols grounded in peer-reviewed GLP-1 clinical research." },
-  { emoji: "🧪", title: "Licensed Compounding Pharmacies", desc: "Medications are dispensed by USP 797-compliant compounding pharmacies in the United States." },
+  { title: "Board-Certified Physicians", desc: "Every program is reviewed and supervised by US-licensed, board-certified physicians." },
+  { title: "Evidence-Based Protocols", desc: "Dosing and titration follow protocols grounded in peer-reviewed GLP-1 clinical research." },
+  { title: "Licensed Compounding Pharmacies", desc: "Medications are dispensed by USP 797-compliant compounding pharmacies in the United States." },
 ];
+
+const trustBadges = ["No subscription lock-in", "Results in 4–8 weeks", "Cancel anytime"];
 
 const faqs = [
   { q: "Who qualifies for a GLP-1 program?", a: "Eligibility is determined by a licensed physician based on your medical history, current medications, and BMI. The free evaluation takes about 5 minutes." },
