@@ -145,7 +145,7 @@ function Hero() {
           <img
             ref={parallaxRef as never}
             src={heroImg}
-            alt="Woman stretching in athletic wear"
+            alt="Fit woman doing core exercise in a minimalist home gym"
             className="absolute inset-0 h-[120%] w-full object-cover"
             style={{ top: "-10%" }}
             loading="eager"
