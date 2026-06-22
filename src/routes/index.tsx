@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Reveal, useParallax } from "@/components/Reveal";
 
 const heroImg = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
@@ -138,26 +139,34 @@ function Nav({ scrolled }: { scrolled: boolean }) {
 }
 
 function Hero() {
+  const parallaxRef = useParallax(0.4);
   return (
     <section className="w-full border-b border-[#E7E8EE]">
       <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
         <div className="relative min-h-[360px] overflow-hidden bg-[#F7F7F7] md:min-h-[580px]">
-          <img src={heroImg} alt="Woman stretching in athletic wear" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+          <img
+            ref={parallaxRef as never}
+            src={heroImg}
+            alt="Woman stretching in athletic wear"
+            className="absolute inset-0 h-[120%] w-full object-cover"
+            style={{ top: "-10%" }}
+            loading="eager"
+          />
         </div>
         <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</span>
-          <h1 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
+          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</Reveal>
+          <Reveal as="h1" delay={80} className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
             GLP-1 weight loss,
             <br />
             <em className="font-serif italic text-[#1B2147]">backed by science.</em>
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
+          </Reveal>
+          <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
             Physician-supervised weight loss — personalized to your goals, delivered to your door.
-          </p>
-          <div className="mt-8">
+          </Reveal>
+          <Reveal delay={240} className="mt-8">
             <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
-          </div>
-          <p className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</p>
+          </Reveal>
+          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</Reveal>
         </div>
       </div>
     </section>
@@ -186,51 +195,53 @@ function ProductCards() {
   return (
     <section className="bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           GLP-1 medications, <em className="italic">in one place.</em>
-        </h2>
+        </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {products.map((p) => (
-            <article key={p.id} id={p.id} className="flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-              <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
-                <div className="flex flex-col">
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
-                    ))}
+          {products.map((p, idx) => (
+            <Reveal key={p.id} delay={idx * 150}>
+              <article id={p.id} className="card-lift flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
+                <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
+                  <div className="flex flex-col">
+                    <div className="flex flex-wrap gap-2">
+                      {p.tags.map((t) => (
+                        <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
+                      ))}
+                    </div>
+                    <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
+                    <ul className="mt-5 space-y-2.5">
+                      {p.bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
+                          <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
-                  <ul className="mt-5 space-y-2.5">
-                    {p.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
-                        <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex items-start justify-end">
-                  <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
-                    <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
-                  </div>
-                </div>
-              </div>
-              <div className="mt-auto px-8 py-6 md:px-10">
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
-                    <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
-                      {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                  <div className="flex items-start justify-end">
+                    <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
+                      <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
                     </div>
                   </div>
-                  <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
-                  <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
                 </div>
-              </div>
-            </article>
+                <div className="mt-auto px-8 py-6 md:px-10">
+                  <div className="flex flex-col gap-4">
+                    <div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
+                      <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
+                        {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                      </div>
+                    </div>
+                    <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
+                    <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -242,24 +253,24 @@ function HowItWorks() {
   return (
     <section id="how" className="bg-[#FAF8F5] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           It's easy <em className="italic">to get started.</em>
-        </h2>
+        </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n}>
+          {steps.map((s, idx) => (
+            <Reveal key={s.n} delay={idx * 150} className="card-lift rounded-2xl p-2 -m-2">
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
                 <img src={s.img} alt={s.title} className="h-full w-full object-cover" loading="lazy" />
               </div>
               <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9298AB]">Step {s.n}</div>
               <h3 className="mt-2 font-serif text-2xl text-[#1B2147]">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#5A6075]">{s.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
-        <div className="mt-14 text-center">
+        <Reveal className="mt-14 text-center">
           <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -277,12 +288,12 @@ function Testimonials() {
   return (
     <section className="bg-[#F7F7F7] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           <em className="italic">Results</em> that speak louder than promises.
-        </h2>
+        </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <div key={t.name} className="flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
+          {testimonials.map((t, idx) => (
+            <Reveal key={t.name} delay={idx * 150} className="card-lift flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => <Star key={i} />)}
               </div>
@@ -293,7 +304,7 @@ function Testimonials() {
                 </svg>
                 Verified buyer
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
         <p className="mt-8 text-xs text-[#5A6075]">Collected from verified customers. Results vary.</p>
@@ -307,16 +318,16 @@ function FAQ() {
   return (
     <section id="faq" className="bg-white px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
-        <div>
+        <Reveal>
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
             Weight Loss Treatment <em className="italic">FAQs</em>
           </h2>
-        </div>
+        </Reveal>
         <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={f.q}>
+              <Reveal key={f.q} delay={i * 60}>
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -332,7 +343,7 @@ function FAQ() {
                     <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
