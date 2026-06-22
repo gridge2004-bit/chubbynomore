@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import semaHero from "@/assets/sema-hero.jpg";
-import tirzHero from "@/assets/tirz-hero.jpg";
-import semaProduct from "@/assets/semaglutide.jpg";
-import tirzProduct from "@/assets/tirzepatide.jpg";
+const semaHero = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80";
+const tirzHero = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80";
+const semaProduct = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
+const tirzProduct = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80";
 import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
@@ -25,11 +25,11 @@ const navLinks = [
 ];
 
 const miniCards = [
-  { emoji: "💊", title: "Semaglutide", desc: "Once-weekly GLP-1", href: "#semaglutide" },
-  { emoji: "💉", title: "Tirzepatide", desc: "Dual GIP/GLP-1", href: "#tirzepatide" },
-  { emoji: "🏷️", title: "Pricing & Plans", desc: "Transparent monthly cost", href: "#pricing" },
-  { emoji: "🧭", title: "How It Works", desc: "From eval to delivery", href: "#how" },
-  { emoji: "❓", title: "FAQ", desc: "Answers in plain language", href: "#faq" },
+  { title: "Semaglutide", desc: "Once-weekly GLP-1", href: "#semaglutide" },
+  { title: "Tirzepatide", desc: "Dual GIP/GLP-1", href: "#tirzepatide" },
+  { title: "Pricing & Plans", desc: "Transparent monthly cost", href: "#pricing" },
+  { title: "How It Works", desc: "From eval to delivery", href: "#how" },
+  { title: "FAQ", desc: "Answers in plain language", href: "#faq" },
 ];
 
 const marqueeItems = [
@@ -45,10 +45,12 @@ const semaGoals = ["All of the above", "Lose 15+ lbs", "Curb cravings", "Better 
 const tirzGoals = ["All of the above", "Lose 25+ lbs", "Reduce appetite", "Metabolic reset", "Long-term maintenance"];
 
 const credibility = [
-  { emoji: "🩺", title: "Board-Certified Physicians", desc: "Every program is reviewed and supervised by US-licensed, board-certified physicians." },
-  { emoji: "📊", title: "Evidence-Based Protocols", desc: "Dosing and titration follow protocols grounded in peer-reviewed GLP-1 clinical research." },
-  { emoji: "🧪", title: "Licensed Compounding Pharmacies", desc: "Medications are dispensed by USP 797-compliant compounding pharmacies in the United States." },
+  { title: "Board-Certified Physicians", desc: "Every program is reviewed and supervised by US-licensed, board-certified physicians." },
+  { title: "Evidence-Based Protocols", desc: "Dosing and titration follow protocols grounded in peer-reviewed GLP-1 clinical research." },
+  { title: "Licensed Compounding Pharmacies", desc: "Medications are dispensed by USP 797-compliant compounding pharmacies in the United States." },
 ];
+
+const trustBadges = ["No subscription lock-in", "Results in 4–8 weeks", "Cancel anytime"];
 
 const faqs = [
   { q: "Who qualifies for a GLP-1 program?", a: "Eligibility is determined by a licensed physician based on your medical history, current medications, and BMI. The free evaluation takes about 5 minutes." },
@@ -124,7 +126,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           ))}
         </nav>
         <a href="#cta" className="btn-pill">
-          Check If I Qualify <span aria-hidden>→</span>
+          Check If I Qualify — Free & Fast <span aria-hidden>→</span>
         </a>
       </div>
     </header>
@@ -135,15 +137,33 @@ function Hero() {
   return (
     <section className="mx-auto max-w-7xl px-6 pt-10 pb-16 md:pt-16 md:pb-20">
       <div className="grid items-end gap-10 md:grid-cols-[1.4fr_1fr]">
-        <h1 className="font-serif text-5xl leading-[1.02] tracking-tight md:text-7xl">
-          Real GLP-1 care.<br />
-          Physician-led.<br />
-          <span className="text-[color:var(--teal)]">No guesswork.</span>
-        </h1>
+        <div>
+          <h1 className="font-serif text-5xl leading-[1.02] tracking-tight md:text-7xl">
+            Real GLP-1 care.<br />
+            Physician-led.<br />
+            <span className="text-[color:var(--teal)]">No guesswork.</span>
+          </h1>
+          <p className="mt-6 text-sm font-medium text-muted-foreground">
+            Join 10,000+ people already on the program
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#cta" className="btn-pill">
+              Check If I Qualify — Free & Fast <span aria-hidden>→</span>
+            </a>
+            <a href="#how" className="btn-pill-outline">How it works</a>
+          </div>
+          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            {trustBadges.map((b) => (
+              <li key={b} className="flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--teal)]" />
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="flex flex-col items-start gap-3 md:items-end">
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">As featured in</span>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-serif text-xl text-foreground/70 md:justify-end">
-            <span>Forbes</span><span className="opacity-30">|</span>
             <span>SELF</span><span className="opacity-30">|</span>
             <span>Healthline</span>
           </div>
@@ -204,7 +224,7 @@ function MiniCards() {
               href={c.href}
               className="card-surface flex w-56 shrink-0 flex-col gap-2 px-5 py-4 transition hover:-translate-y-0.5 hover:border-forest/30"
             >
-              <span className="text-2xl">{c.emoji}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--teal)]">{String(miniCards.indexOf(c) + 1).padStart(2, "0")}</span>
               <span className="font-button text-sm">{c.title}</span>
               <span className="text-xs text-muted-foreground">{c.desc}</span>
             </a>
@@ -317,9 +337,9 @@ function Credibility() {
         Built on real medicine, not marketing.
       </h2>
       <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {credibility.map((c) => (
+        {credibility.map((c, i) => (
           <div key={c.title} className="card-surface p-8 text-left">
-            <span className="text-3xl">{c.emoji}</span>
+            <span className="font-serif text-3xl text-[color:var(--teal)]">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="mt-5 font-serif text-2xl">{c.title}</h3>
             <p className="mt-3 text-sm text-muted-foreground">{c.desc}</p>
           </div>
@@ -392,7 +412,7 @@ function CTASection() {
               placeholder="you@email.com"
               className="flex-1 rounded-full border border-border bg-white px-5 py-3.5 text-sm outline-none focus:border-forest"
             />
-            <button className="btn-pill justify-center">Start free eval →</button>
+            <button className="btn-pill justify-center">Get My Free Evaluation →</button>
           </div>
         </form>
 
