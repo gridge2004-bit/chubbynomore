@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 const heroImg = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
-const semaglutideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
-const tirzepatideImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80";
+const semaglutideImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80";
+const tirzepatideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
 const step1Img = "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80";
 const step2Img = "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80";
 const step3Img = "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80";
@@ -191,8 +191,8 @@ function ProductCards() {
         </h2>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {products.map((p) => (
-            <article key={p.id} id={p.id} className="flex flex-col overflow-hidden rounded-2xl border border-[#E7E8EE] bg-white">
-              <div className="grid grid-cols-[1fr_140px] gap-6 p-8 md:p-10">
+            <article key={p.id} id={p.id} className="flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
+              <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
                 <div className="flex flex-col">
                   <div className="flex flex-wrap gap-2">
                     {p.tags.map((t) => (
@@ -212,24 +212,22 @@ function ProductCards() {
                     ))}
                   </ul>
                 </div>
-                <div className="flex items-center justify-center">
-                  <div className="h-32 w-32 overflow-hidden rounded-xl bg-[#F7F7F7]">
-                    <img src={p.img} alt={p.name} className="h-full w-full object-cover" loading="lazy" />
+                <div className="flex items-start justify-end">
+                  <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
+                    <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
                   </div>
                 </div>
               </div>
-              <div className="mt-auto border-t border-[#E7E8EE] px-8 py-6 md:px-10">
-                <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="mt-auto px-8 py-6 md:px-10">
+                <div className="flex flex-col gap-4">
                   <div>
                     <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
                     <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
                       {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-5">
-                    <PillButton href="#cta">Start Treatment</PillButton>
-                    <a href={`#${p.id}`} className="text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
-                  </div>
+                  <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
+                  <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
                 </div>
               </div>
             </article>
