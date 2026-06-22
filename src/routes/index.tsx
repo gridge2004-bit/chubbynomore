@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
-const step1Img = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80";
-const step2Img = "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80";
+const step1Img = "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=600&q=80";
+const step2Img = "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80";
 const step3Img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
 const ctaImg = "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80";
 
