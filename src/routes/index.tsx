@@ -73,6 +73,8 @@ function Index() {
     <div className="min-h-screen bg-cream text-foreground">
       <Nav scrolled={scrolled} />
       <Hero />
+      <Testimonials />
+      <ProductCards />
       <MiniCards />
       <Marquee />
       <DrugSection
@@ -176,23 +178,6 @@ function Hero() {
           />
         </div>
       </div>
-
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
-        <HeroCard
-          tint="#E8F1E8"
-          tag="Semaglutide"
-          headline="Once-weekly. Steady results."
-          href="#semaglutide"
-          image={semaProduct}
-        />
-        <HeroCard
-          tint="#F4ECDD"
-          tag="Tirzepatide"
-          headline="Dual-action. Deeper response."
-          href="#tirzepatide"
-          image={tirzProduct}
-        />
-      </div>
     </section>
   );
 }
@@ -217,6 +202,83 @@ function HeroCard({ tint, tag, headline, href, image }: { tint: string; tag: str
         </div>
       </div>
     </a>
+  );
+}
+
+function Star({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+}
+
+const testimonials = [
+  {
+    quote: "I tried everything for years and nothing stuck. With physician supervision and the right medication, I finally have a plan that works. Down 19 lbs in 12 weeks.",
+    name: "Sarah M., 34 — Lost 19 lbs in 12 weeks",
+    avatar: "https://i.pravatar.cc/80?img=1",
+  },
+  {
+    quote: "The process was so easy — evaluation to delivery in under a week. My doctor adjusts my dose as I go and I never feel alone in this.",
+    name: "James T., 41 — Ongoing physician-adjusted dosing",
+    avatar: "https://i.pravatar.cc/80?img=5",
+  },
+  {
+    quote: "I was skeptical about GLP-1 but the clinical data is real. I've lost 22 lbs and my blood sugar is the best it's been in years.",
+    name: "Michelle R., 38 — Lost 22 lbs, blood sugar improved",
+    avatar: "https://i.pravatar.cc/80?img=9",
+  },
+];
+
+function Testimonials() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-20">
+      <div className="text-center">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">Real Results</span>
+        <h2 className="mt-4 font-serif text-4xl md:text-5xl">People just like you are seeing results.</h2>
+      </div>
+      <div className="mt-12 grid gap-6 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <div key={t.name} className="card-surface flex flex-col p-8">
+            <div className="flex gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-4 w-4 text-[color:var(--forest)]" />
+              ))}
+            </div>
+            <p className="mt-5 flex-1 text-sm leading-relaxed text-foreground/90">"{t.quote}"</p>
+            <div className="mt-6 flex items-center gap-3">
+              <img src={t.avatar} alt={t.name} className="h-10 w-10 rounded-full object-cover" loading="lazy" />
+              <span className="text-xs font-medium text-muted-foreground">{t.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-10 text-center text-sm font-medium text-muted-foreground">Rated 4.8/5 by over 2,400 patients</p>
+    </section>
+  );
+}
+
+function ProductCards() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 pt-8 pb-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        <HeroCard
+          tint="#E8F1E8"
+          tag="Semaglutide"
+          headline="Once-weekly. Steady results."
+          href="#semaglutide"
+          image={semaProduct}
+        />
+        <HeroCard
+          tint="#F4ECDD"
+          tag="Tirzepatide"
+          headline="Dual-action. Deeper response."
+          href="#tirzepatide"
+          image={tirzProduct}
+        />
+      </div>
+    </section>
   );
 }
 
