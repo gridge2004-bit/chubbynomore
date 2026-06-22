@@ -200,7 +200,7 @@ function ProductCards() {
           {products.map((p, idx) => (
             <Reveal key={p.id} delay={idx * 150}>
               <article id={p.id} className="card-lift flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-                <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
+                <div className="grid grid-cols-[1fr_180px] gap-6 p-8 md:p-10">
                   <div className="flex flex-col">
                     <div className="flex flex-wrap gap-2">
                       {p.tags.map((t) => (
