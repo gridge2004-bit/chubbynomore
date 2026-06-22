@@ -282,6 +282,7 @@ function ProductCards() {
   );
 }
 
+function MiniCards() {
   return (
     <section className="border-y border-border/60 bg-cream">
       <div className="mx-auto max-w-7xl overflow-x-auto px-6 py-6 no-scrollbar">
