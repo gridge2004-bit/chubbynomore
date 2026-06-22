@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Reveal, useParallax } from "@/components/Reveal";
 
 const heroImg = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
