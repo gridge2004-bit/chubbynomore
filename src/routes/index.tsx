@@ -478,36 +478,34 @@ function FAQ() {
 
 function CTASection() {
   return (
-    <section id="cta" className="mx-auto max-w-7xl px-6 pb-24">
-      <div className="grid gap-6 md:grid-cols-2">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="card-surface flex flex-col justify-between gap-8 p-8 md:p-12"
-        >
+    <section id="cta" className="bg-forest text-forest-foreground">
+      <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">Free evaluation</span>
-            <h3 className="mt-4 font-serif text-3xl md:text-4xl leading-tight">Get your free evaluation now.</h3>
-            <p className="mt-3 text-sm text-muted-foreground">5 minutes. No card required. A licensed physician reviews every submission.</p>
+            <h2 className="font-serif text-4xl leading-tight md:text-5xl">
+              Ready to start? Your free evaluation takes 5 minutes.
+            </h2>
+            <p className="mt-4 text-sm text-forest-foreground/70">
+              No credit card required. A licensed physician reviews every submission.
+            </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              type="email"
-              required
-              placeholder="you@email.com"
-              className="flex-1 rounded-full border border-border bg-white px-5 py-3.5 text-sm outline-none focus:border-forest"
-            />
-            <button className="btn-pill justify-center">Get My Free Evaluation →</button>
-          </div>
-        </form>
-
-        <a href="#faq" className="card-surface flex flex-col justify-between gap-8 p-8 md:p-12 transition hover:-translate-y-1" style={{ backgroundColor: "#E8F1E8" }}>
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-forest/70">Knowledge base</span>
-            <h3 className="mt-4 font-serif text-3xl md:text-4xl leading-tight">All your GLP-1 questions answered.</h3>
-            <p className="mt-3 text-sm text-forest/70">Dosing, side effects, eligibility, shipping, HSA/FSA — covered in plain language.</p>
+            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3 sm:flex-row">
+              <input
+                type="email"
+                required
+                placeholder="you@email.com"
+                className="flex-1 rounded-full bg-white/10 px-5 py-3.5 text-sm text-forest-foreground placeholder:text-forest-foreground/50 outline-none ring-1 ring-white/15 focus:bg-white/20"
+              />
+              <button className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-button text-sm font-extrabold text-forest transition hover:bg-white/90">
+                Get My Free Evaluation →
+              </button>
+            </form>
+            <a href="#faq" className="mt-4 inline-block text-xs text-forest-foreground/60 transition hover:text-forest-foreground">
+              Read the FAQ →
+            </a>
           </div>
-          <span className="font-button text-sm text-forest">Read the FAQ →</span>
-        </a>
+        </div>
       </div>
     </section>
   );
