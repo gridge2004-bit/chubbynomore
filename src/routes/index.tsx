@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 const heroImg = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&q=80";
 const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
+const semaglutideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
+const tirzepatideImg = "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&q=80";
 const step1Img = "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=600&q=80";
 const step2Img = "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80";
 const step3Img = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
@@ -43,6 +45,7 @@ const products = [
     bullets: ["Once-weekly injection", "Physician-titrated dosing", "Avg. ↓15% body weight at 6 months"],
     price: "$229",
     period: "/28-day supply",
+    img: semaglutideImg,
   },
   {
     id: "tirzepatide",
@@ -52,6 +55,7 @@ const products = [
     bullets: ["Dual-agonist mechanism", "Physician-titrated dosing", "Avg. ↓22% body weight at 6 months"],
     price: "$349",
     period: "/28-day supply",
+    img: tirzepatideImg,
   },
 ];
 
@@ -210,7 +214,7 @@ function ProductCards() {
                 </div>
                 <div className="flex items-center justify-center">
                   <div className="h-32 w-32 overflow-hidden rounded-xl bg-[#F7F7F7]">
-                    <img src={vialImg} alt={`${p.name} vial`} className="h-full w-full object-cover" loading="lazy" />
+                    <img src={p.img} alt={p.name} className="h-full w-full object-cover" loading="lazy" />
                   </div>
                 </div>
               </div>
