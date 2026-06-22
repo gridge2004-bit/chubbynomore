@@ -1,16 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Reveal, useParallax } from "@/components/Reveal";
-
-// Maximus-style imagery: muted cool tones, soft natural light, editorial studio feel
-const heroImg = "https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1200&q=80&sat=-20";
-const vialImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80";
-const semaglutideImg = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80";
-const tirzepatideImg = "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&q=80";
-const step1Img = "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=600&q=80&sat=-25";
-const step2Img = "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=600&q=80&sat=-20";
-const step3Img = "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80&sat=-25";
-const ctaImg = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80&sat=-20";
+import heroImg from "@/assets/hero.jpg";
+import semaglutideImg from "@/assets/semaglutide-vial.jpg";
+import tirzepatideImg from "@/assets/tirzepatide-vial.jpg";
+import step1Img from "@/assets/step1.jpg";
+import step2Img from "@/assets/step2.jpg";
+import step3Img from "@/assets/step3.jpg";
+import ctaImg from "@/assets/cta.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -203,7 +200,7 @@ function ProductCards() {
           {products.map((p, idx) => (
             <Reveal key={p.id} delay={idx * 150}>
               <article id={p.id} className="card-lift flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-                <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
+                <div className="grid grid-cols-[1fr_180px] gap-6 p-8 md:p-10">
                   <div className="flex flex-col">
                     <div className="flex flex-wrap gap-2">
                       {p.tags.map((t) => (
@@ -223,10 +220,13 @@ function ProductCards() {
                       ))}
                     </ul>
                   </div>
-                  <div className="flex items-start justify-end">
-                    <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
-                      <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
-                    </div>
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={p.img}
+                      alt={p.name}
+                      className="h-[180px] w-[180px] object-contain mix-blend-multiply"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <div className="mt-auto px-8 py-6 md:px-10">
