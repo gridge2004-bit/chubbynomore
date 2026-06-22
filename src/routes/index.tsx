@@ -195,51 +195,53 @@ function ProductCards() {
   return (
     <section className="bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           GLP-1 medications, <em className="italic">in one place.</em>
-        </h2>
+        </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {products.map((p) => (
-            <article key={p.id} id={p.id} className="flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-              <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
-                <div className="flex flex-col">
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
-                    ))}
+          {products.map((p, idx) => (
+            <Reveal key={p.id} delay={idx * 150}>
+              <article id={p.id} className="card-lift flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
+                <div className="grid grid-cols-[1fr_150px] gap-6 p-8 md:p-10">
+                  <div className="flex flex-col">
+                    <div className="flex flex-wrap gap-2">
+                      {p.tags.map((t) => (
+                        <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
+                      ))}
+                    </div>
+                    <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
+                    <ul className="mt-5 space-y-2.5">
+                      {p.bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
+                          <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
-                  <ul className="mt-5 space-y-2.5">
-                    {p.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
-                        <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex items-start justify-end">
-                  <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
-                    <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
-                  </div>
-                </div>
-              </div>
-              <div className="mt-auto px-8 py-6 md:px-10">
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
-                    <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
-                      {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                  <div className="flex items-start justify-end">
+                    <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
+                      <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
                     </div>
                   </div>
-                  <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
-                  <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
                 </div>
-              </div>
-            </article>
+                <div className="mt-auto px-8 py-6 md:px-10">
+                  <div className="flex flex-col gap-4">
+                    <div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
+                      <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
+                        {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                      </div>
+                    </div>
+                    <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
+                    <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -251,24 +253,24 @@ function HowItWorks() {
   return (
     <section id="how" className="bg-[#FAF8F5] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           It's easy <em className="italic">to get started.</em>
-        </h2>
+        </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n}>
+          {steps.map((s, idx) => (
+            <Reveal key={s.n} delay={idx * 150} className="card-lift rounded-2xl p-2 -m-2">
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
                 <img src={s.img} alt={s.title} className="h-full w-full object-cover" loading="lazy" />
               </div>
               <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9298AB]">Step {s.n}</div>
               <h3 className="mt-2 font-serif text-2xl text-[#1B2147]">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#5A6075]">{s.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
-        <div className="mt-14 text-center">
+        <Reveal className="mt-14 text-center">
           <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
