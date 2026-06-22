@@ -220,10 +220,13 @@ function ProductCards() {
                       ))}
                     </ul>
                   </div>
-                  <div className="flex items-start justify-end">
-                    <div className="h-[150px] w-[150px] overflow-hidden rounded-xl bg-white">
-                      <img src={p.img} alt={p.name} className="h-full w-full object-contain" loading="lazy" />
-                    </div>
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={p.img}
+                      alt={p.name}
+                      className="h-[180px] w-[180px] object-contain mix-blend-multiply"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <div className="mt-auto px-8 py-6 md:px-10">
