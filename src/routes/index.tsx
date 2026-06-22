@@ -105,6 +105,7 @@ function Index() {
         goals={tirzGoals}
         formats={["Self-inject pen", "Vial + syringe", "Titration-adjusted dosing"]}
       />
+      <HowItWorks />
       <Credibility />
       <FAQ />
       <CTASection />
@@ -397,6 +398,37 @@ function DrugSection({
             })}
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <section id="how" className="mx-auto max-w-7xl px-6 py-20">
+      <div className="text-center">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--teal)]">The Process</span>
+        <h2 className="mt-4 font-serif text-4xl md:text-5xl">Getting started takes less than 5 minutes.</h2>
+      </div>
+      <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="text-center">
+          <span className="font-serif text-5xl text-[color:var(--forest)]">01</span>
+          <h3 className="mt-4 font-serif text-xl">Complete your free evaluation</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Answer a few questions about your health history. A licensed physician reviews every submission, usually within 24 hours.</p>
+        </div>
+        <div className="text-center">
+          <span className="font-serif text-5xl text-[color:var(--forest)]">02</span>
+          <h3 className="mt-4 font-serif text-xl">Get matched and prescribed</h3>
+          <p className="mt-2 text-sm text-muted-foreground">If you qualify, your physician selects the right protocol and dosage for your goals. No guesswork, no generic plans.</p>
+        </div>
+        <div className="text-center">
+          <span className="font-serif text-5xl text-[color:var(--forest)]">03</span>
+          <h3 className="mt-4 font-serif text-xl">Receive your medication at home</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Your medication ships discreetly to your door from a licensed US compounding pharmacy. Ongoing support included.</p>
+        </div>
+      </div>
+      <div className="mt-12 text-center">
+        <a href="#cta" className="btn-pill">Check If I Qualify — Free & Fast →</a>
       </div>
     </section>
   );
