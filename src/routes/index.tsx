@@ -113,7 +113,7 @@ function PromoBanner() {
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
         <span>HSA / FSA eligible — early access, by invitation</span>
         <span aria-hidden className="hidden text-white/40 sm:inline">•</span>
-        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">See if you qualify →</a>
+        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">Check If I Qualify — Free & Fast →</a>
       </div>
     </div>
   );
