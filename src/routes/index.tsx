@@ -249,14 +249,16 @@ function CategoryStack() {
 
 function RowTile({ tile }: { tile: Tile }) {
   return (
-    <article className="grid grid-cols-[1fr_90px] items-center gap-4 rounded-2xl bg-[#F0F0EF] px-5 py-5 sm:grid-cols-[1fr_200px] sm:px-10 sm:py-7">
-      <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+    <article className="grid grid-cols-[1fr_110px] items-center gap-4 rounded-[28px] bg-[#EFEFEE] px-6 py-7 sm:grid-cols-[1fr_240px] sm:px-12 sm:py-9">
+      <div className="flex min-w-0 items-center gap-4 sm:gap-5">
         {tile.tag && (
-          <span className="w-fit shrink-0 rounded-md bg-[#1B2147] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">{tile.tag}</span>
+          <span className="shrink-0 rounded-lg bg-[#1B2147] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">
+            {tile.tag}
+          </span>
         )}
-        <h3 className="font-serif text-xl leading-tight text-[#1B2147] sm:truncate sm:text-[34px]">{tile.title}</h3>
+        <h3 className="font-serif text-[26px] leading-[1.05] text-[#1B2147] sm:text-[44px]">{tile.title}</h3>
       </div>
-      <div className="flex h-[70px] items-center justify-end sm:h-[120px]">
+      <div className="flex h-[90px] items-center justify-end sm:h-[150px]">
         <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
       </div>
     </article>
@@ -265,9 +267,9 @@ function RowTile({ tile }: { tile: Tile }) {
 
 function HalfTile({ tile }: { tile: Tile }) {
   return (
-    <article className="grid h-full grid-cols-[1fr_90px] items-center gap-3 rounded-2xl bg-[#F0F0EF] px-6 py-6 sm:grid-cols-[1fr_110px] sm:px-8 sm:py-8">
-      <h3 className="font-serif text-xl leading-tight text-[#1B2147] sm:text-[26px]">{tile.title}</h3>
-      <div className="flex h-[80px] items-center justify-end sm:h-[100px]">
+    <article className="grid h-full grid-cols-[1fr_100px] items-center gap-4 rounded-[28px] bg-[#EFEFEE] px-7 py-8 sm:grid-cols-[1fr_130px] sm:px-10 sm:py-10">
+      <h3 className="font-serif text-[26px] leading-[1.05] text-[#1B2147] sm:text-[34px]">{tile.title}</h3>
+      <div className="flex h-[100px] items-center justify-end sm:h-[130px]">
         <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
       </div>
     </article>
