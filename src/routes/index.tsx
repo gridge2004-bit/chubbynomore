@@ -97,8 +97,9 @@ function Index() {
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
+      <CategoryStack />
+      <AsSeenIn />
       <TrustMarquee />
-      <ProductCards />
       <GLP1Highlights />
       <HowItWorks />
 
