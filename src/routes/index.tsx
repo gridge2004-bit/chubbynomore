@@ -71,11 +71,6 @@ const steps = [
   { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
-const testimonials = [
-  { quote: "I tried every diet imaginable. ChubbyNoMore was the first thing that actually worked — and I finally feel like myself again.", name: "Sarah R. — Lost 34 lbs in 8 months" },
-  { quote: "The whole process was seamless. Doctor was incredibly supportive. The medication just… worked. I couldn't believe how different I felt.", name: "Marcus T. — Lost 52 lbs in 11 months" },
-  { quote: "Honestly, I just feel like myself again — more energy, sharper focus, and clothes that finally fit right. The process was simple and my doctor actually listened.", name: "James R. — Early-access member" },
-];
 
 const faqs = [
   { q: "Will insurance cover this?", a: "Most insurance plans don't cover GLP-1 medications for weight loss, but our programs are HSA/FSA eligible. We keep pricing transparent so there are no surprises." },
@@ -107,7 +102,6 @@ function Index() {
       <GLP1Highlights />
       <HowItWorks />
 
-      <Testimonials />
       <FAQ />
       <FinalCTA />
       <Footer />
@@ -395,42 +389,6 @@ function HowItWorks() {
   );
 }
 
-function Star() {
-  return (
-    <svg viewBox="0 0 24 24" fill={NAVY} className="h-4 w-4">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
-
-function Testimonials() {
-  return (
-    <section className="bg-[#F7F7F7] px-6 py-24">
-      <div className="mx-auto max-w-7xl">
-        <Reveal as="h2" className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          <em className="italic">920+ patients</em> transformed their lives.
-        </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, idx) => (
-            <Reveal key={t.name} delay={idx * 150} className="card-lift flex flex-col rounded-2xl border border-[#E7E8EE] bg-white p-8">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => <Star key={i} />)}
-              </div>
-              <p className="mt-5 flex-1 text-[15px] leading-relaxed text-[#1B2147]">"{t.quote}"</p>
-              <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-[#1B2147]">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Verified buyer
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-8 text-xs text-[#5A6075]">In clinical trials, patients lost on average about 15% of body weight on semaglutide and about 20% on tirzepatide over roughly 68–72 weeks, used alongside diet and exercise. Individual stories are not typical and not a guarantee of your results.</p>
-      </div>
-    </section>
-  );
-}
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
