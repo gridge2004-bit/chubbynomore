@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ChubbyNoMore — Real GLP-1 medication. Real results. Real you." },
-      { name: "description", content: "Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
+      { name: "description", content: "Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
     ],
   }),
   component: Index,
