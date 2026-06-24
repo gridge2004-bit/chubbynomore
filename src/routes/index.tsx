@@ -228,17 +228,38 @@ const productCards: ProductCard[] = [
   },
 ];
 
+function HeroTile({ tile }: { tile: Tile }) {
+  return (
+    <article className="card-lift relative h-[300px] overflow-hidden rounded-3xl sm:h-[380px]">
+      <img src={tile.img} alt={tile.imgAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <h3 className="absolute left-6 bottom-6 font-serif text-3xl text-white drop-shadow-lg sm:text-4xl">{tile.title}</h3>
+    </article>
+  );
+}
+
 function CategoryStack() {
+  const heroTiles = tiles.filter((t) => t.variant === "image-hero");
   return (
     <section className="bg-white px-4 pb-16 sm:px-6">
-      <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2">
-        {productCards.map((p, i) => (
-          <Reveal key={p.id} delay={i * 100}>
-            <a href="#cta" className="card-lift block h-full">
-              <ProductTile card={p} />
-            </a>
-          </Reveal>
-        ))}
+      <div className="mx-auto flex max-w-7xl flex-col gap-4">
+        {/* Two big image cards */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {heroTiles.map((t, i) => (
+            <Reveal key={t.id} delay={i * 100}>
+              <HeroTile tile={t} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="grid max-w-7xl gap-5 sm:grid-cols-2">
+          {productCards.map((p, i) => (
+            <Reveal key={p.id} delay={i * 100}>
+              <a href="#cta" className="card-lift block h-full">
+                <ProductTile card={p} />
+              </a>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
