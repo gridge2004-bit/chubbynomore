@@ -301,9 +301,6 @@ function GLP1Highlights() {
             <div className="flex h-28 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
               <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Oral</div>
             </div>
-            <div className="flex h-32 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Compound</div>
-            </div>
           </div>
         </Reveal>
 
