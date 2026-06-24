@@ -194,83 +194,81 @@ const tiles: Tile[] = [
   { id: "dosing", title: "Personalized dosing", img: ctaImg, imgAlt: "Personalized dosing care", variant: "row" },
 ];
 
-function CategoryStack() {
-  const heroTiles = tiles.filter((t) => t.variant === "image-hero");
-  const rowTiles = tiles.filter((t) => t.variant === "row");
-  const halfTiles = tiles.filter((t) => t.variant === "half");
-  const [compounded, brand, dosing] = rowTiles;
+type ProductCard = {
+  id: string;
+  title: string;
+  subtitle: string;
+  medications: string;
+  img: string;
+  imgAlt: string;
+  prices: { label: string; value: string }[];
+};
 
+const productCards: ProductCard[] = [
+  {
+    id: "compounded",
+    title: "Compounded Weight Loss",
+    subtitle: "Custom-formulated",
+    medications: "Tirzepatide, Semaglutide",
+    img: semaglutideImg,
+    imgAlt: "Compounded weight loss vials",
+    prices: [
+      { label: "GLP-1 + GIP", value: "Starting at $249.99" },
+      { label: "GLP-1", value: "Starting at $149.99" },
+    ],
+  },
+  {
+    id: "brand",
+    title: "Brand-name Weight Loss",
+    subtitle: "FDA-approved name brand",
+    medications: "Ozempic, Mounjaro, Wegovy, Foundayo, Zepbound",
+    img: tirzepatideImg,
+    imgAlt: "Brand-name GLP-1 injector pens",
+    prices: [{ label: "", value: "Starting at $199.99" }],
+  },
+];
+
+function CategoryStack() {
   return (
     <section className="bg-white px-4 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        {/* Two big image cards */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          {heroTiles.map((t, i) => (
-            <Reveal key={t.id} delay={i * 100}>
-              <article className="card-lift relative h-[300px] overflow-hidden rounded-3xl sm:h-[380px]">
-                <img src={t.img} alt={t.imgAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <h3 className="absolute left-6 bottom-6 font-serif text-3xl text-white drop-shadow-lg sm:text-4xl">{t.title}</h3>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Full-width row tiles */}
-        {[compounded, brand].map((t, i) => (
-          <Reveal key={t.id} delay={i * 100}>
-            <a href="#cta" className="card-lift block">
-              <RowTile tile={t} />
+      <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2">
+        {productCards.map((p, i) => (
+          <Reveal key={p.id} delay={i * 100}>
+            <a href="#cta" className="card-lift block h-full">
+              <ProductTile card={p} />
             </a>
           </Reveal>
         ))}
-
-        {/* Two-column row */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          {halfTiles.map((t, i) => (
-            <Reveal key={t.id} delay={i * 100}>
-              <a href="#cta" className="card-lift block h-full">
-                <HalfTile tile={t} />
-              </a>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Final full-width */}
-        <Reveal>
-          <a href="#cta" className="card-lift block">
-            <RowTile tile={dosing} />
-          </a>
-        </Reveal>
       </div>
     </section>
   );
 }
 
-function RowTile({ tile }: { tile: Tile }) {
+function ProductTile({ card }: { card: ProductCard }) {
   return (
-    <article className="grid grid-cols-[1fr_110px] items-center gap-4 rounded-[28px] bg-[#EFEFEE] px-6 py-7 sm:grid-cols-[1fr_240px] sm:px-12 sm:py-9">
-      <div className="flex min-w-0 items-center gap-4 sm:gap-5">
-        {tile.tag && (
-          <span className="shrink-0 rounded-lg bg-[#1B2147] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-            {tile.tag}
-          </span>
-        )}
-        <h3 className="font-serif text-[26px] leading-[1.05] text-[#1B2147] sm:text-[44px]">{tile.title}</h3>
+    <article className="flex h-full flex-col rounded-[28px] bg-[#D9DDD8] px-8 py-9 sm:px-10 sm:py-10">
+      <div className="grid grid-cols-[1fr_auto] items-start gap-4">
+        <h3 className="font-serif text-[40px] leading-[1.02] text-[#1B2147] sm:text-[48px]">
+          {card.title.split(" ").slice(0, -2).join(" ")}
+          <br />
+          {card.title.split(" ").slice(-2).join(" ")}
+        </h3>
+        <div className="flex h-[120px] w-[140px] items-center justify-end sm:h-[170px] sm:w-[200px]">
+          <img src={card.img} alt={card.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
+        </div>
       </div>
-      <div className="flex h-[90px] items-center justify-end sm:h-[150px]">
-        <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
-      </div>
-    </article>
-  );
-}
-
-function HalfTile({ tile }: { tile: Tile }) {
-  return (
-    <article className="grid h-full grid-cols-[1fr_100px] items-center gap-4 rounded-[28px] bg-[#EFEFEE] px-7 py-8 sm:grid-cols-[1fr_130px] sm:px-10 sm:py-10">
-      <h3 className="font-serif text-[26px] leading-[1.05] text-[#1B2147] sm:text-[34px]">{tile.title}</h3>
-      <div className="flex h-[100px] items-center justify-end sm:h-[130px]">
-        <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
+      <p className="mt-6 text-[15px] text-[#1B2147]/85">{card.subtitle}</p>
+      <p className="mt-2 text-[15px] font-medium text-[#3454C7]">{card.medications}</p>
+      <div className="mt-auto pt-10 space-y-2 text-[15px] text-[#1B2147]">
+        {card.prices.map((p, idx) => (
+          <div key={idx} className="flex flex-wrap items-center gap-1.5">
+            {p.label && <span>{p.label}</span>}
+            <a href="#cta" className="text-[#3454C7] underline underline-offset-2">
+              {p.value}
+            </a>
+            <span aria-hidden className="text-[#3454C7]">→</span>
+          </div>
+        ))}
       </div>
     </article>
   );
