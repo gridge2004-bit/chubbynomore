@@ -203,7 +203,7 @@ function ProductCards() {
     <section className="bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          GLP-1 medications, <em className="italic">in one place.</em>
+          Two GLP-1 options. <em className="italic">Your physician helps you choose.</em>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {products.map((p, idx) => (
@@ -264,7 +264,7 @@ function HowItWorks() {
     <section id="how" className="bg-[#FAF8F5] px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          It's easy <em className="italic">to get started.</em>
+          Three steps to <em className="italic">a healthier you.</em>
         </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
           {steps.map((s, idx) => (
@@ -279,7 +279,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+          <PillButton href="#cta">See If You Qualify</PillButton>
         </Reveal>
       </div>
     </section>
@@ -299,7 +299,7 @@ function Testimonials() {
     <section className="bg-[#F7F7F7] px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          <em className="italic">Results</em> that speak louder than promises.
+          <em className="italic">920+ patients</em> transformed their lives.
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, idx) => (
@@ -317,7 +317,7 @@ function Testimonials() {
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 text-xs text-[#5A6075]">Collected from verified customers. Results vary.</p>
+        <p className="mt-8 text-xs text-[#5A6075]">In clinical trials, patients lost on average about 15% of body weight on semaglutide and about 20% on tirzepatide over roughly 68–72 weeks, used alongside diet and exercise. Individual stories are not typical and not a guarantee of your results.</p>
       </div>
     </section>
   );
@@ -330,7 +330,7 @@ function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
-            Weight Loss Treatment <em className="italic">FAQs</em>
+            Common questions. <em className="italic">Honest answers.</em>
           </h2>
         </Reveal>
         <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
@@ -364,23 +364,23 @@ function FAQ() {
 
 function FinalCTA() {
   const checks = [
-    "Easy online doctor visits",
-    "No appointments, message anytime",
-    "US-based medical providers",
-    "Free expedited shipping",
+    "Doctor prescribed",
+    "100% confidential",
+    "Delivered to your door",
+    "Licensed in all 50 states",
   ];
   return (
     <section id="cta" className="w-full bg-[#E8EDF8]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={ctaImg} alt="Young woman in athletic wear smiling" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <img src={ctaImg} alt="Patient living an active life" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
-            Physician grade health care, <em className="italic">from anywhere.</em>
+            Ready to see if GLP-1 is right for you? <em className="italic">ChubbyNoMore is with you every step.</em>
           </h2>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[#1B2147]/75">
-            Join 10,000+ people who have trusted and transformed their health with ChubbyNoMore.
+            Join 920+ patients already on their journey. Free to join. Invite-only early access.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {checks.map((c) => (
@@ -393,7 +393,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">See If You Qualify</PillButton>
           </div>
         </div>
       </div>
@@ -409,12 +409,12 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="font-serif text-3xl">ChubbyNoMore</div>
             <p className="mt-4 max-w-xs text-sm text-white/70">
-              Physician-supervised GLP-1 care. Transparent pricing, discreet shipping, real medicine.
+              Doctor-prescribed GLP-1 weight loss, prescribed online and delivered to your door. Licensed in all 50 states.
             </p>
           </div>
-          <FooterCol title="Programs" links={["Semaglutide", "Tirzepatide", "Pricing & Plans"]} />
-          <FooterCol title="Learn" links={["How It Works", "FAQ", "Knowledge base"]} />
-          <FooterCol title="Company" links={["About", "Contact", "Press"]} />
+          <FooterCol title="Program" links={["How It Works", "Medications", "Pricing", "FAQs"]} />
+          <FooterCol title="Company" links={["About Us", "Our Doctors", "Patient Stories", "Blog"]} />
+          <FooterCol title="Legal" links={["Privacy Policy", "Terms of Service", "HIPAA Notice", "Contact"]} />
         </div>
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 md:flex-row">
           <span>© {new Date().getFullYear()} ChubbyNoMore. All rights reserved.</span>
