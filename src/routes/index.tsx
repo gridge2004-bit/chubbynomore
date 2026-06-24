@@ -274,19 +274,19 @@ function HalfTile({ tile }: { tile: Tile }) {
   );
 }
 
-function AsSeenIn() {
-  const outlets = ["GQ", "Men's Health", "Forbes"];
+function TrustMarquee() {
+  const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
   return (
-    <section className="bg-white px-6 pt-4 pb-16">
-      <div className="mx-auto max-w-7xl">
-        <div className="text-xs font-medium text-[#5A6075]">As seen in:</div>
-        <div className="mt-4 grid grid-cols-3 items-center gap-4 sm:gap-8">
-          {outlets.map((o, i) => (
-            <div key={o} className={`flex items-center justify-center ${i > 0 ? "border-l border-[#1B2147]/20" : ""}`}>
-              <span className="font-serif text-2xl font-bold tracking-tight text-[#1B2147] sm:text-4xl">{o}</span>
-            </div>
-          ))}
-        </div>
+    <section className="overflow-hidden bg-[#1B2147] py-5 text-white">
+      <div className="marquee-track text-sm font-medium uppercase tracking-[0.18em]">
+        {items.map((t, i) => (
+          <span key={i} className="flex items-center gap-12">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {t}
+          </span>
+        ))}
       </div>
     </section>
   );
