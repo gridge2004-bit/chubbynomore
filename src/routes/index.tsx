@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ChubbyNoMore — Real GLP-1 medication. Real results. Real you." },
-      { name: "description", content: "Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
+      { name: "description", content: "Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
     ],
   }),
   component: Index,
@@ -141,7 +141,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <PillButton href="#cta">See If You Qualify</PillButton>
+        <PillButton href="#cta">Get Started</PillButton>
       </div>
     </header>
   );
@@ -168,10 +168,10 @@ function Hero() {
             <em className="font-serif italic text-[#1B2147]">Real results. Real you.</em>
           </Reveal>
           <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
-            Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
+            Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">See If You Qualify</PillButton>
+            <PillButton href="#cta">Get Started</PillButton>
           </Reveal>
           <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
         </div>
@@ -279,7 +279,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">See If You Qualify</PillButton>
+          <PillButton href="#cta">Get Started</PillButton>
         </Reveal>
       </div>
     </section>
@@ -393,7 +393,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">See If You Qualify</PillButton>
+            <PillButton href="#cta">Get Started</PillButton>
           </div>
         </div>
       </div>
