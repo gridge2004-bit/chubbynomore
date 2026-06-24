@@ -262,7 +262,7 @@ function ProductCards() {
 function GLP1Highlights() {
   const [format, setFormat] = useState("Injectable");
   const [goal, setGoal] = useState("All of the above");
-  const formats = ["Injectable", "Oral", "Compounded"];
+  const formats = ["Injectable", "Oral"];
   const goals = ["Lose stubborn fat", "Curb cravings & appetite", "Improve metabolic health", "Feel confident again", "All of the above"];
 
   return (
