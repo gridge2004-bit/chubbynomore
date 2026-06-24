@@ -259,7 +259,107 @@ function ProductCards() {
   );
 }
 
+function GLP1Highlights() {
+  const [format, setFormat] = useState("Injectable");
+  const [goal, setGoal] = useState("All of the above");
+  const formats = ["Injectable", "Oral", "Compounded"];
+  const goals = ["Lose stubborn fat", "Curb cravings & appetite", "Improve metabolic health", "Feel confident again", "All of the above"];
+
+  return (
+    <section className="bg-white px-6 py-24">
+      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+        {/* Card 1 — Treatment formats */}
+        <Reveal className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
+          <div>
+            <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
+              Treatment formats that fit <em className="italic">your lifestyle</em>
+            </h3>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {formats.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFormat(f)}
+                  className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                    format === f ? "bg-[#1B2147] text-white" : "bg-white text-[#1B2147] hover:bg-[#1B2147]/5"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+            <a
+              href="#semaglutide"
+              className="mt-3 flex w-full items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+            >
+              View all
+            </a>
+          </div>
+          <div className="mt-8 flex items-end justify-center gap-2">
+            <div className="flex h-24 w-16 items-end justify-center rounded-xl bg-white shadow-sm">
+              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
+            </div>
+            <div className="flex h-28 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
+              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Oral</div>
+            </div>
+            <div className="flex h-32 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
+              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Compound</div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Card 2 — Results */}
+        <Reveal delay={120} className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
+          <div>
+            <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
+              Make optimal your <em className="italic">new normal</em>
+            </h3>
+            <div className="mt-8 flex items-baseline gap-2 text-[#1B2147]">
+              <span className="text-3xl font-semibold">↓</span>
+              <span className="font-serif text-5xl font-semibold tracking-tight md:text-[56px]">20%</span>
+            </div>
+            <p className="mt-1 text-sm text-[#5A6075]">Avg. body weight reduction*</p>
+          </div>
+          <div className="mt-8 grid grid-cols-2 items-end gap-3">
+            <div className="flex h-28 flex-col items-center justify-end rounded-2xl bg-[#1B2147]/90 p-4 text-white">
+              <div className="text-[10px] uppercase tracking-[0.16em] opacity-70">Baseline</div>
+              <div className="font-serif text-3xl font-semibold">230</div>
+              <div className="text-[10px] opacity-70">lbs</div>
+            </div>
+            <div className="flex h-44 flex-col items-center justify-end rounded-2xl bg-[#1B2147] p-4 text-white">
+              <div className="text-[10px] uppercase tracking-[0.16em] opacity-70">After 68 wks</div>
+              <div className="font-serif text-3xl font-semibold">184</div>
+              <div className="text-[10px] opacity-70">lbs</div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Card 3 — Goals */}
+        <Reveal delay={240} className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
+          <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
+            Why do you want to <em className="italic">lose weight?</em>
+          </h3>
+          <div className="mt-6 flex flex-col gap-2.5">
+            {goals.map((g) => (
+              <button
+                key={g}
+                onClick={() => setGoal(g)}
+                className={`rounded-full px-5 py-3 text-sm font-semibold transition ${
+                  goal === g ? "bg-[#1B2147] text-white" : "bg-white text-[#1B2147] hover:bg-[#1B2147]/5"
+                }`}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+      <p className="mx-auto mt-6 max-w-7xl text-[11px] text-[#9298AB]">*Based on published clinical trial averages for tirzepatide over ~68–72 weeks, used alongside diet and exercise. Individual results vary.</p>
+    </section>
+  );
+}
+
 function HowItWorks() {
+
   return (
     <section id="how" className="bg-[#FAF8F5] px-6 py-24">
       <div className="mx-auto max-w-7xl">
