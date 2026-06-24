@@ -12,74 +12,71 @@ import ctaImg from "@/assets/cta.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChubbyNoMore — Physician-supervised GLP-1 care" },
-      { name: "description", content: "Semaglutide and Tirzepatide programs supervised by board-certified physicians. Transparent pricing, discreet shipping, HSA/FSA eligible." },
+      { title: "ChubbyNoMore — Real GLP-1 medication. Real results. Real you." },
+      { name: "description", content: "Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
     ],
   }),
   component: Index,
 });
 
 const navLinks = [
-  { label: "Semaglutide", href: "#semaglutide" },
-  { label: "Tirzepatide", href: "#tirzepatide" },
   { label: "How It Works", href: "#how" },
+  { label: "Medications", href: "#semaglutide" },
+  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 
 const marqueeItems = [
-  "Custom dosing",
-  "Physician supervised",
-  "10,000+ members",
-  "Clinically proven",
-  "Discreet shipping",
+  "Prescribed by US-licensed physicians",
+  "Board-certified doctors",
+  "Compounded by a licensed US pharmacy",
+  "Licensed in all 50 states",
+  "HIPAA compliant",
   "No hidden fees",
 ];
 
 const products = [
   {
     id: "semaglutide",
-    tags: ["COMPOUNDED", "GLP-1"],
+    tags: ["MOST POPULAR", "GLP-1"],
     name: "Semaglutide",
-    desc: "A once-weekly GLP-1 protocol with physician oversight from your first evaluation through every titration step. Steady, predictable results.",
-    bullets: ["Once-weekly injection", "Physician-titrated dosing", "Avg. ↓15% body weight at 6 months"],
-    price: "$229",
-    period: "/28-day supply",
+    desc: "A once-weekly GLP-1 injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's appropriate for you. Individual results vary.",
+    bullets: ["Once-weekly injection", "Physician-titrated dosing", "From $47/mL — flat monthly price"],
+    price: "$149",
+    period: "/month",
     img: semaglutideImg,
   },
   {
     id: "tirzepatide",
-    tags: ["COMPOUNDED", "GLP-1"],
+    tags: ["DUAL-ACTION", "GLP-1 / GIP"],
     name: "Tirzepatide",
-    desc: "A dual GIP/GLP-1 receptor protocol for patients seeking a stronger metabolic response, with the same physician oversight throughout.",
-    bullets: ["Dual-agonist mechanism", "Physician-titrated dosing", "Avg. ↓22% body weight at 6 months"],
-    price: "$349",
-    period: "/28-day supply",
+    desc: "A once-weekly dual-action (GLP-1/GIP) injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's right for you. Individual results vary.",
+    bullets: ["Dual-action GLP-1 + GIP", "Physician-titrated dosing", "Free shipping, cancel anytime"],
+    price: "$199",
+    period: "/month",
     img: tirzepatideImg,
   },
 ];
 
 const steps = [
-  { n: "01", img: step1Img, title: "Complete your evaluation", desc: "Answer a few questions about your health history. The whole thing takes about 5 minutes from your phone." },
-  { n: "02", img: step2Img, title: "Physician review", desc: "A US-licensed physician reviews your submission — usually within 24 hours — and writes the right protocol for you." },
-  { n: "03", img: step3Img, title: "Treatment delivered", desc: "Your medication ships discreetly from a licensed US compounding pharmacy. Ongoing support included." },
+  { n: "01", img: step1Img, title: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Everything is confidential and HIPAA-secure." },
+  { n: "02", img: step2Img, title: "Meet your physician", desc: "A board-certified doctor reviews your history, evaluates your eligibility, and creates a personalized treatment plan just for you." },
+  { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 const testimonials = [
-  { quote: "I tried everything for years and nothing stuck. With physician supervision and the right medication, I finally have a plan that works. Down 19 lbs in 12 weeks.", name: "Sarah M., 34 — Lost 19 lbs in 12 weeks" },
-  { quote: "The process was so easy — evaluation to delivery in under a week. My doctor adjusts my dose as I go and I never feel alone in this.", name: "James T., 41 — Ongoing physician-adjusted dosing" },
-  { quote: "I was skeptical about GLP-1 but the clinical data is real. I've lost 22 lbs and my blood sugar is the best it's been in years.", name: "Michelle R., 38 — Lost 22 lbs, blood sugar improved" },
+  { quote: "I tried every diet imaginable. ChubbyNoMore was the first thing that actually worked — and I finally feel like myself again.", name: "Sarah R. — Lost 34 lbs in 8 months" },
+  { quote: "The whole process was seamless. Doctor was incredibly supportive. The medication just… worked. I couldn't believe how different I felt.", name: "Marcus T. — Lost 52 lbs in 11 months" },
+  { quote: "Honestly, I just feel like myself again — more energy, sharper focus, and clothes that finally fit right. The process was simple and my doctor actually listened.", name: "James R. — Early-access member" },
 ];
 
 const faqs = [
-  { q: "Who qualifies for a GLP-1 program?", a: "Eligibility is determined by a licensed physician based on your medical history, current medications, and BMI. The free evaluation takes about 5 minutes." },
-  { q: "How is the medication shipped?", a: "Medication is shipped discreetly in temperature-controlled packaging directly from a USP 797 compounding pharmacy to your door." },
-  { q: "Is this covered by HSA or FSA?", a: "Yes. ChubbyNoMore programs are HSA and FSA eligible. We provide itemized receipts for reimbursement." },
-  { q: "What are the side effects?", a: "Common side effects include nausea, fatigue, and mild GI discomfort, especially during titration. Your physician will discuss your full risk profile during the evaluation." },
-  { q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can pause or cancel your program at any time from your account." },
-  { q: "Is this safe? Are there risks I should know about?", a: "GLP-1 medications like semaglutide and tirzepatide have been FDA-approved and studied extensively. Like all medications, they carry possible side effects (most commonly nausea and fatigue, especially early on). That's exactly why we require a physician evaluation before every prescription — to make sure it's the right fit for your health profile." },
-  { q: "How is this different from getting GLP-1 from my regular doctor?", a: "Most primary care physicians have limited time for weight management and may not be familiar with titration protocols. Our platform is built specifically for GLP-1 care — with physicians who specialize in metabolic health, ongoing dose adjustments, and support throughout your journey." },
-  { q: "What if I don't qualify?", a: "If you don't qualify after your free evaluation, you won't be charged anything. Our physicians will let you know why and may suggest alternatives that could be a better fit for your situation." },
-  { q: "Will insurance cover this?", a: "Most insurance plans do not cover compounded GLP-1 medications. However, our programs are HSA/FSA eligible, and our pricing is transparent with no hidden fees. Many patients find it more affordable than expected." },
+  { q: "Will insurance cover this?", a: "Most insurance plans don't cover GLP-1 medications for weight loss, but our programs are HSA/FSA eligible. We keep pricing transparent so there are no surprises." },
+  { q: "How quickly will I see results?", a: "Many patients begin noticing changes within the first 1–2 months, but everyone responds differently and results vary. Your physician will set realistic expectations. GLP-1 medication works best alongside healthy eating and regular activity." },
+  { q: "Are there side effects?", a: "The most common side effects are digestive — usually nausea, and sometimes vomiting, diarrhea, or constipation. These are typically mild and tend to ease as your dose is increased slowly. Less common but more serious risks include pancreatitis, gallbladder problems, and low blood sugar. GLP-1 medications are not right for everyone. Your physician reviews your full health history before prescribing." },
+  { q: "Do I need to go to a clinic?", a: "No. Everything is done online — your consultation, prescription, and follow-ups. Medication is shipped directly to your door." },
+  { q: "What if I don't qualify?", a: "If you don't meet the criteria for GLP-1 therapy, your physician will explain why and may suggest alternative options. You're never charged if you don't qualify." },
+  { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus exclusively on GLP-1 weight loss. Your physician stays involved throughout — not just at signup. We don't disappear after the prescription." },
 ];
 
 const NAVY = "#1B2147";
