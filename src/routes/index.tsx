@@ -93,7 +93,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-[#1B2147]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white text-[#1B2147]">
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
