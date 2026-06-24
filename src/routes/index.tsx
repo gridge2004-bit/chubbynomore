@@ -4,8 +4,8 @@ import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import semaglutideImg from "@/assets/compounded-weightloss.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
-import semaglutideVialImg from "@/assets/semaglutide-vial.png";
-import tirzepatideVialImg from "@/assets/tirzepatide-vial.png";
+import oralTablets1Img from "@/assets/oral-tablets-1.png";
+import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step1Img from "@/assets/step1.jpg";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
@@ -189,8 +189,8 @@ const tiles: Tile[] = [
   { id: "lose", title: "Lose weight", img: step2Img, imgAlt: "Woman exercising on a mat", variant: "image-hero" },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
   { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
-  { id: "cravings", title: "Curb cravings & appetite", img: semaglutideVialImg, imgAlt: "Semaglutide vial", variant: "half" },
-  { id: "metabolic", title: "Metabolic health", img: tirzepatideVialImg, imgAlt: "Tirzepatide vial", variant: "half" },
+  { id: "cravings", title: "Curb cravings & appetite", img: oralTablets1Img, imgAlt: "Oral weight-loss tablets", variant: "half" },
+  { id: "metabolic", title: "Metabolic health", img: oralTablets2Img, imgAlt: "Oral metabolic health tablets", variant: "half" },
   { id: "dosing", title: "Personalized dosing", img: ctaImg, imgAlt: "Personalized dosing care", variant: "row" },
 ];
 
