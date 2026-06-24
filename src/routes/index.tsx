@@ -298,19 +298,21 @@ function GLP1Highlights() {
                 </button>
               ))}
             </div>
-            <a
-              href="#semaglutide"
-              className="mt-3 flex w-full items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
-            >
-              View all
-            </a>
           </div>
           <div className="mt-8 flex items-end justify-center gap-2">
-            <div className="flex h-24 w-16 items-end justify-center rounded-xl bg-white shadow-sm">
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
+            <div className="flex h-28 w-16 flex-col items-center justify-end rounded-xl bg-white p-2 shadow-sm">
+              <div className="flex flex-1 flex-col items-center justify-center gap-1">
+                <span className="text-lg font-bold text-[#1B2147]">1×</span>
+                <span className="text-[9px] uppercase tracking-wider text-[#5A6075]">week</span>
+              </div>
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
             </div>
-            <div className="flex h-28 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Oral</div>
+            <div className="flex h-32 w-16 flex-col items-center justify-end rounded-xl bg-[#1B2147] p-2 shadow-sm">
+              <div className="flex flex-1 flex-col items-center justify-center gap-1">
+                <span className="text-lg font-bold text-white">1×</span>
+                <span className="text-[9px] uppercase tracking-wider text-white/70">day</span>
+              </div>
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-white">Oral</div>
             </div>
           </div>
         </Reveal>
