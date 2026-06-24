@@ -71,11 +71,6 @@ const steps = [
   { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
-const testimonials = [
-  { quote: "I tried every diet imaginable. ChubbyNoMore was the first thing that actually worked — and I finally feel like myself again.", name: "Sarah R. — Lost 34 lbs in 8 months" },
-  { quote: "The whole process was seamless. Doctor was incredibly supportive. The medication just… worked. I couldn't believe how different I felt.", name: "Marcus T. — Lost 52 lbs in 11 months" },
-  { quote: "Honestly, I just feel like myself again — more energy, sharper focus, and clothes that finally fit right. The process was simple and my doctor actually listened.", name: "James R. — Early-access member" },
-];
 
 const faqs = [
   { q: "Will insurance cover this?", a: "Most insurance plans don't cover GLP-1 medications for weight loss, but our programs are HSA/FSA eligible. We keep pricing transparent so there are no surprises." },
