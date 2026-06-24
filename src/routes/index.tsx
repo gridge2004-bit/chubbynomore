@@ -300,20 +300,24 @@ function GLP1Highlights() {
             </div>
           </div>
           <div className="mt-8 flex items-end justify-center gap-3">
-            <div className="flex h-52 w-24 flex-col items-center justify-end rounded-2xl bg-white p-3 shadow-sm">
-              <div className="flex flex-1 flex-col items-center justify-center gap-1">
-                <span className="text-2xl font-bold text-[#1B2147]">1×</span>
-                <span className="text-[10px] uppercase tracking-wider text-[#5A6075]">week</span>
+            {format === "Injectable" && (
+              <div className="flex h-52 w-24 flex-col items-center justify-end rounded-2xl bg-white p-3 shadow-sm transition-all duration-300">
+                <div className="flex flex-1 flex-col items-center justify-center gap-1">
+                  <span className="text-2xl font-bold text-[#1B2147]">1×</span>
+                  <span className="text-[10px] uppercase tracking-wider text-[#5A6075]">week</span>
+                </div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
               </div>
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
-            </div>
-            <div className="flex h-64 w-24 flex-col items-center justify-end rounded-2xl bg-[#1B2147] p-3 shadow-sm">
-              <div className="flex flex-1 flex-col items-center justify-center gap-1">
-                <span className="text-2xl font-bold text-white">1×</span>
-                <span className="text-[10px] uppercase tracking-wider text-white/70">day</span>
+            )}
+            {format === "Oral" && (
+              <div className="flex h-64 w-24 flex-col items-center justify-end rounded-2xl bg-[#1B2147] p-3 shadow-sm transition-all duration-300">
+                <div className="flex flex-1 flex-col items-center justify-center gap-1">
+                  <span className="text-2xl font-bold text-white">1×</span>
+                  <span className="text-[10px] uppercase tracking-wider text-white/70">day</span>
+                </div>
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-white">Oral</div>
               </div>
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-white">Oral</div>
-            </div>
+            )}
           </div>
         </Reveal>
 
