@@ -156,114 +156,133 @@ function Nav({ scrolled }: { scrolled: boolean }) {
 
 function Hero() {
   return (
-    <section className="w-full border-b border-[#E7E8EE]">
-      <div className="grid w-full md:grid-cols-[55fr_45fr]" style={{ minHeight: 580 }}>
-        <div className="relative h-[360px] overflow-hidden bg-[#F7F7F7] md:h-[580px]">
-          <img
-            src={heroImg}
-            alt="Athletic man running on a mountain trail"
-            className="h-full w-full object-cover"
-            style={{ objectPosition: "center 30%" }}
-            loading="eager"
-          />
-        </div>
-        <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
-          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">Real GLP-1 medication</Reveal>
-          <Reveal as="h1" delay={80} className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
-            Real GLP-1 medication.
-            <br />
-            <em className="font-serif italic text-[#1B2147]">Real results. Real you.</em>
-          </Reveal>
-          <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
-            Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
-          </Reveal>
-          <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
-          </Reveal>
-          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TrustMarquee() {
-  const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
-  return (
-    <section className="overflow-hidden bg-[#1B2147] py-5 text-white">
-      <div className="marquee-track text-sm font-medium uppercase tracking-[0.18em]">
-        {items.map((t, i) => (
-          <span key={i} className="flex items-center gap-12">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {t}
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ProductCards() {
-  return (
-    <section className="bg-white px-4 py-16 sm:px-6 sm:py-24">
+    <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="h2" className="text-center font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
-          Two ways to start. <em className="italic">Your physician helps you choose.</em>
+        <Reveal as="h1" className="font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
+          Real GLP-1
+          <br />
+          <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
         </Reveal>
-        <div className="mt-10 grid gap-6 sm:mt-14 md:grid-cols-2">
-          {products.map((p, idx) => (
-            <Reveal key={p.id} delay={idx * 150}>
-              <article id={p.id} className="card-lift flex h-full flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-                <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-[1fr_140px] sm:gap-6 sm:p-8 md:grid-cols-[1fr_180px] md:p-10">
-                  <div className="flex min-w-0 flex-col">
-                    <span className="self-start rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{p.tag}</span>
-                    <h3 className="mt-5 font-serif text-2xl font-semibold text-[#1B2147] sm:text-3xl md:text-[32px]">{p.name}</h3>
-                    <p className="mt-2 text-sm font-medium text-[#5A6075]">{p.subtitle}</p>
-                    <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1">
-                      {p.medications.map((m, i) => (
-                        <span key={m} className="font-serif text-base italic text-[#1B2147]">
-                          {m}{i < p.medications.length - 1 ? "," : ""}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="mt-4 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
-                    <ul className="mt-5 space-y-2.5">
-                      {p.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
-                          <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="order-first flex items-center justify-center sm:order-none">
-                    <img
-                      src={p.img}
-                      alt={p.name}
-                      className="h-[160px] w-full max-w-[200px] object-contain mix-blend-multiply sm:h-[160px] sm:w-[140px] md:h-[180px] md:w-[180px]"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-                <div className="mt-auto border-t border-[#1B2147]/10 px-6 py-5 sm:px-8 sm:py-6 md:px-10">
-                  <div className="flex flex-col gap-3">
-                    {p.options.map((o) => (
-                      <div key={o.label} className="flex items-baseline justify-between gap-3">
-                        <span className="min-w-0 flex-1 text-sm font-medium text-[#1B2147]">{o.label}</span>
-                        <span className="shrink-0 font-serif text-lg font-semibold text-[#1B2147] sm:text-xl">
-                          {o.price}<span className="text-sm font-normal text-[#5A6075]">{o.period}</span>
-                        </span>
-                      </div>
-                    ))}
-                    <a href="#cta" className="mt-2 flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment →</a>
-                  </div>
-                </div>
+        <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
+          The leading edge of doctor-prescribed weight loss — treating people, not averages.
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+type Tile = {
+  id: string;
+  tag?: string;
+  title: string;
+  img: string;
+  imgAlt: string;
+  variant: "image-hero" | "row" | "half";
+  align?: "left" | "right";
+  imgClass?: string;
+};
+
+const tiles: Tile[] = [
+  { id: "boost", title: "Boost metabolism", img: heroImg, imgAlt: "Man running on a trail", variant: "image-hero" },
+  { id: "lose", title: "Lose weight", img: step2Img, imgAlt: "Woman exercising on a mat", variant: "image-hero" },
+  { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
+  { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
+  { id: "cravings", title: "Curb cravings & appetite", img: semaglutideVialImg, imgAlt: "Semaglutide vial", variant: "half" },
+  { id: "metabolic", title: "Metabolic health", img: tirzepatideVialImg, imgAlt: "Tirzepatide vial", variant: "half" },
+  { id: "dosing", title: "Personalized dosing", img: ctaImg, imgAlt: "Personalized dosing care", variant: "row" },
+];
+
+function CategoryStack() {
+  const heroTiles = tiles.filter((t) => t.variant === "image-hero");
+  const rowTiles = tiles.filter((t) => t.variant === "row");
+  const halfTiles = tiles.filter((t) => t.variant === "half");
+  const [compounded, brand, dosing] = rowTiles;
+
+  return (
+    <section className="bg-white px-4 pb-16 sm:px-6">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4">
+        {/* Two big image cards */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {heroTiles.map((t, i) => (
+            <Reveal key={t.id} delay={i * 100}>
+              <article className="card-lift relative h-[300px] overflow-hidden rounded-3xl sm:h-[380px]">
+                <img src={t.img} alt={t.imgAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+                <h3 className="absolute left-6 top-6 font-serif text-3xl text-[#1B2147] sm:text-4xl">{t.title}</h3>
               </article>
             </Reveal>
+          ))}
+        </div>
+
+        {/* Full-width row tiles */}
+        {[compounded, brand].map((t, i) => (
+          <Reveal key={t.id} delay={i * 100}>
+            <a href="#cta" className="card-lift block">
+              <RowTile tile={t} />
+            </a>
+          </Reveal>
+        ))}
+
+        {/* Two-column row */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {halfTiles.map((t, i) => (
+            <Reveal key={t.id} delay={i * 100}>
+              <a href="#cta" className="card-lift block h-full">
+                <HalfTile tile={t} />
+              </a>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Final full-width */}
+        <Reveal>
+          <a href="#cta" className="card-lift block">
+            <RowTile tile={dosing} />
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function RowTile({ tile }: { tile: Tile }) {
+  return (
+    <article className="grid grid-cols-[1fr_120px] items-center gap-4 rounded-2xl bg-[#F0F0EF] px-6 py-5 sm:grid-cols-[1fr_200px] sm:px-10 sm:py-7">
+      <div className="flex min-w-0 items-center gap-4">
+        {tile.tag && (
+          <span className="shrink-0 rounded-md bg-[#1B2147] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">{tile.tag}</span>
+        )}
+        <h3 className="truncate font-serif text-2xl text-[#1B2147] sm:text-[34px]">{tile.title}</h3>
+      </div>
+      <div className="flex h-[80px] items-center justify-end sm:h-[120px]">
+        <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
+      </div>
+    </article>
+  );
+}
+
+function HalfTile({ tile }: { tile: Tile }) {
+  return (
+    <article className="grid h-full grid-cols-[1fr_90px] items-center gap-3 rounded-2xl bg-[#F0F0EF] px-6 py-6 sm:grid-cols-[1fr_110px] sm:px-8 sm:py-8">
+      <h3 className="font-serif text-xl leading-tight text-[#1B2147] sm:text-[26px]">{tile.title}</h3>
+      <div className="flex h-[80px] items-center justify-end sm:h-[100px]">
+        <img src={tile.img} alt={tile.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
+      </div>
+    </article>
+  );
+}
+
+function AsSeenIn() {
+  const outlets = ["GQ", "Men's Health", "Forbes"];
+  return (
+    <section className="bg-white px-6 pt-4 pb-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-xs font-medium text-[#5A6075]">As seen in:</div>
+        <div className="mt-4 grid grid-cols-3 items-center gap-4 sm:gap-8">
+          {outlets.map((o, i) => (
+            <div key={o} className={`flex items-center justify-center ${i > 0 ? "border-l border-[#1B2147]/20" : ""}`}>
+              <span className="font-serif text-2xl font-bold tracking-tight text-[#1B2147] sm:text-4xl">{o}</span>
+            </div>
           ))}
         </div>
       </div>
