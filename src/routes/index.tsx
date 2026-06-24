@@ -97,7 +97,9 @@ function Index() {
       <Hero />
       <TrustMarquee />
       <ProductCards />
+      <GLP1Highlights />
       <HowItWorks />
+
       <Testimonials />
       <FAQ />
       <FinalCTA />
