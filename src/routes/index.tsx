@@ -105,6 +105,7 @@ function Index() {
       <FAQ />
       <FinalCTA />
       <Footer />
+      <QualifyModal />
     </div>
   );
 }
