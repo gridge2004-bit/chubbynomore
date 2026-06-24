@@ -509,3 +509,480 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
     </div>
   );
 }
+
+/* ───────────────── QUALIFY MODAL (ported from Backup Website) ───────────────── */
+type Condition = "diabetes" | "hbp" | "cholesterol" | "sleep_apnea" | "none";
+type Goal = "lose_weight" | "improve_health" | "both";
+
+const MINT = "#6FBF9F";
+
+function QualifyModal() {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState(0);
+  const totalSteps = 7;
+
+  const [weight, setWeight] = useState(185);
+  const [heightFt, setHeightFt] = useState(5);
+  const [heightIn, setHeightIn] = useState(5);
+  const [age, setAge] = useState("35–44");
+  const [conditions, setConditions] = useState<Condition[]>([]);
+  const [goal, setGoal] = useState<Goal>("both");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [contactError, setContactError] = useState("");
+  const [conditionsError, setConditionsError] = useState(false);
+
+  // Intercept clicks on any CTA anchor pointing to #cta
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest('a[href="#cta"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      e.preventDefault();
+      setStep(0);
+      setOpen(true);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const next = () => setStep((s) => Math.min(s + 1, totalSteps));
+  const back = () => setStep((s) => Math.max(s - 1, 0));
+
+  const toggleCondition = (c: Condition) => {
+    setConditionsError(false);
+    if (c === "none") {
+      setConditions((cur) => (cur.includes("none") ? [] : ["none"]));
+      return;
+    }
+    setConditions((cur) => {
+      const without = cur.filter((x) => x !== "none" && x !== c);
+      return cur.includes(c) ? without : [...without, c];
+    });
+  };
+
+  const validateConditions = () => {
+    if (conditions.length === 0) {
+      setConditionsError(true);
+      return;
+    }
+    next();
+  };
+
+  const validateContact = () => {
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    if (!name.trim() || !email.trim() || !phone.trim()) {
+      setContactError("Please fill out all the boxes above to continue.");
+      return;
+    }
+    if (!emailValid) {
+      setContactError("Please enter a valid email address.");
+      return;
+    }
+    setContactError("");
+    next();
+  };
+
+  const pct = step === 0 ? 0 : Math.round((step / totalSteps) * 100);
+  const stepLabel = step === 0 ? "Free qualification check" : `Step ${step} of ${totalSteps}`;
+
+  if (!open) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="qualify-modal-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setOpen(false);
+      }}
+      className="fixed inset-0 z-[300] flex items-center justify-center bg-[#1B2147]/60 backdrop-blur-sm px-4 py-6 sm:p-8"
+    >
+      <div className="relative flex max-h-[92vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+          className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-[#E7E8EE] bg-white text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+        >
+          ✕
+        </button>
+
+        {/* Header */}
+        <div className="border-b border-[#E7E8EE] px-6 pt-6 pb-4 sm:px-8">
+          <span className="font-serif text-[20px] font-bold text-[#1B2147]">ChubbyNoMore</span>
+          <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[#F0F0EF]">
+            <div
+              className="h-full transition-all duration-300"
+              style={{ width: `${pct}%`, backgroundColor: MINT }}
+            />
+          </div>
+          <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: MINT }}>
+            {stepLabel}
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="overflow-y-auto px-6 py-7 sm:px-8 sm:py-8">
+          {step === 0 && (
+            <div>
+              <h2 id="qualify-modal-title" className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                Find out if you qualify
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                Answer a few quick questions and we'll tell you right away if GLP-1 therapy is right for you. Takes about 2 minutes.
+              </p>
+              <ul className="mt-5 space-y-2.5">
+                {[
+                  "100% confidential & HIPAA secure",
+                  "No credit card required to check",
+                  "Board-certified physician review",
+                  "Results in under 24 hours",
+                ].map((b) => (
+                  <li key={b} className="flex items-center gap-3 text-sm text-[#1B2147]">
+                    <span className="grid h-5 w-5 place-items-center rounded-full text-[11px] font-bold text-[#1B2147]" style={{ backgroundColor: MINT }}>
+                      ✓
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <ModalNav onNext={next} nextLabel="Let's Get Started →" />
+            </div>
+          )}
+
+          {step === 1 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                What's your current weight?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                Use the slider to select your approximate weight. This helps us calculate your eligibility accurately.
+              </p>
+              <div className="mt-7 text-center">
+                <div className="font-serif text-5xl font-semibold text-[#1B2147]">
+                  {weight} <span className="text-2xl font-medium text-[#5A6075]">lbs</span>
+                </div>
+                <input
+                  type="range"
+                  min={120}
+                  max={400}
+                  value={weight}
+                  onChange={(e) => setWeight(parseInt(e.target.value))}
+                  aria-label="Current weight in pounds"
+                  className="mt-5 w-full"
+                  style={{ accentColor: MINT }}
+                />
+                <div className="mt-2 flex justify-between text-xs text-[#5A6075]">
+                  <span>120 lbs</span>
+                  <span>400 lbs</span>
+                </div>
+              </div>
+              <ModalNav onBack={back} onNext={next} />
+            </div>
+          )}
+
+          {step === 2 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                What's your height?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                We use this along with your weight to calculate your BMI and determine eligibility.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <SelectField label="Feet" value={heightFt} onChange={setHeightFt}>
+                  {[4, 5, 6, 7].map((n) => (
+                    <option key={n} value={n}>{n} ft</option>
+                  ))}
+                </SelectField>
+                <SelectField label="Inches" value={heightIn} onChange={setHeightIn}>
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <option key={i} value={i}>{i} in</option>
+                  ))}
+                </SelectField>
+              </div>
+              <ModalNav onBack={back} onNext={next} />
+            </div>
+          )}
+
+          {step === 3 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                What's your age range?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                ChubbyNoMore is available for adults 18 and older. Select your age range below.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {["18–24", "25–34", "35–44", "45–54", "55+"].map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => setAge(r)}
+                    className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${
+                      age === r
+                        ? "border-[#6FBF9F] bg-[#6FBF9F]/10 text-[#1B2147]"
+                        : "border-[#E7E8EE] bg-white text-[#1B2147] hover:border-[#6FBF9F]"
+                    }`}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>
+              <ModalNav onBack={back} onNext={next} />
+            </div>
+          )}
+
+          {step === 4 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                Any health conditions?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                Select all that apply. Having certain conditions may lower the BMI threshold for qualification.
+              </p>
+              <div className="mt-6 space-y-2.5">
+                {(
+                  [
+                    ["diabetes", "Type 2 Diabetes"],
+                    ["hbp", "High Blood Pressure"],
+                    ["cholesterol", "High Cholesterol"],
+                    ["sleep_apnea", "Sleep Apnea"],
+                    ["none", "None of the above"],
+                  ] as [Condition, string][]
+                ).map(([val, label]) => {
+                  const checked = conditions.includes(val);
+                  return (
+                    <button
+                      type="button"
+                      key={val}
+                      onClick={() => toggleCondition(val)}
+                      className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
+                        checked
+                          ? "border-[#6FBF9F] bg-[#6FBF9F]/10 text-[#1B2147]"
+                          : "border-[#E7E8EE] bg-white text-[#1B2147] hover:border-[#6FBF9F]"
+                      }`}
+                    >
+                      <span
+                        className={`grid h-5 w-5 flex-shrink-0 place-items-center rounded-md border ${
+                          checked ? "border-[#6FBF9F] bg-[#6FBF9F] text-[#1B2147]" : "border-[#E7E8EE] bg-white"
+                        }`}
+                      >
+                        {checked && "✓"}
+                      </span>
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              {conditionsError && (
+                <p className="mt-3 text-sm font-semibold text-[#C0392B]">
+                  Please select at least one option to continue.
+                </p>
+              )}
+              <ModalNav onBack={back} onNext={validateConditions} />
+            </div>
+          )}
+
+          {step === 5 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                What's your primary goal?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                This helps us tailor the right approach and medication plan for you.
+              </p>
+              <div className="mt-6 space-y-3">
+                {(
+                  [
+                    ["lose_weight", "Lose Weight", "I want to reduce my body weight significantly"],
+                    ["improve_health", "Improve Health Markers", "Focus on blood sugar, blood pressure, cholesterol"],
+                    ["both", "Both", "I want to lose weight and improve my overall health"],
+                  ] as [Goal, string, string][]
+                ).map(([val, title, sub]) => {
+                  const selected = goal === val;
+                  return (
+                    <button
+                      key={val}
+                      type="button"
+                      onClick={() => setGoal(val)}
+                      className={`block w-full rounded-2xl border px-5 py-4 text-left transition ${
+                        selected
+                          ? "border-[#6FBF9F] bg-[#6FBF9F]/10"
+                          : "border-[#E7E8EE] bg-white hover:border-[#6FBF9F]"
+                      }`}
+                    >
+                      <div className="font-serif text-base font-semibold text-[#1B2147]">{title}</div>
+                      <div className="mt-1 text-sm text-[#5A6075]">{sub}</div>
+                    </button>
+                  );
+                })}
+              </div>
+              <ModalNav onBack={back} onNext={next} />
+            </div>
+          )}
+
+          {step === 6 && (
+            <div>
+              <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl">
+                Where should we send your results?
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+                We'll send your qualification results and next steps.
+              </p>
+              <div className="mt-6 space-y-4">
+                <TextField label="First Name" id="q-name" value={name} onChange={setName} placeholder="Your first name" autoComplete="given-name" />
+                <TextField label="Email" id="q-email" type="email" value={email} onChange={setEmail} placeholder="you@email.com" autoComplete="email" />
+                <TextField label="Phone" id="q-phone" type="tel" value={phone} onChange={setPhone} placeholder="+1 (555) 000-0000" autoComplete="tel" />
+              </div>
+              <p className="mt-3 text-xs text-[#5A6075]">
+                No spam. We'll only send your qualification results and next steps.
+              </p>
+              {contactError && (
+                <p className="mt-2 text-sm font-semibold text-[#C0392B]">{contactError}</p>
+              )}
+              <ModalNav
+                onBack={back}
+                onNext={validateContact}
+                nextLabel="Reserve My Early-Access Spot →"
+              />
+              <p className="mt-3 text-xs font-semibold leading-relaxed" style={{ color: MINT }}>
+                Early access is released in limited batches — add your email to hold your place in line. We will email you the moment your spot opens.
+              </p>
+            </div>
+          )}
+
+          {step === 7 && (
+            <div className="py-3 text-center">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#1B2147] text-3xl text-white">
+                ✓
+              </div>
+              <h3 className="mt-4 font-serif text-2xl font-semibold text-[#1B2147]">
+                You're on the early-access list.
+              </h3>
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#5A6075]">
+                Your place in line is saved. We'll email you the moment your early-access spot opens — invitations are sent in limited batches.
+              </p>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="mt-7 inline-flex items-center justify-center gap-3 rounded-full bg-[#1B2147] px-7 py-3 font-semibold text-white transition hover:bg-[#0F1432]"
+              >
+                Close
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModalNav({
+  onBack,
+  onNext,
+  nextLabel = "Continue →",
+}: {
+  onBack?: () => void;
+  onNext: () => void;
+  nextLabel?: string;
+}) {
+  return (
+    <div className="mt-8 flex items-center justify-between gap-3">
+      {onBack ? (
+        <button
+          type="button"
+          onClick={onBack}
+          className="rounded-full border border-[#E7E8EE] bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#F0F0EF]"
+        >
+          ← Back
+        </button>
+      ) : (
+        <span />
+      )}
+      <button
+        type="button"
+        onClick={onNext}
+        className="inline-flex items-center gap-2 rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+      >
+        {nextLabel}
+      </button>
+    </div>
+  );
+}
+
+function SelectField<T extends number>({
+  label,
+  value,
+  onChange,
+  children,
+}: {
+  label: string;
+  value: T;
+  onChange: (v: T) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-[#1B2147]">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(parseInt(e.target.value) as T)}
+        className="w-full rounded-lg border border-[#E7E8EE] bg-white px-3 py-2.5 text-sm text-[#1B2147] outline-none focus-visible:ring-2"
+        style={{ ["--tw-ring-color" as never]: MINT }}
+      >
+        {children}
+      </select>
+    </label>
+  );
+}
+
+function TextField({
+  label,
+  id,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  autoComplete,
+}: {
+  label: string;
+  id: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  placeholder?: string;
+  autoComplete?: string;
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-[#1B2147]">{label}</label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        className="w-full rounded-lg border border-[#E7E8EE] bg-white px-3 py-2.5 text-sm text-[#1B2147] outline-none focus-visible:ring-2"
+        style={{ ["--tw-ring-color" as never]: MINT }}
+      />
+    </div>
+  );
+}
