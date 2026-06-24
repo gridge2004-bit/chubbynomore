@@ -279,7 +279,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">Get Started</PillButton>
+          <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
         </Reveal>
       </div>
     </section>
