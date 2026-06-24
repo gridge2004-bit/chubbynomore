@@ -393,7 +393,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
           </div>
         </div>
       </div>
