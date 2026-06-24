@@ -102,7 +102,6 @@ function Index() {
       <GLP1Highlights />
       <HowItWorks />
 
-      <Testimonials />
       <FAQ />
       <FinalCTA />
       <Footer />
