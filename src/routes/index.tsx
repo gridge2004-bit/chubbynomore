@@ -111,9 +111,9 @@ function PromoBanner() {
     <div className="w-full bg-[#1B2147] text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[12px]">
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
-        <span>Limited time — $100 off your first month</span>
+        <span>HSA / FSA eligible — early access, by invitation</span>
         <span aria-hidden className="hidden text-white/40 sm:inline">•</span>
-        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">Claim offer →</a>
+        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">See if you qualify →</a>
       </div>
     </div>
   );
@@ -141,7 +141,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+        <PillButton href="#cta">See If You Qualify</PillButton>
       </div>
     </header>
   );
@@ -161,19 +161,19 @@ function Hero() {
           />
         </div>
         <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
-          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</Reveal>
+          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">Real GLP-1 medication</Reveal>
           <Reveal as="h1" delay={80} className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
-            GLP-1 weight loss,
+            Real GLP-1 medication.
             <br />
-            <em className="font-serif italic text-[#1B2147]">backed by science.</em>
+            <em className="font-serif italic text-[#1B2147]">Real results. Real you.</em>
           </Reveal>
           <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
-            Physician-supervised weight loss — personalized to your goals, delivered to your door.
+            Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+            <PillButton href="#cta">See If You Qualify</PillButton>
           </Reveal>
-          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</Reveal>
+          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
         </div>
       </div>
     </section>
