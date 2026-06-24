@@ -168,7 +168,7 @@ function Hero() {
             <em className="font-serif italic text-[#1B2147]">Real results. Real you.</em>
           </Reveal>
           <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
-            Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
+            Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
             <PillButton href="#cta">See If You Qualify</PillButton>
