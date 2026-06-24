@@ -209,8 +209,8 @@ function CategoryStack() {
             <Reveal key={t.id} delay={i * 100}>
               <article className="card-lift relative h-[300px] overflow-hidden rounded-3xl sm:h-[380px]">
                 <img src={t.img} alt={t.imgAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-                <h3 className="absolute left-6 top-6 font-serif text-3xl text-[#1B2147] sm:text-4xl">{t.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <h3 className="absolute left-6 bottom-6 font-serif text-3xl text-white drop-shadow-lg sm:text-4xl">{t.title}</h3>
               </article>
             </Reveal>
           ))}
