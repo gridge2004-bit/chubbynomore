@@ -12,74 +12,71 @@ import ctaImg from "@/assets/cta.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChubbyNoMore — Physician-supervised GLP-1 care" },
-      { name: "description", content: "Semaglutide and Tirzepatide programs supervised by board-certified physicians. Transparent pricing, discreet shipping, HSA/FSA eligible." },
+      { title: "ChubbyNoMore — Real GLP-1 medication. Real results. Real you." },
+      { name: "description", content: "Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
     ],
   }),
   component: Index,
 });
 
 const navLinks = [
-  { label: "Semaglutide", href: "#semaglutide" },
-  { label: "Tirzepatide", href: "#tirzepatide" },
   { label: "How It Works", href: "#how" },
+  { label: "Medications", href: "#semaglutide" },
+  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 
 const marqueeItems = [
-  "Custom dosing",
-  "Physician supervised",
-  "10,000+ members",
-  "Clinically proven",
-  "Discreet shipping",
+  "Prescribed by US-licensed physicians",
+  "Board-certified doctors",
+  "Compounded by a licensed US pharmacy",
+  "Licensed in all 50 states",
+  "HIPAA compliant",
   "No hidden fees",
 ];
 
 const products = [
   {
     id: "semaglutide",
-    tags: ["COMPOUNDED", "GLP-1"],
+    tags: ["MOST POPULAR", "GLP-1"],
     name: "Semaglutide",
-    desc: "A once-weekly GLP-1 protocol with physician oversight from your first evaluation through every titration step. Steady, predictable results.",
-    bullets: ["Once-weekly injection", "Physician-titrated dosing", "Avg. ↓15% body weight at 6 months"],
-    price: "$229",
-    period: "/28-day supply",
+    desc: "A once-weekly GLP-1 injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's appropriate for you. Individual results vary.",
+    bullets: ["Once-weekly injection", "Physician-titrated dosing", "From $47/mL — flat monthly price"],
+    price: "$149",
+    period: "/month",
     img: semaglutideImg,
   },
   {
     id: "tirzepatide",
-    tags: ["COMPOUNDED", "GLP-1"],
+    tags: ["DUAL-ACTION", "GLP-1 / GIP"],
     name: "Tirzepatide",
-    desc: "A dual GIP/GLP-1 receptor protocol for patients seeking a stronger metabolic response, with the same physician oversight throughout.",
-    bullets: ["Dual-agonist mechanism", "Physician-titrated dosing", "Avg. ↓22% body weight at 6 months"],
-    price: "$349",
-    period: "/28-day supply",
+    desc: "A once-weekly dual-action (GLP-1/GIP) injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's right for you. Individual results vary.",
+    bullets: ["Dual-action GLP-1 + GIP", "Physician-titrated dosing", "Free shipping, cancel anytime"],
+    price: "$199",
+    period: "/month",
     img: tirzepatideImg,
   },
 ];
 
 const steps = [
-  { n: "01", img: step1Img, title: "Complete your evaluation", desc: "Answer a few questions about your health history. The whole thing takes about 5 minutes from your phone." },
-  { n: "02", img: step2Img, title: "Physician review", desc: "A US-licensed physician reviews your submission — usually within 24 hours — and writes the right protocol for you." },
-  { n: "03", img: step3Img, title: "Treatment delivered", desc: "Your medication ships discreetly from a licensed US compounding pharmacy. Ongoing support included." },
+  { n: "01", img: step1Img, title: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Everything is confidential and HIPAA-secure." },
+  { n: "02", img: step2Img, title: "Meet your physician", desc: "A board-certified doctor reviews your history, evaluates your eligibility, and creates a personalized treatment plan just for you." },
+  { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 const testimonials = [
-  { quote: "I tried everything for years and nothing stuck. With physician supervision and the right medication, I finally have a plan that works. Down 19 lbs in 12 weeks.", name: "Sarah M., 34 — Lost 19 lbs in 12 weeks" },
-  { quote: "The process was so easy — evaluation to delivery in under a week. My doctor adjusts my dose as I go and I never feel alone in this.", name: "James T., 41 — Ongoing physician-adjusted dosing" },
-  { quote: "I was skeptical about GLP-1 but the clinical data is real. I've lost 22 lbs and my blood sugar is the best it's been in years.", name: "Michelle R., 38 — Lost 22 lbs, blood sugar improved" },
+  { quote: "I tried every diet imaginable. ChubbyNoMore was the first thing that actually worked — and I finally feel like myself again.", name: "Sarah R. — Lost 34 lbs in 8 months" },
+  { quote: "The whole process was seamless. Doctor was incredibly supportive. The medication just… worked. I couldn't believe how different I felt.", name: "Marcus T. — Lost 52 lbs in 11 months" },
+  { quote: "Honestly, I just feel like myself again — more energy, sharper focus, and clothes that finally fit right. The process was simple and my doctor actually listened.", name: "James R. — Early-access member" },
 ];
 
 const faqs = [
-  { q: "Who qualifies for a GLP-1 program?", a: "Eligibility is determined by a licensed physician based on your medical history, current medications, and BMI. The free evaluation takes about 5 minutes." },
-  { q: "How is the medication shipped?", a: "Medication is shipped discreetly in temperature-controlled packaging directly from a USP 797 compounding pharmacy to your door." },
-  { q: "Is this covered by HSA or FSA?", a: "Yes. ChubbyNoMore programs are HSA and FSA eligible. We provide itemized receipts for reimbursement." },
-  { q: "What are the side effects?", a: "Common side effects include nausea, fatigue, and mild GI discomfort, especially during titration. Your physician will discuss your full risk profile during the evaluation." },
-  { q: "Can I cancel anytime?", a: "Yes. There are no long-term contracts. You can pause or cancel your program at any time from your account." },
-  { q: "Is this safe? Are there risks I should know about?", a: "GLP-1 medications like semaglutide and tirzepatide have been FDA-approved and studied extensively. Like all medications, they carry possible side effects (most commonly nausea and fatigue, especially early on). That's exactly why we require a physician evaluation before every prescription — to make sure it's the right fit for your health profile." },
-  { q: "How is this different from getting GLP-1 from my regular doctor?", a: "Most primary care physicians have limited time for weight management and may not be familiar with titration protocols. Our platform is built specifically for GLP-1 care — with physicians who specialize in metabolic health, ongoing dose adjustments, and support throughout your journey." },
-  { q: "What if I don't qualify?", a: "If you don't qualify after your free evaluation, you won't be charged anything. Our physicians will let you know why and may suggest alternatives that could be a better fit for your situation." },
-  { q: "Will insurance cover this?", a: "Most insurance plans do not cover compounded GLP-1 medications. However, our programs are HSA/FSA eligible, and our pricing is transparent with no hidden fees. Many patients find it more affordable than expected." },
+  { q: "Will insurance cover this?", a: "Most insurance plans don't cover GLP-1 medications for weight loss, but our programs are HSA/FSA eligible. We keep pricing transparent so there are no surprises." },
+  { q: "How quickly will I see results?", a: "Many patients begin noticing changes within the first 1–2 months, but everyone responds differently and results vary. Your physician will set realistic expectations. GLP-1 medication works best alongside healthy eating and regular activity." },
+  { q: "Are there side effects?", a: "The most common side effects are digestive — usually nausea, and sometimes vomiting, diarrhea, or constipation. These are typically mild and tend to ease as your dose is increased slowly. Less common but more serious risks include pancreatitis, gallbladder problems, and low blood sugar. GLP-1 medications are not right for everyone. Your physician reviews your full health history before prescribing." },
+  { q: "Do I need to go to a clinic?", a: "No. Everything is done online — your consultation, prescription, and follow-ups. Medication is shipped directly to your door." },
+  { q: "What if I don't qualify?", a: "If you don't meet the criteria for GLP-1 therapy, your physician will explain why and may suggest alternative options. You're never charged if you don't qualify." },
+  { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus exclusively on GLP-1 weight loss. Your physician stays involved throughout — not just at signup. We don't disappear after the prescription." },
 ];
 
 const NAVY = "#1B2147";
@@ -114,9 +111,9 @@ function PromoBanner() {
     <div className="w-full bg-[#1B2147] text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[12px]">
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
-        <span>Limited time — $100 off your first month</span>
+        <span>HSA / FSA eligible — early access, by invitation</span>
         <span aria-hidden className="hidden text-white/40 sm:inline">•</span>
-        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">Claim offer →</a>
+        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">See if you qualify →</a>
       </div>
     </div>
   );
@@ -144,7 +141,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+        <PillButton href="#cta">See If You Qualify</PillButton>
       </div>
     </header>
   );
@@ -164,19 +161,19 @@ function Hero() {
           />
         </div>
         <div className="flex flex-col justify-center bg-white px-8 py-16 md:px-16">
-          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">GLP-1 Weight Loss</Reveal>
+          <Reveal as="span" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]">Real GLP-1 medication</Reveal>
           <Reveal as="h1" delay={80} className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-[#1B2147] md:text-6xl lg:text-[68px]">
-            GLP-1 weight loss,
+            Real GLP-1 medication.
             <br />
-            <em className="font-serif italic text-[#1B2147]">backed by science.</em>
+            <em className="font-serif italic text-[#1B2147]">Real results. Real you.</em>
           </Reveal>
           <Reveal as="p" delay={160} className="mt-6 max-w-md text-base leading-relaxed text-[#5A6075]">
-            Physician-supervised weight loss — personalized to your goals, delivered to your door.
+            Medical weight loss designed for men. Prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+            <PillButton href="#cta">See If You Qualify</PillButton>
           </Reveal>
-          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">Join 10,000+ people already on the program</Reveal>
+          <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
         </div>
       </div>
     </section>
@@ -206,7 +203,7 @@ function ProductCards() {
     <section className="bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          GLP-1 medications, <em className="italic">in one place.</em>
+          Two GLP-1 options. <em className="italic">Your physician helps you choose.</em>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {products.map((p, idx) => (
@@ -267,7 +264,7 @@ function HowItWorks() {
     <section id="how" className="bg-[#FAF8F5] px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          It's easy <em className="italic">to get started.</em>
+          Three steps to <em className="italic">a healthier you.</em>
         </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
           {steps.map((s, idx) => (
@@ -282,7 +279,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">Check If I Qualify — Free &amp; Fast</PillButton>
+          <PillButton href="#cta">See If You Qualify</PillButton>
         </Reveal>
       </div>
     </section>
@@ -302,7 +299,7 @@ function Testimonials() {
     <section className="bg-[#F7F7F7] px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          <em className="italic">Results</em> that speak louder than promises.
+          <em className="italic">920+ patients</em> transformed their lives.
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, idx) => (
@@ -320,7 +317,7 @@ function Testimonials() {
             </Reveal>
           ))}
         </div>
-        <p className="mt-8 text-xs text-[#5A6075]">Collected from verified customers. Results vary.</p>
+        <p className="mt-8 text-xs text-[#5A6075]">In clinical trials, patients lost on average about 15% of body weight on semaglutide and about 20% on tirzepatide over roughly 68–72 weeks, used alongside diet and exercise. Individual stories are not typical and not a guarantee of your results.</p>
       </div>
     </section>
   );
@@ -333,7 +330,7 @@ function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
-            Weight Loss Treatment <em className="italic">FAQs</em>
+            Common questions. <em className="italic">Honest answers.</em>
           </h2>
         </Reveal>
         <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
@@ -367,23 +364,23 @@ function FAQ() {
 
 function FinalCTA() {
   const checks = [
-    "Easy online doctor visits",
-    "No appointments, message anytime",
-    "US-based medical providers",
-    "Free expedited shipping",
+    "Doctor prescribed",
+    "100% confidential",
+    "Delivered to your door",
+    "Licensed in all 50 states",
   ];
   return (
     <section id="cta" className="w-full bg-[#E8EDF8]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={ctaImg} alt="Young woman in athletic wear smiling" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <img src={ctaImg} alt="Patient living an active life" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
-            Physician grade health care, <em className="italic">from anywhere.</em>
+            Ready to see if GLP-1 is right for you? <em className="italic">ChubbyNoMore is with you every step.</em>
           </h2>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-[#1B2147]/75">
-            Join 10,000+ people who have trusted and transformed their health with ChubbyNoMore.
+            Join 920+ patients already on their journey. Free to join. Invite-only early access.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {checks.map((c) => (
@@ -396,7 +393,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">See If You Qualify</PillButton>
           </div>
         </div>
       </div>
@@ -412,12 +409,12 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="font-serif text-3xl">ChubbyNoMore</div>
             <p className="mt-4 max-w-xs text-sm text-white/70">
-              Physician-supervised GLP-1 care. Transparent pricing, discreet shipping, real medicine.
+              Doctor-prescribed GLP-1 weight loss, prescribed online and delivered to your door. Licensed in all 50 states.
             </p>
           </div>
-          <FooterCol title="Programs" links={["Semaglutide", "Tirzepatide", "Pricing & Plans"]} />
-          <FooterCol title="Learn" links={["How It Works", "FAQ", "Knowledge base"]} />
-          <FooterCol title="Company" links={["About", "Contact", "Press"]} />
+          <FooterCol title="Program" links={["How It Works", "Medications", "Pricing", "FAQs"]} />
+          <FooterCol title="Company" links={["About Us", "Our Doctors", "Patient Stories", "Blog"]} />
+          <FooterCol title="Legal" links={["Privacy Policy", "Terms of Service", "HIPAA Notice", "Contact"]} />
         </div>
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 md:flex-row">
           <span>© {new Date().getFullYear()} ChubbyNoMore. All rights reserved.</span>
