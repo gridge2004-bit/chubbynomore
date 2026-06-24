@@ -99,7 +99,7 @@ function Index() {
       <Hero />
       <CategoryStack />
       <AsSeenIn />
-      <TrustMarquee />
+      
       <GLP1Highlights />
       <HowItWorks />
 
