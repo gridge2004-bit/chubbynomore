@@ -205,19 +205,19 @@ function TrustMarquee() {
 
 function ProductCards() {
   return (
-    <section className="bg-white px-6 py-24">
+    <section className="bg-white px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
           Two ways to start. <em className="italic">Your physician helps you choose.</em>
         </Reveal>
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 sm:mt-14 md:grid-cols-2">
           {products.map((p, idx) => (
             <Reveal key={p.id} delay={idx * 150}>
               <article id={p.id} className="card-lift flex h-full flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
-                <div className="grid grid-cols-[1fr_180px] gap-6 p-8 md:p-10">
-                  <div className="flex flex-col">
+                <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-[1fr_140px] sm:gap-6 sm:p-8 md:grid-cols-[1fr_180px] md:p-10">
+                  <div className="flex min-w-0 flex-col">
                     <span className="self-start rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{p.tag}</span>
-                    <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
+                    <h3 className="mt-5 font-serif text-2xl font-semibold text-[#1B2147] sm:text-3xl md:text-[32px]">{p.name}</h3>
                     <p className="mt-2 text-sm font-medium text-[#5A6075]">{p.subtitle}</p>
                     <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1">
                       {p.medications.map((m, i) => (
@@ -238,21 +238,21 @@ function ProductCards() {
                       ))}
                     </ul>
                   </div>
-                  <div className="flex items-center justify-center">
+                  <div className="order-first flex items-center justify-center sm:order-none">
                     <img
                       src={p.img}
                       alt={p.name}
-                      className="h-[180px] w-[180px] object-contain mix-blend-multiply"
+                      className="h-[160px] w-full max-w-[200px] object-contain mix-blend-multiply sm:h-[160px] sm:w-[140px] md:h-[180px] md:w-[180px]"
                       loading="lazy"
                     />
                   </div>
                 </div>
-                <div className="mt-auto border-t border-[#1B2147]/10 px-8 py-6 md:px-10">
+                <div className="mt-auto border-t border-[#1B2147]/10 px-6 py-5 sm:px-8 sm:py-6 md:px-10">
                   <div className="flex flex-col gap-3">
                     {p.options.map((o) => (
                       <div key={o.label} className="flex items-baseline justify-between gap-3">
-                        <span className="text-sm font-medium text-[#1B2147]">{o.label}</span>
-                        <span className="font-serif text-xl font-semibold text-[#1B2147]">
+                        <span className="min-w-0 flex-1 text-sm font-medium text-[#1B2147]">{o.label}</span>
+                        <span className="shrink-0 font-serif text-lg font-semibold text-[#1B2147] sm:text-xl">
                           {o.price}<span className="text-sm font-normal text-[#5A6075]">{o.period}</span>
                         </span>
                       </div>
