@@ -37,23 +37,30 @@ const marqueeItems = [
 
 const products = [
   {
-    id: "semaglutide",
-    tags: ["MOST POPULAR", "GLP-1"],
-    name: "Semaglutide",
-    desc: "A once-weekly GLP-1 injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's appropriate for you. Individual results vary.",
-    bullets: ["Once-weekly injection", "Physician-titrated dosing", "From $47/mL — flat monthly price"],
-    price: "$149",
-    period: "/month",
+    id: "compounded",
+    tag: "MOST POPULAR",
+    name: "Compounded Weight Loss",
+    subtitle: "Custom-formulated",
+    medications: ["Tirzepatide", "Semaglutide"],
+    desc: "Custom-formulated GLP-1 medications compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides what's right for you.",
+    bullets: ["Once-weekly injection", "Physician-titrated dosing", "Free shipping, cancel anytime"],
+    options: [
+      { label: "GLP-1 + GIP (Tirzepatide)", price: "$199", period: "/month" },
+      { label: "GLP-1 (Semaglutide)", price: "$149", period: "/month" },
+    ],
     img: semaglutideImg,
   },
   {
-    id: "tirzepatide",
-    tags: ["DUAL-ACTION", "GLP-1 / GIP"],
-    name: "Tirzepatide",
-    desc: "A once-weekly dual-action (GLP-1/GIP) injection for weight management, compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides if it's right for you. Individual results vary.",
-    bullets: ["Dual-action GLP-1 + GIP", "Physician-titrated dosing", "Free shipping, cancel anytime"],
-    price: "$199",
-    period: "/month",
+    id: "brand",
+    tag: "FDA-APPROVED",
+    name: "Brand-name Weight Loss",
+    subtitle: "FDA-approved name brand",
+    medications: ["Ozempic", "Mounjaro", "Wegovy", "Zepbound"],
+    desc: "Brand-name GLP-1 medications dispensed by a licensed US pharmacy. Prescribed online by a board-certified physician based on your eligibility and goals.",
+    bullets: ["Authentic manufacturer product", "Physician-managed care", "Shipped discreetly to your door"],
+    options: [
+      { label: "Starting at", price: "$399", period: "/month" },
+    ],
     img: tirzepatideImg,
   },
 ];
@@ -203,21 +210,25 @@ function ProductCards() {
     <section className="bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
-          Two GLP-1 options. <em className="italic">Your physician helps you choose.</em>
+          Two ways to start. <em className="italic">Your physician helps you choose.</em>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {products.map((p, idx) => (
             <Reveal key={p.id} delay={idx * 150}>
-              <article id={p.id} className="card-lift flex flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
+              <article id={p.id} className="card-lift flex h-full flex-col overflow-hidden rounded-2xl bg-[#F0F0EF]">
                 <div className="grid grid-cols-[1fr_180px] gap-6 p-8 md:p-10">
                   <div className="flex flex-col">
-                    <div className="flex flex-wrap gap-2">
-                      {p.tags.map((t) => (
-                        <span key={t} className="rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{t}</span>
+                    <span className="self-start rounded-full bg-[#1B2147] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{p.tag}</span>
+                    <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
+                    <p className="mt-2 text-sm font-medium text-[#5A6075]">{p.subtitle}</p>
+                    <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1">
+                      {p.medications.map((m, i) => (
+                        <span key={m} className="font-serif text-base italic text-[#1B2147]">
+                          {m}{i < p.medications.length - 1 ? "," : ""}
+                        </span>
                       ))}
                     </div>
-                    <h3 className="mt-5 font-serif text-3xl font-semibold text-[#1B2147] md:text-[32px]">{p.name}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-[#5A6075]">{p.desc}</p>
                     <ul className="mt-5 space-y-2.5">
                       {p.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-3 text-sm text-[#1B2147]">
@@ -238,16 +249,17 @@ function ProductCards() {
                     />
                   </div>
                 </div>
-                <div className="mt-auto px-8 py-6 md:px-10">
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-[#5A6075]">Starting at</div>
-                      <div className="mt-1 font-serif text-3xl font-semibold text-[#1B2147]">
-                        {p.price}<span className="text-base font-normal text-[#5A6075]">{p.period}</span>
+                <div className="mt-auto border-t border-[#1B2147]/10 px-8 py-6 md:px-10">
+                  <div className="flex flex-col gap-3">
+                    {p.options.map((o) => (
+                      <div key={o.label} className="flex items-baseline justify-between gap-3">
+                        <span className="text-sm font-medium text-[#1B2147]">{o.label}</span>
+                        <span className="font-serif text-xl font-semibold text-[#1B2147]">
+                          {o.price}<span className="text-sm font-normal text-[#5A6075]">{o.period}</span>
+                        </span>
                       </div>
-                    </div>
-                    <a href="#cta" className="flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment</a>
-                    <a href={`#${p.id}`} className="text-center text-sm font-semibold text-[#1B2147] underline-offset-4 hover:underline">Learn more →</a>
+                    ))}
+                    <a href="#cta" className="mt-2 flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition bg-[#1B2147] text-white hover:bg-[#0F1432]">Start Treatment →</a>
                   </div>
                 </div>
               </article>
