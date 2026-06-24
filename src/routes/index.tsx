@@ -262,7 +262,7 @@ function ProductCards() {
 function GLP1Highlights() {
   const [format, setFormat] = useState("Injectable");
   const [goal, setGoal] = useState("All of the above");
-  const formats = ["Injectable", "Oral", "Compounded"];
+  const formats = ["Injectable", "Oral"];
   const goals = ["Lose stubborn fat", "Curb cravings & appetite", "Improve metabolic health", "Feel confident again", "All of the above"];
 
   return (
@@ -300,9 +300,6 @@ function GLP1Highlights() {
             </div>
             <div className="flex h-28 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
               <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Oral</div>
-            </div>
-            <div className="flex h-32 w-16 items-end justify-center rounded-xl bg-[#1B2147] shadow-sm">
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-white">Compound</div>
             </div>
           </div>
         </Reveal>
