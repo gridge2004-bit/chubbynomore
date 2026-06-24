@@ -171,7 +171,7 @@ function Hero() {
             Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
           </Reveal>
           <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
         </div>
