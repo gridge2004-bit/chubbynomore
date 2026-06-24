@@ -141,7 +141,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <PillButton href="#cta">See If You Qualify</PillButton>
+        <PillButton href="#cta">Get Started</PillButton>
       </div>
     </header>
   );
