@@ -93,7 +93,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-[#1B2147]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white text-[#1B2147]">
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
@@ -131,21 +131,22 @@ function PillButton({ href, children, variant = "primary" }: { href: string; chi
 
 function Nav({ scrolled }: { scrolled: boolean }) {
   return (
-    <header className={`sticky top-0 z-50 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
-        <a href="/" className="flex min-w-0 items-center gap-2">
-          <span className="font-serif text-[18px] font-bold text-[#1B2147] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
-        </a>
-        <nav className="hidden items-center gap-10 md:flex">
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-[#1B2147]/80 transition hover:text-[#1B2147]">
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <a href="#cta" className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#1B2147] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#0F1432] sm:px-7 sm:py-3.5 sm:text-sm">
-          <span className="sm:hidden">Qualify</span>
-          <span className="hidden sm:inline">Check If I Qualify — Free &amp; Fast</span>
+    <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
+        <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
+          <a href="/" className="flex min-w-0 items-center gap-2">
+            <span className="font-serif text-[18px] font-bold text-[#1B2147] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
+          </a>
+          <nav className="hidden items-center gap-10 md:flex">
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} className="text-sm font-medium text-[#1B2147]/80 transition hover:text-[#1B2147]">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <a href="#cta" className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#1B2147] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#0F1432] sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm">
+          Check If I Qualify — Free &amp; Fast
         </a>
       </div>
     </header>
