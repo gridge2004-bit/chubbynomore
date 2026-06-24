@@ -113,7 +113,7 @@ function PromoBanner() {
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
         <span>HSA / FSA eligible — early access, by invitation</span>
         <span aria-hidden className="hidden text-white/40 sm:inline">•</span>
-        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">See if you qualify →</a>
+        <a href="#cta" className="hidden underline-offset-4 hover:underline sm:inline">Check If I Qualify — Free & Fast →</a>
       </div>
     </div>
   );
@@ -141,7 +141,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <PillButton href="#cta">Get Started</PillButton>
+        <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
       </div>
     </header>
   );
@@ -171,7 +171,7 @@ function Hero() {
             Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms.
           </Reveal>
           <Reveal delay={240} className="mt-8">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
           </Reveal>
           <Reveal as="p" delay={320} className="mt-5 text-sm text-[#5A6075]">From $47/mL — up to 3× less than other GLP-1 programs.</Reveal>
         </div>
@@ -279,7 +279,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">Get Started</PillButton>
+          <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
         </Reveal>
       </div>
     </section>
@@ -393,7 +393,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">Get Started</PillButton>
+            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
           </div>
         </div>
       </div>
