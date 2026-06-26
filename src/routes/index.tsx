@@ -267,20 +267,21 @@ function CategoryStack() {
 
 function ProductTile({ card }: { card: ProductCard }) {
   return (
-    <article className="flex h-full flex-col rounded-[28px] bg-[#D9DDD8] px-8 py-9 sm:px-10 sm:py-10">
-      <div className="grid grid-cols-[1fr_auto] items-start gap-4">
-        <h3 className="font-serif text-[40px] leading-[1.02] text-[#1B2147] sm:text-[48px]">
-          {card.title.split(" ").slice(0, -2).join(" ")}
-          <br />
-          {card.title.split(" ").slice(-2).join(" ")}
-        </h3>
-        <div className="flex h-[120px] w-[140px] items-center justify-end sm:h-[170px] sm:w-[200px]">
-          <img src={card.img} alt={card.imgAlt} className="h-full w-auto object-contain mix-blend-multiply" loading="lazy" />
-        </div>
+    <article className="flex h-full flex-col rounded-[28px] bg-[#D9DDD8] px-6 py-7 sm:px-8 sm:py-8">
+      <div className="flex items-center justify-center py-2">
+        <img
+          src={card.img}
+          alt={card.imgAlt}
+          className="max-h-[180px] w-auto object-contain mix-blend-multiply sm:max-h-[220px]"
+          loading="lazy"
+        />
       </div>
-      <p className="mt-6 text-[15px] text-[#1B2147]/85">{card.subtitle}</p>
-      <p className="mt-2 text-[15px] font-medium text-[#3454C7]">{card.medications}</p>
-      <div className="mt-auto pt-10 space-y-2 text-[15px] text-[#1B2147]">
+      <h3 className="mt-4 font-serif text-[28px] leading-[1.1] text-[#1B2147] sm:text-[34px]">
+        {card.title}
+      </h3>
+      <p className="mt-3 text-[15px] text-[#1B2147]/85">{card.subtitle}</p>
+      <p className="mt-1.5 text-[15px] font-medium text-[#3454C7]">{card.medications}</p>
+      <div className="mt-auto pt-6 space-y-2 text-[15px] text-[#1B2147]">
         {card.prices.map((p, idx) => (
           <div key={idx} className="flex flex-wrap items-center gap-1.5">
             {p.label && <span>{p.label}</span>}
