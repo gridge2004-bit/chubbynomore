@@ -133,6 +133,7 @@ function PillButton({ href, children, variant = "primary" }: { href: string; chi
 }
 
 function Nav({ scrolled }: { scrolled: boolean }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
@@ -140,9 +141,15 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           <a href="/" className="flex min-w-0 items-center gap-2">
             <span className="font-serif text-[18px] font-bold text-[#1B2147] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
           </a>
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm font-medium text-[#1B2147]/80 transition hover:text-[#1B2147]">
+              <a
+                key={l.href}
+                href={l.href}
+                className={`text-xs font-medium text-[#1B2147]/80 transition hover:text-[#1B2147] sm:text-sm ${
+                  l.label === "Medications" || l.label === "Pricing" ? "" : "hidden md:inline-flex"
+                }`}
+              >
                 {l.label}
               </a>
             ))}
