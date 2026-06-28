@@ -166,7 +166,7 @@ function Hero() {
           <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
-          The leading edge of doctor-prescribed weight loss — treating people, not averages.
+          Starting at $149/mo. No insurance needed. Doctor-prescribed and delivered to your door.
         </Reveal>
       </div>
     </section>
