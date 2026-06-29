@@ -12,6 +12,7 @@ import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
+import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -303,7 +304,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Zepbound® (tirzepatide) once-weekly injection. FDA-approved for chronic weight management and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     price: "$449.99",
     period: "/mo",
-    img: tirzepatideImg,
+    img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
   },
   {
