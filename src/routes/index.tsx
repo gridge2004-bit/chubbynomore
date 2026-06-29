@@ -14,6 +14,7 @@ import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
 import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
+import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -327,7 +328,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A once-weekly semaglutide injection that improves insulin sensitivity, reduces appetite, and helps regulate blood sugar.",
     price: "$349.99",
     period: "/mo",
-    img: tirzepatideImg,
+    img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
   },
   {
