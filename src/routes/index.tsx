@@ -328,7 +328,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A once-weekly semaglutide injection that improves insulin sensitivity, reduces appetite, and helps regulate blood sugar.",
     price: "$349.99",
     period: "/mo",
-    img: tirzepatideImg,
+    img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
   },
   {
