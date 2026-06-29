@@ -13,6 +13,7 @@ import ctaImg from "@/assets/cta.jpg";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
+import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
