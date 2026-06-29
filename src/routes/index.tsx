@@ -316,7 +316,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® once-weekly injection for chronic weight management in adults with obesity with a weight-related condition, and to reduce the risk of major cardiovascular events.",
     price: "$349.99",
     period: "/mo",
-    img: tirzepatideImg,
+    img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
   },
   {
