@@ -11,6 +11,7 @@ import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
+import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -291,7 +292,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® tablets deliver the same active ingredient as the Wegovy injection, in a once-daily oral form. The first and only FDA-approved semaglutide pill for weight loss in adults with obesity or overweight with a weight-related condition.",
     price: "$249.99",
     period: "/mo",
-    img: oralTablets2Img,
+    img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
   },
   {
