@@ -474,9 +474,9 @@ function ProductTile({ card }: { card: ProductCard }) {
         {card.prices.map((p, idx) => (
           <div key={idx} className="flex flex-wrap items-center gap-1.5">
             {p.label && <span>{p.label}</span>}
-            <a href="#cta" className="text-[#3454C7] underline underline-offset-2">
+            <span className="text-[#3454C7] underline underline-offset-2">
               {p.value}
-            </a>
+            </span>
             <span aria-hidden className="text-[#3454C7]">→</span>
           </div>
         ))}
