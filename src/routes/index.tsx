@@ -10,6 +10,7 @@ import step1Img from "@/assets/step1.jpg";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -279,7 +280,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Foundayo™ (orforglipron) is the only GLP-1 pill for weight loss that can be taken any time of day, with or without food or water restrictions. FDA-approved for chronic weight management in adults with obesity or overweight with a weight-related condition.",
     price: "$199.99",
     period: "/mo",
-    img: oralTablets1Img,
+    img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
   },
   {
