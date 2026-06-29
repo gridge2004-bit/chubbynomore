@@ -370,42 +370,44 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           </span>
         ))}
       </div>
-      <div className="mt-5 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
-        <div className="min-w-0">
-          <h3 className="font-sans text-[28px] font-semibold leading-[1.1] text-[#1B2147] sm:text-[34px]">
+      <div className="mt-5 flex items-start gap-4">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-sans text-[22px] font-semibold leading-[1.15] text-[#1B2147] break-words sm:text-[26px] lg:text-[28px]">
             {card.name}
           </h3>
-          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#1B2147]/85">
-            {card.desc}
-          </p>
         </div>
-        <div className="flex items-center justify-center sm:w-[180px]">
+        <div className="flex w-[110px] shrink-0 items-center justify-center sm:w-[140px]">
           <img
             src={card.img}
             alt={card.imgAlt}
-            className="max-h-[180px] w-auto object-contain mix-blend-multiply"
+            className="max-h-[120px] w-auto object-contain mix-blend-multiply sm:max-h-[150px]"
             loading="lazy"
           />
         </div>
       </div>
-      <div className="mt-6 flex flex-wrap items-baseline gap-1.5 text-[#1B2147]">
-        <span className="text-[15px]">Starting at</span>
-        <span className="text-[32px] font-bold leading-none sm:text-[36px]">{card.price}</span>
-        <span className="text-[15px]">{card.period}</span>
-      </div>
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="#cta"
-          className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
-        >
-          Start treatment
-        </a>
-        <a
-          href="#cta"
-          className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
-        >
-          Learn more
-        </a>
+      <p className="mt-4 text-[14.5px] leading-relaxed text-[#1B2147]/85 sm:text-[15px]">
+        {card.desc}
+      </p>
+      <div className="mt-auto pt-6">
+        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-[#1B2147]">
+          <span className="text-[15px]">Starting at</span>
+          <span className="text-[30px] font-bold leading-none sm:text-[34px]">{card.price}</span>
+          <span className="text-[15px]">{card.period}</span>
+        </div>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="#cta"
+            className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+          >
+            Start treatment
+          </a>
+          <a
+            href="#cta"
+            className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-5 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
+          >
+            Learn more
+          </a>
+        </div>
       </div>
     </article>
   );
