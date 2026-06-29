@@ -15,6 +15,7 @@ import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
 import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
 import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
+import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -339,7 +340,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A once-weekly tirzepatide injection that activates two hormone receptors — GIP and GLP-1 — to reduce appetite, slow gastric emptying, and support metabolic health.",
     price: "$1,249.99",
     period: "/mo",
-    img: tirzepatideImg,
+    img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
   },
 ];
