@@ -100,6 +100,7 @@ function Index() {
       <Nav scrolled={scrolled} />
       <Hero />
       <CategoryStack />
+      <DetailedProducts />
       <TrustMarquee />
       
       <GLP1Highlights />
