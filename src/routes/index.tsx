@@ -100,6 +100,7 @@ function Index() {
       <Nav scrolled={scrolled} />
       <Hero />
       <CategoryStack />
+      <DetailedProducts />
       <TrustMarquee />
       
       <GLP1Highlights />
@@ -234,6 +235,181 @@ const productCards: ProductCard[] = [
     prices: [{ label: "", value: "Starting at $199.99" }],
   },
 ];
+
+type DetailedCard = {
+  id: string;
+  tags: string[];
+  tagTone: "tan" | "lavender";
+  name: string;
+  desc: string;
+  price: string;
+  period: string;
+  img: string;
+  imgAlt: string;
+};
+
+const detailedCards: DetailedCard[] = [
+  {
+    id: "tirzepatide",
+    tags: ["COMPOUNDED", "GLP-1 + GIP"],
+    tagTone: "tan",
+    name: "Tirzepatide",
+    desc: "Discover one of the most effective medical weight loss tools available — clinically studied to support significant weight loss over time.",
+    price: "$249.99",
+    period: "/28-day supply",
+    img: semaglutideImg,
+    imgAlt: "Compounded Tirzepatide vial",
+  },
+  {
+    id: "semaglutide",
+    tags: ["COMPOUNDED", "GLP-1"],
+    tagTone: "tan",
+    name: "Semaglutide",
+    desc: "Unlock meaningful weight loss support with Semaglutide — clinically studied to help patients achieve significant results over time.",
+    price: "$149.99",
+    period: "/28-day supply",
+    img: semaglutideImg,
+    imgAlt: "Compounded Semaglutide vial",
+  },
+  {
+    id: "foundayo",
+    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tagTone: "lavender",
+    name: "Foundayo™ Tablets",
+    desc: "Foundayo™ (orforglipron) is the only GLP-1 pill for weight loss that can be taken any time of day, with or without food or water restrictions. FDA-approved for chronic weight management in adults with obesity or overweight with a weight-related condition.",
+    price: "$199.99",
+    period: "/mo",
+    img: oralTablets1Img,
+    imgAlt: "Foundayo tablet",
+  },
+  {
+    id: "wegovy-tablets",
+    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tagTone: "lavender",
+    name: "Wegovy® Tablets",
+    desc: "Wegovy® tablets deliver the same active ingredient as the Wegovy injection, in a once-daily oral form. The first and only FDA-approved semaglutide pill for weight loss in adults with obesity or overweight with a weight-related condition.",
+    price: "$249.99",
+    period: "/mo",
+    img: oralTablets2Img,
+    imgAlt: "Wegovy tablet",
+  },
+  {
+    id: "zepbound",
+    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tagTone: "lavender",
+    name: "Zepbound®",
+    desc: "Zepbound® (tirzepatide) once-weekly injection. FDA-approved for chronic weight management and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
+    price: "$449.99",
+    period: "/mo",
+    img: tirzepatideImg,
+    imgAlt: "Zepbound injection pen",
+  },
+  {
+    id: "wegovy-pens",
+    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tagTone: "lavender",
+    name: "Wegovy® Pens",
+    desc: "Wegovy® once-weekly injection for chronic weight management in adults with obesity with a weight-related condition, and to reduce the risk of major cardiovascular events.",
+    price: "$349.99",
+    period: "/mo",
+    img: tirzepatideImg,
+    imgAlt: "Wegovy injection pen",
+  },
+  {
+    id: "ozempic",
+    tags: ["BRAND-NAME", "GLP-1"],
+    tagTone: "lavender",
+    name: "Ozempic®",
+    desc: "A once-weekly semaglutide injection that improves insulin sensitivity, reduces appetite, and helps regulate blood sugar.",
+    price: "$349.99",
+    period: "/mo",
+    img: tirzepatideImg,
+    imgAlt: "Ozempic injection pen",
+  },
+  {
+    id: "mounjaro",
+    tags: ["BRAND-NAME", "GLP-1 + GIP"],
+    tagTone: "lavender",
+    name: "Mounjaro®",
+    desc: "A once-weekly tirzepatide injection that activates two hormone receptors — GIP and GLP-1 — to reduce appetite, slow gastric emptying, and support metabolic health.",
+    price: "$1,249.99",
+    period: "/mo",
+    img: tirzepatideImg,
+    imgAlt: "Mounjaro injection pen",
+  },
+];
+
+function DetailedProducts() {
+  return (
+    <section id="pricing" className="bg-white px-4 pb-16 sm:px-6">
+      <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2">
+        {detailedCards.map((c, i) => (
+          <Reveal key={c.id} delay={(i % 2) * 100}>
+            <DetailedProductCard card={c} />
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DetailedProductCard({ card }: { card: DetailedCard }) {
+  const tagClass =
+    card.tagTone === "tan"
+      ? "bg-[#E6D4B8] text-[#1B2147]"
+      : "bg-[#D8DCEF] text-[#1B2147]";
+  return (
+    <article className="flex h-full flex-col rounded-[28px] bg-[#EEF0EC] px-6 py-7 sm:px-8 sm:py-8">
+      <div className="flex flex-wrap gap-2">
+        {card.tags.map((t) => (
+          <span
+            key={t}
+            className={`rounded-md px-3 py-1 text-[11px] font-semibold tracking-[0.12em] ${tagClass}`}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+      <div className="mt-5 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-start">
+        <div className="min-w-0">
+          <h3 className="font-sans text-[28px] font-semibold leading-[1.1] text-[#1B2147] sm:text-[34px]">
+            {card.name}
+          </h3>
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#1B2147]/85">
+            {card.desc}
+          </p>
+        </div>
+        <div className="flex items-center justify-center sm:w-[180px]">
+          <img
+            src={card.img}
+            alt={card.imgAlt}
+            className="max-h-[180px] w-auto object-contain mix-blend-multiply"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div className="mt-6 flex flex-wrap items-baseline gap-1.5 text-[#1B2147]">
+        <span className="text-[15px]">Starting at</span>
+        <span className="text-[32px] font-bold leading-none sm:text-[36px]">{card.price}</span>
+        <span className="text-[15px]">{card.period}</span>
+      </div>
+      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="#cta"
+          className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+        >
+          Start treatment
+        </a>
+        <a
+          href="#cta"
+          className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
+        >
+          Learn more
+        </a>
+      </div>
+    </article>
+  );
+}
 
 function HeroTile({ tile }: { tile: Tile }) {
   return (
