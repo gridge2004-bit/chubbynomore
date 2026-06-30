@@ -378,21 +378,22 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           </span>
         ))}
       </div>
-      <div className="mt-5 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
-        <div className="min-w-0 flex-1 self-stretch">
-          <h3 className="font-sans text-[22px] font-semibold leading-[1.15] text-[#1B2147] break-words sm:text-[26px] lg:text-[28px]">
+      <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
+        <div className="min-w-0">
+          <h3 className="font-sans text-[20px] font-semibold leading-[1.15] text-[#1B2147] break-words sm:text-[24px] lg:text-[28px]">
             {card.name}
           </h3>
         </div>
-        <div className="flex w-[140px] shrink-0 items-center justify-center sm:w-[160px]">
+        <div className="flex w-[110px] shrink-0 items-center justify-center sm:w-[150px] lg:w-[160px]">
           <img
             src={card.img}
             alt={card.imgAlt}
-            className="max-h-[140px] w-auto object-contain mix-blend-multiply sm:max-h-[150px]"
+            className="max-h-[110px] w-auto object-contain mix-blend-multiply sm:max-h-[140px] lg:max-h-[150px]"
             loading="lazy"
           />
         </div>
       </div>
+
       <p className="mt-4 text-[14.5px] leading-relaxed text-[#1B2147]/85 sm:text-[15px]">
         {card.desc}
       </p>
