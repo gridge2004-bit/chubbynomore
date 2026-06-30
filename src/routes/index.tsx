@@ -506,103 +506,51 @@ function TrustMarquee() {
 }
 
 function GLP1Highlights() {
-  const [format, setFormat] = useState("Injectable");
-  const [goal, setGoal] = useState("All of the above");
-  const formats = ["Injectable", "Oral"];
-  const goals = ["Lose stubborn fat", "Curb cravings & appetite", "Improve metabolic health", "Feel confident again", "All of the above"];
-
   return (
-    <section className="bg-white px-6 py-24">
-      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
-        {/* Card 1 — Treatment formats */}
-        <Reveal className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
-          <div>
-            <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
-              Treatment formats that fit <em className="italic">your lifestyle</em>
-            </h3>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {formats.map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFormat(f)}
-                  className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
-                    format === f ? "bg-[#1B2147] text-white" : "bg-white text-[#1B2147] hover:bg-[#1B2147]/5"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="mt-8 flex items-end justify-center gap-3">
-            {format === "Injectable" && (
-              <div className="flex h-52 w-24 flex-col items-center justify-end rounded-2xl bg-white p-3 shadow-sm transition-all duration-300">
-                <div className="flex flex-1 flex-col items-center justify-center gap-1">
-                  <span className="text-2xl font-bold text-[#1B2147]">1×</span>
-                  <span className="text-[10px] uppercase tracking-wider text-[#5A6075]">week</span>
-                </div>
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#1B2147]">Injectable</div>
-              </div>
-            )}
-            {format === "Oral" && (
-              <div className="flex h-64 w-24 flex-col items-center justify-end rounded-2xl bg-[#1B2147] p-3 shadow-sm transition-all duration-300">
-                <div className="flex flex-1 flex-col items-center justify-center gap-1">
-                  <span className="text-2xl font-bold text-white">1×</span>
-                  <span className="text-[10px] uppercase tracking-wider text-white/70">day</span>
-                </div>
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-white">Oral</div>
-              </div>
-            )}
-          </div>
+    <section className="bg-[#E8EAF0] px-6 py-20 md:py-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal as="h2" className="font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
+          Proprietary formula,<br />
+          <em className="italic text-[#3454C7]">powerful outcomes.</em>
         </Reveal>
 
-        {/* Card 2 — Results */}
-        <Reveal delay={120} className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
-          <div>
-            <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
-              Make optimal your <em className="italic">new normal</em>
+        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          {/* Card 1 — Tirzepatide */}
+          <Reveal className="rounded-3xl bg-gradient-to-b from-white to-[#EEF0F7] p-7 md:p-9 shadow-sm">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
+              Body weight support (Tirzepatide)
+            </div>
+            <h3 className="mt-5 font-serif text-[40px] leading-none text-[#1B2147] md:text-[52px]">
+              GLP-1 + GIP
             </h3>
-            <div className="mt-8 flex items-baseline gap-2 text-[#1B2147]">
-              <span className="text-3xl font-semibold">↓</span>
-              <span className="font-serif text-5xl font-semibold tracking-tight md:text-[56px]">20%</span>
-            </div>
-            <p className="mt-1 text-sm text-[#5A6075]">Avg. body weight reduction*</p>
-          </div>
-          <div className="mt-8 grid grid-cols-2 items-end gap-3">
-            <div className="flex h-28 flex-col items-center justify-end rounded-2xl bg-[#1B2147]/90 p-4 text-white">
-              <div className="text-[10px] uppercase tracking-[0.16em] opacity-70">Baseline</div>
-              <div className="font-serif text-3xl font-semibold">230</div>
-              <div className="text-[10px] opacity-70">lbs</div>
-            </div>
-            <div className="flex h-44 flex-col items-center justify-end rounded-2xl bg-[#1B2147] p-4 text-white">
-              <div className="text-[10px] uppercase tracking-[0.16em] opacity-70">After 68 wks</div>
-              <div className="font-serif text-3xl font-semibold">184</div>
-              <div className="text-[10px] opacity-70">lbs</div>
-            </div>
-          </div>
-        </Reveal>
+            <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
+              Tirzepatide is a dual-action GLP-1 and GIP receptor agonist clinically studied for its ability to support metabolic health and weight management over time. Results vary.
+            </p>
+          </Reveal>
 
-        {/* Card 3 — Goals */}
-        <Reveal delay={240} className="flex flex-col justify-between rounded-3xl bg-[#EEF0F7] p-8 md:p-10" style={{ minHeight: 480 }}>
-          <h3 className="font-serif text-[28px] leading-[1.15] text-[#1B2147] md:text-[32px]">
-            Why do you want to <em className="italic">lose weight?</em>
-          </h3>
-          <div className="mt-6 flex flex-col gap-2.5">
-            {goals.map((g) => (
-              <button
-                key={g}
-                onClick={() => setGoal(g)}
-                className={`rounded-full px-5 py-3 text-sm font-semibold transition ${
-                  goal === g ? "bg-[#1B2147] text-white" : "bg-white text-[#1B2147] hover:bg-[#1B2147]/5"
-                }`}
-              >
-                {g}
-              </button>
-            ))}
-          </div>
-        </Reveal>
+          {/* Card 2 — Semaglutide */}
+          <Reveal delay={120} className="rounded-3xl bg-gradient-to-b from-white to-[#EEF0F7] p-7 md:p-9 shadow-sm">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
+              Body weight support (Semaglutide)
+            </div>
+            <h3 className="mt-5 font-serif text-[40px] leading-none text-[#1B2147] md:text-[52px]">
+              GLP-1
+            </h3>
+            <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
+              Semaglutide is a GLP-1 receptor agonist clinically studied for its ability to support appetite control and healthy weight management over time. Results vary. 4.7/5 Reviews
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mt-6 md:mt-8">
+          <a
+            href="#cta"
+            className="flex w-full items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:mx-auto md:w-auto md:px-14"
+          >
+            Get Started
+          </a>
+        </div>
       </div>
-      <p className="mx-auto mt-6 max-w-7xl text-[11px] text-[#9298AB]">*Based on published clinical trial averages for tirzepatide over ~68–72 weeks, used alongside diet and exercise. Individual results vary.</p>
     </section>
   );
 }
