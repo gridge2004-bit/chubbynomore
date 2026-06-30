@@ -420,14 +420,22 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <a
             href="#cta"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+            }}
             className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
             Get Started
           </a>
           <a
             href="#cta"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+            }}
             className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-5 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
           >
             Learn more
