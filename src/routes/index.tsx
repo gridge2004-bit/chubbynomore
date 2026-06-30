@@ -637,7 +637,7 @@ function CompoundedVsBrand() {
   ];
 
   return (
-    <section className="bg-[#FAF8F5] px-6 py-20 md:py-28">
+    <section className="bg-[#FAF8F5] px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
@@ -695,7 +695,7 @@ function CompoundedVsBrand() {
 function HowItWorks() {
 
   return (
-    <section id="how" className="bg-[#FAF8F5] px-6 py-24">
+    <section id="how" className="bg-[#FAF8F5] px-6 py-16">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
           Three steps to <em className="italic">a healthier you.</em>
