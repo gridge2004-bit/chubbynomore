@@ -367,7 +367,21 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
       ? "bg-[#E6D4B8] text-[#1B2147]"
       : "bg-[#D8DCEF] text-[#1B2147]";
   return (
-    <article className="flex h-full flex-col rounded-[28px] bg-[#EEF0EC] px-6 py-7 sm:px-8 sm:py-8">
+    <article
+      className="card-lift flex h-full cursor-pointer flex-col rounded-[28px] bg-[#EEF0EC] px-6 py-7 sm:px-8 sm:py-8"
+      role="button"
+      tabIndex={0}
+      aria-label={`Start questionnaire for ${card.name}`}
+      onClick={() => {
+        window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+        }
+      }}
+    >
       <div className="flex flex-wrap gap-2">
         {card.tags.map((t) => (
           <span
@@ -406,12 +420,22 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <a
             href="#cta"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+            }}
             className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
             Get Started
           </a>
           <a
             href="#cta"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
+            }}
             className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-5 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
           >
             Learn more
@@ -866,16 +890,25 @@ function QualifyModal() {
 
   // Intercept clicks on any CTA anchor pointing to #cta
   useEffect(() => {
+    const openQuestionnaire = () => {
+      setStep(0);
+      setOpen(true);
+    };
+
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const anchor = target?.closest('a[href="#cta"]') as HTMLAnchorElement | null;
       if (!anchor) return;
       e.preventDefault();
-      setStep(0);
-      setOpen(true);
+      openQuestionnaire();
     };
+    const onOpenQualifyModal = () => openQuestionnaire();
     document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    window.addEventListener("open-qualify-modal", onOpenQualifyModal);
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("open-qualify-modal", onOpenQualifyModal);
+    };
   }, []);
 
   useEffect(() => {
