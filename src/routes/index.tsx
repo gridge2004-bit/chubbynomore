@@ -465,7 +465,9 @@ function CategoryStack() {
         <div className="grid gap-4 sm:grid-cols-2">
           {heroTiles.map((t, i) => (
             <Reveal key={t.id} delay={i * 100}>
-              <HeroTile tile={t} />
+              <a href="#cta" className="block h-full" aria-label={`Start intake form for ${t.title}`}>
+                <HeroTile tile={t} />
+              </a>
             </Reveal>
           ))}
         </div>
