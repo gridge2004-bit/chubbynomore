@@ -378,17 +378,17 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           </span>
         ))}
       </div>
-      <div className="mt-5 flex items-start gap-4">
-        <div className="min-w-0 flex-1">
+      <div className="mt-5 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+        <div className="min-w-0 flex-1 self-stretch">
           <h3 className="font-sans text-[22px] font-semibold leading-[1.15] text-[#1B2147] break-words sm:text-[26px] lg:text-[28px]">
             {card.name}
           </h3>
         </div>
-        <div className="flex w-[110px] shrink-0 items-center justify-center sm:w-[140px]">
+        <div className="flex w-[140px] shrink-0 items-center justify-center sm:w-[160px]">
           <img
             src={card.img}
             alt={card.imgAlt}
-            className="max-h-[120px] w-auto object-contain mix-blend-multiply sm:max-h-[150px]"
+            className="max-h-[140px] w-auto object-contain mix-blend-multiply sm:max-h-[150px]"
             loading="lazy"
           />
         </div>
@@ -407,7 +407,7 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
             href="#cta"
             className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
-            Start treatment
+            Get Started
           </a>
           <a
             href="#cta"
