@@ -177,9 +177,7 @@ function Hero() {
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h1" className="font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
-          Real GLP-1
-          <br />
-          <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
+          Real GLP-1 <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
           Starting at $149/mo. No insurance needed. Doctor-prescribed and delivered to your door.
