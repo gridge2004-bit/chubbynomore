@@ -111,6 +111,7 @@ function Index() {
       
      <GLP1Highlights />
      <WeightLossScale />
+     <CompoundedVsBrand />
      <HowItWorks />
 
       <FAQ />
@@ -604,6 +605,88 @@ function WeightLossScale() {
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
           In clinical trials of GLP-1 medications, adults lost a mean of roughly 15% of body weight over about a year (STEP-1, Novo Nordisk; SURMOUNT-1, Eli Lilly). This is a study average, not a prediction of your personal result. Individual results vary.
         </p>
+      </div>
+    </section>
+  );
+}
+
+function CompoundedVsBrand() {
+  const cards = [
+    {
+      tag: "COMPOUNDED",
+      title: "Custom-formulated",
+      meds: "Tirzepatide, Semaglutide",
+      rows: [
+        ["Regulation", "Prepared by licensed US compounding pharmacies."],
+        ["Cost", "$149.99–$249.99 per month, out of pocket. No insurance required."],
+        ["Customization", "Dose tailored to you. Vial-and-syringe format."],
+        ["Supply", "Reliably in stock through our pharmacy partner."],
+      ],
+    },
+    {
+      tag: "BRAND-NAME",
+      title: "FDA-approved name brand",
+      meds: "Ozempic, Mounjaro, Wegovy, Zepbound, Foundayo",
+      rows: [
+        ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
+        ["Cost", "From $499 per month. Insurance and savings cards may apply."],
+        ["Customization", "Fixed doses in pre-filled injection pens."],
+        ["Supply", "Subject to manufacturer shortages from time to time."],
+      ],
+    },
+  ];
+
+  return (
+    <section className="bg-[#FAF8F5] px-6 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+            Compounded vs Brand-name
+          </div>
+          <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
+            <em className="italic text-[#3454C7]">Powerful active ingredient.</em>{" "}
+            Different regulatory path.
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          {cards.map((c, idx) => (
+            <Reveal
+              key={c.tag}
+              delay={idx * 120}
+              className="rounded-3xl bg-[#EFEFEC] p-7 md:p-10"
+            >
+              <div className="flex justify-center">
+                <span className="inline-block rounded-md bg-[#1B2147] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+                  {c.tag}
+                </span>
+              </div>
+              <h3 className="mt-7 font-serif text-[32px] leading-tight text-[#1B2147] md:text-[40px]">
+                {c.title}
+              </h3>
+              <p className="mt-4 text-[16px] font-medium text-[#3454C7]">{c.meds}</p>
+              <ul className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#1B2147]/85 md:text-[16px]">
+                {c.rows.map(([label, body]) => (
+                  <li key={label} className="flex gap-3">
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1B2147]" />
+                    <span>
+                      <strong className="font-semibold text-[#1B2147]">{label}:</strong> {body}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-10 text-center md:mt-14">
+          <p className="font-semibold text-[#1B2147]">
+            Both paths are doctor-supervised by ChubbyNoMore providers. You can switch between compounded and brand-name as your needs change.
+          </p>
+          <p className="mt-3 text-sm text-[#1B2147]/70">
+            Compounded medications are not FDA-approved for safety, efficacy, or quality.
+          </p>
+        </Reveal>
       </div>
     </section>
   );
