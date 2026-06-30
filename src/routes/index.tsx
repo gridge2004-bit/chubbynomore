@@ -109,8 +109,9 @@ function Index() {
       <DetailedProducts />
       <TrustMarquee />
       
-      <GLP1Highlights />
-      <HowItWorks />
+     <GLP1Highlights />
+     <WeightLossScale />
+     <HowItWorks />
 
       <FAQ />
       <FinalCTA />
@@ -550,6 +551,59 @@ function GLP1Highlights() {
             Get Started
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function WeightLossScale() {
+  const [weight, setWeight] = useState(270);
+  const potentialLoss = Math.round(weight * 0.15);
+
+  return (
+    <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
+      <div className="mx-auto max-w-3xl rounded-3xl bg-[#0F1E3F] p-8 text-white shadow-sm md:p-14">
+        <h2 className="font-serif text-[36px] leading-[1.1] tracking-tight md:text-[52px]">
+          Nearly 74% of adults in the U.S. are overweight or obese.
+        </h2>
+        <p className="mt-5 text-[15px] text-white/80 md:text-base">
+          Adjust the scale to view your potential weight loss.
+        </p>
+
+        <div className="mt-12 text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+            Your current weight (lbs):
+          </div>
+          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
+            {weight}
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <input
+            type="range"
+            min={120}
+            max={400}
+            step={1}
+            value={weight}
+            onChange={(e) => setWeight(Number(e.target.value))}
+            aria-label="Current weight in pounds"
+            className="scale-slider w-full"
+          />
+        </div>
+
+        <div className="mt-12 text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+            In one year you could lose (lbs):
+          </div>
+          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
+            {potentialLoss}
+          </div>
+        </div>
+
+        <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
+          In clinical trials of GLP-1 medications, adults lost a mean of roughly 15% of body weight over about a year (STEP-1, Novo Nordisk; SURMOUNT-1, Eli Lilly). This is a study average, not a prediction of your personal result. Individual results vary.
+        </p>
       </div>
     </section>
   );
