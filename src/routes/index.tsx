@@ -111,6 +111,7 @@ function Index() {
       
      <GLP1Highlights />
      <WeightLossScale />
+     <CompoundedVsBrand />
      <HowItWorks />
 
       <FAQ />
