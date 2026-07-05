@@ -9,38 +9,65 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
+  id: '/medications/$slug',
+  path: '/medications/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/sitemap.xml' | '/medications/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/sitemap.xml' | '/medications/$slug'
+  id: '__root__' | '/' | '/sitemap.xml' | '/medications/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/medications/$slug': {
+      id: '/medications/$slug'
+      path: '/medications/$slug'
+      fullPath: '/medications/$slug'
+      preLoaderRoute: typeof MedicationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

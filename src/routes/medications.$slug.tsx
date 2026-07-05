@@ -34,7 +34,7 @@ export const Route = createFileRoute("/medications/$slug")({
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: med.faqs.map((f) => ({
+      mainEntity: med.faqs.map((f: typeof med.faqs[number]) => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -128,7 +128,7 @@ function MedicationDetail() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E7E8EE] text-[#1B2147]">
-                {med.dosage.map((row) => (
+                {med.dosage.map((row: typeof med.dosage[number]) => (
                   <tr key={row.week}>
                     <td className="px-4 py-3 font-medium">{row.week}</td>
                     <td className="px-4 py-3">{row.dose}</td>
@@ -174,7 +174,7 @@ function MedicationDetail() {
 
         <Section title="Frequently asked questions">
           <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
-            {med.faqs.map((f) => (
+            {med.faqs.map((f: typeof med.faqs[number]) => (
               <details key={f.q} className="group py-4">
                 <summary className="flex cursor-pointer items-center justify-between gap-6 font-serif text-lg text-[#1B2147]">
                   {f.q}
