@@ -121,6 +121,9 @@ function Index() {
      <GLP1Highlights />
      <WeightLossScale />
      <CompoundedVsBrand />
+     <QualifyCriteria />
+     <SemaVsTirz />
+     <NotForYou />
      <HowItWorks />
 
       <FAQ />
@@ -130,6 +133,7 @@ function Index() {
     </div>
   );
 }
+
 
 function PromoBanner() {
   return (
