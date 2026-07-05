@@ -10,6 +10,8 @@ import step1Img from "@/assets/step1.jpg";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import feelLikeYourselfImg from "@/assets/feel-like-yourself.jpg";
+import loveWhatYouSeeImg from "@/assets/love-what-you-see.jpg";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
@@ -212,8 +214,8 @@ type Tile = {
 };
 
 const tiles: Tile[] = [
-  { id: "boost", title: "Boost metabolism", img: heroImg, imgAlt: "Man running on a trail", variant: "image-hero" },
-  { id: "lose", title: "Lose weight", img: step2Img, imgAlt: "Woman exercising on a mat", variant: "image-hero" },
+  { id: "boost", title: "Feel like yourself again", img: feelLikeYourselfImg, imgAlt: "Woman smiling confidently outdoors at golden hour", variant: "image-hero" },
+  { id: "lose", title: "Love what you see", img: loveWhatYouSeeImg, imgAlt: "Woman smiling at her reflection in a bright bedroom mirror", variant: "image-hero" },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
   { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
   { id: "cravings", title: "Curb cravings & appetite", img: oralTablets1Img, imgAlt: "Oral weight-loss tablets", variant: "half" },
