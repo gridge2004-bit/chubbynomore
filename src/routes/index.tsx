@@ -10,33 +10,28 @@ import step1Img from "@/assets/step1.jpg";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
-import feelLikeYourselfImg from "@/assets/feel-like-yourself.jpg";
-import loveWhatYouSeeImg from "@/assets/love-what-you-see.jpg";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
 import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
 import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
-
-const HOME_TITLE = "Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore";
-const HOME_DESCRIPTION = "ChubbyNoMore is an online GLP-1 weight loss program: compounded semaglutide and tirzepatide, plus brand-name Wegovy®, Ozempic®, Zepbound®, and Mounjaro®, prescribed by US-licensed physicians from $149/mo and shipped discreetly — no insurance required.";
+import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
+import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: HOME_TITLE },
-      { name: "description", content: HOME_DESCRIPTION },
-      { property: "og:title", content: HOME_TITLE },
-      { property: "og:description", content: HOME_DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://chubbynomore.com/" },
+      { title: "Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore" },
+      { name: "description", content: "ChubbyNoMore is an online GLP-1 weight loss program for US adults, offering physician-prescribed compounded semaglutide, tirzepatide, and brand-name Wegovy, Zepbound, Ozempic and Mounjaro — delivered discreetly, no insurance required." },
+      { property: "og:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { property: "og:description", content: "Physician-prescribed semaglutide and tirzepatide, delivered to your door. Compounded from $149/mo, brand-name from $199/mo. No insurance required." },
+      { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
-
 
 const navLinks = [
   { label: "How It Works", href: "#how" },
@@ -122,10 +117,10 @@ function Index() {
       
      <GLP1Highlights />
      <WeightLossScale />
-     <CompoundedVsBrand />
-     <QualifyCriteria />
+     <WhoQualifies />
      <SemaVsTirz />
-     <NotForYou />
+     <CompoundedVsBrand />
+     <WhoNotFor />
      <HowItWorks />
 
       <FAQ />
@@ -135,7 +130,6 @@ function Index() {
     </div>
   );
 }
-
 
 function PromoBanner() {
   return (
@@ -206,6 +200,8 @@ type Tile = {
   id: string;
   tag?: string;
   title: string;
+  subtitle?: string;
+  icon?: "bolt" | "user";
   img: string;
   imgAlt: string;
   variant: "image-hero" | "row" | "half";
@@ -214,8 +210,24 @@ type Tile = {
 };
 
 const tiles: Tile[] = [
-  { id: "boost", title: "Feel like yourself again", img: feelLikeYourselfImg, imgAlt: "Woman smiling confidently outdoors at golden hour", variant: "image-hero" },
-  { id: "lose", title: "Love what you see", img: loveWhatYouSeeImg, imgAlt: "Woman smiling at her reflection in a bright bedroom mirror", variant: "image-hero" },
+  {
+    id: "feel",
+    title: "Feel like yourself again",
+    subtitle: "Sustained energy for the moments that matter most.",
+    icon: "bolt",
+    img: feelLikeYourselfAsset.url,
+    imgAlt: "Father playing with his children in the front yard at golden hour",
+    variant: "image-hero",
+  },
+  {
+    id: "love",
+    title: "Love what you see",
+    subtitle: "Confidence that shows in every part of your life.",
+    icon: "user",
+    img: loveWhatYouSeeAsset.url,
+    imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
+    variant: "image-hero",
+  },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
   { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
   { id: "cravings", title: "Curb cravings & appetite", img: oralTablets1Img, imgAlt: "Oral weight-loss tablets", variant: "half" },
@@ -450,7 +462,6 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           >
             Learn more
           </Link>
-
         </div>
       </div>
     </article>
@@ -459,10 +470,35 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
 
 function HeroTile({ tile }: { tile: Tile }) {
   return (
-    <article className="card-lift relative h-[300px] overflow-hidden rounded-3xl sm:h-[380px]">
-      <img src={tile.img} alt={tile.imgAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-      <h3 className="absolute left-6 bottom-6 font-serif text-3xl text-white drop-shadow-lg sm:text-4xl">{tile.title}</h3>
+    <article className="card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-[#F2F3F0]">
+      <div className="aspect-[4/3] w-full overflow-hidden">
+        <img
+          src={tile.img}
+          alt={tile.imgAlt}
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div className="flex items-center gap-4 px-6 py-6 sm:px-7 sm:py-7">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#1B2147]/25 text-[#1B2147] sm:h-12 sm:w-12">
+          {tile.icon === "user" ? (
+            <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+            </svg>
+          )}
+        </div>
+        <div className="min-w-0">
+          <h3 className="text-[20px] font-bold leading-tight text-[#1B2147] sm:text-[22px]">{tile.title}</h3>
+          {tile.subtitle && (
+            <p className="mt-1 text-[14px] leading-snug text-[#1B2147]/70 sm:text-[15px]">{tile.subtitle}</p>
+          )}
+        </div>
+      </div>
     </article>
   );
 }
@@ -759,129 +795,7 @@ function HowItWorks() {
 }
 
 
-function QualifyCriteria() {
-  const criteria = [
-    "Adult 18 years or older and living in the United States.",
-    "BMI of 30 or higher (obesity).",
-    "BMI of 27 or higher (overweight) with a weight-related condition such as type 2 diabetes, high blood pressure, high cholesterol, or obstructive sleep apnea.",
-    "Not pregnant, planning pregnancy within 2 months, or breastfeeding.",
-    "No personal or family history of medullary thyroid carcinoma (MTC) or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
-    "No history of pancreatitis or severe gastrointestinal disease.",
-  ];
-  return (
-    <section id="qualify" className="bg-white px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-4xl">
-        <Reveal>
-          <h2 className="font-serif text-[36px] leading-[1.1] text-[#1B2147] md:text-[48px]">
-            Who qualifies for GLP-1 weight loss treatment?
-          </h2>
-          <p className="mt-5 text-[16px] leading-relaxed text-[#1B2147]/85">
-            GLP-1 medications are prescribed to adults who meet clinical criteria for chronic weight management. A ChubbyNoMore physician reviews your full history before deciding whether treatment is right for you.
-          </p>
-          <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-[#1B2147]/85 md:text-[16px]">
-            {criteria.map((c) => (
-              <li key={c} className="flex gap-3">
-                <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3454C7]" />
-                <span>{c}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8">
-            <a href="#cta" className="inline-flex items-center justify-center rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432]">
-              Check If I Qualify — Free &amp; Fast
-            </a>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function SemaVsTirz() {
-  const rows: [string, string, string][] = [
-    ["Drug class", "GLP-1 receptor agonist", "Dual GLP-1 + GIP receptor agonist"],
-    ["Trial average weight loss", "~15% at 68 weeks (STEP-1)", "~20% at 72 weeks (SURMOUNT-1, top dose)"],
-    ["Dosing", "Once weekly, titrated 0.25 → 2.4 mg", "Once weekly, titrated 2.5 → 15 mg"],
-    ["Compounded price at CNM", "$149.99 / 28-day supply", "$249.99 / 28-day supply"],
-    ["Brand equivalents", "Wegovy®, Ozempic®", "Zepbound®, Mounjaro®"],
-    ["Common side effects", "Nausea, diarrhea, constipation, fatigue", "Nausea, diarrhea, decreased appetite, injection-site reactions"],
-    ["Best fit", "Established GLP-1 mechanism; lower price point", "Greater average weight loss in trials; dual-hormone mechanism"],
-  ];
-  return (
-    <section id="compare" className="bg-[#F7F7F5] px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <h2 className="font-serif text-[36px] leading-[1.1] text-[#1B2147] md:text-[48px]">
-            Semaglutide vs Tirzepatide — which is right for me?
-          </h2>
-          <p className="mt-5 text-[16px] leading-relaxed text-[#1B2147]/85">
-            Both are once-weekly GLP-1 medications, but they work slightly differently and produce different average results in trials. Your ChubbyNoMore physician chooses based on your history, tolerance, and goals.
-          </p>
-        </Reveal>
-        <Reveal delay={100} className="mt-8 overflow-x-auto rounded-2xl border border-[#E7E8EE] bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-[#EEF0EC] text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]">
-              <tr>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3">Semaglutide</th>
-                <th className="px-4 py-3">Tirzepatide</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E7E8EE] text-[#1B2147]">
-              {rows.map(([label, sema, tirz]) => (
-                <tr key={label}>
-                  <th scope="row" className="px-4 py-4 align-top font-semibold">{label}</th>
-                  <td className="px-4 py-4 align-top">{sema}</td>
-                  <td className="px-4 py-4 align-top">{tirz}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Reveal>
-        <p className="mt-4 text-xs text-[#5A6075]">
-          STEP-1 (Wilding et al., NEJM 2021, Novo Nordisk); SURMOUNT-1 (Jastreboff et al., NEJM 2022, Eli Lilly). Averages, not personal predictions.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function NotForYou() {
-  const items = [
-    "Personal or family history of medullary thyroid carcinoma (MTC) or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
-    "History of pancreatitis or severe gastrointestinal disease (including gastroparesis).",
-    "Pregnancy, planning pregnancy within 2 months, or breastfeeding.",
-    "Type 1 diabetes or history of diabetic ketoacidosis.",
-    "Under 18 years of age.",
-    "Active gallbladder disease or unexplained severe abdominal pain.",
-    "Known hypersensitivity to semaglutide, tirzepatide, or any inactive ingredients.",
-  ];
-  return (
-    <section id="not-for-you" className="bg-white px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-4xl">
-        <Reveal>
-          <h2 className="font-serif text-[36px] leading-[1.1] text-[#1B2147] md:text-[48px]">
-            Who this is not for
-          </h2>
-          <p className="mt-5 text-[16px] leading-relaxed text-[#1B2147]/85">
-            GLP-1 medications are not appropriate for everyone. Do not start treatment if any of the following apply — your ChubbyNoMore physician will screen for these during your intake.
-          </p>
-          <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-[#1B2147]/85 md:text-[16px]">
-            {items.map((it) => (
-              <li key={it} className="flex gap-3">
-                <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C0392B]" />
-                <span>{it}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function FAQ() {
-
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="faq" className="bg-white px-6 py-24">
@@ -937,9 +851,6 @@ function FinalCTA() {
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
             Ready to see if GLP-1 is right for you? <em className="italic">ChubbyNoMore is with you every step.</em>
           </h2>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-[#1B2147]/75">
-            Join 920+ patients already on their journey. Free to join. Invite-only early access.
-          </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {checks.map((c) => (
               <li key={c} className="flex items-start gap-3 text-sm text-[#1B2147]">
@@ -1483,5 +1394,165 @@ function TextField({
         style={{ ["--tw-ring-color" as never]: MINT }}
       />
     </div>
+  );
+}
+
+/* ───────────── Query-driven SEO sections ───────────── */
+
+function WhoQualifies() {
+  return (
+    <section className="bg-white px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-4xl">
+        <Reveal>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+            Eligibility
+          </div>
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
+            Who qualifies for GLP-1 weight loss treatment?
+          </h2>
+        </Reveal>
+        <Reveal delay={80} className="mt-6 space-y-4 text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+          <p>
+            Most US adults 18 and older with a BMI of <strong>30 or higher</strong> qualify for GLP-1
+            therapy through ChubbyNoMore. Adults with a BMI of <strong>27 or higher</strong> also
+            qualify if they have at least one weight-related condition, such as type 2 diabetes, high
+            blood pressure, high cholesterol, or obstructive sleep apnea.
+          </p>
+          <p>
+            You must be able to safely take a GLP-1 medication — meaning no personal or family
+            history of medullary thyroid cancer or MEN 2, no history of pancreatitis, and you can't
+            be pregnant, planning pregnancy, or breastfeeding.
+          </p>
+          <p>
+            A US-licensed physician reviews your full health history, current medications, and goals
+            before prescribing. If you don't qualify, you're never charged.
+          </p>
+        </Reveal>
+        <Reveal delay={140} className="mt-8">
+          <a
+            href="#cta"
+            className="inline-flex rounded-full bg-[#1B2147] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#0F1432]"
+          >
+            Check my eligibility — free
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function WhoNotFor() {
+  const items = [
+    "You have a personal or family history of medullary thyroid cancer or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
+    "You're currently pregnant, actively trying to conceive, or breastfeeding.",
+    "You have a history of pancreatitis, severe gastroparesis, or active gallbladder disease.",
+    "You have type 1 diabetes or a history of diabetic ketoacidosis.",
+    "You're under 18 years old.",
+    "You're seeking rapid, short-term weight loss without a plan for sustained lifestyle changes — GLP-1 therapy is designed for long-term chronic weight management.",
+  ];
+  return (
+    <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-4xl">
+        <Reveal>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
+            Safety first
+          </div>
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
+            Who this is not for
+          </h2>
+        </Reveal>
+        <Reveal delay={80}>
+          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+            GLP-1 medications are powerful and not right for everyone. Don't start therapy through
+            ChubbyNoMore — or any provider — if any of the following apply to you:
+          </p>
+        </Reveal>
+        <Reveal delay={140}>
+          <ul className="mt-6 grid gap-3">
+            {items.map((i) => (
+              <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
+                <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#B84B4B]" />
+                <span>{i}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mt-6 text-sm text-[#1B2147]/70">
+            Not sure? Complete our free intake and a physician will review your history — if it's not
+            safe or appropriate, they'll tell you and suggest alternatives.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function SemaVsTirz() {
+  const rows: [string, string, string][] = [
+    ["Drug class", "GLP-1 receptor agonist", "Dual GLP-1 + GIP receptor agonist"],
+    ["Average weight loss (trial data)", "~15% over 68 weeks (STEP-1)", "~20–22% at 15 mg over 72 weeks (SURMOUNT-1)"],
+    ["Dosing schedule", "Once weekly injection", "Once weekly injection"],
+    ["Compounded starting price", "$149.99 / month", "$249.99 / month"],
+    ["FDA-approved brand versions", "Wegovy®, Ozempic®", "Zepbound®, Mounjaro®"],
+    ["Common side effects", "Nausea, constipation, fatigue", "Nausea, diarrhea, decreased appetite"],
+    ["Best fit for", "Steady weight loss with a well-studied GLP-1", "Highest average efficacy option"],
+  ];
+  return (
+    <section className="bg-white px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+            Compare
+          </div>
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[56px]">
+            Semaglutide vs Tirzepatide — which is right for me?
+          </h2>
+          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+            Both are once-weekly GLP-1 medications available through ChubbyNoMore. Tirzepatide adds
+            a second target (GIP) and produces greater average weight loss in clinical trials, while
+            semaglutide has a longer real-world track record and a lower monthly cost.
+          </p>
+        </Reveal>
+        <Reveal delay={100} className="mt-10 overflow-hidden rounded-2xl border border-[#1B2147]/10">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-left text-[14.5px]">
+              <thead className="bg-[#1B2147] text-white">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Attribute</th>
+                  <th className="px-5 py-4 font-semibold">Semaglutide</th>
+                  <th className="px-5 py-4 font-semibold">Tirzepatide</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {rows.map(([a, b, c], i) => (
+                  <tr key={a} className={i % 2 ? "bg-[#F5F6F3]" : ""}>
+                    <td className="px-5 py-4 font-semibold text-[#1B2147]">{a}</td>
+                    <td className="px-5 py-4 text-[#1B2147]/85">{b}</td>
+                    <td className="px-5 py-4 text-[#1B2147]/85">{c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+        <Reveal delay={160} className="mt-8 flex flex-wrap gap-3">
+          <Link
+            to="/medications/$slug"
+            params={{ slug: "semaglutide" }}
+            className="rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
+          >
+            Semaglutide details →
+          </Link>
+          <Link
+            to="/medications/$slug"
+            params={{ slug: "tirzepatide" }}
+            className="rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
+          >
+            Tirzepatide details →
+          </Link>
+        </Reveal>
+      </div>
+    </section>
   );
 }
