@@ -1,16 +1,56 @@
-## Fix Product Card Images & Text Fitting
+## Apply the SEO/AEO edits described in the upload
 
-### Problem
-The two product cards ("Compounded Weight Loss" and "Brand-name Weight Loss") have images that are constrained in small fixed-size containers, causing them to appear cut off or awkwardly scaled. The large serif titles (40–48px) compete for horizontal space with the image, making text feel cramped and prone to awkward line breaks.
+The upload is a Lovable chat log describing SEO/AEO changes a prior session claimed to ship. The current site is missing most of them. I'll implement each item to match.
 
-### Changes
+### 1. Homepage & root metadata
+- Change `src/routes/index.tsx` `<title>` to: `Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore`
+- Rewrite the home meta description to a keyword-forward one-sentence version (who it's for, what it is, delivery/pricing highlights).
+- Keep `__root.tsx` as sitewide defaults (og:type website, twitter card, social image).
 
-1. **ProductTile layout**: Change from `grid-cols-[1fr_auto]` (title squeezed next to image) to a vertical stack layout. Place the image in its own row with a larger, aspect-ratio-preserving container so the medication photo displays fully without being cropped. This gives both the image and text adequate breathing room.
+### 2. New H2 sections on the home page (query-driven, AEO-friendly)
+Add three new sections between existing sections (after `CompoundedVsBrand`, before `HowItWorks`):
+- **"Who qualifies for GLP-1 weight loss treatment?"** — short paragraph + bulleted eligibility criteria (BMI ≥ 30, or ≥ 27 with a weight-related condition, adult, US-based, not pregnant, no contraindications).
+- **"Semaglutide vs Tirzepatide — which is right for me?"** — intro paragraph plus a **comparison table** covering: drug class, trial data (STEP-1 vs SURMOUNT-1 average loss), dosing schedule, price, brand equivalents, common side effects, best fit.
+- **"Who this is not for"** — bulleted list of contraindications (personal/family history of MTC or MEN 2, pregnancy/breastfeeding, active pancreatitis, severe GI disease, under 18, etc.).
 
-2. **Title typography**: Reduce the product card title size and let it flow naturally instead of forcing a manual `<br>` split. This prevents awkward word breaks like "Brand-" / "name" when the container is narrow.
+### 3. Per-medication detail pages at `/medications/$slug`
+Create `src/routes/medications.$slug.tsx` with real content for 8 slugs:
+`semaglutide, tirzepatide, foundayo, wegovy-tablets, zepbound, wegovy-pens, ozempic, mounjaro`
 
-3. **Image container**: Replace the rigid `h-[120px] w-[140px]` / `sm:h-[170px] sm:w-[200px]` box with a flex container that respects the image's natural aspect ratio using `object-contain` and generous max-height/width constraints.
+Each page renders:
+- Hero: name, tag row (brand vs compounded), price, "Check if I qualify" CTA
+- Summary paragraph
+- **Who is this for** (candidate profile)
+- **Who this is not for** (contraindications)
+- **Dosage** table (titration schedule)
+- **Common side effects** + **Serious side effects**
+- **Monitoring plan**
+- **Pricing**
+- **FAQs** (4–6 per medication)
+- Data lives in a `medications` map keyed by slug in `src/data/medications.ts`.
 
-4. **Spacing & sizing**: Tighten vertical padding slightly and ensure subtitle, medication list, and price rows read cleanly without crowding.
+Per-page head() sets:
+- `<title>` — `${name} — Online prescription & pricing | ChubbyNoMore`
+- `description` — one-sentence, keyword-forward
+- `<link rel="canonical">` to `https://chubbynomore.com/medications/${slug}` (leaf only)
+- og:title, og:description, og:type=article, og:url
+- JSON-LD scripts: `Drug` schema (name, activeIngredient, drugClass, prescriptionStatus) **and** `FAQPage` schema built from the page's FAQ list.
 
-No changes to other sections, data-trust grid, or global styles.
+### 4. Wire the pricing cards to detail pages
+On the home page, the "Learn more" button in `DetailedProductCard` currently opens the qualify modal. Change it to `<Link to="/medications/$slug" params={{ slug: card.id }}>` so each medication card links to its detail page. Keep "Get Started" opening the modal.
+
+### 5. sitemap + routeTree
+- Update `public/robots.txt` / add `src/routes/sitemap[.]xml.ts` with the 8 medication URLs + `/`.
+- Let the TanStack Router plugin regenerate `routeTree.gen.ts` (no manual edit).
+
+### Technical notes
+- No backend changes; all content is static.
+- No changes to unrelated sections (Hero, cards, FAQ, marquee, footer, modal).
+- Uses existing color tokens and typography; no new deps.
+
+### Out of scope
+- Rewriting hero copy or visuals.
+- Building a CMS or fetching medication content from a database.
+- Blog/article routes.
+
+Proceed?
