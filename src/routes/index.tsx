@@ -440,17 +440,15 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           >
             Get Started
           </a>
-          <a
-            href="#cta"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
-            }}
+          <Link
+            to="/medications/$slug"
+            params={{ slug: card.id }}
+            onClick={(e) => e.stopPropagation()}
             className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-5 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
           >
             Learn more
-          </a>
+          </Link>
+
         </div>
       </div>
     </article>
