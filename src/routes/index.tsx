@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
@@ -17,15 +17,24 @@ import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
 import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 
+const HOME_TITLE = "Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore";
+const HOME_DESCRIPTION = "ChubbyNoMore is an online GLP-1 weight loss program: compounded semaglutide and tirzepatide, plus brand-name Wegovy®, Ozempic®, Zepbound®, and Mounjaro®, prescribed by US-licensed physicians from $149/mo and shipped discreetly — no insurance required.";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChubbyNoMore — Real GLP-1 medication. Real results. Real you." },
-      { name: "description", content: "Medical weight loss, prescribed by real doctors. Delivered discreetly. No insurance required. No waiting rooms." },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESCRIPTION },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://chubbynomore.com/" },
     ],
+    links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
   }),
   component: Index,
 });
+
 
 const navLinks = [
   { label: "How It Works", href: "#how" },
