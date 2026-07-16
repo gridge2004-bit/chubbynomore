@@ -672,7 +672,7 @@ function WeightLossScale() {
           Nearly 74% of adults in the U.S. are overweight or obese.
         </h2>
         <p className="mt-5 text-[15px] text-white/80 md:text-base">
-          Adjust the scale to view your potential weight loss.
+          Adjust the scale to see what 15% of your current weight equals.
         </p>
 
         <div className="mt-12 text-center">
@@ -699,7 +699,7 @@ function WeightLossScale() {
 
         <div className="mt-12 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-            In one year you could lose (lbs):
+            15% of this weight equals (lbs):
           </div>
           <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
             {potentialLoss}
@@ -707,7 +707,7 @@ function WeightLossScale() {
         </div>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
-          In clinical trials of GLP-1 medications, adults lost a mean of roughly 15% of body weight over about a year (STEP-1, Novo Nordisk; SURMOUNT-1, Eli Lilly). This is a study average, not a prediction of your personal result. Individual results vary.
+          This calculator is an educational example based on the approximately 15% mean weight reduction observed over 68 weeks in the STEP 1 clinical trial of semaglutide 2.4 mg used with lifestyle intervention. It is not a prediction of your personal results, does not represent tirzepatide trial results, and does not establish the safety, effectiveness, or quality of compounded semaglutide. Individual results vary.
         </p>
       </div>
     </section>
