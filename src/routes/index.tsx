@@ -115,6 +115,7 @@ function Index() {
       <TrustMarquee />
       <HowItWorks />
       <MedicationOptions />
+      <DetailedProducts />
 
       <GLP1Highlights />
       <WeightLossScale />
