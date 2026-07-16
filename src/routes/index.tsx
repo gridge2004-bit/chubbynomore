@@ -1540,7 +1540,7 @@ function WhoNotFor() {
               </h2>
             </Reveal>
             <Reveal delay={80}>
-              <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+              <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-[#1B2147]/90 md:text-[17px]">
                 Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
               </p>
             </Reveal>
@@ -1558,7 +1558,7 @@ function WhoNotFor() {
                       <path d="M12 5v14M5 12h14" />
                     </svg>
                   </span>
-                  <span className="text-[14px] leading-relaxed text-[#1B2147]/90 md:text-[15px]">
+                  <span className="text-[14px] leading-relaxed text-[#1B2147] md:text-[15px]">
                     {i}
                   </span>
                 </div>
@@ -1576,7 +1576,7 @@ function WhoNotFor() {
                   <path d="M12 8v5M12 16h.01" />
                 </svg>
               </span>
-              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
                 This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
               </p>
             </div>
