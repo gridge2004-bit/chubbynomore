@@ -1438,24 +1438,18 @@ function WhoQualifies() {
             Eligibility
           </div>
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
-            Who qualifies for GLP-1 weight loss treatment?
+            Who may qualify for prescription weight loss treatment?
           </h2>
         </Reveal>
         <Reveal delay={80} className="mt-6 space-y-4 text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
           <p>
-            Most US adults 18 and older with a BMI of <strong>30 or higher</strong> qualify for GLP-1
-            therapy through ChubbyNoMore. Adults with a BMI of <strong>27 or higher</strong> also
-            qualify if they have at least one weight-related condition, such as type 2 diabetes, high
-            blood pressure, high cholesterol, or obstructive sleep apnea.
+            Adults with a BMI of <strong>30 or higher</strong>, or a BMI of <strong>27 or higher</strong> with at least one weight-related condition, may be candidates for certain prescription weight-management medications. Meeting these general criteria does not guarantee eligibility.
           </p>
           <p>
-            You must be able to safely take a GLP-1 medication — meaning no personal or family
-            history of medullary thyroid cancer or MEN 2, no history of pancreatitis, and you can't
-            be pregnant, planning pregnancy, or breastfeeding.
+            Eligibility depends on the specific medication, your medical history, current medications, treatment goals, and other clinical factors. Certain treatments may not be appropriate during pregnancy or breastfeeding, or for people with particular medical conditions or risk factors.
           </p>
           <p>
-            A US-licensed physician reviews your full health history, current medications, and goals
-            before prescribing. If you don't qualify, you're never charged.
+            A licensed provider will review your complete health history and determine whether any available treatment option is medically appropriate for you. If you do not qualify, you will not be charged.
           </p>
         </Reveal>
         <Reveal delay={140} className="mt-8">
