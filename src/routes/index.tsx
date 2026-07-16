@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 
 const navLinks = [
   { label: "How It Works", href: "#how" },
-  { label: "Medications", href: "#semaglutide" },
+  { label: "Medications", href: "#medications" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -1453,7 +1453,7 @@ function WhoQualifies() {
             href="#cta"
             className="inline-flex rounded-full bg-[#1B2147] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#0F1432]"
           >
-            Check my eligibility — free
+            See if I qualify — free
           </a>
         </Reveal>
       </div>
