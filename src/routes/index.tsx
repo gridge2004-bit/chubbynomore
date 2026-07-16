@@ -614,8 +614,10 @@ function GLP1Highlights() {
     <section className="bg-[#E8EAF0] px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <Reveal as="h2" className="font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
-          Proprietary formula,<br />
-          <em className="italic text-[#3454C7]">powerful outcomes.</em>
+          Weight loss is about more than willpower.
+        </Reveal>
+        <Reveal as="p" className="mt-5 max-w-3xl text-[17px] leading-[1.5] text-[#1B2147]/85">
+          For many people, biology makes losing weight—and keeping it off—far more difficult. GLP-1 medications can help regulate appetite, improve satiety, and reduce food intake as part of a medically supervised weight-management plan.
         </Reveal>
 
         <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
