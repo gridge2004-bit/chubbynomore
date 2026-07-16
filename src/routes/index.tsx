@@ -1576,7 +1576,7 @@ function WhoNotFor() {
                   <path d="M12 8v5M12 16h.01" />
                 </svg>
               </span>
-              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
+              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
                 This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
               </p>
             </div>
