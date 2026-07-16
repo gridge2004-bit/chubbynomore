@@ -536,7 +536,7 @@ function EmotionalTransformation() {
 
 function MedicationOptions() {
   return (
-    <section id="medications" className="bg-white px-4 thpt-12 md:pt-16 pb-16 sm:px-6">
+    <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
         <Reveal className="mb-2 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
