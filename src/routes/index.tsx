@@ -1521,12 +1521,11 @@ function WhoNotFor() {
 function SemaVsTirz() {
   const rows: [string, string, string][] = [
     ["Drug class", "GLP-1 receptor agonist", "Dual GLP-1 + GIP receptor agonist"],
-    ["Average weight loss (trial data)", "~15% over 68 weeks (STEP-1)", "~20–22% at 15 mg over 72 weeks (SURMOUNT-1)"],
+    ["Average weight loss in brand-name clinical trials", "Wegovy®: approximately 15% over 68 weeks in STEP 1", "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1"],
     ["Dosing schedule", "Once weekly injection", "Once weekly injection"],
     ["Compounded starting price", "$149.99 per 28-day supply", "$249.99 per 28-day supply"],
     ["FDA-approved brand versions", "Wegovy®, Ozempic®", "Zepbound®, Mounjaro®"],
     ["Common side effects", "Nausea, constipation, fatigue", "Nausea, diarrhea, decreased appetite"],
-    ["Best fit for", "Steady weight loss with a well-studied GLP-1", "Highest average efficacy option"],
   ];
   return (
     <section className="bg-white px-6 py-16 md:py-20">
