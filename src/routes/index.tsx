@@ -748,8 +748,8 @@ function CompoundedVsBrand() {
             Compounded vs Brand-name
           </div>
           <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
-            <em className="italic text-[#3454C7]">Powerful active ingredient.</em>{" "}
-            Different regulatory path.
+            <em className="italic text-[#3454C7]">Different treatment options.</em>{" "}
+            Different regulatory pathways.
           </h2>
         </Reveal>
 
