@@ -192,6 +192,17 @@ function Hero() {
         <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
           Starting at $149/mo. No insurance needed. Doctor-prescribed and delivered to your door.
         </Reveal>
+        <Reveal delay={200}>
+          <a
+            href="#cta"
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2147] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#0F1432]"
+          >
+            See if I qualify — free
+          </a>
+        </Reveal>
+        <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
+          Free eligibility check. No charge if you don't qualify.
+        </Reveal>
       </div>
     </section>
   );
