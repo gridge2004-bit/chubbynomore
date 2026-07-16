@@ -376,7 +376,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["BRAND-NAME", "GLP-1 + GIP"],
     tagTone: "lavender",
     name: "Mounjaro®",
-    desc: "A once-weekly tirzepatide injection that activates two hormone receptors — GIP and GLP-1 — to reduce appetite, slow gastric emptying, and support metabolic health.",
+    desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     price: "$1,249.99",
     period: "/month",
     img: mounjaroPenAsset.url,
