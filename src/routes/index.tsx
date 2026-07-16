@@ -718,13 +718,13 @@ function CompoundedVsBrand() {
   const cards = [
     {
       tag: "COMPOUNDED",
-      title: "Custom-formulated",
+      title: "Prepared by a compounding pharmacy",
       meds: "Tirzepatide, Semaglutide",
       rows: [
         ["Regulation", "Prepared by licensed US compounding pharmacies."],
         ["Cost", "$149.99–$249.99 per 28-day supply, out of pocket. No insurance required."],
-        ["Customization", "Dose tailored to you. Vial-and-syringe format."],
-        ["Supply", "Reliably in stock through our pharmacy partner."],
+        ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
+        ["Supply", "Availability varies and is confirmed at the time of prescribing."],
       ],
     },
     {
