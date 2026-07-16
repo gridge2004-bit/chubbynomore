@@ -1699,10 +1699,10 @@ function SemaVsTirz() {
                 <Link
                   to="/medications/$slug"
                   params={{ slug: card.slug }}
-                  className="group/btn inline-flex items-center gap-2 rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
                 >
                   {card.name} details
-                  <span className="transition-transform duration-200 group-hover/btn:translate-x-1">
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">
                     →
                   </span>
                 </Link>
