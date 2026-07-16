@@ -277,7 +277,7 @@ const productCards: ProductCard[] = [
     medications: "Ozempic, Mounjaro, Wegovy, Foundayo, Zepbound",
     img: tirzepatideImg,
     imgAlt: "Brand-name GLP-1 injector pens",
-    prices: [{ label: "", value: "Starting at $199.99/month" }],
+    prices: [{ label: "", value: "Starting at $199.99 per month" }],
   },
 ];
 
@@ -1541,7 +1541,7 @@ function SemaVsTirz() {
           <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
             Both are once-weekly GLP-1 medications available through ChubbyNoMore. Tirzepatide adds
             a second target (GIP) and produces greater average weight loss in clinical trials, while
-            semaglutide has a longer real-world track record and a lower monthly cost.
+            semaglutide has a longer real-world track record and a lower starting cost.
           </p>
         </Reveal>
         <Reveal delay={100} className="mt-10 overflow-hidden rounded-2xl border border-[#1B2147]/10">
