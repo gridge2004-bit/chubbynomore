@@ -1625,7 +1625,7 @@ function SemaVsTirz() {
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[56px]">
             Semaglutide vs Tirzepatide — which is right for me?
           </h2>
-          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/90 md:text-[17px]">
             Semaglutide and tirzepatide act through different hormone pathways. In clinical trials of FDA-approved brand-name products, tirzepatide produced greater average weight loss, while semaglutide has a longer real-world track record and a lower starting cost. These trial results do not establish the safety, efficacy, or quality of compounded formulations.
           </p>
         </Reveal>
@@ -1649,7 +1649,7 @@ function SemaVsTirz() {
               <div className="mt-6 flex flex-col gap-5">
                 {card.attributes.map((attr) => (
                   <div key={attr.label} className="flex flex-col gap-1.5">
-                    <span className="w-fit rounded-full bg-[#1B2147]/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/80">
+                    <span className="w-fit rounded-full bg-[#1B2147]/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/90">
                       {attr.label}
                     </span>
                     {attr.price ? (
@@ -1657,12 +1657,12 @@ function SemaVsTirz() {
                         <span className="font-serif text-[28px] leading-none md:text-[32px]">
                           {attr.price}
                         </span>
-                        <span className="text-[14px] font-medium text-[#1B2147]/70">
+                        <span className="text-[14px] font-medium text-[#1B2147]/80">
                           {attr.priceUnit}
                         </span>
                       </span>
                     ) : (
-                      <span className="text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
+                      <span className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
                         {attr.value}
                       </span>
                     )}
