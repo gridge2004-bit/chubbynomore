@@ -1528,34 +1528,59 @@ function WhoNotFor() {
   ];
   return (
     <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-4xl">
-        <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
-            Safety first
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+          <div>
+            <Reveal>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
+                Safety first
+              </div>
+              <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[48px]">
+                Important safety considerations
+              </h2>
+            </Reveal>
+            <Reveal delay={80}>
+              <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+                Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
+              </p>
+            </Reveal>
           </div>
-          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
-            Important safety considerations
-          </h2>
-        </Reveal>
-        <Reveal delay={80}>
-          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
-            Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
-          </p>
-        </Reveal>
-        <Reveal delay={140}>
-          <ul className="mt-6 grid gap-3">
-            {items.map((i) => (
-              <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
-                <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#B84B4B]" />
-                <span>{i}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+
+          <Reveal delay={140}>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {items.map((i) => (
+                <div
+                  key={i}
+                  className="flex gap-3 rounded-2xl bg-white p-4 shadow-sm md:p-5"
+                >
+                  <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#B84B4B]/10 text-[#B84B4B]">
+                    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                  <span className="text-[14px] leading-relaxed text-[#1B2147]/90 md:text-[15px]">
+                    {i}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
         <Reveal delay={200}>
-          <p className="mt-6 text-sm text-[#1B2147]/70">
-            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
-          </p>
+          <div className="mt-10 rounded-2xl border border-[#B84B4B]/15 bg-white p-6 md:mt-14 md:p-8">
+            <div className="flex gap-4">
+              <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#B84B4B]/10 text-[#B84B4B]">
+                <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v5M12 16h.01" />
+                </svg>
+              </span>
+              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+                This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
+              </p>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -1563,14 +1588,33 @@ function WhoNotFor() {
 }
 
 function SemaVsTirz() {
-  const rows: [string, string, string][] = [
-    ["Drug class", "GLP-1 receptor agonist", "Dual GLP-1 + GIP receptor agonist"],
-    ["Average weight loss in brand-name clinical trials", "Wegovy®: approximately 15% over 68 weeks in STEP 1", "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1"],
-    ["Dosing schedule", "Once weekly injection", "Once weekly injection"],
-    ["Compounded starting price", "$149.99 per 28-day supply", "$249.99 per 28-day supply"],
-    ["FDA-approved products containing the ingredient", "Wegovy® — weight management; Ozempic® — type 2 diabetes", "Zepbound® — weight management; Mounjaro® — type 2 diabetes"],
-    ["Common side effects", "Nausea, constipation, fatigue", "Nausea, diarrhea, decreased appetite"],
+  const cards = [
+    {
+      name: "Semaglutide",
+      drugClass: "GLP-1 receptor agonist",
+      slug: "semaglutide",
+      attributes: [
+        { label: "Average weight loss in brand-name clinical trials", value: "Wegovy®: approximately 15% over 68 weeks in STEP 1" },
+        { label: "Dosing schedule", value: "Once weekly injection" },
+        { label: "Compounded starting price", value: "$149.99 per 28-day supply", price: "$149.99", priceUnit: "per 28-day supply" },
+        { label: "FDA-approved products containing the ingredient", value: "Wegovy® — weight management; Ozempic® — type 2 diabetes" },
+        { label: "Common side effects", value: "Nausea, constipation, fatigue" },
+      ],
+    },
+    {
+      name: "Tirzepatide",
+      drugClass: "Dual GLP-1 + GIP receptor agonist",
+      slug: "tirzepatide",
+      attributes: [
+        { label: "Average weight loss in brand-name clinical trials", value: "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1" },
+        { label: "Dosing schedule", value: "Once weekly injection" },
+        { label: "Compounded starting price", value: "$249.99 per 28-day supply", price: "$249.99", priceUnit: "per 28-day supply" },
+        { label: "FDA-approved products containing the ingredient", value: "Zepbound® — weight management; Mounjaro® — type 2 diabetes" },
+        { label: "Common side effects", value: "Nausea, diarrhea, decreased appetite" },
+      ],
+    },
   ];
+
   return (
     <section className="bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
@@ -1585,44 +1629,59 @@ function SemaVsTirz() {
             Semaglutide and tirzepatide act through different hormone pathways. In clinical trials of FDA-approved brand-name products, tirzepatide produced greater average weight loss, while semaglutide has a longer real-world track record and a lower starting cost. These trial results do not establish the safety, efficacy, or quality of compounded formulations.
           </p>
         </Reveal>
-        <Reveal delay={100} className="mt-10 overflow-hidden rounded-2xl border border-[#1B2147]/10">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-[14.5px]">
-              <thead className="bg-[#1B2147] text-white">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">Attribute</th>
-                  <th className="px-5 py-4 font-semibold">Semaglutide</th>
-                  <th className="px-5 py-4 font-semibold">Tirzepatide</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {rows.map(([a, b, c], i) => (
-                  <tr key={a} className={i % 2 ? "bg-[#F5F6F3]" : ""}>
-                    <td className="px-5 py-4 font-semibold text-[#1B2147]">{a}</td>
-                    <td className="px-5 py-4 text-[#1B2147]/85">{b}</td>
-                    <td className="px-5 py-4 text-[#1B2147]/85">{c}</td>
-                  </tr>
+
+        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
+          {cards.map((card, idx) => (
+            <Reveal
+              key={card.name}
+              delay={idx * 120}
+              className="flex flex-col rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] p-7 shadow-sm md:p-9"
+            >
+              <div className="border-b border-[#1B2147]/10 pb-6">
+                <h3 className="font-serif text-[32px] leading-tight text-[#1B2147] md:text-[40px]">
+                  {card.name}
+                </h3>
+                <p className="mt-2 text-[15px] font-medium text-[#3454C7]">
+                  {card.drugClass}
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-col gap-5">
+                {card.attributes.map((attr) => (
+                  <div key={attr.label} className="flex flex-col gap-1.5">
+                    <span className="w-fit rounded-full bg-[#1B2147]/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/80">
+                      {attr.label}
+                    </span>
+                    {attr.price ? (
+                      <span className="inline-flex items-baseline gap-2 text-[#1B2147]">
+                        <span className="font-serif text-[28px] leading-none md:text-[32px]">
+                          {attr.price}
+                        </span>
+                        <span className="text-[14px] font-medium text-[#1B2147]/70">
+                          {attr.priceUnit}
+                        </span>
+                      </span>
+                    ) : (
+                      <span className="text-[15px] leading-relaxed text-[#1B2147]/90 md:text-[16px]">
+                        {attr.value}
+                      </span>
+                    )}
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </Reveal>
-        <Reveal delay={160} className="mt-8 flex flex-wrap gap-3">
-          <Link
-            to="/medications/$slug"
-            params={{ slug: "semaglutide" }}
-            className="rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
-          >
-            Semaglutide details →
-          </Link>
-          <Link
-            to="/medications/$slug"
-            params={{ slug: "tirzepatide" }}
-            className="rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
-          >
-            Tirzepatide details →
-          </Link>
-        </Reveal>
+              </div>
+
+              <div className="mt-auto pt-8">
+                <Link
+                  to="/medications/$slug"
+                  params={{ slug: card.slug }}
+                  className="inline-flex rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
+                >
+                  {card.name} details →
+                </Link>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
