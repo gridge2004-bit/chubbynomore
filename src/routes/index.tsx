@@ -701,7 +701,7 @@ function WeightLossScale() {
         <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
           <div className="text-center md:min-w-[140px]">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              Your selected weight
+              Your starting point
             </div>
             <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
               {weight} <span className="text-[24px] md:text-[28px]">lbs</span>
@@ -731,7 +731,7 @@ function WeightLossScale() {
 
           <div className="text-center md:min-w-[140px]">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              Illustrative weight at 15% lower
+              Weight at 15% lower
             </div>
             <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
               {illustrativeWeight} <span className="text-[24px] md:text-[28px]">lbs</span>
@@ -740,7 +740,7 @@ function WeightLossScale() {
         </div>
 
         <p className="mt-10 text-center text-[15px] text-white/90 md:text-base">
-          Picture how different getting dressed, moving through your day, taking photos, and showing up for the people you love could feel.
+          Imagine what carrying {potentialLoss} fewer pounds could mean for your confidence, energy, and everyday movement.
         </p>
 
         <div className="mt-8 text-center">
@@ -748,7 +748,7 @@ function WeightLossScale() {
             href="#cta"
             className="inline-flex items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:px-14"
           >
-            See if I qualify — free
+            Check my eligibility — free
           </a>
           <p className="mt-3 text-[13px] text-white/70">
             Free eligibility check. Takes about 5 minutes. No charge if you don’t qualify.
