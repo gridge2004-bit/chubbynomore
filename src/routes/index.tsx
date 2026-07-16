@@ -785,7 +785,7 @@ function CompoundedVsBrand() {
 
         <Reveal className="mt-10 text-center md:mt-14">
           <p className="font-semibold text-[#1B2147]">
-            Both paths are doctor-supervised by ChubbyNoMore providers. You can switch between compounded and brand-name as your needs change.
+            A licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
           </p>
           <p className="mt-3 text-sm text-[#1B2147]/70">
             Compounded medications are not FDA-approved for safety, efficacy, or quality.
