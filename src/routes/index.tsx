@@ -111,17 +111,17 @@ function Index() {
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
-      <CategoryStack />
-      <DetailedProducts />
+      <EmotionalTransformation />
       <TrustMarquee />
-      
-     <GLP1Highlights />
-     <WeightLossScale />
-     <WhoQualifies />
-     <SemaVsTirz />
-     <CompoundedVsBrand />
-     <WhoNotFor />
-     <HowItWorks />
+      <HowItWorks />
+      <MedicationOptions />
+
+      <GLP1Highlights />
+      <WeightLossScale />
+      <WhoQualifies />
+      <SemaVsTirz />
+      <CompoundedVsBrand />
+      <WhoNotFor />
 
       <FAQ />
       <FinalCTA />
