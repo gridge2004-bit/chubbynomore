@@ -88,10 +88,10 @@ const steps = [
 
 const faqs = [
   { q: "Will insurance cover this?", a: "Coverage varies by plan, medication, and individual eligibility. Some services or prescription expenses may qualify for HSA or FSA reimbursement depending on your plan. Check with your insurer or plan administrator before purchase." },
-  { q: "How quickly will I see results?", a: "Many patients begin noticing changes within the first 1–2 months, but everyone responds differently and results vary. Your physician will set realistic expectations. GLP-1 medication works best alongside healthy eating and regular activity." },
-  { q: "Are there side effects?", a: "The most common side effects are digestive — usually nausea, and sometimes vomiting, diarrhea, or constipation. These are typically mild and tend to ease as your dose is increased slowly. Less common but more serious risks include pancreatitis, gallbladder problems, and low blood sugar. GLP-1 medications are not right for everyone. Your physician reviews your full health history before prescribing." },
-  { q: "Do I need to go to a clinic?", a: "No. Everything is done online — your consultation, prescription, and follow-ups. Medication is shipped directly to your door." },
-  { q: "What if I don't qualify?", a: "If you don't meet the criteria for GLP-1 therapy, your physician will explain why and may suggest alternative options. You're never charged if you don't qualify." },
+  { q: "How quickly will I see results?", a: "Response and timing vary by medication, dose, adherence, and individual factors. Some people notice changes during dose escalation, while others take longer. Your licensed provider will discuss realistic expectations based on your treatment plan. Results are not guaranteed." },
+  { q: "Are there side effects?", a: "Common side effects vary by medication and may include nausea, vomiting, diarrhea, constipation, abdominal discomfort, and decreased appetite. Serious reactions can also occur, including pancreatitis, gallbladder problems, dehydration-related kidney injury, severe gastrointestinal reactions, low blood sugar when combined with certain diabetes medications, and serious allergic reactions. Review the medication guide and discuss your complete health history with your licensed provider." },
+  { q: "Do I need to go to a clinic?", a: "Care is generally provided online where available. A licensed provider may determine that laboratory testing, additional evaluation, or in-person medical care is needed before or during treatment." },
+  { q: "What if I don't qualify?", a: "If an available treatment option is not medically appropriate for you, a licensed provider will explain the decision and may recommend that you discuss other options with your regular healthcare professional. You will not be charged for the eligibility check." },
   { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus exclusively on GLP-1 weight loss. Your physician stays involved throughout — not just at signup. We don't disappear after the prescription." },
 ];
 
@@ -1516,12 +1516,13 @@ function WhoQualifies() {
 
 function WhoNotFor() {
   const items = [
-    "You have a personal or family history of medullary thyroid cancer or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
-    "You're currently pregnant, actively trying to conceive, or breastfeeding.",
-    "You have a history of pancreatitis, severe gastroparesis, or active gallbladder disease.",
-    "You have type 1 diabetes or a history of diabetic ketoacidosis.",
-    "You're under 18 years old.",
-    "You're seeking rapid, short-term weight loss without a plan for sustained lifestyle changes — GLP-1 therapy is designed for long-term chronic weight management.",
+    "You or a family member have had medullary thyroid carcinoma, or you have Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
+    "You have had a serious allergic reaction to semaglutide, tirzepatide, or any ingredient in a prescribed medication.",
+    "You are pregnant, breastfeeding, planning a pregnancy, or become pregnant during treatment.",
+    "You have a history of pancreatitis, gallbladder problems, severe gastroparesis, or another serious digestive condition.",
+    "You have type 1 diabetes, a history of diabetic ketoacidosis, diabetic retinopathy, kidney problems, or take insulin or certain other diabetes medications.",
+    "You have an upcoming surgery or procedure involving general anesthesia or deep sedation.",
+    "Age eligibility varies by medication and program availability.",
   ];
   return (
     <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
@@ -1531,13 +1532,12 @@ function WhoNotFor() {
             Safety first
           </div>
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
-            Who this is not for
+            Important safety considerations
           </h2>
         </Reveal>
         <Reveal delay={80}>
           <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
-            GLP-1 medications are powerful and not right for everyone. Don't start therapy through
-            ChubbyNoMore — or any provider — if any of the following apply to you:
+            Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
           </p>
         </Reveal>
         <Reveal delay={140}>
@@ -1552,8 +1552,7 @@ function WhoNotFor() {
         </Reveal>
         <Reveal delay={200}>
           <p className="mt-6 text-sm text-[#1B2147]/70">
-            Not sure? Complete our free intake and a physician will review your history — if it's not
-            safe or appropriate, they'll tell you and suggest alternatives.
+            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
           </p>
         </Reveal>
       </div>
