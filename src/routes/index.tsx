@@ -670,13 +670,13 @@ function WeightLossScale() {
     <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
       <div className="mx-auto max-w-3xl rounded-3xl bg-[#0F1E3F] p-8 text-white shadow-sm md:p-14">
         <h2 className="font-serif text-[36px] leading-[1.1] tracking-tight md:text-[52px]">
-          Nearly 74% of adults in the U.S. are overweight or obese.
+          What could {potentialLoss} fewer pounds change for you?
         </h2>
         <p className="mt-5 text-[15px] text-white/80 md:text-base">
-          Move the scale and picture what carrying less weight could mean for your everyday life.
+          More confidence in your clothes. More energy for the people and moments that matter. A lighter version of everyday life.
         </p>
 
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
             Your current weight (lbs):
           </div>
@@ -698,27 +698,62 @@ function WeightLossScale() {
           />
         </div>
 
-        <div className="mt-12 text-center">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-            A 15% reduction equals:
+        <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
+          <div className="text-center md:min-w-[140px]">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+              Your selected weight
+            </div>
+            <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
+              {weight} <span className="text-[24px] md:text-[28px]">lbs</span>
+            </div>
           </div>
-          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
-            {potentialLoss} lbs
+
+          <div className="flex flex-col items-center gap-3">
+            <svg
+              className="h-6 w-14 text-white/60 md:h-8 md:w-20"
+              viewBox="0 0 80 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 14h68M64 6l12 8-12 8"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <div className="rounded-full bg-[#3454C7] px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-white shadow-md">
+              −{potentialLoss} lbs
+            </div>
+          </div>
+
+          <div className="text-center md:min-w-[140px]">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+              Illustrative weight at 15% lower
+            </div>
+            <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
+              {illustrativeWeight} <span className="text-[24px] md:text-[28px]">lbs</span>
+            </div>
           </div>
         </div>
+
+        <p className="mt-10 text-center text-[15px] text-white/90 md:text-base">
+          Picture how different getting dressed, moving through your day, taking photos, and showing up for the people you love could feel.
+        </p>
 
         <div className="mt-8 text-center">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-            Illustrative weight after a 15% reduction:
-          </div>
-          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
-            {illustrativeWeight} lbs
-          </div>
+          <a
+            href="#cta"
+            className="inline-flex items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:px-14"
+          >
+            See if I qualify — free
+          </a>
+          <p className="mt-3 text-[13px] text-white/70">
+            Free eligibility check. Takes about 5 minutes. No charge if you don’t qualify.
+          </p>
         </div>
-
-        <p className="mt-8 text-center text-[15px] text-white/90 md:text-base">
-          Imagine how different everyday life could feel carrying that much less weight.
-        </p>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
           This calculator is an educational example based on the approximately 15% mean weight reduction observed over 68 weeks in the STEP 1 clinical trial of semaglutide 2.4 mg used with lifestyle intervention. It is not a prediction of your personal results, does not represent tirzepatide trial results, and does not establish the safety, effectiveness, or quality of compounded semaglutide. Individual results vary.
