@@ -332,7 +332,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
     tagTone: "lavender",
     name: "Wegovy® Tablets",
-    desc: "Wegovy® tablets deliver the same active ingredient as the Wegovy injection, in a once-daily oral form. The first and only FDA-approved semaglutide pill for weight loss in adults with obesity or overweight with a weight-related condition.",
+    desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
     price: "$249.99",
     period: "/month",
     img: wegovyPillAsset.url,
