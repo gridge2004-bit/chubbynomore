@@ -1528,23 +1528,18 @@ function WhoNotFor() {
   ];
   return (
     <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
-          <div>
-            <Reveal>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
-                Safety first
-              </div>
-              <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[48px]">
-                Important safety considerations
-              </h2>
-            </Reveal>
-            <Reveal delay={80}>
-              <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-[#1B2147]/90 md:text-[17px]">
-                Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
-              </p>
-            </Reveal>
+      <div className="mx-auto max-w-[1100px]">
+        <Reveal>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
+            Safety first
           </div>
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[48px]">
+            Important safety considerations
+          </h2>
+          <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-[#1B2147]/90 md:text-[17px]">
+            Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
+          </p>
+        </Reveal>
 
           <Reveal delay={140}>
             <div className="grid gap-3 sm:grid-cols-2">
