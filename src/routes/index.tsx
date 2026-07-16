@@ -503,12 +503,11 @@ function HeroTile({ tile }: { tile: Tile }) {
   );
 }
 
-function CategoryStack() {
+function EmotionalTransformation() {
   const heroTiles = tiles.filter((t) => t.variant === "image-hero");
   return (
     <section className="bg-white px-4 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        {/* Two big image cards */}
         <div className="grid gap-4 sm:grid-cols-2">
           {heroTiles.map((t, i) => (
             <Reveal key={t.id} delay={i * 100}>
@@ -518,6 +517,15 @@ function CategoryStack() {
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function MedicationOptions() {
+  return (
+    <section id="medications" className="bg-white px-4 pb-16 sm:px-6">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4">
         <div className="grid max-w-7xl gap-5 sm:grid-cols-2">
           {productCards.map((p, i) => (
             <Reveal key={p.id} delay={i * 100}>
