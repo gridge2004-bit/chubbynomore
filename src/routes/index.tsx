@@ -1580,6 +1580,7 @@ function SemaVsTirz() {
       accent: {
         wash: "bg-[#EAF3F5]",
         washStrong: "bg-[#DDEAF0]",
+        circle: "bg-[#DDEAF0]",
         text: "text-[#2E6B7A]",
         pill: "bg-[#2E6B7A]/10 text-[#2E6B7A]",
         feature: "bg-[#2E6B7A]/8",
