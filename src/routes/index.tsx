@@ -1570,6 +1570,14 @@ function SemaVsTirz() {
       name: "Semaglutide",
       drugClass: "GLP-1 receptor agonist",
       slug: "semaglutide",
+      accent: {
+        wash: "bg-[#EAF3F5]",
+        circle: "bg-[#DDEAF0]",
+        text: "text-[#2E6B7A]",
+        pill: "bg-[#2E6B7A]/10 text-[#2E6B7A]",
+        feature: "bg-[#2E6B7A]/8",
+        deco: "GLP-1",
+      },
       attributes: [
         { label: "Average weight loss in brand-name clinical trials", value: "Wegovy®: approximately 15% over 68 weeks in STEP 1" },
         { label: "Dosing schedule", value: "Once weekly injection" },
@@ -1577,20 +1585,19 @@ function SemaVsTirz() {
         { label: "FDA-approved products containing the ingredient", value: "Wegovy® — weight management; Ozempic® — type 2 diabetes" },
         { label: "Common side effects", value: "Nausea, constipation, fatigue" },
       ],
-      accent: {
-        wash: "bg-[#EAF3F5]",
-        washStrong: "bg-[#DDEAF0]",
-        circle: "bg-[#DDEAF0]",
-        text: "text-[#2E6B7A]",
-        pill: "bg-[#2E6B7A]/10 text-[#2E6B7A]",
-        feature: "bg-[#2E6B7A]/8",
-        deco: "GLP-1",
-      },
     },
     {
       name: "Tirzepatide",
       drugClass: "Dual GLP-1 + GIP receptor agonist",
       slug: "tirzepatide",
+      accent: {
+        wash: "bg-[#ECECF6]",
+        circle: "bg-[#E0E2F0]",
+        text: "text-[#4B4F8C]",
+        pill: "bg-[#4B4F8C]/10 text-[#4B4F8C]",
+        feature: "bg-[#4B4F8C]/8",
+        deco: "GLP-1 + GIP",
+      },
       attributes: [
         { label: "Average weight loss in brand-name clinical trials", value: "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1" },
         { label: "Dosing schedule", value: "Once weekly injection" },
@@ -1598,15 +1605,6 @@ function SemaVsTirz() {
         { label: "FDA-approved products containing the ingredient", value: "Zepbound® — weight management; Mounjaro® — type 2 diabetes" },
         { label: "Common side effects", value: "Nausea, diarrhea, decreased appetite" },
       ],
-      accent: {
-        wash: "bg-[#ECECF6]",
-        washStrong: "bg-[#E0E2F0]",
-        circle: "bg-[#E0E2F0]",
-        text: "text-[#4B4F8C]",
-        pill: "bg-[#4B4F8C]/10 text-[#4B4F8C]",
-        feature: "bg-[#4B4F8C]/8",
-        deco: "GLP-1 + GIP",
-      },
     },
   ];
 
@@ -1632,7 +1630,6 @@ function SemaVsTirz() {
               delay={idx * 120}
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] shadow-sm transition-all duration-300 ease-out md:hover:-translate-y-1 md:hover:shadow-lg"
             >
-              {/* Header with accent wash and decorative element */}
               <div className={`relative overflow-hidden ${card.accent.wash} px-7 pb-8 pt-7 md:px-9 md:pt-9`}>
                 <span className={`pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full opacity-30 blur-3xl md:h-48 md:w-48 ${card.accent.circle}`} />
                 <span className="pointer-events-none absolute bottom-0 right-2 select-none font-serif text-[80px] font-bold leading-none opacity-[0.04] md:text-[110px]">
@@ -1652,12 +1649,10 @@ function SemaVsTirz() {
                 {card.attributes.map((attr, attrIdx) => {
                   const isTrial = attr.label === "Average weight loss in brand-name clinical trials";
                   const isPrice = attr.label === "Compounded starting price";
+                  const divider = attrIdx !== 0 ? "border-t border-[#1B2147]/8" : "";
                   return (
-                    <div
-                      key={attr.label}
-                      className={`py-5 ${attrIdx !== 0 ? "border-t border-[#1B2147]/8" : ""}`}
-                    >
-                      {isTrial ? (
+                    <div key={attr.label} className={`py-5 ${divider}`}>
+                      {isTrial && (
                         <div className={`rounded-2xl ${card.accent.feature} p-5`}>
                           <span className={`mb-3 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
                             {attr.label}
@@ -1666,7 +1661,8 @@ function SemaVsTirz() {
                             {attr.value}
                           </p>
                         </div>
-                      ) : isPrice ? (
+                      )}
+                      {isPrice && (
                         <div>
                           <span className={`mb-3 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
                             {attr.label}
@@ -1680,7 +1676,8 @@ function SemaVsTirz() {
                             </span>
                           </div>
                         </div>
-                      ) : (
+                      )}
+                      {!isTrial && !isPrice && (
                         <div>
                           <span className={`mb-2 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
                             {attr.label}
@@ -1708,7 +1705,7 @@ function SemaVsTirz() {
                 </Link>
               </div>
             </Reveal>
-          )}
+          ))}
         </div>
       </div>
     </section>
