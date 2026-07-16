@@ -1634,7 +1634,7 @@ function SemaVsTirz() {
             >
               {/* Header with accent wash and decorative element */}
               <div className={`relative overflow-hidden ${card.accent.wash} px-7 pb-8 pt-7 md:px-9 md:pt-9`}>
-                <span className="pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full opacity-30 blur-3xl md:h-48 md:w-48" style={{ backgroundColor: card.accent.washStrong.replace("bg-", "").replace("[", "").replace("]", "") }} />
+                <span className={`pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full opacity-30 blur-3xl md:h-48 md:w-48 ${card.accent.circle}`} />
                 <span className="pointer-events-none absolute bottom-0 right-2 select-none font-serif text-[80px] font-bold leading-none opacity-[0.04] md:text-[110px]">
                   {card.accent.deco}
                 </span>
