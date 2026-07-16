@@ -1536,7 +1536,7 @@ function WhoNotFor() {
           </h2>
         </Reveal>
         <Reveal delay={80}>
-          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2141]/85 md:text-[17px]">
+          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
             Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
           </p>
         </Reveal>
