@@ -643,7 +643,7 @@ function GLP1Highlights() {
               GLP-1
             </h3>
             <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
-              Semaglutide is a GLP-1 receptor agonist clinically studied for its ability to support appetite control and healthy weight management over time. Results vary. 4.7/5 Reviews
+              Semaglutide is a GLP-1 receptor agonist clinically studied for its ability to support appetite control and healthy weight management over time. Results vary.
             </p>
           </Reveal>
         </div>
