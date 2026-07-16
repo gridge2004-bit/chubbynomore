@@ -175,7 +175,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           </nav>
         </div>
         <a href="#cta" className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#1B2147] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#0F1432] sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm">
-          Check If I Qualify — Free &amp; Fast
+          See if I qualify — free
         </a>
       </div>
     </header>
@@ -464,7 +464,7 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
             }}
             className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
-            Get Started
+            See if I qualify — free
           </a>
           <Link
             to="/medications/$slug"
@@ -643,7 +643,7 @@ function GLP1Highlights() {
             href="#cta"
             className="flex w-full items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:mx-auto md:w-auto md:px-14"
           >
-            Get Started
+            See if I qualify — free
           </a>
         </div>
       </div>
@@ -807,7 +807,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
+          <PillButton href="#cta">See if I qualify — free</PillButton>
         </Reveal>
       </div>
     </section>
@@ -882,7 +882,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">Check If I Qualify — Free & Fast</PillButton>
+            <PillButton href="#cta">See if I qualify — free</PillButton>
           </div>
         </div>
       </div>
