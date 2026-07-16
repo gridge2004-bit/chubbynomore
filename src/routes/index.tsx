@@ -1538,9 +1538,7 @@ function SemaVsTirz() {
             Semaglutide vs Tirzepatide — which is right for me?
           </h2>
           <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
-            Both are once-weekly GLP-1 medications available through ChubbyNoMore. Tirzepatide adds
-            a second target (GIP) and produces greater average weight loss in clinical trials, while
-            semaglutide has a longer real-world track record and a lower starting cost.
+            Semaglutide and tirzepatide act through different hormone pathways. In clinical trials of FDA-approved brand-name products, tirzepatide produced greater average weight loss, while semaglutide has a longer real-world track record and a lower starting cost. These trial results do not establish the safety, efficacy, or quality of compounded formulations.
           </p>
         </Reveal>
         <Reveal delay={100} className="mt-10 overflow-hidden rounded-2xl border border-[#1B2147]/10">
