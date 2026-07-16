@@ -41,12 +41,12 @@ const navLinks = [
 ];
 
 const marqueeItems = [
-  "Prescribed by US-licensed physicians",
-  "Board-certified doctors",
-  "Compounded by a licensed US pharmacy",
-  "Licensed in all 50 states",
-  "HIPAA compliant",
-  "No hidden fees",
+  "Online health intake",
+  "Licensed-provider review",
+  "Medication dispensed by a licensed US pharmacy",
+  "Transparent starting prices",
+  "Discreet home delivery",
+  "Ongoing clinical support",
 ];
 
 const products = [
@@ -81,13 +81,13 @@ const products = [
 
 const steps = [
   { n: "01", img: step1Img, title: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Everything is confidential and HIPAA-secure." },
-  { n: "02", img: step2Img, title: "Meet your physician", desc: "A board-certified doctor reviews your history, evaluates your eligibility, and creates a personalized treatment plan just for you." },
+  { n: "02", img: step2Img, title: "Meet your physician", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
   { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 
 const faqs = [
-  { q: "Will insurance cover this?", a: "Most insurance plans don't cover GLP-1 medications for weight loss, but our programs are HSA/FSA eligible. We keep pricing transparent so there are no surprises." },
+  { q: "Will insurance cover this?", a: "Coverage varies by plan, medication, and individual eligibility. Some services or prescription expenses may qualify for HSA or FSA reimbursement depending on your plan. Check with your insurer or plan administrator before purchase." },
   { q: "How quickly will I see results?", a: "Many patients begin noticing changes within the first 1–2 months, but everyone responds differently and results vary. Your physician will set realistic expectations. GLP-1 medication works best alongside healthy eating and regular activity." },
   { q: "Are there side effects?", a: "The most common side effects are digestive — usually nausea, and sometimes vomiting, diarrhea, or constipation. These are typically mild and tend to ease as your dose is increased slowly. Less common but more serious risks include pancreatitis, gallbladder problems, and low blood sugar. GLP-1 medications are not right for everyone. Your physician reviews your full health history before prescribing." },
   { q: "Do I need to go to a clinic?", a: "No. Everything is done online — your consultation, prescription, and follow-ups. Medication is shipped directly to your door." },
@@ -137,7 +137,7 @@ function PromoBanner() {
     <div className="w-full bg-[#1B2147] text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[12px]">
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
-        <span>HSA / FSA eligible — early access, by invitation</span>
+        <span>Free online eligibility check — early access, by invitation</span>
       </div>
     </div>
   );
@@ -915,10 +915,10 @@ function FAQ() {
 
 function FinalCTA() {
   const checks = [
-    "Doctor prescribed",
-    "100% confidential",
+    "Clinician reviewed",
+    "Private online intake",
     "Delivered to your door",
-    "Licensed in all 50 states",
+    "Availability varies by state",
   ];
   return (
     <section id="cta" className="w-full bg-[#E8EDF8]">
@@ -957,7 +957,7 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="font-serif text-3xl">ChubbyNoMore</div>
             <p className="mt-4 max-w-xs text-sm text-white/70">
-              Doctor-prescribed GLP-1 weight loss, prescribed online and delivered to your door. Licensed in all 50 states.
+              Online prescription weight-management care with clinician review and home delivery, where available.
             </p>
           </div>
           <FooterCol title="Program" links={["How It Works", "Medications", "Pricing", "FAQs"]} />
@@ -1138,9 +1138,9 @@ function QualifyModal() {
               </p>
               <ul className="mt-5 space-y-2.5">
                 {[
-                  "100% confidential & HIPAA secure",
+                  "Private online intake",
                   "No credit card required to check",
-                  "Board-certified physician review",
+                  "Licensed provider review",
                   "Results in under 24 hours",
                 ].map((b) => (
                   <li key={b} className="flex items-center gap-3 text-sm text-[#1B2147]">
