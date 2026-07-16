@@ -340,10 +340,10 @@ const detailedCards: DetailedCard[] = [
   },
   {
     id: "zepbound",
-    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tags: ["BRAND-NAME", "GLP-1 + GIP", "FDA-APPROVED"],
     tagTone: "lavender",
     name: "Zepbound®",
-    desc: "Zepbound® (tirzepatide) once-weekly injection. FDA-approved for chronic weight management and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
+    desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     price: "$449.99",
     period: "/month",
     img: zepboundPenAsset.url,
