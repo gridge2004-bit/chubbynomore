@@ -664,6 +664,7 @@ function GLP1Highlights() {
 function WeightLossScale() {
   const [weight, setWeight] = useState(270);
   const potentialLoss = Math.round(weight * 0.15);
+  const illustrativeWeight = Math.round(weight - potentialLoss);
 
   return (
     <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
@@ -672,7 +673,7 @@ function WeightLossScale() {
           Nearly 74% of adults in the U.S. are overweight or obese.
         </h2>
         <p className="mt-5 text-[15px] text-white/80 md:text-base">
-          Adjust the scale to see what 15% of your current weight equals.
+          Move the scale and picture what carrying less weight could mean for your everyday life.
         </p>
 
         <div className="mt-12 text-center">
@@ -699,12 +700,25 @@ function WeightLossScale() {
 
         <div className="mt-12 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-            15% of this weight equals (lbs):
+            A 15% reduction equals:
           </div>
           <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
-            {potentialLoss}
+            {potentialLoss} lbs
           </div>
         </div>
+
+        <div className="mt-8 text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+            Illustrative weight after a 15% reduction:
+          </div>
+          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
+            {illustrativeWeight} lbs
+          </div>
+        </div>
+
+        <p className="mt-8 text-center text-[15px] text-white/90 md:text-base">
+          Imagine how different everyday life could feel carrying that much less weight.
+        </p>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
           This calculator is an educational example based on the approximately 15% mean weight reduction observed over 68 weeks in the STEP 1 clinical trial of semaglutide 2.4 mg used with lifestyle intervention. It is not a prediction of your personal results, does not represent tirzepatide trial results, and does not establish the safety, effectiveness, or quality of compounded semaglutide. Individual results vary.
