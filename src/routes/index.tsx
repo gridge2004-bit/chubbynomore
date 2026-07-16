@@ -365,7 +365,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["BRAND-NAME", "GLP-1"],
     tagTone: "lavender",
     name: "Ozempic®",
-    desc: "A once-weekly semaglutide injection that improves insulin sensitivity, reduces appetite, and helps regulate blood sugar.",
+    desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     price: "$349.99",
     period: "/month",
     img: ozempicPenAsset.url,
