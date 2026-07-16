@@ -718,13 +718,13 @@ function CompoundedVsBrand() {
   const cards = [
     {
       tag: "COMPOUNDED",
-      title: "Custom-formulated",
+      title: "Prepared by a compounding pharmacy",
       meds: "Tirzepatide, Semaglutide",
       rows: [
         ["Regulation", "Prepared by licensed US compounding pharmacies."],
         ["Cost", "$149.99–$249.99 per 28-day supply, out of pocket. No insurance required."],
-        ["Customization", "Dose tailored to you. Vial-and-syringe format."],
-        ["Supply", "Reliably in stock through our pharmacy partner."],
+        ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
+        ["Supply", "Availability varies and is confirmed at the time of prescribing."],
       ],
     },
     {
@@ -748,8 +748,8 @@ function CompoundedVsBrand() {
             Compounded vs Brand-name
           </div>
           <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
-            <em className="italic text-[#3454C7]">Powerful active ingredient.</em>{" "}
-            Different regulatory path.
+            <em className="italic text-[#3454C7]">Different treatment options.</em>{" "}
+            Different regulatory pathways.
           </h2>
         </Reveal>
 
@@ -785,7 +785,7 @@ function CompoundedVsBrand() {
 
         <Reveal className="mt-10 text-center md:mt-14">
           <p className="font-semibold text-[#1B2147]">
-            Both paths are doctor-supervised by ChubbyNoMore providers. You can switch between compounded and brand-name as your needs change.
+            A licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
           </p>
           <p className="mt-3 text-sm text-[#1B2147]/70">
             Compounded medications are not FDA-approved for safety, efficacy, or quality.
