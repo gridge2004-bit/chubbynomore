@@ -1516,12 +1516,13 @@ function WhoQualifies() {
 
 function WhoNotFor() {
   const items = [
-    "You have a personal or family history of medullary thyroid cancer or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
-    "You're currently pregnant, actively trying to conceive, or breastfeeding.",
-    "You have a history of pancreatitis, severe gastroparesis, or active gallbladder disease.",
-    "You have type 1 diabetes or a history of diabetic ketoacidosis.",
-    "You're under 18 years old.",
-    "You're seeking rapid, short-term weight loss without a plan for sustained lifestyle changes — GLP-1 therapy is designed for long-term chronic weight management.",
+    "You or a family member have had medullary thyroid carcinoma, or you have Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
+    "You have had a serious allergic reaction to semaglutide, tirzepatide, or any ingredient in a prescribed medication.",
+    "You are pregnant, breastfeeding, planning a pregnancy, or become pregnant during treatment.",
+    "You have a history of pancreatitis, gallbladder problems, severe gastroparesis, or another serious digestive condition.",
+    "You have type 1 diabetes, a history of diabetic ketoacidosis, diabetic retinopathy, kidney problems, or take insulin or certain other diabetes medications.",
+    "You have an upcoming surgery or procedure involving general anesthesia or deep sedation.",
+    "Age eligibility varies by medication and program availability.",
   ];
   return (
     <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
@@ -1531,13 +1532,12 @@ function WhoNotFor() {
             Safety first
           </div>
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
-            Who this is not for
+            Important safety considerations
           </h2>
         </Reveal>
         <Reveal delay={80}>
-          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
-            GLP-1 medications are powerful and not right for everyone. Don't start therapy through
-            ChubbyNoMore — or any provider — if any of the following apply to you:
+          <p className="mt-6 max-w-2xl text-[16px] leading-relaxed text-[#1B2141]/85 md:text-[17px]">
+            Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
           </p>
         </Reveal>
         <Reveal delay={140}>
@@ -1552,8 +1552,7 @@ function WhoNotFor() {
         </Reveal>
         <Reveal delay={200}>
           <p className="mt-6 text-sm text-[#1B2147]/70">
-            Not sure? Complete our free intake and a physician will review your history — if it's not
-            safe or appropriate, they'll tell you and suggest alternatives.
+            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
           </p>
         </Reveal>
       </div>
