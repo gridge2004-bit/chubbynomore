@@ -1611,7 +1611,7 @@ function SemaVsTirz() {
   ];
 
   return (
-    <section className="bg-white px-6 py-16 md:py-20%20">
+    <section className="bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
