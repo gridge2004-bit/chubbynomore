@@ -80,9 +80,9 @@ const products = [
 ];
 
 const steps = [
-  { n: "01", img: step1Img, title: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Your health information is submitted through a private online intake." },
-  { n: "02", img: step2Img, title: "Meet your physician", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
-  { n: "03", img: step3Img, title: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
+  { n: "01", img: step1Img, title: "Complete your intake", imgAlt: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Your health information is submitted through a private online intake." },
+  { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
+  { n: "03", img: step3Img, title: "Receive your medication", imgAlt: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 
@@ -92,7 +92,7 @@ const faqs = [
   { q: "Are there side effects?", a: "Common side effects vary by medication and may include nausea, vomiting, diarrhea, constipation, abdominal discomfort, and decreased appetite. Serious reactions can also occur, including pancreatitis, gallbladder problems, dehydration-related kidney injury, severe gastrointestinal reactions, low blood sugar when combined with certain diabetes medications, and serious allergic reactions. Review the medication guide and discuss your complete health history with your licensed provider." },
   { q: "Do I need to go to a clinic?", a: "Care is generally provided online where available. A licensed provider may determine that laboratory testing, additional evaluation, or in-person medical care is needed before or during treatment." },
   { q: "What if I don't qualify?", a: "If an available treatment option is not medically appropriate for you, a licensed provider will explain the decision and may recommend that you discuss other options with your regular healthcare professional. You will not be charged for the eligibility check." },
-  { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus exclusively on GLP-1 weight loss. Your physician stays involved throughout — not just at signup. We don't disappear after the prescription." },
+  { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus on GLP-1 weight-management care. Your licensed provider remains involved beyond signup, with ongoing clinical support where available." },
 ];
 
 const NAVY = "#1B2147";
@@ -190,7 +190,7 @@ function Hero() {
           Real GLP-1 <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
-          Starting at $149.99 per 28-day supply. No insurance needed. Doctor-prescribed and delivered to your door.
+          Starting at $149.99 per 28-day supply. No insurance needed. Prescribed when medically appropriate and delivered to your door.
         </Reveal>
         <Reveal delay={200}>
           <a
@@ -857,7 +857,7 @@ function HowItWorks() {
           {steps.map((s, idx) => (
             <Reveal key={s.n} delay={idx * 150} className="card-lift rounded-2xl p-2 -m-2">
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
-                <img src={s.img} alt={s.title} className="h-full w-full object-cover" loading="lazy" />
+                <img src={s.img} alt={s.imgAlt} className="h-full w-full object-cover" loading="lazy" />
               </div>
               <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9298AB]">Step {s.n}</div>
               <h3 className="mt-2 font-serif text-2xl text-[#1B2147]">{s.title}</h3>
