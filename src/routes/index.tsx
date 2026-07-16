@@ -778,12 +778,12 @@ function CompoundedVsBrand() {
     },
     {
       tag: "BRAND-NAME",
-      title: "FDA-approved name brand",
-      meds: "Ozempic, Mounjaro, Wegovy, Zepbound, Foundayo",
+      title: "FDA-approved brand-name medications",
+      meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
       rows: [
         ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
         ["Cost", "From $199.99 per month. Insurance and savings cards may apply."],
-        ["Customization", "Fixed doses in pre-filled injection pens."],
+        ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
         ["Supply", "Subject to manufacturer shortages from time to time."],
       ],
     },
