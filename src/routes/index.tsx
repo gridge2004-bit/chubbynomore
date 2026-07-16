@@ -321,7 +321,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
     tagTone: "lavender",
     name: "Foundayo™ Tablets",
-    desc: "Foundayo™ (orforglipron) is the only GLP-1 pill for weight loss that can be taken any time of day, with or without food or water restrictions. FDA-approved for chronic weight management in adults with obesity or overweight with a weight-related condition.",
+    desc: "Foundayo™ (orforglipron) is a once-daily oral GLP-1 medication FDA-approved, together with a reduced-calorie diet and increased physical activity, to reduce excess body weight and maintain weight reduction long term in eligible adults.",
     price: "$199.99",
     period: "/month",
     img: foundayoPillAsset.url,
