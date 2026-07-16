@@ -272,9 +272,9 @@ const productCards: ProductCard[] = [
   },
   {
     id: "brand",
-    title: "Brand-name Weight Loss",
-    subtitle: "FDA-approved name brand",
-    medications: "Ozempic, Mounjaro, Wegovy, Foundayo, Zepbound",
+    title: "Brand-name Prescription Options",
+    subtitle: "FDA-approved medications with uses that vary by product",
+    medications: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
     img: tirzepatideImg,
     imgAlt: "Brand-name GLP-1 injector pens",
     prices: [{ label: "", value: "Starting at $199.99 per month" }],
