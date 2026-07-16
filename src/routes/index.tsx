@@ -1570,6 +1570,14 @@ function SemaVsTirz() {
       name: "Semaglutide",
       drugClass: "GLP-1 receptor agonist",
       slug: "semaglutide",
+      accent: {
+        wash: "bg-[#EAF3F5]",
+        circle: "bg-[#DDEAF0]",
+        text: "text-[#2E6B7A]",
+        pill: "bg-[#2E6B7A]/10 text-[#2E6B7A]",
+        feature: "bg-[#2E6B7A]/8",
+        deco: "GLP-1",
+      },
       attributes: [
         { label: "Average weight loss in brand-name clinical trials", value: "Wegovy®: approximately 15% over 68 weeks in STEP 1" },
         { label: "Dosing schedule", value: "Once weekly injection" },
@@ -1582,6 +1590,14 @@ function SemaVsTirz() {
       name: "Tirzepatide",
       drugClass: "Dual GLP-1 + GIP receptor agonist",
       slug: "tirzepatide",
+      accent: {
+        wash: "bg-[#ECECF6]",
+        circle: "bg-[#E0E2F0]",
+        text: "text-[#4B4F8C]",
+        pill: "bg-[#4B4F8C]/10 text-[#4B4F8C]",
+        feature: "bg-[#4B4F8C]/8",
+        deco: "GLP-1 + GIP",
+      },
       attributes: [
         { label: "Average weight loss in brand-name clinical trials", value: "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1" },
         { label: "Dosing schedule", value: "Once weekly injection" },
@@ -1612,48 +1628,80 @@ function SemaVsTirz() {
             <Reveal
               key={card.name}
               delay={idx * 120}
-              className="flex flex-col rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] p-7 shadow-sm md:p-9"
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] shadow-sm transition-all duration-300 ease-out md:hover:-translate-y-1 md:hover:shadow-lg"
             >
-              <div className="border-b border-[#1B2147]/10 pb-6">
-                <h3 className="font-serif text-[32px] leading-tight text-[#1B2147] md:text-[40px]">
-                  {card.name}
-                </h3>
-                <p className="mt-2 text-[15px] font-medium text-[#3454C7]">
-                  {card.drugClass}
-                </p>
+              <div className={`relative overflow-hidden ${card.accent.wash} px-7 pb-8 pt-7 md:px-9 md:pt-9`}>
+                <span className={`pointer-events-none absolute -right-6 -top-8 h-40 w-40 rounded-full opacity-30 blur-3xl md:h-48 md:w-48 ${card.accent.circle}`} />
+                <span className="pointer-events-none absolute bottom-0 right-2 select-none font-serif text-[80px] font-bold leading-none opacity-[0.04] md:text-[110px]">
+                  {card.accent.deco}
+                </span>
+                <div className="relative z-10">
+                  <h3 className="font-serif text-[32px] leading-tight text-[#1B2147] md:text-[40px]">
+                    {card.name}
+                  </h3>
+                  <p className={`mt-2 text-[15px] font-medium ${card.accent.text}`}>
+                    {card.drugClass}
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-6 flex flex-col gap-5">
-                {card.attributes.map((attr) => (
-                  <div key={attr.label} className="flex flex-col gap-1.5">
-                    <span className="w-fit rounded-full bg-[#1B2147]/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/90">
-                      {attr.label}
-                    </span>
-                    {attr.price ? (
-                      <span className="inline-flex items-baseline gap-2 text-[#1B2147]">
-                        <span className="font-serif text-[28px] leading-none md:text-[32px]">
-                          {attr.price}
-                        </span>
-                        <span className="text-[14px] font-medium text-[#1B2147]/80">
-                          {attr.priceUnit}
-                        </span>
-                      </span>
-                    ) : (
-                      <span className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
-                        {attr.value}
-                      </span>
-                    )}
-                  </div>
-                ))}
+              <div className="flex flex-col gap-0 px-7 md:px-9">
+                {card.attributes.map((attr, attrIdx) => {
+                  const isTrial = attr.label === "Average weight loss in brand-name clinical trials";
+                  const isPrice = attr.label === "Compounded starting price";
+                  const divider = attrIdx !== 0 ? "border-t border-[#1B2147]/8" : "";
+                  return (
+                    <div key={attr.label} className={`py-5 ${divider}`}>
+                      {isTrial && (
+                        <div className={`rounded-2xl ${card.accent.feature} p-5`}>
+                          <span className={`mb-3 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
+                            {attr.label}
+                          </span>
+                          <p className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
+                            {attr.value}
+                          </p>
+                        </div>
+                      )}
+                      {isPrice && (
+                        <div>
+                          <span className={`mb-3 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
+                            {attr.label}
+                          </span>
+                          <div className={`flex items-baseline gap-3 rounded-2xl ${card.accent.wash} px-5 py-4`}>
+                            <span className="font-serif text-[32px] leading-none text-[#1B2147] md:text-[36px]">
+                              {attr.price}
+                            </span>
+                            <span className="text-[14px] font-medium text-[#1B2147]/80">
+                              {attr.priceUnit}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      {!isTrial && !isPrice && (
+                        <div>
+                          <span className={`mb-2 inline-block w-fit rounded-full ${card.accent.pill} px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]`}>
+                            {attr.label}
+                          </span>
+                          <p className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
+                            {attr.value}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
-              <div className="mt-auto pt-8">
+              <div className="mt-auto px-7 pb-7 pt-2 md:px-9 md:pb-9">
                 <Link
                   to="/medications/$slug"
                   params={{ slug: card.slug }}
-                  className="inline-flex rounded-full border border-[#1B2147]/25 px-6 py-3 text-sm font-semibold text-[#1B2147] hover:border-[#1B2147]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
                 >
-                  {card.name} details →
+                  {card.name} details
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
                 </Link>
               </div>
             </Reveal>
