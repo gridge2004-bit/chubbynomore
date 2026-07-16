@@ -538,6 +538,14 @@ function MedicationOptions() {
   return (
     <section id="medications" className="bg-white px-4 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
+        <Reveal className="mb-2 text-center">
+          <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+            Personalized GLP-1 treatment options starting at $149/month.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
+            Your licensed provider will determine which available treatment option may be medically appropriate for you.
+          </p>
+        </Reveal>
         <div className="grid max-w-7xl gap-5 sm:grid-cols-2">
           {productCards.map((p, i) => (
             <Reveal key={p.id} delay={i * 100}>
