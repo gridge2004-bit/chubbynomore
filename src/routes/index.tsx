@@ -1703,7 +1703,7 @@ function SemaVsTirz() {
                 >
                   {card.name} details
                   <span className="transition-transform duration-200 group-hover:translate-x-1">
-                    →
+                    &rarr;
                   </span>
                 </Link>
               </div>
