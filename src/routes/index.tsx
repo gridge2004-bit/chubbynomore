@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       { title: "Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore" },
       { name: "description", content: "ChubbyNoMore is an online GLP-1 weight loss program for US adults, offering physician-prescribed compounded semaglutide, tirzepatide, and brand-name Wegovy, Zepbound, Ozempic and Mounjaro — delivered discreetly, no insurance required." },
       { property: "og:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
-      { property: "og:description", content: "Physician-prescribed semaglutide and tirzepatide, delivered to your door. Compounded from $149/mo, brand-name from $199/mo. No insurance required." },
+      { property: "og:description", content: "Physician-prescribed semaglutide and tirzepatide, delivered to your door. Compounded from $149.99 per 28-day supply, brand-name from $199.99 per month. No insurance required." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -58,9 +58,9 @@ const products = [
     medications: ["Tirzepatide", "Semaglutide"],
     desc: "Custom-formulated GLP-1 medications compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides what's right for you.",
     bullets: ["Once-weekly injection", "Physician-titrated dosing", "Free shipping, cancel anytime"],
-    options: [
-      { label: "GLP-1 + GIP (Tirzepatide)", price: "$199", period: "/month" },
-      { label: "GLP-1 (Semaglutide)", price: "$149", period: "/month" },
+      options: [
+      { label: "GLP-1 + GIP (Tirzepatide)", price: "$249.99", period: "per 28-day supply" },
+      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "per 28-day supply" },
     ],
     img: semaglutideImg,
   },
@@ -190,7 +190,7 @@ function Hero() {
           Real GLP-1 <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
-          Starting at $149/mo. No insurance needed. Doctor-prescribed and delivered to your door.
+          Starting at $149.99 per 28-day supply. No insurance needed. Doctor-prescribed and delivered to your door.
         </Reveal>
         <Reveal delay={200}>
           <a
@@ -266,8 +266,8 @@ const productCards: ProductCard[] = [
     img: semaglutideImg,
     imgAlt: "Compounded weight loss vials",
     prices: [
-      { label: "GLP-1 + GIP", value: "Starting at $249.99" },
-      { label: "GLP-1", value: "Starting at $149.99" },
+      { label: "GLP-1 + GIP", value: "Starting at $249.99 per 28-day supply" },
+      { label: "GLP-1", value: "Starting at $149.99 per 28-day supply" },
     ],
   },
   {
@@ -277,7 +277,7 @@ const productCards: ProductCard[] = [
     medications: "Ozempic, Mounjaro, Wegovy, Foundayo, Zepbound",
     img: tirzepatideImg,
     imgAlt: "Brand-name GLP-1 injector pens",
-    prices: [{ label: "", value: "Starting at $199.99" }],
+    prices: [{ label: "", value: "Starting at $199.99/month" }],
   },
 ];
 
@@ -323,7 +323,7 @@ const detailedCards: DetailedCard[] = [
     name: "Foundayo™ Tablets",
     desc: "Foundayo™ (orforglipron) is the only GLP-1 pill for weight loss that can be taken any time of day, with or without food or water restrictions. FDA-approved for chronic weight management in adults with obesity or overweight with a weight-related condition.",
     price: "$199.99",
-    period: "/mo",
+    period: "/month",
     img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
   },
@@ -334,7 +334,7 @@ const detailedCards: DetailedCard[] = [
     name: "Wegovy® Tablets",
     desc: "Wegovy® tablets deliver the same active ingredient as the Wegovy injection, in a once-daily oral form. The first and only FDA-approved semaglutide pill for weight loss in adults with obesity or overweight with a weight-related condition.",
     price: "$249.99",
-    period: "/mo",
+    period: "/month",
     img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
   },
@@ -345,7 +345,7 @@ const detailedCards: DetailedCard[] = [
     name: "Zepbound®",
     desc: "Zepbound® (tirzepatide) once-weekly injection. FDA-approved for chronic weight management and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     price: "$449.99",
-    period: "/mo",
+    period: "/month",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
   },
@@ -356,7 +356,7 @@ const detailedCards: DetailedCard[] = [
     name: "Wegovy® Pens",
     desc: "Wegovy® once-weekly injection for chronic weight management in adults with obesity with a weight-related condition, and to reduce the risk of major cardiovascular events.",
     price: "$349.99",
-    period: "/mo",
+    period: "/month",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
   },
@@ -367,7 +367,7 @@ const detailedCards: DetailedCard[] = [
     name: "Ozempic®",
     desc: "A once-weekly semaglutide injection that improves insulin sensitivity, reduces appetite, and helps regulate blood sugar.",
     price: "$349.99",
-    period: "/mo",
+    period: "/month",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
   },
@@ -378,7 +378,7 @@ const detailedCards: DetailedCard[] = [
     name: "Mounjaro®",
     desc: "A once-weekly tirzepatide injection that activates two hormone receptors — GIP and GLP-1 — to reduce appetite, slow gastric emptying, and support metabolic health.",
     price: "$1,249.99",
-    period: "/mo",
+    period: "/month",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
   },
@@ -540,7 +540,7 @@ function MedicationOptions() {
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
         <Reveal className="mb-2 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
-            Personalized GLP-1 treatment options starting at $149/month.
+            Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
@@ -722,7 +722,7 @@ function CompoundedVsBrand() {
       meds: "Tirzepatide, Semaglutide",
       rows: [
         ["Regulation", "Prepared by licensed US compounding pharmacies."],
-        ["Cost", "$149.99–$249.99 per month, out of pocket. No insurance required."],
+        ["Cost", "$149.99–$249.99 per 28-day supply, out of pocket. No insurance required."],
         ["Customization", "Dose tailored to you. Vial-and-syringe format."],
         ["Supply", "Reliably in stock through our pharmacy partner."],
       ],
@@ -733,7 +733,7 @@ function CompoundedVsBrand() {
       meds: "Ozempic, Mounjaro, Wegovy, Zepbound, Foundayo",
       rows: [
         ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "From $499 per month. Insurance and savings cards may apply."],
+        ["Cost", "From $199.99 per month. Insurance and savings cards may apply."],
         ["Customization", "Fixed doses in pre-filled injection pens."],
         ["Supply", "Subject to manufacturer shortages from time to time."],
       ],
@@ -1523,7 +1523,7 @@ function SemaVsTirz() {
     ["Drug class", "GLP-1 receptor agonist", "Dual GLP-1 + GIP receptor agonist"],
     ["Average weight loss (trial data)", "~15% over 68 weeks (STEP-1)", "~20–22% at 15 mg over 72 weeks (SURMOUNT-1)"],
     ["Dosing schedule", "Once weekly injection", "Once weekly injection"],
-    ["Compounded starting price", "$149.99 / month", "$249.99 / month"],
+    ["Compounded starting price", "$149.99 per 28-day supply", "$249.99 per 28-day supply"],
     ["FDA-approved brand versions", "Wegovy®, Ozempic®", "Zepbound®, Mounjaro®"],
     ["Common side effects", "Nausea, constipation, fatigue", "Nausea, diarrhea, decreased appetite"],
     ["Best fit for", "Steady weight loss with a well-studied GLP-1", "Highest average efficacy option"],
