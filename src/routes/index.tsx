@@ -354,7 +354,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
     tagTone: "lavender",
     name: "Wegovy® Pens",
-    desc: "Wegovy® once-weekly injection for chronic weight management in adults with obesity with a weight-related condition, and to reduce the risk of major cardiovascular events.",
+    desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
     price: "$349.99",
     period: "/month",
     img: wegovyPenAsset.url,
