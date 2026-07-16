@@ -22,13 +22,15 @@ import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Online GLP-1 Weight Loss Program | Compounded Semaglutide & Tirzepatide | ChubbyNoMore" },
-      { name: "description", content: "ChubbyNoMore is an online GLP-1 weight loss program for US adults, offering physician-prescribed compounded semaglutide, tirzepatide, and brand-name Wegovy, Zepbound, Ozempic and Mounjaro — delivered discreetly, no insurance required." },
+      { title: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide, tirzepatide, and select FDA-approved brand-name options." },
       { property: "og:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
-      { property: "og:description", content: "Physician-prescribed semaglutide and tirzepatide, delivered to your door. Compounded from $149.99 per 28-day supply, brand-name from $199.99 per month. No insurance required." },
-      { property: "og:url", content: "/" },
+      { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:url", content: "https://chubbynomore.com/" },
+      { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
   }),
   component: Index,
 });
