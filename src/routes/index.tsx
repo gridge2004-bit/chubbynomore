@@ -299,7 +299,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["COMPOUNDED", "GLP-1 + GIP"],
     tagTone: "tan",
     name: "Tirzepatide",
-    desc: "Discover one of the most effective medical weight loss tools available — clinically studied to support significant weight loss over time.",
+    desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     price: "$249.99",
     period: "/28-day supply",
     img: semaglutideImg,
@@ -310,7 +310,7 @@ const detailedCards: DetailedCard[] = [
     tags: ["COMPOUNDED", "GLP-1"],
     tagTone: "tan",
     name: "Semaglutide",
-    desc: "Unlock meaningful weight loss support with Semaglutide — clinically studied to help patients achieve significant results over time.",
+    desc: "A clinician-prescribed GLP-1 treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     price: "$149.99",
     period: "/28-day supply",
     img: semaglutideImg,
@@ -630,7 +630,7 @@ function GLP1Highlights() {
               GLP-1 + GIP
             </h3>
             <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
-              Tirzepatide is a dual-action GLP-1 and GIP receptor agonist clinically studied for its ability to support metabolic health and weight management over time. Results vary.
+              Tirzepatide acts on GLP-1 and GIP pathways involved in appetite and metabolic regulation. A licensed provider will determine whether it may be appropriate for you. Individual results vary.
             </p>
           </Reveal>
 
@@ -643,7 +643,7 @@ function GLP1Highlights() {
               GLP-1
             </h3>
             <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
-              Semaglutide is a GLP-1 receptor agonist clinically studied for its ability to support appetite control and healthy weight management over time. Results vary.
+              Semaglutide acts on the GLP-1 pathway involved in appetite regulation and satiety. A licensed provider will determine whether it may be appropriate for you. Individual results vary.
             </p>
           </Reveal>
         </div>
