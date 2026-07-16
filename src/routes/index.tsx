@@ -1541,41 +1541,23 @@ function WhoNotFor() {
           </p>
         </Reveal>
 
-          <Reveal delay={140}>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {items.map((i) => (
-                <div
-                  key={i}
-                  className="flex gap-3 rounded-2xl bg-white p-4 shadow-sm md:p-5"
-                >
-                  <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#B84B4B]/10 text-[#B84B4B]">
-                    <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                  </span>
-                  <span className="text-[14px] leading-relaxed text-[#1B2147] md:text-[15px]">
-                    {i}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
+        <Reveal delay={100} className="mt-8 md:mt-10">
+          <ul className="divide-y divide-[#1B2147]/10">
+            {items.map((item) => (
+              <li key={item} className="flex gap-4 py-5 md:py-6">
+                <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#B84B4B]" />
+                <span className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
 
-        <Reveal delay={200}>
-          <div className="mt-10 rounded-2xl border border-[#B84B4B]/15 bg-white p-6 md:mt-14 md:p-8">
-            <div className="flex gap-4">
-              <span aria-hidden className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#B84B4B]/10 text-[#B84B4B]">
-                <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v5M12 16h.01" />
-                </svg>
-              </span>
-              <p className="max-w-3xl text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
-                This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
-              </p>
-            </div>
-          </div>
+        <Reveal delay={180} className="mt-10 border-t border-[#1B2147]/10 pt-6 md:mt-12 md:pt-8">
+          <p className="max-w-4xl text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
+          </p>
         </Reveal>
       </div>
     </section>
