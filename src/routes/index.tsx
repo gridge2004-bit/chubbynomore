@@ -1567,7 +1567,7 @@ function SemaVsTirz() {
     ["Average weight loss in brand-name clinical trials", "Wegovy®: approximately 15% over 68 weeks in STEP 1", "Zepbound®: approximately 20–22% over 72 weeks in SURMOUNT-1"],
     ["Dosing schedule", "Once weekly injection", "Once weekly injection"],
     ["Compounded starting price", "$149.99 per 28-day supply", "$249.99 per 28-day supply"],
-    ["FDA-approved brand versions", "Wegovy®, Ozempic®", "Zepbound®, Mounjaro®"],
+    ["FDA-approved products containing the ingredient", "Wegovy® — weight management; Ozempic® — type 2 diabetes", "Zepbound® — weight management; Mounjaro® — type 2 diabetes"],
     ["Common side effects", "Nausea, constipation, fatigue", "Nausea, diarrhea, decreased appetite"],
   ];
   return (
