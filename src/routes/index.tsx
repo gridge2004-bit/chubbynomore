@@ -95,6 +95,8 @@ const faqs = [
   { q: "Do I need to go to a clinic?", a: "Care is generally provided online where available. A licensed provider may determine that laboratory testing, additional evaluation, or in-person medical care is needed before or during treatment." },
   { q: "What if I don't qualify?", a: "If an available treatment option is not medically appropriate for you, a licensed provider will explain the decision and may recommend that you discuss other options with your regular healthcare professional. You will not be charged for the eligibility check." },
   { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus on GLP-1 weight-management care. Your licensed provider remains involved beyond signup, with ongoing clinical support where available." },
+  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. Complete the intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing treatment is medically appropriate. Continuation and dosing are determined by the provider." },
+  { q: "How is my information handled?", a: "Your health information will be submitted through the private patient-intake system used by the licensed provider. Full privacy details will be provided before the intake process begins." },
 ];
 
 const NAVY = "#1B2147";
@@ -190,7 +192,7 @@ function Hero() {
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
         <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
-          For men ready to take control of their health
+          For men who are done waiting to feel like themselves again
         </Reveal>
         <Reveal as="h1" className="mt-4 font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
           Serious GLP-1 care, built for men.
@@ -207,7 +209,7 @@ function Hero() {
           </a>
         </Reveal>
         <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
-          Takes about 5 minutes to start. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
+          Takes about 5 minutes. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
           <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
@@ -413,6 +415,11 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
       <p className="mt-4 text-[14.5px] leading-relaxed text-[#1B2147]/85 sm:text-[15px]">
         {card.desc}
       </p>
+      {card.tags.includes("COMPOUNDED") && (
+        <p className="mt-3 text-[12px] leading-relaxed text-[#1B2147]/60 italic">
+          Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
+        </p>
+      )}
       <div className="mt-auto pt-6">
         <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-[#1B2147]">
           <span className="text-[15px]">Starting at</span>
@@ -566,7 +573,7 @@ function SwitchingCare() {
               href="#cta"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#1B2147] bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
             >
-              Explore switching my GLP-1 care →
+              Switch and keep my momentum →
             </a>
             <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[#1B2147]/60">
               Continuation of treatment and dosing are determined by the licensed provider based on your medical history and current treatment.
@@ -632,8 +639,18 @@ function GLP1Highlights() {
 
 function WeightLossScale() {
   const [weight, setWeight] = useState(270);
-  const potentialLoss = Math.round(weight * 0.15);
+  const [trial, setTrial] = useState<"sema" | "tirz">("sema");
+
+  const trialPct = trial === "sema" ? 0.15 : 0.21; // midpoint of 20–22%
+  const trialLabel = trial === "sema" ? "approximately 15%" : "approximately 20–22%";
+  const endingLabel = trial === "sema" ? "Weight at ~15% lower" : "Weight at ~20–22% lower";
+  const potentialLoss = Math.round(weight * trialPct);
   const illustrativeWeight = Math.round(weight - potentialLoss);
+
+  const tabBase =
+    "flex-1 rounded-full px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition";
+  const tabOn = "bg-white text-[#0F1E3F]";
+  const tabOff = "bg-transparent text-white/75 hover:text-white";
 
   return (
     <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
@@ -644,6 +661,29 @@ function WeightLossScale() {
         <p className="mt-5 text-[15px] text-white/80 md:text-base">
           More confidence in your clothes. More energy for the people and moments that matter. A lighter version of everyday life.
         </p>
+
+        <div className="mt-8" role="tablist" aria-label="Trial average">
+          <div className="mx-auto flex max-w-md gap-1 rounded-full border border-white/15 bg-white/5 p-1">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={trial === "sema"}
+              onClick={() => setTrial("sema")}
+              className={`${tabBase} ${trial === "sema" ? tabOn : tabOff}`}
+            >
+              Semaglutide ~15%
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={trial === "tirz"}
+              onClick={() => setTrial("tirz")}
+              className={`${tabBase} ${trial === "tirz" ? tabOn : tabOff}`}
+            >
+              Tirzepatide ~20–22%
+            </button>
+          </div>
+        </div>
 
         <div className="mt-10 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
@@ -700,7 +740,7 @@ function WeightLossScale() {
 
           <div className="text-center md:min-w-[140px]">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              Weight at 15% lower
+              {endingLabel}
             </div>
             <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
               {illustrativeWeight} <span className="text-[24px] md:text-[28px]">lbs</span>
@@ -725,7 +765,7 @@ function WeightLossScale() {
         </div>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
-          This calculator is an educational example based on the approximately 15% mean weight reduction observed over 68 weeks in the STEP 1 clinical trial of semaglutide 2.4 mg used with lifestyle intervention. It is not a prediction of your personal results, does not represent tirzepatide trial results, and does not establish the safety, effectiveness, or quality of compounded semaglutide. Individual results vary.
+          This is an educational illustration of clinical-trial averages ({trialLabel}), not a prediction or promise of personal results. Individual results vary. Weight loss is not guaranteed. These results do not establish the safety, effectiveness, or quality of compounded medications.
         </p>
       </div>
     </section>
