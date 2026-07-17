@@ -115,6 +115,7 @@ function Index() {
       <Hero />
       <EmotionalTransformation />
       <TrustMarquee />
+      <SwitchingCare />
       <HowItWorks />
       <MedicationOptions />
       <DetailedProducts />
