@@ -190,7 +190,7 @@ function Hero() {
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
         <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
-          For men ready to take control of their health
+          For men who are done waiting to feel like themselves again
         </Reveal>
         <Reveal as="h1" className="mt-4 font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
           Serious GLP-1 care, built for men.
