@@ -982,37 +982,38 @@ function Footer() {
   return (
     <footer className="bg-[#1B2147] text-white">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
-        <div className="grid gap-12 md:grid-cols-5">
+        <div className="grid gap-12 md:grid-cols-3">
           <div className="md:col-span-2">
             <div className="font-serif text-3xl">ChubbyNoMore</div>
             <p className="mt-4 max-w-xs text-sm text-white/70">
               Online prescription weight-management care with clinician review and home delivery, where available.
             </p>
           </div>
-          <FooterCol title="Program" links={["How It Works", "Medications", "Pricing", "FAQs"]} />
-          <FooterCol title="Company" links={["About Us", "Our Doctors", "Patient Stories", "Blog"]} />
-          <FooterCol title="Legal" links={["Privacy Policy", "Terms of Service", "HIPAA Notice", "Contact"]} />
+          <FooterCol
+            title="Program"
+            links={[
+              { label: "How It Works", href: "#how" },
+              { label: "Medications", href: "#medications" },
+              { label: "Pricing", href: "#pricing" },
+              { label: "FAQs", href: "#faq" },
+            ]}
+          />
         </div>
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 md:flex-row">
           <span>© {new Date().getFullYear()} ChubbyNoMore. All rights reserved.</span>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">HIPAA</a>
-          </div>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       <div className="text-xs uppercase tracking-[0.2em] text-white/60">{title}</div>
       <ul className="mt-4 space-y-2.5 text-sm">
         {links.map((l) => (
-          <li key={l}><a href="#" className="text-white/85 transition hover:text-white">{l}</a></li>
+          <li key={l.label}><a href={l.href} className="text-white/85 transition hover:text-white">{l.label}</a></li>
         ))}
       </ul>
     </div>
