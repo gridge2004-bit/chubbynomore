@@ -209,7 +209,7 @@ function Hero() {
           Takes about 5 minutes to start. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
-          <a href="#medications" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
+          <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
             Already taking a GLP-1? Explore switching your care →
           </a>
         </Reveal>
