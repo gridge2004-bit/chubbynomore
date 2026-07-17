@@ -362,19 +362,6 @@ const detailedCards: DetailedCard[] = [
   },
 ];
 
-function DetailedProducts() {
-  return (
-    <section id="pricing" className="bg-white px-4 pb-16 sm:px-6">
-      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-        {detailedCards.map((c, i) => (
-          <Reveal key={c.id} delay={(i % 2) * 100}>
-            <DetailedProductCard card={c} />
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function DetailedProductCard({ card }: { card: DetailedCard }) {
   const tagClass =
