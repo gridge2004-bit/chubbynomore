@@ -536,36 +536,6 @@ function MedicationOptions() {
   );
 }
 
-function ProductTile({ card }: { card: ProductCard }) {
-  return (
-    <article className="flex h-full flex-col rounded-[28px] bg-[#D9DDD8] px-6 py-7 sm:px-8 sm:py-8">
-      <div className="flex items-center justify-center py-2">
-        <img
-          src={card.img}
-          alt={card.imgAlt}
-          className="max-h-[180px] w-auto object-contain mix-blend-multiply sm:max-h-[220px]"
-          loading="lazy"
-        />
-      </div>
-      <h3 className="mt-4 font-serif text-[28px] leading-[1.1] text-[#1B2147] sm:text-[34px]">
-        {card.title}
-      </h3>
-      <p className="mt-3 text-[15px] text-[#1B2147]/85">{card.subtitle}</p>
-      <p className="mt-1.5 text-[15px] font-medium text-[#3454C7]">{card.medications}</p>
-      <div className="mt-auto pt-6 space-y-2 text-[15px] text-[#1B2147]">
-        {card.prices.map((p, idx) => (
-          <div key={idx} className="flex flex-wrap items-center gap-1.5">
-            {p.label && <span>{p.label}</span>}
-            <span className="text-[#3454C7] underline underline-offset-2">
-              {p.value}
-            </span>
-            <span aria-hidden className="text-[#3454C7]">→</span>
-          </div>
-        ))}
-      </div>
-    </article>
-  );
-}
 
 function TrustMarquee() {
   const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
