@@ -566,7 +566,7 @@ function SwitchingCare() {
               href="#cta"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#1B2147] bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
             >
-              Explore switching my GLP-1 care →
+              Switch and keep my momentum →
             </a>
             <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[#1B2147]/60">
               Continuation of treatment and dosing are determined by the licensed provider based on your medical history and current treatment.
