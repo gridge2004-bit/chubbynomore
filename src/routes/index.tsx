@@ -627,7 +627,7 @@ function SwitchingCare() {
         <div className="grid gap-10 rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] p-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-12 lg:p-14">
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
-              Already taking a GLP-1?
+              ALREADY TAKING A GLP-1?
             </div>
             <h2 className="mt-4 font-serif text-[34px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[44px] lg:text-[52px]">
               Switching your care can be simple.
