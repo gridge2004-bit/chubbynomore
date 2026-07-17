@@ -207,7 +207,7 @@ function Hero() {
           </a>
         </Reveal>
         <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
-          Takes about 5 minutes to start. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
+          Takes about 5 minutes. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
           <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
