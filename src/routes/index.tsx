@@ -119,7 +119,6 @@ function Index() {
       <WhyChoose />
       <EmotionalTransformation />
       <MedicationOptions />
-      <DetailedProducts />
 
       <GLP1Highlights />
       <WeightLossScale />
