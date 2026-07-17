@@ -95,6 +95,8 @@ const faqs = [
   { q: "Do I need to go to a clinic?", a: "Care is generally provided online where available. A licensed provider may determine that laboratory testing, additional evaluation, or in-person medical care is needed before or during treatment." },
   { q: "What if I don't qualify?", a: "If an available treatment option is not medically appropriate for you, a licensed provider will explain the decision and may recommend that you discuss other options with your regular healthcare professional. You will not be charged for the eligibility check." },
   { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus on GLP-1 weight-management care. Your licensed provider remains involved beyond signup, with ongoing clinical support where available." },
+  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. Complete the intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing treatment is medically appropriate. Continuation and dosing are determined by the provider." },
+  { q: "How is my information handled?", a: "Your health information will be submitted through the private patient-intake system used by the licensed provider. Full privacy details will be provided before the intake process begins." },
 ];
 
 const NAVY = "#1B2147";
