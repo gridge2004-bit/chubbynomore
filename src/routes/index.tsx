@@ -637,8 +637,18 @@ function GLP1Highlights() {
 
 function WeightLossScale() {
   const [weight, setWeight] = useState(270);
-  const potentialLoss = Math.round(weight * 0.15);
+  const [trial, setTrial] = useState<"sema" | "tirz">("sema");
+
+  const trialPct = trial === "sema" ? 0.15 : 0.21; // midpoint of 20–22%
+  const trialLabel = trial === "sema" ? "approximately 15%" : "approximately 20–22%";
+  const endingLabel = trial === "sema" ? "Weight at ~15% lower" : "Weight at ~20–22% lower";
+  const potentialLoss = Math.round(weight * trialPct);
   const illustrativeWeight = Math.round(weight - potentialLoss);
+
+  const tabBase =
+    "flex-1 rounded-full px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition";
+  const tabOn = "bg-white text-[#0F1E3F]";
+  const tabOff = "bg-transparent text-white/75 hover:text-white";
 
   return (
     <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
@@ -649,6 +659,29 @@ function WeightLossScale() {
         <p className="mt-5 text-[15px] text-white/80 md:text-base">
           More confidence in your clothes. More energy for the people and moments that matter. A lighter version of everyday life.
         </p>
+
+        <div className="mt-8" role="tablist" aria-label="Trial average">
+          <div className="mx-auto flex max-w-md gap-1 rounded-full border border-white/15 bg-white/5 p-1">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={trial === "sema"}
+              onClick={() => setTrial("sema")}
+              className={`${tabBase} ${trial === "sema" ? tabOn : tabOff}`}
+            >
+              Semaglutide ~15%
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={trial === "tirz"}
+              onClick={() => setTrial("tirz")}
+              className={`${tabBase} ${trial === "tirz" ? tabOn : tabOff}`}
+            >
+              Tirzepatide ~20–22%
+            </button>
+          </div>
+        </div>
 
         <div className="mt-10 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
@@ -705,7 +738,7 @@ function WeightLossScale() {
 
           <div className="text-center md:min-w-[140px]">
             <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              Weight at 15% lower
+              {endingLabel}
             </div>
             <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
               {illustrativeWeight} <span className="text-[24px] md:text-[28px]">lbs</span>
@@ -730,7 +763,7 @@ function WeightLossScale() {
         </div>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
-          This calculator is an educational example based on the approximately 15% mean weight reduction observed over 68 weeks in the STEP 1 clinical trial of semaglutide 2.4 mg used with lifestyle intervention. It is not a prediction of your personal results, does not represent tirzepatide trial results, and does not establish the safety, effectiveness, or quality of compounded semaglutide. Individual results vary.
+          This is an educational illustration of clinical-trial averages ({trialLabel}), not a prediction or promise of personal results. Individual results vary. Weight loss is not guaranteed. These results do not establish the safety, effectiveness, or quality of compounded medications.
         </p>
       </div>
     </section>
