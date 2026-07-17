@@ -113,11 +113,11 @@ function Index() {
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
-      <EmotionalTransformation />
       <TrustMarquee />
       <SwitchingCare />
       <HowItWorks />
       <WhyChoose />
+      <EmotionalTransformation />
       <MedicationOptions />
       <DetailedProducts />
 
