@@ -117,6 +117,7 @@ function Index() {
       <TrustMarquee />
       <SwitchingCare />
       <HowItWorks />
+      <WhyChoose />
       <MedicationOptions />
       <DetailedProducts />
 
@@ -886,6 +887,66 @@ function CompoundedVsBrand() {
           <p className="mt-3 text-sm text-[#1B2147]/70">
             Compounded medications are not FDA-approved for safety, efficacy, or quality.
           </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function WhyChoose() {
+  const benefits = [
+    {
+      title: "Private online intake",
+      body: "Complete your health history online without sitting in a waiting room.",
+    },
+    {
+      title: "Licensed-provider review",
+      body: "Your medical information is reviewed by a licensed provider. Treatment is never automatically approved by software.",
+    },
+    {
+      title: "Clear starting prices",
+      body: "See starting prices before beginning. Final treatment options and costs depend on eligibility and availability.",
+    },
+    {
+      title: "Delivered to your door",
+      body: "If prescribed, medication is dispensed by a licensed U.S. pharmacy and shipped discreetly where available.",
+    },
+  ];
+
+  return (
+    <section className="bg-white px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-7xl">
+        <Reveal className="text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+            WHY MEN CHOOSE CHUBBYNOMORE
+          </div>
+          <h2 className="mx-auto mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+            Straightforward care, without the usual friction.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
+            ChubbyNoMore is designed to make medically supervised GLP-1 care private, clear, and convenient.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {benefits.map((b, i) => (
+            <Reveal
+              key={b.title}
+              delay={i * 100}
+              className="flex flex-col rounded-2xl bg-[#FAF8F5] p-7 md:p-8"
+            >
+              <h3 className="font-serif text-xl text-[#1B2147] md:text-2xl">
+                {b.title}
+              </h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-[#1B2147]/75">
+                {b.body}
+              </p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={400} className="mt-12 text-center md:mt-14">
+          <PillButton href="#cta">See if I qualify — free</PillButton>
         </Reveal>
       </div>
     </section>
