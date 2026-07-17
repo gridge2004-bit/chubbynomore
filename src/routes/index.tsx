@@ -413,6 +413,11 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
       <p className="mt-4 text-[14.5px] leading-relaxed text-[#1B2147]/85 sm:text-[15px]">
         {card.desc}
       </p>
+      {card.tags.includes("COMPOUNDED") && (
+        <p className="mt-3 text-[12px] leading-relaxed text-[#1B2147]/60 italic">
+          Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
+        </p>
+      )}
       <div className="mt-auto pt-6">
         <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-[#1B2147]">
           <span className="text-[15px]">Starting at</span>
