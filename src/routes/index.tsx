@@ -620,6 +620,42 @@ function TrustMarquee() {
   );
 }
 
+function SwitchingCare() {
+  return (
+    <section id="switching" className="bg-white px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-10 rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] p-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-12 lg:p-14">
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+              Already taking a GLP-1?
+            </div>
+            <h2 className="mt-4 font-serif text-[34px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[44px] lg:text-[52px]">
+              Switching your care can be simple.
+            </h2>
+            <p className="mt-5 text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+              Already taking semaglutide or tirzepatide through another provider? Complete a brief online intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing your treatment—and at what dose—is medically appropriate.
+            </p>
+          </div>
+          <div className="flex flex-col items-start md:items-start">
+            <p className="text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+              If prescribed, medication is dispensed by a licensed U.S. pharmacy and delivered discreetly to your door where available.
+            </p>
+            <a
+              href="#cta"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#1B2147] bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+            >
+              Explore switching my GLP-1 care →
+            </a>
+            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[#1B2147]/60">
+              Continuation of treatment and dosing are determined by the licensed provider based on your medical history and current treatment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function GLP1Highlights() {
   return (
     <section className="bg-[#E8EAF0] px-6 py-20 md:py-24">
