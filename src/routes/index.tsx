@@ -258,39 +258,6 @@ const tiles: Tile[] = [
   { id: "dosing", title: "Personalized dosing", img: ctaImg, imgAlt: "Personalized dosing care", variant: "row" },
 ];
 
-type ProductCard = {
-  id: string;
-  title: string;
-  subtitle: string;
-  medications: string;
-  img: string;
-  imgAlt: string;
-  prices: { label: string; value: string }[];
-};
-
-const productCards: ProductCard[] = [
-  {
-    id: "compounded",
-    title: "Compounded Weight Loss",
-    subtitle: "Custom-formulated",
-    medications: "Tirzepatide, Semaglutide",
-    img: semaglutideImg,
-    imgAlt: "Compounded weight loss vials",
-    prices: [
-      { label: "GLP-1 + GIP", value: "Starting at $249.99 per 28-day supply" },
-      { label: "GLP-1", value: "Starting at $149.99 per 28-day supply" },
-    ],
-  },
-  {
-    id: "brand",
-    title: "Brand-name Prescription Options",
-    subtitle: "FDA-approved medications with uses that vary by product",
-    medications: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
-    img: tirzepatideImg,
-    imgAlt: "Brand-name GLP-1 injector pens",
-    prices: [{ label: "", value: "Starting at $199.99 per month" }],
-  },
-];
 
 type DetailedCard = {
   id: string;
