@@ -188,11 +188,14 @@ function Hero() {
   return (
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="h1" className="font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
-          Real GLP-1 <em className="font-serif italic underline decoration-2 underline-offset-[6px] text-[#1B2147]">results.</em>
+        <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+          For men ready to take control of their health
         </Reveal>
-        <Reveal as="p" delay={120} className="mt-6 max-w-xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
-          Starting at $149.99 per 28-day supply. No insurance needed. Prescribed when medically appropriate and delivered to your door.
+        <Reveal as="h1" className="mt-4 font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
+          Serious GLP-1 care, built for men.
+        </Reveal>
+        <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
+          Complete a private online evaluation with a licensed provider. If treatment is medically appropriate, available options may include compounded semaglutide or tirzepatide and select FDA-approved brand-name medications, delivered to your door where available. Compounded semaglutide starts at $149.99 per 28-day supply. No insurance required.
         </Reveal>
         <Reveal delay={200}>
           <a
@@ -203,7 +206,12 @@ function Hero() {
           </a>
         </Reveal>
         <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
-          Free eligibility check. No charge if you don't qualify.
+          Takes about 5 minutes to start. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
+        </Reveal>
+        <Reveal delay={320}>
+          <a href="#medications" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
+            Already taking a GLP-1? Explore switching your care →
+          </a>
         </Reveal>
       </div>
     </section>
