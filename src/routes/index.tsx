@@ -117,6 +117,7 @@ function Index() {
       <TrustMarquee />
       <SwitchingCare />
       <HowItWorks />
+      <WhyChoose />
       <MedicationOptions />
       <DetailedProducts />
 
