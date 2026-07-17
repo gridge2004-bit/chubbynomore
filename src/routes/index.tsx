@@ -549,7 +549,7 @@ function EmotionalTransformation() {
 function MedicationOptions() {
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4">
+      <div className="mx-auto flex max-w-0032 flex-col gap-4">
         <Reveal className="mb-2 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
             Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
@@ -558,12 +558,10 @@ function MedicationOptions() {
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
           </p>
         </Reveal>
-        <div className="grid max-w-7xl gap-5 sm:grid-cols-2">
-          {productCards.map((p, i) => (
-            <Reveal key={p.id} delay={i * 100}>
-              <a href="#cta" className="card-lift block h-full">
-                <ProductTile card={p} />
-              </a>
+        <div id="pricing" className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
+          {detailedCards.map((c, i) => (
+            <Reveal key={c.id} delay={(i % 2) * 100}>
+              <DetailedProductCard card={c} />
             </Reveal>
           ))}
         </div>
