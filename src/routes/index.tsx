@@ -1566,10 +1566,19 @@ function QualifyModal() {
               <ModalNav
                 onBack={goBack}
                 onNext={goNext}
+                nextLabel={step === totalQuestions ? "See next step" : "Next"}
                 nextDisabled={!nextEnabled}
                 showBack={step > 1}
               />
             </div>
+          )}
+
+          {isOutcome && (
+            <OutcomeScreen
+              variant={needsReview ? "review" : "continue"}
+              onReview={reviewAnswers}
+              onClose={closeNow}
+            />
           )}
         </div>
       </div>
