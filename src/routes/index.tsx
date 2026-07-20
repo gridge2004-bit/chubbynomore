@@ -1484,6 +1484,74 @@ function QualifyModal() {
   };
   const reviewAnswers = () => setStep(1);
 
+  /* ─────────── QUESTIONNAIRE RESULT (in-memory only) ───────────
+     Structured screening result built when the user reaches the
+     outcome step. This object lives in React component state only.
+
+     PRIVACY (do not change without review):
+     - Never persist to localStorage or sessionStorage.
+     - Never send to Google Analytics, Meta Pixel, ad platforms,
+       heat-mapping tools, or general website analytics.
+     - Never place answers in the URL or query parameters.
+     - Never include answers in error-reporting logs.
+     - Do not transmit anywhere until the approved secure backend
+       or EHR integration is in place.
+
+     TODO: Wire this result to the approved secure backend / EHR
+     submission endpoint once available. Until then, this object
+     stays in memory and is discarded when the modal closes.
+     ------------------------------------------------------------- */
+  const rawWeight = answers["current_weight"];
+  const parsedWeight =
+    typeof rawWeight === "string" && rawWeight !== ""
+      ? Number(rawWeight)
+      : null;
+  const currentWeight =
+    parsedWeight !== null && Number.isInteger(parsedWeight)
+      ? parsedWeight
+      : null;
+  const glp1Raw = answers["current_glp1"];
+  const currentlyUsingGLP1: "yes" | "no" | "unsure" | null =
+    glp1Raw === "yes" || glp1Raw === "no" || glp1Raw === "unsure"
+      ? glp1Raw
+      : null;
+  const screeningOutcome: "additional_review" | "continue_intake" = needsReview
+    ? "additional_review"
+    : "continue_intake";
+
+  const [result, setResult] = useState<{
+    currentWeight: number | null;
+    currentlyUsingGLP1: "yes" | "no" | "unsure" | null;
+    selectedConditions: string[];
+    screeningOutcome: "additional_review" | "continue_intake";
+    completedAt: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!isOutcome) {
+      if (result !== null) setResult(null);
+      return;
+    }
+    const built = {
+      currentWeight,
+      currentlyUsingGLP1,
+      selectedConditions,
+      screeningOutcome,
+      completedAt: new Date().toISOString(),
+    };
+    setResult(built);
+    // Dev-only logging. import.meta.env.DEV is `false` in production
+    // builds, so this branch is stripped from the production bundle.
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.debug("[qualify] screening result (dev only, in-memory):", built);
+    }
+    // TODO: Replace this dev log with a call to the approved secure
+    // backend or EHR submission endpoint once it is connected.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOutcome]);
+
+
   // Progress: 0% on intro; 100% on outcome; otherwise (step / totalQuestions)
   const pct =
     step === 0 || totalQuestions === 0
