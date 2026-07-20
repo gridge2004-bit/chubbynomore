@@ -95,7 +95,7 @@ const faqs = [
   { q: "What determines whether I qualify for treatment?", a: "A licensed provider will review factors including your medical history, current medications, height, weight, BMI, existing health conditions, and treatment goals. Completing the questionnaire does not guarantee approval or a prescription." },
   { q: "Can I eventually stop taking GLP-1 medication?", a: "The appropriate length of treatment differs for each patient. Your provider will help determine whether continuing, adjusting, or stopping treatment is appropriate. Do not stop or change a prescribed medication without medical guidance." },
   { q: "What happens if GLP-1 treatment is not right for me?", a: "A prescription will not be issued if a licensed provider determines that treatment is not medically appropriate. The provider may discuss other possible next steps or recommend that you follow up with your primary-care provider or another specialist." },
-  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final treatment and pricing are determined by the licensed provider based on what may be medically appropriate for you." },
+  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
 ];
 
 const NAVY = "#1B2147";
