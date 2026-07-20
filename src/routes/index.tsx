@@ -1451,29 +1451,51 @@ function QualifyModal() {
   const setAnswer = (id: string, value: unknown) =>
     setAnswers((prev) => ({ ...prev, [id]: value }));
 
-  const currentQuestion = step > 0 ? questionSteps[step - 1] : null;
+  const outcomeStep = totalQuestions + 1;
+  const isOutcome = step === outcomeStep;
+  const currentQuestion =
+    step > 0 && step <= totalQuestions ? questionSteps[step - 1] : null;
   const nextEnabled = currentQuestion ? currentQuestion.isAnswered(answers) : true;
+
+  // Which outcome to show, based on health-conditions routing config.
+  const selectedConditions =
+    (answers["health_conditions"] as string[] | undefined) ?? [];
+  const needsReview = selectedConditions.some((c) =>
+    HEALTH_ROUTING.reviewRequired.includes(c)
+  );
 
   const goNext = () => {
     if (step === 0) {
-      // Intro → first question (or close if no questions defined yet)
       if (totalQuestions === 0) return;
       setStep(1);
       return;
     }
+    if (isOutcome) return;
     if (!nextEnabled) return;
-    setStep((s) => Math.min(s + 1, totalQuestions));
+    setStep((s) => Math.min(s + 1, outcomeStep));
   };
   const goBack = () => setStep((s) => Math.max(s - 1, 0));
 
-  // Progress: 0% on intro; otherwise (step / totalQuestions)
+  // Close without the "answers will not be saved" confirm — used from
+  // outcome-screen actions where the flow is intentionally complete.
+  const closeNow = () => {
+    setOpen(false);
+    setTimeout(reset, 0);
+  };
+  const reviewAnswers = () => setStep(1);
+
+  // Progress: 0% on intro; 100% on outcome; otherwise (step / totalQuestions)
   const pct =
     step === 0 || totalQuestions === 0
       ? 0
+      : isOutcome
+      ? 100
       : Math.round((step / totalQuestions) * 100);
   const stepLabel =
     step === 0
       ? "Getting started"
+      : isOutcome
+      ? "Next steps"
       : `Step ${step} of ${totalQuestions}`;
 
   if (!open) return null;
