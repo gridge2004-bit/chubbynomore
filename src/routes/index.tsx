@@ -83,7 +83,7 @@ const products = [
 ];
 
 const steps = [
-  { n: "01", img: step1Img, title: "Complete your intake", imgAlt: "Complete your intake", desc: "Fill out your health history online in about 5 minutes. No awkward waiting rooms. Your health information is submitted through a private online intake." },
+  { n: "01", img: step1Img, title: "Complete your intake", imgAlt: "Complete your intake", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
   { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
   { n: "03", img: step3Img, title: "Receive your medication", imgAlt: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
@@ -208,7 +208,7 @@ function Hero() {
           </a>
         </Reveal>
         <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
-          Takes about 5 minutes. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
+          Takes about 60 seconds. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
           <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
@@ -759,7 +759,7 @@ function WeightLossScale() {
             Check my eligibility — free
           </a>
           <p className="mt-3 text-[13px] text-white/70">
-            Free eligibility check. Takes about 5 minutes. No charge if you don’t qualify.
+            Free eligibility check. Takes about 60 seconds. No charge if you don’t qualify.
           </p>
         </div>
 
