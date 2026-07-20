@@ -1112,6 +1112,51 @@ const HEALTH_OPTIONS: string[] = [
 ];
 const HEALTH_NONE = "None of these apply to me";
 
+/* ─────────── QUESTIONNAIRE ROUTING CONFIG ───────────
+   Screening-only routing. NOT a diagnosis or eligibility decision.
+   A developer can edit these lists after clinical review to change
+   which health-history selections require additional provider review
+   versus which continue into the full intake.
+   Any selection in `reviewRequired` routes to the Additional Review
+   outcome. Otherwise the user sees the Continue Intake outcome.
+   ---------------------------------------------------- */
+const HEALTH_ROUTING: {
+  reviewRequired: string[];
+  continueIntake: string[];
+} = {
+  reviewRequired: [
+    // medullary thyroid carcinoma history
+    HEALTH_OPTIONS[0],
+    // MEN 2 history
+    HEALTH_OPTIONS[1],
+    // serious GLP-1 allergic reaction
+    HEALTH_OPTIONS[2],
+    // pregnant, planning pregnancy, or breastfeeding
+    HEALTH_OPTIONS[3],
+    // fertility treatment
+    HEALTH_OPTIONS[4],
+  ],
+  continueIntake: [
+    // cardiovascular disease
+    HEALTH_OPTIONS[5],
+    // obstructive sleep apnea
+    HEALTH_OPTIONS[6],
+    // high blood pressure
+    HEALTH_OPTIONS[7],
+    // high cholesterol
+    HEALTH_OPTIONS[8],
+    // type 2 diabetes
+    HEALTH_OPTIONS[9],
+    // none of the listed conditions
+    HEALTH_NONE,
+  ],
+};
+
+// TODO: Replace these placeholders with the confirmed provider-booking
+// and full-intake destinations once those systems are connected.
+const PROVIDER_BOOKING_URL_PLACEHOLDER = "#provider-booking-placeholder";
+const FULL_INTAKE_URL_PLACEHOLDER = "#full-intake-placeholder";
+
 const questionSteps: QuestionStep[] = [
   {
     id: "current_weight",
@@ -1406,29 +1451,51 @@ function QualifyModal() {
   const setAnswer = (id: string, value: unknown) =>
     setAnswers((prev) => ({ ...prev, [id]: value }));
 
-  const currentQuestion = step > 0 ? questionSteps[step - 1] : null;
+  const outcomeStep = totalQuestions + 1;
+  const isOutcome = step === outcomeStep;
+  const currentQuestion =
+    step > 0 && step <= totalQuestions ? questionSteps[step - 1] : null;
   const nextEnabled = currentQuestion ? currentQuestion.isAnswered(answers) : true;
+
+  // Which outcome to show, based on health-conditions routing config.
+  const selectedConditions =
+    (answers["health_conditions"] as string[] | undefined) ?? [];
+  const needsReview = selectedConditions.some((c) =>
+    HEALTH_ROUTING.reviewRequired.includes(c)
+  );
 
   const goNext = () => {
     if (step === 0) {
-      // Intro → first question (or close if no questions defined yet)
       if (totalQuestions === 0) return;
       setStep(1);
       return;
     }
+    if (isOutcome) return;
     if (!nextEnabled) return;
-    setStep((s) => Math.min(s + 1, totalQuestions));
+    setStep((s) => Math.min(s + 1, outcomeStep));
   };
   const goBack = () => setStep((s) => Math.max(s - 1, 0));
 
-  // Progress: 0% on intro; otherwise (step / totalQuestions)
+  // Close without the "answers will not be saved" confirm — used from
+  // outcome-screen actions where the flow is intentionally complete.
+  const closeNow = () => {
+    setOpen(false);
+    setTimeout(reset, 0);
+  };
+  const reviewAnswers = () => setStep(1);
+
+  // Progress: 0% on intro; 100% on outcome; otherwise (step / totalQuestions)
   const pct =
     step === 0 || totalQuestions === 0
       ? 0
+      : isOutcome
+      ? 100
       : Math.round((step / totalQuestions) * 100);
   const stepLabel =
     step === 0
       ? "Getting started"
+      : isOutcome
+      ? "Next steps"
       : `Step ${step} of ${totalQuestions}`;
 
   if (!open) return null;
@@ -1499,10 +1566,19 @@ function QualifyModal() {
               <ModalNav
                 onBack={goBack}
                 onNext={goNext}
+                nextLabel={step === totalQuestions ? "See next step" : "Next"}
                 nextDisabled={!nextEnabled}
                 showBack={step > 1}
               />
             </div>
+          )}
+
+          {isOutcome && (
+            <OutcomeScreen
+              variant={needsReview ? "review" : "continue"}
+              onReview={reviewAnswers}
+              onClose={closeNow}
+            />
           )}
         </div>
       </div>
@@ -1555,6 +1631,69 @@ function IntroScreen({
         This initial questionnaire does not guarantee approval or a
         prescription.
       </p>
+    </div>
+  );
+}
+
+function OutcomeScreen({
+  variant,
+  onReview,
+  onClose,
+}: {
+  variant: "review" | "continue";
+  onReview: () => void;
+  onClose: () => void;
+}) {
+  const isReview = variant === "review";
+  const heading = isReview
+    ? "Let’s find the right next step"
+    : "You’re ready to continue";
+  const body = isReview
+    ? "One or more of your answers requires additional review before you continue. This does not necessarily mean treatment is unavailable. A licensed provider can review your health history and help determine which options may be appropriate for you."
+    : "Your initial answers did not identify one of the listed issues requiring additional review. This is not a medical approval and does not guarantee a prescription. A licensed provider must still review your complete health history and determine whether treatment is appropriate.";
+  const primaryLabel = isReview
+    ? "Speak with a provider"
+    : "Continue to full intake";
+  // Placeholder destinations — replace once the real booking / intake URLs
+  // are connected (see PROVIDER_BOOKING_URL_PLACEHOLDER / FULL_INTAKE_URL_PLACEHOLDER).
+  const primaryHref = isReview
+    ? PROVIDER_BOOKING_URL_PLACEHOLDER
+    : FULL_INTAKE_URL_PLACEHOLDER;
+
+  return (
+    <div>
+      <h2
+        id="qualify-modal-title"
+        className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+      >
+        {heading}
+      </h2>
+      <p className="mt-4 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+        {body}
+      </p>
+
+      <div className="mt-8 flex flex-col gap-3">
+        <a
+          href={primaryHref}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] focus-visible:ring-offset-2"
+        >
+          {primaryLabel}
+        </a>
+        <button
+          type="button"
+          onClick={onReview}
+          className="inline-flex w-full items-center justify-center rounded-full border border-[#1B2147] bg-white px-6 py-3 text-sm font-semibold text-[#1B2147] transition hover:bg-[#F5F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+        >
+          Review my answers
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#1B2147] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+        >
+          Return to the homepage
+        </button>
+      </div>
     </div>
   );
 }
