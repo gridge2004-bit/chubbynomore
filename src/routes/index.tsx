@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import semaglutideImg from "@/assets/compounded-weightloss.jpg";
@@ -89,14 +90,12 @@ const steps = [
 
 
 const faqs = [
-  { q: "Will insurance cover this?", a: "Coverage varies by plan, medication, and individual eligibility. Some services or prescription expenses may qualify for HSA or FSA reimbursement depending on your plan. Check with your insurer or plan administrator before purchase." },
-  { q: "How quickly will I see results?", a: "Response and timing vary by medication, dose, adherence, and individual factors. Some people notice changes during dose escalation, while others take longer. Your licensed provider will discuss realistic expectations based on your treatment plan. Results are not guaranteed." },
-  { q: "Are there side effects?", a: "Common side effects vary by medication and may include nausea, vomiting, diarrhea, constipation, abdominal discomfort, and decreased appetite. Serious reactions can also occur, including pancreatitis, gallbladder problems, dehydration-related kidney injury, severe gastrointestinal reactions, low blood sugar when combined with certain diabetes medications, and serious allergic reactions. Review the medication guide and discuss your complete health history with your licensed provider." },
-  { q: "Do I need to go to a clinic?", a: "Care is generally provided online where available. A licensed provider may determine that laboratory testing, additional evaluation, or in-person medical care is needed before or during treatment." },
-  { q: "What if I don't qualify?", a: "If an available treatment option is not medically appropriate for you, a licensed provider will explain the decision and may recommend that you discuss other options with your regular healthcare professional. You will not be charged for the eligibility check." },
-  { q: "How is ChubbyNoMore different from other telehealth services?", a: "We focus on GLP-1 weight-management care. Your licensed provider remains involved beyond signup, with ongoing clinical support where available." },
-  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. Complete the intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing treatment is medically appropriate. Continuation and dosing are determined by the provider." },
-  { q: "How is my information handled?", a: "Your health information will be submitted through the private patient-intake system used by the licensed provider. Full privacy details will be provided before the intake process begins." },
+  { q: "What are the common side effects of GLP-1 medications?", a: "Common side effects may include nausea, diarrhea, vomiting, constipation, and stomach discomfort, particularly when beginning treatment or increasing a dose. Side effects vary by person. A licensed provider will review the potential risks and help determine an appropriate treatment and titration plan." },
+  { q: "How much weight can I expect to lose?", a: "Results vary significantly from person to person, and no specific result is guaranteed. Your provider can discuss what may be realistic based on your medication, starting weight, medical history, lifestyle, and consistency with your treatment plan." },
+  { q: "What determines whether I qualify for treatment?", a: "A licensed provider will review factors including your medical history, current medications, height, weight, BMI, existing health conditions, and treatment goals. Completing the questionnaire does not guarantee approval or a prescription." },
+  { q: "Can I eventually stop taking GLP-1 medication?", a: "The appropriate length of treatment differs for each patient. Your provider will help determine whether continuing, adjusting, or stopping treatment is appropriate. Do not stop or change a prescribed medication without medical guidance." },
+  { q: "What happens if GLP-1 treatment is not right for me?", a: "A prescription will not be issued if a licensed provider determines that treatment is not medically appropriate. The provider may discuss other possible next steps or recommend that you follow up with your primary-care provider or another specialist." },
+  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final treatment and pricing are determined by the licensed provider based on what may be medically appropriate for you." },
 ];
 
 const NAVY = "#1B2147";
@@ -129,8 +128,8 @@ function Index() {
       <CompoundedVsBrand />
       <WhoNotFor />
 
-      <FAQ />
       <FinalCTA />
+      <FAQ />
       <Footer />
       <QualifyModal />
     </div>
@@ -944,38 +943,62 @@ function HowItWorks() {
 
 
 function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [openSet, setOpenSet] = useState<Set<number>>(() => new Set([0]));
+  const toggle = (i: number) =>
+    setOpenSet((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
   return (
     <section id="faq" className="bg-white px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
-            Common questions. <em className="italic">Honest answers.</em>
+            Frequently asked <em className="italic">questions.</em>
           </h2>
         </Reveal>
-        <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
-          {faqs.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <Reveal key={f.q} delay={i * 60}>
-                <button
-                  type="button"
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 py-5 text-left"
-                >
-                  <span className="font-serif text-lg text-[#1B2147] md:text-xl">{f.q}</span>
-                  <span className="grid h-7 w-7 shrink-0 place-items-center text-xl text-[#1B2147]" aria-hidden>
-                    {isOpen ? "−" : "+"}
-                  </span>
-                </button>
-                <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}>
-                  <div className="min-h-0">
-                    <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
+        <div>
+          <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
+            {faqs.map((f, i) => {
+              const isOpen = openSet.has(i);
+              const panelId = `faq-panel-${i}`;
+              const btnId = `faq-btn-${i}`;
+              return (
+                <Reveal key={f.q} delay={i * 60}>
+                  <button
+                    id={btnId}
+                    type="button"
+                    onClick={() => toggle(i)}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    className="flex w-full items-center justify-between gap-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2147] focus-visible:ring-offset-2"
+                  >
+                    <span className="font-serif text-lg text-[#1B2147] md:text-xl">{f.q}</span>
+                    <ChevronDown
+                      aria-hidden
+                      className={`h-5 w-5 shrink-0 text-[#1B2147] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={btnId}
+                    hidden={!isOpen}
+                    className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}
+                  >
+                    <div className="min-h-0">
+                      <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            );
-          })}
+                </Reveal>
+              );
+            })}
+          </div>
+          <p className="mt-6 text-xs leading-relaxed text-[#5A6075] md:text-sm">
+            Prescription treatment requires an online medical evaluation. Not everyone qualifies. Individual results vary.
+          </p>
         </div>
       </div>
     </section>
