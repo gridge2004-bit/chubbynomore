@@ -1635,6 +1635,69 @@ function IntroScreen({
   );
 }
 
+function OutcomeScreen({
+  variant,
+  onReview,
+  onClose,
+}: {
+  variant: "review" | "continue";
+  onReview: () => void;
+  onClose: () => void;
+}) {
+  const isReview = variant === "review";
+  const heading = isReview
+    ? "Let’s find the right next step"
+    : "You’re ready to continue";
+  const body = isReview
+    ? "One or more of your answers requires additional review before you continue. This does not necessarily mean treatment is unavailable. A licensed provider can review your health history and help determine which options may be appropriate for you."
+    : "Your initial answers did not identify one of the listed issues requiring additional review. This is not a medical approval and does not guarantee a prescription. A licensed provider must still review your complete health history and determine whether treatment is appropriate.";
+  const primaryLabel = isReview
+    ? "Speak with a provider"
+    : "Continue to full intake";
+  // Placeholder destinations — replace once the real booking / intake URLs
+  // are connected (see PROVIDER_BOOKING_URL_PLACEHOLDER / FULL_INTAKE_URL_PLACEHOLDER).
+  const primaryHref = isReview
+    ? PROVIDER_BOOKING_URL_PLACEHOLDER
+    : FULL_INTAKE_URL_PLACEHOLDER;
+
+  return (
+    <div>
+      <h2
+        id="qualify-modal-title"
+        className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+      >
+        {heading}
+      </h2>
+      <p className="mt-4 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+        {body}
+      </p>
+
+      <div className="mt-8 flex flex-col gap-3">
+        <a
+          href={primaryHref}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] focus-visible:ring-offset-2"
+        >
+          {primaryLabel}
+        </a>
+        <button
+          type="button"
+          onClick={onReview}
+          className="inline-flex w-full items-center justify-center rounded-full border border-[#1B2147] bg-white px-6 py-3 text-sm font-semibold text-[#1B2147] transition hover:bg-[#F5F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+        >
+          Review my answers
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#1B2147] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+        >
+          Return to the homepage
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function ModalNav({
   onBack,
   onNext,
