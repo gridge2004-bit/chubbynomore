@@ -1112,6 +1112,51 @@ const HEALTH_OPTIONS: string[] = [
 ];
 const HEALTH_NONE = "None of these apply to me";
 
+/* ─────────── QUESTIONNAIRE ROUTING CONFIG ───────────
+   Screening-only routing. NOT a diagnosis or eligibility decision.
+   A developer can edit these lists after clinical review to change
+   which health-history selections require additional provider review
+   versus which continue into the full intake.
+   Any selection in `reviewRequired` routes to the Additional Review
+   outcome. Otherwise the user sees the Continue Intake outcome.
+   ---------------------------------------------------- */
+const HEALTH_ROUTING: {
+  reviewRequired: string[];
+  continueIntake: string[];
+} = {
+  reviewRequired: [
+    // medullary thyroid carcinoma history
+    HEALTH_OPTIONS[0],
+    // MEN 2 history
+    HEALTH_OPTIONS[1],
+    // serious GLP-1 allergic reaction
+    HEALTH_OPTIONS[2],
+    // pregnant, planning pregnancy, or breastfeeding
+    HEALTH_OPTIONS[3],
+    // fertility treatment
+    HEALTH_OPTIONS[4],
+  ],
+  continueIntake: [
+    // cardiovascular disease
+    HEALTH_OPTIONS[5],
+    // obstructive sleep apnea
+    HEALTH_OPTIONS[6],
+    // high blood pressure
+    HEALTH_OPTIONS[7],
+    // high cholesterol
+    HEALTH_OPTIONS[8],
+    // type 2 diabetes
+    HEALTH_OPTIONS[9],
+    // none of the listed conditions
+    HEALTH_NONE,
+  ],
+};
+
+// TODO: Replace these placeholders with the confirmed provider-booking
+// and full-intake destinations once those systems are connected.
+const PROVIDER_BOOKING_URL_PLACEHOLDER = "#provider-booking-placeholder";
+const FULL_INTAKE_URL_PLACEHOLDER = "#full-intake-placeholder";
+
 const questionSteps: QuestionStep[] = [
   {
     id: "current_weight",
