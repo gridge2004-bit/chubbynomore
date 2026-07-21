@@ -141,6 +141,7 @@ function Index() {
       <CompoundedVsBrand />
       <WhoNotFor />
 
+      <TrustedCare />
       <FinalCTA />
       <FAQ />
       <Footer />
@@ -1013,6 +1014,188 @@ function FAQ() {
             Prescription treatment requires an online medical evaluation. Not everyone qualifies. Individual results vary.
           </p>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// TrustedCare section
+// Configuration-driven. Do NOT display placeholder credentials,
+// testimonials, statistics, badges, or ratings unless verified
+// data has been supplied and substantiated.
+// ============================================================
+
+type ProviderConfig = {
+  verified: boolean;
+  name?: string;
+  title?: string;
+  headshot?: string;
+  license?: string; // medical license or states served
+  credential?: string; // relevant credential (e.g. specialty)
+  bio?: string;
+};
+
+type TestimonialConfig = {
+  firstName: string;
+  lastInitial: string;
+  photo?: string; // only when written permission exists
+  text: string;
+  compensated: boolean;
+  disclaimer?: string;
+};
+
+type StatisticConfig = {
+  label: string;
+  value?: string; // hidden if not supplied
+};
+
+const providerConfig: ProviderConfig = {
+  verified: false,
+  // TODO: Populate with verified provider details before enabling.
+  // name: "",
+  // title: "",
+  // headshot: "",
+  // license: "",
+  // credential: "",
+  // bio: "",
+};
+
+// Single toggle. Keep false until real, consented testimonials exist.
+const testimonialsEnabled = false;
+const testimonialConfig: TestimonialConfig[] = [
+  // TODO: Add up to three consented testimonials.
+];
+
+const statisticsConfig: StatisticConfig[] = [
+  { label: "Patients served" },
+  { label: "Average review score" },
+  { label: "States available" },
+];
+
+function TrustedCare() {
+  const visibleStats = statisticsConfig.filter((s) => s.value && s.value.trim().length > 0);
+  const showDisclaimer = testimonialsEnabled || visibleStats.length > 0;
+
+  return (
+    <section
+      aria-labelledby="trusted-care-heading"
+      className="w-full bg-white"
+    >
+      <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]/60">
+            Trusted care
+          </div>
+          <h2
+            id="trusted-care-heading"
+            className="mt-4 font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl"
+          >
+            Trusted care, built around real medical review
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/75 md:text-lg">
+            Every intake is reviewed by a licensed medical professional. This page will grow as verified provider information, consented patient testimonials, and substantiated program statistics become available.
+          </p>
+        </div>
+
+        {/* Provider area */}
+        <div className="mt-14 rounded-2xl border border-[#1B2147]/10 bg-[#F5F1EA] p-8 md:p-12">
+          <h3 className="font-serif text-2xl text-[#1B2147] md:text-3xl">
+            Care reviewed by licensed medical professionals
+          </h3>
+
+          {providerConfig.verified ? (
+            <div className="mt-8 grid gap-8 md:grid-cols-[180px_1fr] md:items-start">
+              <div className="h-40 w-40 overflow-hidden rounded-full bg-white ring-1 ring-[#1B2147]/10 md:h-44 md:w-44">
+                {providerConfig.headshot ? (
+                  <img
+                    src={providerConfig.headshot}
+                    alt={providerConfig.name ? `Portrait of ${providerConfig.name}` : "Provider portrait"}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                ) : null}
+              </div>
+              <div>
+                {providerConfig.name && (
+                  <div className="font-serif text-xl text-[#1B2147]">{providerConfig.name}</div>
+                )}
+                {providerConfig.title && (
+                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.title}</div>
+                )}
+                {providerConfig.credential && (
+                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.credential}</div>
+                )}
+                {providerConfig.license && (
+                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.license}</div>
+                )}
+                {providerConfig.bio && (
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#1B2147]/80">
+                    {providerConfig.bio}
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : (
+            <p className="mt-6 text-sm text-[#1B2147]/70">Provider information coming soon</p>
+          )}
+        </div>
+
+        {/* Testimonial area — only rendered when enabled */}
+        {testimonialsEnabled && testimonialConfig.length > 0 && (
+          <div className="mt-12">
+            <h3 className="font-serif text-2xl text-[#1B2147] md:text-3xl">
+              What patients are saying
+            </h3>
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {testimonialConfig.slice(0, 3).map((t, i) => (
+                <figure
+                  key={i}
+                  className="flex h-full flex-col rounded-2xl border border-[#1B2147]/10 bg-white p-6 shadow-sm"
+                >
+                  {t.photo && (
+                    <img
+                      src={t.photo}
+                      alt={`Portrait of ${t.firstName} ${t.lastInitial}.`}
+                      className="mb-4 h-14 w-14 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  <blockquote className="text-sm leading-relaxed text-[#1B2147]/85">
+                    “{t.text}”
+                  </blockquote>
+                  <figcaption className="mt-5 text-sm font-semibold text-[#1B2147]">
+                    {t.firstName} {t.lastInitial}.
+                  </figcaption>
+                  <div className="mt-2 space-y-1 text-xs text-[#1B2147]/60">
+                    {t.compensated && <div>Compensated for their time.</div>}
+                    {t.disclaimer && <div>{t.disclaimer}</div>}
+                  </div>
+                </figure>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Statistics area — each stat hidden if value not supplied */}
+        {visibleStats.length > 0 && (
+          <div className="mt-12 grid gap-6 rounded-2xl bg-[#1B2147] p-8 text-white sm:grid-cols-2 md:grid-cols-3 md:p-10">
+            {visibleStats.map((s) => (
+              <div key={s.label}>
+                <div className="font-serif text-3xl md:text-4xl">{s.value}</div>
+                <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/70">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showDisclaimer && (
+          <p className="mt-8 max-w-3xl text-xs leading-relaxed text-[#1B2147]/60">
+            Individual experiences and results vary. Testimonials do not guarantee that other patients will achieve the same outcome.
+          </p>
+        )}
       </div>
     </section>
   );
