@@ -575,9 +575,13 @@ function MedicationInfoPanel({
           <div className="mt-5 rounded-2xl bg-[#EEF0EC] px-4 py-4">
             <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting price</p>
             <p className="mt-1 text-[22px] font-bold">
-              {card.price}
-              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">{card.period}</span>
+              From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
             </p>
+            <p className="mt-1 text-[13px] text-[#1B2147]/80">
+              {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
+            </p>
+            <p className="mt-2 text-[11px] leading-relaxed text-[#1B2147]/60">{PER_DOSE_INFO}</p>
           </div>
           {isCompounded && (
             <p className="mt-4 text-[12px] italic leading-relaxed text-[#1B2147]/70">
