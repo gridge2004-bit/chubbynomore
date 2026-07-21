@@ -280,10 +280,12 @@ type DetailedCard = {
   tagTone: "tan" | "lavender";
   name: string;
   desc: string;
-  price: string;
-  period: string;
   img: string;
   imgAlt: string;
+  fullSupplyPrice: number;
+  supplyLabel: string; // e.g. "28-day supply"
+  dosesPerSupply: number;
+  doseLabel: string; // e.g. "weekly dose"
 };
 
 const FEATURED_IDS = ["semaglutide", "tirzepatide", "zepbound"];
@@ -298,6 +300,13 @@ const CARD_META: Record<string, { format: string; activeIngredient: string }> = 
   mounjaro: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
 };
 
+const PER_DOSE_INFO =
+  "Per-dose pricing is calculated by dividing the displayed starting supply price by the number of doses in that supply. Your prescribed dose, treatment, final cost, and product availability may differ.";
+
+function formatUSD(n: number) {
+  return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+}
+
 const detailedCards: DetailedCard[] = [
   {
     id: "tirzepatide",
@@ -305,10 +314,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "tan",
     name: "Tirzepatide",
     desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
-    price: "$249.99",
-    period: "/28-day supply",
     img: semaglutideImg,
     imgAlt: "Compounded Tirzepatide vial",
+    fullSupplyPrice: 249.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "semaglutide",
@@ -316,10 +327,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "tan",
     name: "Semaglutide",
     desc: "A clinician-prescribed GLP-1 treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
-    price: "$149.99",
-    period: "/28-day supply",
     img: semaglutideImg,
     imgAlt: "Compounded Semaglutide vial",
+    fullSupplyPrice: 149.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "foundayo",
@@ -327,10 +340,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Foundayo™ Tablets",
     desc: "Foundayo™ (orforglipron) is a once-daily oral GLP-1 medication FDA-approved, together with a reduced-calorie diet and increased physical activity, to reduce excess body weight and maintain weight reduction long term in eligible adults.",
-    price: "$199.99",
-    period: "/month",
     img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
+    fullSupplyPrice: 199.99,
+    supplyLabel: "30-day supply",
+    dosesPerSupply: 30,
+    doseLabel: "daily dose",
   },
   {
     id: "wegovy-tablets",
@@ -338,10 +353,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Wegovy® Tablets",
     desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
-    price: "$249.99",
-    period: "/month",
     img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
+    fullSupplyPrice: 249.99,
+    supplyLabel: "30-day supply",
+    dosesPerSupply: 30,
+    doseLabel: "daily dose",
   },
   {
     id: "zepbound",
@@ -349,10 +366,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Zepbound®",
     desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
-    price: "$449.99",
-    period: "/month",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
+    fullSupplyPrice: 449.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "wegovy-pens",
@@ -360,10 +379,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Wegovy® Pens",
     desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
-    price: "$349.99",
-    period: "/month",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
+    fullSupplyPrice: 349.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "ozempic",
@@ -371,10 +392,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Ozempic®",
     desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
-    price: "$349.99",
-    period: "/month",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
+    fullSupplyPrice: 349.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "mounjaro",
@@ -382,10 +405,12 @@ const detailedCards: DetailedCard[] = [
     tagTone: "lavender",
     name: "Mounjaro®",
     desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
-    price: "$1,249.99",
-    period: "/month",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
+    fullSupplyPrice: 1249.99,
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
 ];
 
@@ -428,14 +453,32 @@ function MedicationRow({
         </p>
       </div>
       <div className="hidden shrink-0 text-right sm:block">
-        <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting at</p>
-        <p className="text-[18px] font-bold text-[#1B2147]">
-          {card.price}
-          <span className="ml-1 text-[12px] font-normal text-[#1B2147]/60">{card.period}</span>
+        <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
+          <p className="text-[16px] font-bold leading-tight">
+            From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+            <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
+          </p>
+          <button
+            type="button"
+            aria-label="How per-dose pricing is calculated"
+            title={PER_DOSE_INFO}
+            className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white"
+          >
+            i
+          </button>
+        </div>
+        <p className="mt-0.5 text-[12px] text-[#1B2147]/70">
+          {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
         </p>
       </div>
-      <div className="flex shrink-0 flex-col items-end gap-1 sm:hidden">
-        <p className="text-[14px] font-bold text-[#1B2147]">{card.price}</p>
+      <div className="flex shrink-0 flex-col items-end gap-0.5 text-right sm:hidden">
+        <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
+          From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+        </p>
+        <p className="text-[11px] text-[#1B2147]/70">per {card.doseLabel}</p>
+        <p className="text-[11px] text-[#1B2147]/70">
+          {formatUSD(card.fullSupplyPrice)} / {card.supplyLabel}
+        </p>
       </div>
       <button
         type="button"
@@ -532,9 +575,13 @@ function MedicationInfoPanel({
           <div className="mt-5 rounded-2xl bg-[#EEF0EC] px-4 py-4">
             <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting price</p>
             <p className="mt-1 text-[22px] font-bold">
-              {card.price}
-              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">{card.period}</span>
+              From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
             </p>
+            <p className="mt-1 text-[13px] text-[#1B2147]/80">
+              {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
+            </p>
+            <p className="mt-2 text-[11px] leading-relaxed text-[#1B2147]/60">{PER_DOSE_INFO}</p>
           </div>
           {isCompounded && (
             <p className="mt-4 text-[12px] italic leading-relaxed text-[#1B2147]/70">
