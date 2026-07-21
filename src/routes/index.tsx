@@ -709,16 +709,17 @@ function MedicationOptions() {
           <ul className="divide-y divide-[#1B2147]/10">
             {featured.map((c) => (
               <li key={c.id}>
-                <MedicationRow card={c} onInfo={setInfoCard} />
+                <MedicationRow card={c} onInfo={openInfo} />
               </li>
             ))}
             {expanded &&
               remaining.map((c) => (
                 <li key={c.id}>
-                  <MedicationRow card={c} onInfo={setInfoCard} />
+                  <MedicationRow card={c} onInfo={openInfo} />
                 </li>
               ))}
           </ul>
+
         </div>
 
         {remaining.length > 0 && (
