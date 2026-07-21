@@ -1099,9 +1099,6 @@ function TrustedCare() {
           >
             Trusted care, built around real medical review
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/75 md:text-lg">
-            Every intake is reviewed by a licensed medical professional. This page will grow as verified provider information, consented patient testimonials, and substantiated program statistics become available.
-          </p>
         </div>
 
         {/* Provider area */}
