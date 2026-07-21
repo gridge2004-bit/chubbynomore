@@ -453,14 +453,32 @@ function MedicationRow({
         </p>
       </div>
       <div className="hidden shrink-0 text-right sm:block">
-        <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting at</p>
-        <p className="text-[18px] font-bold text-[#1B2147]">
-          {card.price}
-          <span className="ml-1 text-[12px] font-normal text-[#1B2147]/60">{card.period}</span>
+        <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
+          <p className="text-[16px] font-bold leading-tight">
+            From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+            <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
+          </p>
+          <button
+            type="button"
+            aria-label="How per-dose pricing is calculated"
+            title={PER_DOSE_INFO}
+            className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white"
+          >
+            i
+          </button>
+        </div>
+        <p className="mt-0.5 text-[12px] text-[#1B2147]/70">
+          {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
         </p>
       </div>
-      <div className="flex shrink-0 flex-col items-end gap-1 sm:hidden">
-        <p className="text-[14px] font-bold text-[#1B2147]">{card.price}</p>
+      <div className="flex shrink-0 flex-col items-end gap-0.5 text-right sm:hidden">
+        <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
+          From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+        </p>
+        <p className="text-[11px] text-[#1B2147]/70">per {card.doseLabel}</p>
+        <p className="text-[11px] text-[#1B2147]/70">
+          {formatUSD(card.fullSupplyPrice)} / {card.supplyLabel}
+        </p>
       </div>
       <button
         type="button"
