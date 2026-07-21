@@ -141,6 +141,7 @@ function Index() {
       <CompoundedVsBrand />
       <WhoNotFor />
 
+      <TrustedCare />
       <FinalCTA />
       <FAQ />
       <Footer />
