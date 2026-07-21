@@ -673,10 +673,22 @@ function EmotionalTransformation() {
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const openInfo = (card: DetailedCard, trigger: HTMLElement) => {
+    triggerRef.current = trigger;
+    setInfoCard(card);
+  };
+  const closeInfo = () => {
+    setInfoCard(null);
+    // Return focus to the icon that opened the panel
+    window.setTimeout(() => triggerRef.current?.focus?.(), 0);
+  };
 
   const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
   const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
   const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
+
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
