@@ -95,6 +95,19 @@ const faqs = [
   { q: "What determines whether I qualify for treatment?", a: "A licensed provider will review factors including your medical history, current medications, height, weight, BMI, existing health conditions, and treatment goals. Completing the questionnaire does not guarantee approval or a prescription." },
   { q: "Can I eventually stop taking GLP-1 medication?", a: "The appropriate length of treatment differs for each patient. Your provider will help determine whether continuing, adjusting, or stopping treatment is appropriate. Do not stop or change a prescribed medication without medical guidance." },
   { q: "What happens if GLP-1 treatment is not right for me?", a: "A prescription will not be issued if a licensed provider determines that treatment is not medically appropriate. The provider may discuss other possible next steps or recommend that you follow up with your primary-care provider or another specialist." },
+  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. If you are currently taking semaglutide, tirzepatide, or another GLP-1 medication, you can complete our online intake and provide information about your current medication, dose, treatment history, and prescribing provider. A licensed provider will review your information and determine whether continuing treatment, changing medications, or adjusting your dose may be medically appropriate. Continuation of treatment or a particular dose is not guaranteed." },
+  {
+    q: "How is my information handled?",
+    a: (
+      <>
+        Your health information is collected through the private online intake and used to evaluate and coordinate your care. It should only be shared with the providers, pharmacies, and service partners involved in delivering that care, as permitted by applicable law and the Chubby No More Privacy Policy.{" "}
+        {/* TODO: Replace /privacy-policy-placeholder with the actual privacy-policy URL once it exists. */}
+        <a href="/privacy-policy-placeholder" className="underline hover:no-underline">
+          Read our Privacy Policy
+        </a>
+      </>
+    ),
+  },
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
 ];
 
