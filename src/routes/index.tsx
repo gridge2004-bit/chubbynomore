@@ -1061,6 +1061,10 @@ const providerConfig: ProviderConfig = {
   // bio: "",
 };
 
+// Master toggle for the entire TrustedCare section.
+// Keep false until at least one verified provider profile has been added.
+const showTrustedCareSection = false;
+
 // Single toggle. Keep false until real, consented testimonials exist.
 const testimonialsEnabled = false;
 const testimonialConfig: TestimonialConfig[] = [
@@ -1074,6 +1078,8 @@ const statisticsConfig: StatisticConfig[] = [
 ];
 
 function TrustedCare() {
+  if (!showTrustedCareSection) return null;
+
   const visibleStats = statisticsConfig.filter((s) => s.value && s.value.trim().length > 0);
   const showDisclaimer = testimonialsEnabled || visibleStats.length > 0;
 
@@ -1093,9 +1099,6 @@ function TrustedCare() {
           >
             Trusted care, built around real medical review
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/75 md:text-lg">
-            Every intake is reviewed by a licensed medical professional. This page will grow as verified provider information, consented patient testimonials, and substantiated program statistics become available.
-          </p>
         </div>
 
         {/* Provider area */}
@@ -1136,9 +1139,7 @@ function TrustedCare() {
                 )}
               </div>
             </div>
-          ) : (
-            <p className="mt-6 text-sm text-[#1B2147]/70">Provider information coming soon</p>
-          )}
+          ) : null}
         </div>
 
         {/* Testimonial area — only rendered when enabled */}
