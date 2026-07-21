@@ -869,20 +869,20 @@ function CompoundedVsBrand() {
 function WhyChoose() {
   const benefits = [
     {
-      title: "Private online intake",
-      body: "Complete your health history online without sitting in a waiting room.",
+      title: "Direct, straightforward care",
+      body: "Clear information, transparent starting prices, and no unnecessary runaround.",
     },
     {
-      title: "Licensed-provider review",
-      body: "Your medical information is reviewed by a licensed provider. Treatment is never automatically approved by software.",
+      title: "Private from the start",
+      body: "Complete your health intake online and receive discreet treatment delivery where available.",
     },
     {
-      title: "Clear starting prices",
-      body: "See starting prices before beginning. Final treatment options and costs depend on eligibility and availability.",
+      title: "Built around a busy schedule",
+      body: "Complete the intake on your own time without sitting in a traditional waiting room.",
     },
     {
-      title: "Delivered to your door",
-      body: "If prescribed, medication is dispensed by a licensed U.S. pharmacy and shipped discreetly where available.",
+      title: "More than a prescription",
+      body: "A licensed provider reviews your medical information and determines whether an available treatment may be appropriate for you.",
     },
   ];
 
@@ -897,7 +897,7 @@ function WhyChoose() {
             Straightforward care, without the usual friction.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
-            ChubbyNoMore is designed to make medically supervised GLP-1 care private, clear, and convenient.
+            Chubby No More is designed for men who want direct answers, private care, transparent pricing, and a medically supervised plan that fits into real life.
           </p>
         </Reveal>
 
