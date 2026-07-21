@@ -1139,9 +1139,7 @@ function TrustedCare() {
                 )}
               </div>
             </div>
-          ) : (
-            <p className="mt-6 text-sm text-[#1B2147]/70">Provider information coming soon</p>
-          )}
+          ) : null}
         </div>
 
         {/* Testimonial area — only rendered when enabled */}
