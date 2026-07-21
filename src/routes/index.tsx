@@ -554,10 +554,11 @@ function MedicationInfoPanel({
             <h3 className="mt-1 text-[22px] font-semibold text-[#1B2147]">{card.name}</h3>
           </div>
           <button
+            ref={closeBtnRef}
             type="button"
             onClick={onClose}
-            aria-label="Close"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white"
+            aria-label="Close information panel"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="6" y1="6" x2="18" y2="18" />
