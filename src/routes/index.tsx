@@ -1078,6 +1078,8 @@ const statisticsConfig: StatisticConfig[] = [
 ];
 
 function TrustedCare() {
+  if (!showTrustedCareSection) return null;
+
   const visibleStats = statisticsConfig.filter((s) => s.value && s.value.trim().length > 0);
   const showDisclaimer = testimonialsEnabled || visibleStats.length > 0;
 
