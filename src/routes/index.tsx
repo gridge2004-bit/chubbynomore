@@ -752,7 +752,7 @@ function MedicationOptions() {
         </div>
       </div>
 
-      <MedicationInfoPanel card={infoCard} onClose={() => setInfoCard(null)} />
+      <MedicationInfoPanel card={infoCard} onClose={closeInfo} />
     </section>
   );
 }
