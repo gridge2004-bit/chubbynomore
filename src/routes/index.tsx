@@ -420,49 +420,50 @@ function MedicationRow({
   onInfo,
 }: {
   card: DetailedCard;
-  onInfo: (card: DetailedCard) => void;
+  onInfo: (card: DetailedCard, trigger: HTMLElement) => void;
 }) {
   const meta = CARD_META[card.id];
   const isCompounded = card.tags.includes("COMPOUNDED");
   const badgeClass = isCompounded
     ? "bg-[#E6D4B8] text-[#1B2147]"
     : "bg-[#D8DCEF] text-[#1B2147]";
+  const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
   return (
-    <div className="flex items-center gap-4 py-5 sm:gap-5 sm:py-6">
-      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
+    <div className="flex items-center gap-3 py-5 sm:gap-5 sm:py-6">
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
         <img
           src={card.img}
           alt={card.imgAlt}
-          className="max-h-14 w-auto object-contain mix-blend-multiply sm:max-h-16"
+          className="max-h-12 w-auto object-contain mix-blend-multiply sm:max-h-16"
           loading="lazy"
         />
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <h3 className="text-[16px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
+          <h3 className="text-[15px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
             {card.name}
           </h3>
           <span
-            className={`rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-[0.1em] ${badgeClass}`}
+            className={`rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.1em] sm:px-2 sm:text-[10px] ${badgeClass}`}
           >
             {isCompounded ? "COMPOUNDED" : "BRAND-NAME"}
           </span>
         </div>
-        <p className="mt-1 text-[13px] text-[#1B2147]/70 sm:text-[14px]">
+        <p className="mt-1 text-[12px] text-[#1B2147]/70 sm:text-[14px]">
           {meta?.format ?? "Prescription treatment"}
         </p>
       </div>
       <div className="hidden shrink-0 text-right sm:block">
         <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
           <p className="text-[16px] font-bold leading-tight">
-            From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+            From {formatUSD(perDose)}
             <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
           </p>
           <button
             type="button"
-            aria-label="How per-dose pricing is calculated"
-            title={PER_DOSE_INFO}
-            className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white"
+            aria-label={`How per-dose pricing is calculated for ${card.name}`}
+            onClick={(e) => onInfo(card, e.currentTarget)}
+            className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
           >
             i
           </button>
@@ -473,20 +474,21 @@ function MedicationRow({
       </div>
       <div className="flex shrink-0 flex-col items-end gap-0.5 text-right sm:hidden">
         <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
-          From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
+          From {formatUSD(perDose)}
         </p>
-        <p className="text-[11px] text-[#1B2147]/70">per {card.doseLabel}</p>
-        <p className="text-[11px] text-[#1B2147]/70">
-          {formatUSD(card.fullSupplyPrice)} / {card.supplyLabel}
+        <p className="text-[10px] text-[#1B2147]/70">per {card.doseLabel}</p>
+        <p className="text-[10px] text-[#1B2147]/70">
+          {formatUSD(card.fullSupplyPrice)}/{card.supplyLabel}
         </p>
       </div>
       <button
         type="button"
-        onClick={() => onInfo(card)}
+        onClick={(e) => onInfo(card, e.currentTarget)}
         aria-label={`More information about ${card.name}`}
-        className="ml-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+        aria-haspopup="dialog"
+        className="ml-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
       >
-        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="10" x2="12" y2="16" />
           <circle cx="12" cy="7.5" r="0.6" fill="currentColor" />
@@ -496,6 +498,7 @@ function MedicationRow({
   );
 }
 
+
 function MedicationInfoPanel({
   card,
   onClose,
@@ -503,6 +506,7 @@ function MedicationInfoPanel({
   card: DetailedCard | null;
   onClose: () => void;
 }) {
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (!card) return;
     const onKey = (e: KeyboardEvent) => {
@@ -511,11 +515,15 @@ function MedicationInfoPanel({
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Move focus into the panel for keyboard/screen-reader users
+    const t = window.setTimeout(() => closeBtnRef.current?.focus(), 0);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      window.clearTimeout(t);
     };
   }, [card, onClose]);
+
 
   if (!card) return null;
   const meta = CARD_META[card.id];
@@ -546,10 +554,11 @@ function MedicationInfoPanel({
             <h3 className="mt-1 text-[22px] font-semibold text-[#1B2147]">{card.name}</h3>
           </div>
           <button
+            ref={closeBtnRef}
             type="button"
             onClick={onClose}
-            aria-label="Close"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white"
+            aria-label="Close information panel"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -664,10 +673,22 @@ function EmotionalTransformation() {
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const openInfo = (card: DetailedCard, trigger: HTMLElement) => {
+    triggerRef.current = trigger;
+    setInfoCard(card);
+  };
+  const closeInfo = () => {
+    setInfoCard(null);
+    // Return focus to the icon that opened the panel
+    window.setTimeout(() => triggerRef.current?.focus?.(), 0);
+  };
 
   const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
   const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
   const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
+
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
@@ -688,16 +709,17 @@ function MedicationOptions() {
           <ul className="divide-y divide-[#1B2147]/10">
             {featured.map((c) => (
               <li key={c.id}>
-                <MedicationRow card={c} onInfo={setInfoCard} />
+                <MedicationRow card={c} onInfo={openInfo} />
               </li>
             ))}
             {expanded &&
               remaining.map((c) => (
                 <li key={c.id}>
-                  <MedicationRow card={c} onInfo={setInfoCard} />
+                  <MedicationRow card={c} onInfo={openInfo} />
                 </li>
               ))}
           </ul>
+
         </div>
 
         {remaining.length > 0 && (
@@ -730,7 +752,7 @@ function MedicationOptions() {
         </div>
       </div>
 
-      <MedicationInfoPanel card={infoCard} onClose={() => setInfoCard(null)} />
+      <MedicationInfoPanel card={infoCard} onClose={closeInfo} />
     </section>
   );
 }
