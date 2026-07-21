@@ -1061,6 +1061,10 @@ const providerConfig: ProviderConfig = {
   // bio: "",
 };
 
+// Master toggle for the entire TrustedCare section.
+// Keep false until at least one verified provider profile has been added.
+const showTrustedCareSection = false;
+
 // Single toggle. Keep false until real, consented testimonials exist.
 const testimonialsEnabled = false;
 const testimonialConfig: TestimonialConfig[] = [
