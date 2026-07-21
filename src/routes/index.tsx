@@ -615,10 +615,17 @@ function EmotionalTransformation() {
 }
 
 function MedicationOptions() {
+  const [expanded, setExpanded] = useState(false);
+  const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
+
+  const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
+  const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
+  const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
+
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        <Reveal className="mb-2 text-center">
+      <div className="mx-auto flex max-w-3xl flex-col">
+        <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
             Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
           </h2>
@@ -626,14 +633,57 @@ function MedicationOptions() {
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
           </p>
         </Reveal>
-        <div id="pricing" className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          {detailedCards.map((c, i) => (
-            <Reveal key={c.id} delay={(i % 2) * 100}>
-              <DetailedProductCard card={c} />
-            </Reveal>
-          ))}
+
+        <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
+          <p className="border-b border-[#1B2147]/10 pt-5 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+            Featured treatment options
+          </p>
+          <ul className="divide-y divide-[#1B2147]/10">
+            {featured.map((c) => (
+              <li key={c.id}>
+                <MedicationRow card={c} onInfo={setInfoCard} />
+              </li>
+            ))}
+            {expanded &&
+              remaining.map((c) => (
+                <li key={c.id}>
+                  <MedicationRow card={c} onInfo={setInfoCard} />
+                </li>
+              ))}
+          </ul>
+        </div>
+
+        {remaining.length > 0 && (
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+              aria-expanded={expanded}
+            >
+              {expanded ? "Show fewer treatment options" : "Show more treatment options"}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+              />
+            </button>
+          </div>
+        )}
+
+        <div className="mt-8 flex flex-col items-center gap-3 text-center">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+            className="inline-flex items-center justify-center rounded-full bg-[#1B2147] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+          >
+            See which treatment may be right for me
+          </button>
+          <p className="text-[12px] text-[#1B2147]/60">
+            Educational information only. This list is not a product selector — a licensed provider decides what may be appropriate.
+          </p>
         </div>
       </div>
+
+      <MedicationInfoPanel card={infoCard} onClose={() => setInfoCard(null)} />
     </section>
   );
 }
