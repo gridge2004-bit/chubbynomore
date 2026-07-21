@@ -506,6 +506,7 @@ function MedicationInfoPanel({
   card: DetailedCard | null;
   onClose: () => void;
 }) {
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (!card) return;
     const onKey = (e: KeyboardEvent) => {
@@ -514,11 +515,15 @@ function MedicationInfoPanel({
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Move focus into the panel for keyboard/screen-reader users
+    const t = window.setTimeout(() => closeBtnRef.current?.focus(), 0);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      window.clearTimeout(t);
     };
   }, [card, onClose]);
+
 
   if (!card) return null;
   const meta = CARD_META[card.id];
