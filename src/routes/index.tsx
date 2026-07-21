@@ -390,90 +390,173 @@ const detailedCards: DetailedCard[] = [
 ];
 
 
-function DetailedProductCard({ card }: { card: DetailedCard }) {
-  const tagClass =
-    card.tagTone === "tan"
-      ? "bg-[#E6D4B8] text-[#1B2147]"
-      : "bg-[#D8DCEF] text-[#1B2147]";
+function MedicationRow({
+  card,
+  onInfo,
+}: {
+  card: DetailedCard;
+  onInfo: (card: DetailedCard) => void;
+}) {
+  const meta = CARD_META[card.id];
+  const isCompounded = card.tags.includes("COMPOUNDED");
+  const badgeClass = isCompounded
+    ? "bg-[#E6D4B8] text-[#1B2147]"
+    : "bg-[#D8DCEF] text-[#1B2147]";
   return (
-    <article
-      className="card-lift flex h-full cursor-pointer flex-col rounded-[28px] bg-[#EEF0EC] px-6 py-7 sm:px-8 sm:py-8"
-      role="button"
-      tabIndex={0}
-      aria-label={`Start questionnaire for ${card.name}`}
-      onClick={() => {
-        window.dispatchEvent(new CustomEvent("open-qualify-modal"));
-      }}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          window.dispatchEvent(new CustomEvent("open-qualify-modal"));
-        }
-      }}
-    >
-      <div className="flex flex-wrap gap-2">
-        {card.tags.map((t) => (
-          <span
-            key={t}
-            className={`rounded-md px-3 py-1 text-[11px] font-semibold tracking-[0.12em] ${tagClass}`}
-          >
-            {t}
-          </span>
-        ))}
+    <div className="flex items-center gap-4 py-5 sm:gap-5 sm:py-6">
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
+        <img
+          src={card.img}
+          alt={card.imgAlt}
+          className="max-h-14 w-auto object-contain mix-blend-multiply sm:max-h-16"
+          loading="lazy"
+        />
       </div>
-      <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
-        <div className="min-w-0">
-          <h3 className="font-sans text-[20px] font-semibold leading-[1.15] text-[#1B2147] break-words sm:text-[24px] lg:text-[28px]">
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <h3 className="text-[16px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
             {card.name}
           </h3>
-        </div>
-        <div className="flex w-[110px] shrink-0 items-center justify-center sm:w-[150px] lg:w-[160px]">
-          <img
-            src={card.img}
-            alt={card.imgAlt}
-            className="max-h-[110px] w-auto object-contain mix-blend-multiply sm:max-h-[140px] lg:max-h-[150px]"
-            loading="lazy"
-          />
-        </div>
-      </div>
-
-      <p className="mt-4 text-[14.5px] leading-relaxed text-[#1B2147]/85 sm:text-[15px]">
-        {card.desc}
-      </p>
-      {card.tags.includes("COMPOUNDED") && (
-        <p className="mt-3 text-[12px] leading-relaxed text-[#1B2147]/60 italic">
-          Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
-        </p>
-      )}
-      <div className="mt-auto pt-6">
-        <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 text-[#1B2147]">
-          <span className="text-[15px]">Starting at</span>
-          <span className="text-[30px] font-bold leading-none sm:text-[34px]">{card.price}</span>
-          <span className="text-[15px]">{card.period}</span>
-        </div>
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <a
-            href="#cta"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.dispatchEvent(new CustomEvent("open-qualify-modal"));
-            }}
-            className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+          <span
+            className={`rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-[0.1em] ${badgeClass}`}
           >
-            See if I qualify — free
-          </a>
+            {isCompounded ? "COMPOUNDED" : "BRAND-NAME"}
+          </span>
+        </div>
+        <p className="mt-1 text-[13px] text-[#1B2147]/70 sm:text-[14px]">
+          {meta?.format ?? "Prescription treatment"}
+        </p>
+      </div>
+      <div className="hidden shrink-0 text-right sm:block">
+        <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting at</p>
+        <p className="text-[18px] font-bold text-[#1B2147]">
+          {card.price}
+          <span className="ml-1 text-[12px] font-normal text-[#1B2147]/60">{card.period}</span>
+        </p>
+      </div>
+      <div className="flex shrink-0 flex-col items-end gap-1 sm:hidden">
+        <p className="text-[14px] font-bold text-[#1B2147]">{card.price}</p>
+      </div>
+      <button
+        type="button"
+        onClick={() => onInfo(card)}
+        aria-label={`More information about ${card.name}`}
+        className="ml-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+      >
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="10" x2="12" y2="16" />
+          <circle cx="12" cy="7.5" r="0.6" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function MedicationInfoPanel({
+  card,
+  onClose,
+}: {
+  card: DetailedCard | null;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (!card) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [card, onClose]);
+
+  if (!card) return null;
+  const meta = CARD_META[card.id];
+  const isCompounded = card.tags.includes("COMPOUNDED");
+  const status = isCompounded
+    ? "Compounded (not FDA-approved)"
+    : "FDA-approved brand-name medication";
+
+  return (
+    <div
+      className="fixed inset-0 z-[70] flex items-end justify-end sm:items-stretch"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${card.name} information`}
+    >
+      <button
+        type="button"
+        aria-label="Close information panel"
+        onClick={onClose}
+        className="absolute inset-0 bg-black/40"
+      />
+      <div className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
+        <div className="flex items-start justify-between gap-4 border-b border-[#1B2147]/10 px-6 py-5">
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+              Treatment information
+            </p>
+            <h3 className="mt-1 text-[22px] font-semibold text-[#1B2147]">{card.name}</h3>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-6 text-[#1B2147]">
+          <div className="mb-5 flex items-center gap-4">
+            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-[#EEF0EC]">
+              <img src={card.img} alt={card.imgAlt} className="max-h-16 w-auto object-contain mix-blend-multiply" />
+            </div>
+            <div className="min-w-0 text-sm">
+              <p><span className="text-[#1B2147]/60">Active ingredient: </span><span className="font-semibold">{meta?.activeIngredient ?? "—"}</span></p>
+              <p className="mt-1"><span className="text-[#1B2147]/60">Format: </span><span className="font-semibold">{meta?.format ?? "—"}</span></p>
+              <p className="mt-1"><span className="text-[#1B2147]/60">Status: </span><span className="font-semibold">{status}</span></p>
+            </div>
+          </div>
+          <div>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">Approved or intended use</p>
+            <p className="mt-2 text-[14.5px] leading-relaxed">{card.desc}</p>
+          </div>
+          <div className="mt-5 rounded-2xl bg-[#EEF0EC] px-4 py-4">
+            <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting price</p>
+            <p className="mt-1 text-[22px] font-bold">
+              {card.price}
+              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">{card.period}</span>
+            </p>
+          </div>
+          {isCompounded && (
+            <p className="mt-4 text-[12px] italic leading-relaxed text-[#1B2147]/70">
+              Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
+            </p>
+          )}
+          <p className="mt-3 text-[12px] leading-relaxed text-[#1B2147]/70">
+            Individual results vary. Weight loss is not guaranteed. A licensed provider determines whether any treatment is medically appropriate.
+          </p>
+        </div>
+        <div className="border-t border-[#1B2147]/10 px-6 py-4">
           <Link
             to="/medications/$slug"
             params={{ slug: card.id }}
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex flex-1 items-center justify-center rounded-full border border-[#1B2147]/20 bg-white px-5 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:border-[#1B2147]"
+            onClick={onClose}
+            className="inline-flex w-full items-center justify-center rounded-full border border-[#1B2147]/25 px-5 py-3 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
           >
-            Learn more
+            View full medication details
           </Link>
         </div>
       </div>
-    </article>
+    </div>
   );
 }
 
