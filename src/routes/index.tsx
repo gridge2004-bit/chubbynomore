@@ -445,9 +445,11 @@ const detailedCards: DetailedCard[] = [
 function MedicationRow({
   card,
   onInfo,
+  tab,
 }: {
   card: DetailedCard;
   onInfo: (card: DetailedCard, trigger: HTMLElement) => void;
+  tab: PricingTab;
 }) {
   const meta = CARD_META[card.id];
   const isCompounded = card.tags.includes("COMPOUNDED");
@@ -455,6 +457,95 @@ function MedicationRow({
     ? "bg-[#E6D4B8] text-[#1B2147]"
     : "bg-[#D8DCEF] text-[#1B2147]";
   const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
+
+  const ins = card.insurance;
+  const insuranceEnabled = tab === "insurance" && ins?.insurancePricingEnabled === true;
+  const insuranceHidden = tab === "insurance" && ins?.unavailableState === "hidden";
+
+  const PricingBlock = () => {
+    if (tab === "cash") {
+      return (
+        <>
+          <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
+            <p className="text-[16px] font-bold leading-tight">
+              From {formatUSD(perDose)}
+              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
+            </p>
+            <button
+              type="button"
+              aria-label={`How per-dose pricing is calculated for ${card.name}`}
+              onClick={(e) => onInfo(card, e.currentTarget)}
+              className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
+            >
+              i
+            </button>
+          </div>
+          <p className="mt-0.5 text-[12px] text-[#1B2147]/70">
+            {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
+          </p>
+        </>
+      );
+    }
+    // Insurance & savings tab
+    if (insuranceEnabled && ins) {
+      return (
+        <>
+          <p className="text-[16px] font-bold leading-tight text-[#1B2147]">
+            {ins.insuranceHeadline}
+            {ins.insuranceSupplyLabel && (
+              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                {ins.insuranceSupplyLabel}
+              </span>
+            )}
+          </p>
+          <p className="mt-0.5 text-[11px] text-[#1B2147]/70">
+            Verified {ins.lastVerifiedDate ?? ""}. See details for terms.
+          </p>
+        </>
+      );
+    }
+    if (insuranceHidden) return null;
+    return (
+      <p className="text-[13px] leading-snug text-[#1B2147]/70">
+        {INSURANCE_UNAVAILABLE_MSG}
+      </p>
+    );
+  };
+
+  const MobilePricingBlock = () => {
+    if (tab === "cash") {
+      return (
+        <>
+          <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
+            From {formatUSD(perDose)}
+          </p>
+          <p className="text-[10px] text-[#1B2147]/70">per {card.doseLabel}</p>
+          <p className="text-[10px] text-[#1B2147]/70">
+            {formatUSD(card.fullSupplyPrice)}/{card.supplyLabel}
+          </p>
+        </>
+      );
+    }
+    if (insuranceEnabled && ins) {
+      return (
+        <>
+          <p className="text-[12px] font-bold leading-tight text-[#1B2147]">
+            {ins.insuranceHeadline}
+          </p>
+          {ins.insuranceSupplyLabel && (
+            <p className="text-[10px] text-[#1B2147]/70">{ins.insuranceSupplyLabel}</p>
+          )}
+        </>
+      );
+    }
+    if (insuranceHidden) return null;
+    return (
+      <p className="text-[10px] leading-snug text-[#1B2147]/70">
+        Insurance pricing not available
+      </p>
+    );
+  };
+
   return (
     <div className="flex items-center gap-3 py-5 sm:gap-5 sm:py-6">
       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
@@ -480,33 +571,11 @@ function MedicationRow({
           {meta?.format ?? "Prescription treatment"}
         </p>
       </div>
-      <div className="hidden shrink-0 text-right sm:block">
-        <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
-          <p className="text-[16px] font-bold leading-tight">
-            From {formatUSD(perDose)}
-            <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
-          </p>
-          <button
-            type="button"
-            aria-label={`How per-dose pricing is calculated for ${card.name}`}
-            onClick={(e) => onInfo(card, e.currentTarget)}
-            className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
-          >
-            i
-          </button>
-        </div>
-        <p className="mt-0.5 text-[12px] text-[#1B2147]/70">
-          {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
-        </p>
+      <div className="hidden shrink-0 max-w-[220px] text-right sm:block">
+        <PricingBlock />
       </div>
-      <div className="flex shrink-0 flex-col items-end gap-0.5 text-right sm:hidden">
-        <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
-          From {formatUSD(perDose)}
-        </p>
-        <p className="text-[10px] text-[#1B2147]/70">per {card.doseLabel}</p>
-        <p className="text-[10px] text-[#1B2147]/70">
-          {formatUSD(card.fullSupplyPrice)}/{card.supplyLabel}
-        </p>
+      <div className="flex shrink-0 max-w-[130px] flex-col items-end gap-0.5 text-right sm:hidden">
+        <MobilePricingBlock />
       </div>
       <button
         type="button"
