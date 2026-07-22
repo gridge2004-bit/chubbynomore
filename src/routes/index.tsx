@@ -690,6 +690,72 @@ function MedicationInfoPanel({
             </p>
             <p className="mt-2 text-[11px] leading-relaxed text-[#1B2147]/60">{PER_DOSE_INFO}</p>
           </div>
+          {(() => {
+            const ins = card.insurance;
+            if (tab !== "insurance") return null;
+            if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check") {
+              return (
+                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                    Insurance & savings
+                  </p>
+                  <p className="mt-1 text-[18px] font-bold text-[#1B2147]">
+                    {ins.insuranceHeadline}
+                    {ins.insuranceSupplyLabel && (
+                      <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
+                        {ins.insuranceSupplyLabel}
+                      </span>
+                    )}
+                  </p>
+                  {ins.insuranceExplanation && (
+                    <p className="mt-2 text-[13px] leading-relaxed text-[#1B2147]/80">
+                      {ins.insuranceExplanation}
+                    </p>
+                  )}
+                  <div className="mt-2 space-y-0.5 text-[11px] text-[#1B2147]/60">
+                    {ins.offerExpiration && <p>Offer valid through {ins.offerExpiration}.</p>}
+                    {ins.lastVerifiedDate && <p>Last verified {ins.lastVerifiedDate}.</p>}
+                  </div>
+                  {ins.termsUrl && (
+                    <a
+                      href={ins.termsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
+                    >
+                      Official savings-program terms
+                    </a>
+                  )}
+                </div>
+              );
+            }
+            if (ins?.insurancePricingEnabled && ins.savingsProgramType === "coverage-check" && ins.coverageCheckUrl) {
+              return (
+                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                    Insurance & savings
+                  </p>
+                  <p className="mt-1 text-[14px] text-[#1B2147]/80">
+                    Check coverage and any available manufacturer savings directly with the manufacturer.
+                  </p>
+                  <a
+                    href={ins.coverageCheckUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
+                  >
+                    Check coverage
+                  </a>
+                </div>
+              );
+            }
+            if (ins?.unavailableState === "hidden") return null;
+            return (
+              <p className="mt-4 text-[13px] leading-relaxed text-[#1B2147]/70">
+                {INSURANCE_UNAVAILABLE_MSG}
+              </p>
+            );
+          })()}
           {isCompounded && (
             <p className="mt-4 text-[12px] italic leading-relaxed text-[#1B2147]/70">
               Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
