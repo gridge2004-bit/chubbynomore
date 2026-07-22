@@ -274,6 +274,26 @@ const tiles: Tile[] = [
 ];
 
 
+type PricingTab = "cash" | "insurance";
+
+// Insurance / manufacturer-savings configuration.
+// Never show an insurance price unless verified values and terms have been
+// entered here. Leave insurancePricingEnabled=false until a live offer is
+// verified with the manufacturer or savings program.
+type InsurancePricing = {
+  insurancePricingEnabled: boolean;
+  insuranceHeadline?: string;
+  insuranceSupplyLabel?: string;
+  insuranceExplanation?: string;
+  savingsProgramType?: "manufacturer-savings-card" | "coupon" | "coverage-check";
+  termsUrl?: string;
+  coverageCheckUrl?: string;
+  offerExpiration?: string;
+  lastVerifiedDate?: string;
+  // Display state when enabled=false: "unavailable" (default) or "hidden"
+  unavailableState?: "unavailable" | "hidden";
+};
+
 type DetailedCard = {
   id: string;
   tags: string[];
@@ -286,6 +306,7 @@ type DetailedCard = {
   supplyLabel: string; // e.g. "28-day supply"
   dosesPerSupply: number;
   doseLabel: string; // e.g. "weekly dose"
+  insurance?: InsurancePricing;
 };
 
 const FEATURED_IDS = ["semaglutide", "tirzepatide", "zepbound"];
@@ -302,6 +323,12 @@ const CARD_META: Record<string, { format: string; activeIngredient: string }> = 
 
 const PER_DOSE_INFO =
   "Per-dose pricing is calculated by dividing the displayed starting supply price by the number of doses in that supply. Your prescribed dose, treatment, final cost, and product availability may differ.";
+
+const INSURANCE_DISCLAIMER =
+  "Insurance coverage and out-of-pocket costs vary by plan, diagnosis, deductible, formulary, prior-authorization requirements, pharmacy, and eligibility for manufacturer savings programs. Displayed savings are not guaranteed. Government-sponsored insurance beneficiaries may not qualify for certain manufacturer offers.";
+
+const INSURANCE_UNAVAILABLE_MSG =
+  "Insurance pricing is not currently available for this option.";
 
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
