@@ -768,6 +768,7 @@ function EmotionalTransformation() {
 
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
+  const [tab, setTab] = useState<PricingTab>("cash");
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
@@ -799,19 +800,54 @@ function MedicationOptions() {
         </Reveal>
 
         <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <p className="border-b border-[#1B2147]/10 pt-5 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+          <div
+            role="tablist"
+            aria-label="Pricing view"
+            className="mt-5 inline-flex self-start rounded-full border border-[#1B2147]/15 bg-[#EEF0EC] p-1"
+          >
+            {(
+              [
+                { id: "cash", label: "Cash pay" },
+                { id: "insurance", label: "Insurance & savings" },
+              ] as { id: PricingTab; label: string }[]
+            ).map((t) => {
+              const active = tab === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setTab(t.id)}
+                  className={`rounded-full px-4 py-2 text-[13px] font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147] ${
+                    active ? "bg-[#1B2147] text-white" : "text-[#1B2147]/70 hover:text-[#1B2147]"
+                  }`}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {tab === "insurance" && (
+            <p className="mt-3 rounded-2xl bg-[#EEF0EC] px-4 py-3 text-[12px] leading-relaxed text-[#1B2147]/75">
+              {INSURANCE_DISCLAIMER}
+            </p>
+          )}
+
+          <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
           <ul className="divide-y divide-[#1B2147]/10">
             {featured.map((c) => (
               <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} />
+                <MedicationRow card={c} onInfo={openInfo} tab={tab} />
               </li>
             ))}
             {expanded &&
               remaining.map((c) => (
                 <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} />
+                  <MedicationRow card={c} onInfo={openInfo} tab={tab} />
                 </li>
               ))}
           </ul>
@@ -848,7 +884,7 @@ function MedicationOptions() {
         </div>
       </div>
 
-      <MedicationInfoPanel card={infoCard} onClose={closeInfo} />
+      <MedicationInfoPanel card={infoCard} onClose={closeInfo} tab={tab} />
     </section>
   );
 }
