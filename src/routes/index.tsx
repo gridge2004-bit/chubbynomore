@@ -598,9 +598,11 @@ function MedicationRow({
 function MedicationInfoPanel({
   card,
   onClose,
+  tab,
 }: {
   card: DetailedCard | null;
   onClose: () => void;
+  tab: PricingTab;
 }) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
