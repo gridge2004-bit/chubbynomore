@@ -474,7 +474,7 @@ function MedicationRow({
     !!ins.offerExpiration &&
     !!ins.lastVerifiedDate;
 
-  const insuranceLabel = isCompounded ? "Insurance & savings" : "Eligible insurance & savings";
+  
 
   return (
     <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-start sm:gap-5 sm:py-6">
