@@ -274,7 +274,7 @@ const tiles: Tile[] = [
 ];
 
 
-type PricingTab = "cash" | "insurance";
+
 
 // Insurance / manufacturer-savings configuration.
 // Never show an insurance price unless verified values and terms have been
@@ -327,8 +327,10 @@ const PER_DOSE_INFO =
 const INSURANCE_DISCLAIMER =
   "Insurance coverage and out-of-pocket costs vary by plan, diagnosis, deductible, formulary, prior-authorization requirements, pharmacy, and eligibility for manufacturer savings programs. Displayed savings are not guaranteed. Government-sponsored insurance beneficiaries may not qualify for certain manufacturer offers.";
 
-const INSURANCE_UNAVAILABLE_MSG =
-  "Insurance pricing is not currently available for this option.";
+const INSURANCE_UNAVAILABLE_COMPOUNDED =
+  "Not currently available for this compounded option";
+const INSURANCE_UNVERIFIED_BRAND =
+  "Check insurance coverage and available savings";
 
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
@@ -445,151 +447,114 @@ const detailedCards: DetailedCard[] = [
 function MedicationRow({
   card,
   onInfo,
-  tab,
 }: {
   card: DetailedCard;
   onInfo: (card: DetailedCard, trigger: HTMLElement) => void;
-  tab: PricingTab;
 }) {
   const meta = CARD_META[card.id];
   const isCompounded = card.tags.includes("COMPOUNDED");
   const badgeClass = isCompounded
     ? "bg-[#E6D4B8] text-[#1B2147]"
     : "bg-[#D8DCEF] text-[#1B2147]";
+  const isWeekly = card.doseLabel.toLowerCase().includes("week");
   const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
 
   const ins = card.insurance;
-  const insuranceEnabled = tab === "insurance" && ins?.insurancePricingEnabled === true;
-  const insuranceHidden = tab === "insurance" && ins?.unavailableState === "hidden";
+  const insuranceVerified =
+    !!ins &&
+    ins.insurancePricingEnabled === true &&
+    !!ins.insuranceHeadline &&
+    !!ins.insuranceSupplyLabel &&
+    !!ins.termsUrl &&
+    !!ins.offerExpiration &&
+    !!ins.lastVerifiedDate;
 
-  const PricingBlock = () => {
-    if (tab === "cash") {
-      return (
-        <>
-          <div className="flex items-center justify-end gap-1.5 text-[#1B2147]">
-            <p className="text-[16px] font-bold leading-tight">
-              From {formatUSD(perDose)}
-              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
-            </p>
-            <button
-              type="button"
-              aria-label={`How per-dose pricing is calculated for ${card.name}`}
-              onClick={(e) => onInfo(card, e.currentTarget)}
-              className="grid h-5 w-5 place-items-center rounded-full border border-[#1B2147]/30 text-[10px] font-bold text-[#1B2147]/70 hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
-            >
-              i
-            </button>
-          </div>
-          <p className="mt-0.5 text-[12px] text-[#1B2147]/70">
-            {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
-          </p>
-        </>
-      );
-    }
-    // Insurance & savings tab
-    if (insuranceEnabled && ins) {
-      return (
-        <>
-          <p className="text-[16px] font-bold leading-tight text-[#1B2147]">
-            {ins.insuranceHeadline}
-            {ins.insuranceSupplyLabel && (
-              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
-                {ins.insuranceSupplyLabel}
-              </span>
-            )}
-          </p>
-          <p className="mt-0.5 text-[11px] text-[#1B2147]/70">
-            Verified {ins.lastVerifiedDate ?? ""}. See details for terms.
-          </p>
-        </>
-      );
-    }
-    if (insuranceHidden) return null;
-    return (
-      <p className="text-[13px] leading-snug text-[#1B2147]/70">
-        {INSURANCE_UNAVAILABLE_MSG}
-      </p>
-    );
-  };
-
-  const MobilePricingBlock = () => {
-    if (tab === "cash") {
-      return (
-        <>
-          <p className="text-[13px] font-bold leading-tight text-[#1B2147]">
-            From {formatUSD(perDose)}
-          </p>
-          <p className="text-[10px] text-[#1B2147]/70">per {card.doseLabel}</p>
-          <p className="text-[10px] text-[#1B2147]/70">
-            {formatUSD(card.fullSupplyPrice)}/{card.supplyLabel}
-          </p>
-        </>
-      );
-    }
-    if (insuranceEnabled && ins) {
-      return (
-        <>
-          <p className="text-[12px] font-bold leading-tight text-[#1B2147]">
-            {ins.insuranceHeadline}
-          </p>
-          {ins.insuranceSupplyLabel && (
-            <p className="text-[10px] text-[#1B2147]/70">{ins.insuranceSupplyLabel}</p>
-          )}
-        </>
-      );
-    }
-    if (insuranceHidden) return null;
-    return (
-      <p className="text-[10px] leading-snug text-[#1B2147]/70">
-        Insurance pricing not available
-      </p>
-    );
-  };
+  const insuranceLabel = isCompounded ? "Insurance & savings" : "Eligible insurance & savings";
 
   return (
-    <div className="flex items-center gap-3 py-5 sm:gap-5 sm:py-6">
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
-        <img
-          src={card.img}
-          alt={card.imgAlt}
-          className="max-h-12 w-auto object-contain mix-blend-multiply sm:max-h-16"
-          loading="lazy"
-        />
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <h3 className="text-[15px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
-            {card.name}
-          </h3>
-          <span
-            className={`rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.1em] sm:px-2 sm:text-[10px] ${badgeClass}`}
-          >
-            {isCompounded ? "COMPOUNDED" : "BRAND-NAME"}
-          </span>
+    <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-start sm:gap-5 sm:py-6">
+      <div className="flex items-start gap-3 sm:contents">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
+          <img
+            src={card.img}
+            alt={card.imgAlt}
+            className="max-h-12 w-auto object-contain mix-blend-multiply sm:max-h-16"
+            loading="lazy"
+          />
         </div>
-        <p className="mt-1 text-[12px] text-[#1B2147]/70 sm:text-[14px]">
-          {meta?.format ?? "Prescription treatment"}
-        </p>
+        <div className="min-w-0 flex-1 sm:flex-1">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <h3 className="text-[15px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
+              {card.name}
+            </h3>
+            <span
+              className={`rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-[0.1em] sm:px-2 sm:text-[10px] ${badgeClass}`}
+            >
+              {isCompounded ? "COMPOUNDED" : "BRAND-NAME"}
+            </span>
+          </div>
+          <p className="mt-1 text-[12px] text-[#1B2147]/70 sm:text-[14px]">
+            {meta?.format ?? "Prescription treatment"}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={(e) => onInfo(card, e.currentTarget)}
+          aria-label={`More information about ${card.name}`}
+          aria-haspopup="dialog"
+          className="ml-auto grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147] sm:order-last sm:ml-1"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="10" x2="12" y2="16" />
+            <circle cx="12" cy="7.5" r="0.6" fill="currentColor" />
+          </svg>
+        </button>
       </div>
-      <div className="hidden shrink-0 max-w-[220px] text-right sm:block">
-        <PricingBlock />
+
+      <div className="grid grid-cols-1 gap-3 sm:w-[280px] sm:shrink-0 sm:text-right">
+        {/* Cash pay */}
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+            Cash pay
+          </p>
+          <p className="mt-1 text-[15px] font-bold leading-tight text-[#1B2147]">
+            From {formatUSD(card.fullSupplyPrice)}
+            <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+              per {card.supplyLabel}
+            </span>
+          </p>
+          {isWeekly && (
+            <p className="mt-0.5 text-[11px] text-[#1B2147]/60">
+              {formatUSD(perDose)} per {card.doseLabel}
+            </p>
+          )}
+        </div>
+
+        {/* Insurance & savings */}
+        <div className="rounded-xl bg-[#EEF0EC]/60 px-3 py-2 sm:bg-transparent sm:px-0 sm:py-0">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+            {insuranceLabel}
+          </p>
+          {isCompounded ? (
+            <p className="mt-1 text-[12px] leading-snug text-[#1B2147]/70">
+              {INSURANCE_UNAVAILABLE_COMPOUNDED}
+            </p>
+          ) : insuranceVerified && ins ? (
+            <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+              As low as {ins.insuranceHeadline}
+              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                {ins.insuranceSupplyLabel}
+                <span aria-hidden="true">*</span>
+              </span>
+            </p>
+          ) : (
+            <p className="mt-1 text-[12px] leading-snug text-[#1B2147]/70">
+              {INSURANCE_UNVERIFIED_BRAND}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="flex shrink-0 max-w-[130px] flex-col items-end gap-0.5 text-right sm:hidden">
-        <MobilePricingBlock />
-      </div>
-      <button
-        type="button"
-        onClick={(e) => onInfo(card, e.currentTarget)}
-        aria-label={`More information about ${card.name}`}
-        aria-haspopup="dialog"
-        className="ml-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
-      >
-        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="10" x2="12" y2="16" />
-          <circle cx="12" cy="7.5" r="0.6" fill="currentColor" />
-        </svg>
-      </button>
     </div>
   );
 }
@@ -598,11 +563,9 @@ function MedicationRow({
 function MedicationInfoPanel({
   card,
   onClose,
-  tab,
 }: {
   card: DetailedCard | null;
   onClose: () => void;
-  tab: PricingTab;
 }) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
@@ -692,20 +655,29 @@ function MedicationInfoPanel({
           </div>
           {(() => {
             const ins = card.insurance;
-            if (tab !== "insurance") return null;
-            if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check") {
+            if (isCompounded) {
               return (
                 <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
                   <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
                     Insurance & savings
                   </p>
+                  <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                    {INSURANCE_UNAVAILABLE_COMPOUNDED}
+                  </p>
+                </div>
+              );
+            }
+            if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check" && ins.insuranceHeadline && ins.insuranceSupplyLabel && ins.termsUrl && ins.offerExpiration && ins.lastVerifiedDate) {
+              return (
+                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                    Eligible insurance & savings
+                  </p>
                   <p className="mt-1 text-[18px] font-bold text-[#1B2147]">
-                    {ins.insuranceHeadline}
-                    {ins.insuranceSupplyLabel && (
-                      <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
-                        {ins.insuranceSupplyLabel}
-                      </span>
-                    )}
+                    As low as {ins.insuranceHeadline}
+                    <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
+                      {ins.insuranceSupplyLabel}
+                    </span>
                   </p>
                   {ins.insuranceExplanation && (
                     <p className="mt-2 text-[13px] leading-relaxed text-[#1B2147]/80">
@@ -713,47 +685,29 @@ function MedicationInfoPanel({
                     </p>
                   )}
                   <div className="mt-2 space-y-0.5 text-[11px] text-[#1B2147]/60">
-                    {ins.offerExpiration && <p>Offer valid through {ins.offerExpiration}.</p>}
-                    {ins.lastVerifiedDate && <p>Last verified {ins.lastVerifiedDate}.</p>}
+                    <p>Offer valid through {ins.offerExpiration}.</p>
+                    <p>Last verified {ins.lastVerifiedDate}.</p>
                   </div>
-                  {ins.termsUrl && (
-                    <a
-                      href={ins.termsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
-                    >
-                      Official savings-program terms
-                    </a>
-                  )}
-                </div>
-              );
-            }
-            if (ins?.insurancePricingEnabled && ins.savingsProgramType === "coverage-check" && ins.coverageCheckUrl) {
-              return (
-                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
-                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
-                    Insurance & savings
-                  </p>
-                  <p className="mt-1 text-[14px] text-[#1B2147]/80">
-                    Check coverage and any available manufacturer savings directly with the manufacturer.
-                  </p>
                   <a
-                    href={ins.coverageCheckUrl}
+                    href={ins.termsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
                   >
-                    Check coverage
+                    Official savings-program terms
                   </a>
                 </div>
               );
             }
-            if (ins?.unavailableState === "hidden") return null;
             return (
-              <p className="mt-4 text-[13px] leading-relaxed text-[#1B2147]/70">
-                {INSURANCE_UNAVAILABLE_MSG}
-              </p>
+              <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                  Eligible insurance & savings
+                </p>
+                <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                  {INSURANCE_UNVERIFIED_BRAND}
+                </p>
+              </div>
             );
           })()}
           {isCompounded && (
@@ -836,7 +790,6 @@ function EmotionalTransformation() {
 
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
-  const [tab, setTab] = useState<PricingTab>("cash");
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
@@ -846,14 +799,12 @@ function MedicationOptions() {
   };
   const closeInfo = () => {
     setInfoCard(null);
-    // Return focus to the icon that opened the panel
     window.setTimeout(() => triggerRef.current?.focus?.(), 0);
   };
 
   const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
   const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
   const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
-
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
@@ -868,59 +819,28 @@ function MedicationOptions() {
         </Reveal>
 
         <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <div
-            role="tablist"
-            aria-label="Pricing view"
-            className="mt-5 inline-flex self-start rounded-full border border-[#1B2147]/15 bg-[#EEF0EC] p-1"
-          >
-            {(
-              [
-                { id: "cash", label: "Cash pay" },
-                { id: "insurance", label: "Insurance & savings" },
-              ] as { id: PricingTab; label: string }[]
-            ).map((t) => {
-              const active = tab === t.id;
-              return (
-                <button
-                  key={t.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setTab(t.id)}
-                  className={`rounded-full px-4 py-2 text-[13px] font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147] ${
-                    active ? "bg-[#1B2147] text-white" : "text-[#1B2147]/70 hover:text-[#1B2147]"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {tab === "insurance" && (
-            <p className="mt-3 rounded-2xl bg-[#EEF0EC] px-4 py-3 text-[12px] leading-relaxed text-[#1B2147]/75">
-              {INSURANCE_DISCLAIMER}
-            </p>
-          )}
-
           <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
           <ul className="divide-y divide-[#1B2147]/10">
             {featured.map((c) => (
               <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} tab={tab} />
+                <MedicationRow card={c} onInfo={openInfo} />
               </li>
             ))}
             {expanded &&
               remaining.map((c) => (
                 <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} tab={tab} />
+                  <MedicationRow card={c} onInfo={openInfo} />
                 </li>
               ))}
           </ul>
-
         </div>
+
+        <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
+          <span aria-hidden="true">*</span>
+          {INSURANCE_DISCLAIMER}
+        </p>
 
         {remaining.length > 0 && (
           <div className="mt-6 flex justify-center">
@@ -952,7 +872,7 @@ function MedicationOptions() {
         </div>
       </div>
 
-      <MedicationInfoPanel card={infoCard} onClose={closeInfo} tab={tab} />
+      <MedicationInfoPanel card={infoCard} onClose={closeInfo} />
     </section>
   );
 }
