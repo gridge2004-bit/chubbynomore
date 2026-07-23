@@ -563,11 +563,9 @@ function MedicationRow({
 function MedicationInfoPanel({
   card,
   onClose,
-  tab,
 }: {
   card: DetailedCard | null;
   onClose: () => void;
-  tab: PricingTab;
 }) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
@@ -657,20 +655,29 @@ function MedicationInfoPanel({
           </div>
           {(() => {
             const ins = card.insurance;
-            if (tab !== "insurance") return null;
-            if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check") {
+            if (isCompounded) {
               return (
                 <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
                   <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
                     Insurance & savings
                   </p>
+                  <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                    {INSURANCE_UNAVAILABLE_COMPOUNDED}
+                  </p>
+                </div>
+              );
+            }
+            if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check" && ins.insuranceHeadline && ins.insuranceSupplyLabel && ins.termsUrl && ins.offerExpiration && ins.lastVerifiedDate) {
+              return (
+                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                    Eligible insurance & savings
+                  </p>
                   <p className="mt-1 text-[18px] font-bold text-[#1B2147]">
-                    {ins.insuranceHeadline}
-                    {ins.insuranceSupplyLabel && (
-                      <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
-                        {ins.insuranceSupplyLabel}
-                      </span>
-                    )}
+                    As low as {ins.insuranceHeadline}
+                    <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
+                      {ins.insuranceSupplyLabel}
+                    </span>
                   </p>
                   {ins.insuranceExplanation && (
                     <p className="mt-2 text-[13px] leading-relaxed text-[#1B2147]/80">
@@ -678,47 +685,29 @@ function MedicationInfoPanel({
                     </p>
                   )}
                   <div className="mt-2 space-y-0.5 text-[11px] text-[#1B2147]/60">
-                    {ins.offerExpiration && <p>Offer valid through {ins.offerExpiration}.</p>}
-                    {ins.lastVerifiedDate && <p>Last verified {ins.lastVerifiedDate}.</p>}
+                    <p>Offer valid through {ins.offerExpiration}.</p>
+                    <p>Last verified {ins.lastVerifiedDate}.</p>
                   </div>
-                  {ins.termsUrl && (
-                    <a
-                      href={ins.termsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
-                    >
-                      Official savings-program terms
-                    </a>
-                  )}
-                </div>
-              );
-            }
-            if (ins?.insurancePricingEnabled && ins.savingsProgramType === "coverage-check" && ins.coverageCheckUrl) {
-              return (
-                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
-                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
-                    Insurance & savings
-                  </p>
-                  <p className="mt-1 text-[14px] text-[#1B2147]/80">
-                    Check coverage and any available manufacturer savings directly with the manufacturer.
-                  </p>
                   <a
-                    href={ins.coverageCheckUrl}
+                    href={ins.termsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
                   >
-                    Check coverage
+                    Official savings-program terms
                   </a>
                 </div>
               );
             }
-            if (ins?.unavailableState === "hidden") return null;
             return (
-              <p className="mt-4 text-[13px] leading-relaxed text-[#1B2147]/70">
-                {INSURANCE_UNAVAILABLE_MSG}
-              </p>
+              <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
+                <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                  Eligible insurance & savings
+                </p>
+                <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                  {INSURANCE_UNVERIFIED_BRAND}
+                </p>
+              </div>
             );
           })()}
           {isCompounded && (
@@ -801,7 +790,6 @@ function EmotionalTransformation() {
 
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
-  const [tab, setTab] = useState<PricingTab>("cash");
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
@@ -811,14 +799,12 @@ function MedicationOptions() {
   };
   const closeInfo = () => {
     setInfoCard(null);
-    // Return focus to the icon that opened the panel
     window.setTimeout(() => triggerRef.current?.focus?.(), 0);
   };
 
   const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
   const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
   const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
-
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
@@ -833,59 +819,28 @@ function MedicationOptions() {
         </Reveal>
 
         <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <div
-            role="tablist"
-            aria-label="Pricing view"
-            className="mt-5 inline-flex self-start rounded-full border border-[#1B2147]/15 bg-[#EEF0EC] p-1"
-          >
-            {(
-              [
-                { id: "cash", label: "Cash pay" },
-                { id: "insurance", label: "Insurance & savings" },
-              ] as { id: PricingTab; label: string }[]
-            ).map((t) => {
-              const active = tab === t.id;
-              return (
-                <button
-                  key={t.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setTab(t.id)}
-                  className={`rounded-full px-4 py-2 text-[13px] font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147] ${
-                    active ? "bg-[#1B2147] text-white" : "text-[#1B2147]/70 hover:text-[#1B2147]"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {tab === "insurance" && (
-            <p className="mt-3 rounded-2xl bg-[#EEF0EC] px-4 py-3 text-[12px] leading-relaxed text-[#1B2147]/75">
-              {INSURANCE_DISCLAIMER}
-            </p>
-          )}
-
           <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
           <ul className="divide-y divide-[#1B2147]/10">
             {featured.map((c) => (
               <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} tab={tab} />
+                <MedicationRow card={c} onInfo={openInfo} />
               </li>
             ))}
             {expanded &&
               remaining.map((c) => (
                 <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} tab={tab} />
+                  <MedicationRow card={c} onInfo={openInfo} />
                 </li>
               ))}
           </ul>
-
         </div>
+
+        <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
+          <span aria-hidden="true">*</span>
+          {INSURANCE_DISCLAIMER}
+        </p>
 
         {remaining.length > 0 && (
           <div className="mt-6 flex justify-center">
@@ -917,7 +872,7 @@ function MedicationOptions() {
         </div>
       </div>
 
-      <MedicationInfoPanel card={infoCard} onClose={closeInfo} tab={tab} />
+      <MedicationInfoPanel card={infoCard} onClose={closeInfo} />
     </section>
   );
 }
