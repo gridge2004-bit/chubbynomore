@@ -306,8 +306,13 @@ type DetailedCard = {
   supplyLabel: string; // e.g. "28-day supply"
   dosesPerSupply: number;
   doseLabel: string; // e.g. "weekly dose"
+  // Placeholder insurance/savings price shown on brand-name rows until a
+  // verified manufacturer or program offer is wired in. Easy to swap later.
+  insuranceSavingsPrice?: string; // e.g. "$XX.XX" or a verified figure
+  insuranceSavingsSupplyLabel?: string; // defaults to supplyLabel
   insurance?: InsurancePricing;
 };
+
 
 const FEATURED_IDS = ["semaglutide", "tirzepatide", "zepbound"];
 const CARD_META: Record<string, { format: string; activeIngredient: string }> = {
@@ -512,49 +517,71 @@ function MedicationRow({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:w-[280px] sm:shrink-0 sm:text-right">
-        {/* Cash pay */}
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
-            Cash pay
-          </p>
-          <p className="mt-1 text-[15px] font-bold leading-tight text-[#1B2147]">
-            From {formatUSD(card.fullSupplyPrice)}
-            <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
-              per {card.supplyLabel}
-            </span>
-          </p>
-          {isWeekly && (
-            <p className="mt-0.5 text-[11px] text-[#1B2147]/60">
-              {formatUSD(perDose)} per {card.doseLabel}
+      <div className="grid grid-cols-1 gap-2 sm:w-[280px] sm:shrink-0 sm:text-right">
+        {isCompounded ? (
+          <>
+            {/* Cash pay — highlighted for compounded */}
+            <div className="rounded-xl bg-[#EEF0EC] px-3 py-2 sm:px-3 sm:py-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+                Cash pay
+              </p>
+              <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+                {formatUSD(card.fullSupplyPrice)}
+                <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                  per {card.supplyLabel}
+                </span>
+              </p>
+            </div>
+            <p className="px-1 text-[12px] leading-snug text-[#1B2147]/70">
+              Insurance &amp; savings not currently available.
             </p>
-          )}
-        </div>
-
-        {/* Insurance & savings */}
-        <div className="rounded-xl bg-[#EEF0EC]/60 px-3 py-2 sm:bg-transparent sm:px-0 sm:py-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
-            {insuranceLabel}
-          </p>
-          {isCompounded ? (
-            <p className="mt-1 text-[12px] leading-snug text-[#1B2147]/70">
-              {INSURANCE_UNAVAILABLE_COMPOUNDED}
-            </p>
-          ) : insuranceVerified && ins ? (
-            <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
-              As low as {ins.insuranceHeadline}
-              <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
-                {ins.insuranceSupplyLabel}
-                <span aria-hidden="true">*</span>
-              </span>
-            </p>
-          ) : (
-            <p className="mt-1 text-[12px] leading-snug text-[#1B2147]/70">
-              {INSURANCE_UNVERIFIED_BRAND}
-            </p>
-          )}
-        </div>
+          </>
+        ) : (
+          <>
+            {/* Insurance & savings — highlighted for brand-name */}
+            <div className="rounded-xl bg-[#EEF0EC] px-3 py-2 sm:px-3 sm:py-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+                Eligible insurance &amp; savings
+              </p>
+              {insuranceVerified && ins ? (
+                <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+                  As low as {ins.insuranceHeadline}
+                  <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                    {ins.insuranceSupplyLabel}
+                    <span aria-hidden="true">*</span>
+                  </span>
+                </p>
+              ) : (
+                <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+                  As low as {card.insuranceSavingsPrice ?? "$XX.XX"}
+                  <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                    per {card.insuranceSavingsSupplyLabel ?? card.supplyLabel}
+                    <span aria-hidden="true">*</span>
+                  </span>
+                </p>
+              )}
+            </div>
+            {/* Cash pay — smaller, underneath */}
+            <div className="px-1">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+                Cash pay
+              </p>
+              <p className="mt-0.5 text-[13px] leading-tight text-[#1B2147]/80">
+                From {formatUSD(card.fullSupplyPrice)}
+                <span className="ml-1 text-[11px] text-[#1B2147]/60">
+                  per {card.supplyLabel}
+                </span>
+              </p>
+              {isWeekly && (
+                <p className="mt-0.5 text-[11px] text-[#1B2147]/55">
+                  {formatUSD(perDose)} per {card.doseLabel}
+                </p>
+              )}
+            </div>
+          </>
+        )}
       </div>
+
     </div>
   );
 }
