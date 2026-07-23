@@ -1240,20 +1240,20 @@ function CompoundedVsBrand() {
 function WhyChoose() {
   const benefits = [
     {
-      title: "Direct, straightforward care",
-      body: "Clear information, transparent starting prices, and no unnecessary runaround.",
+      title: "Straight answers, no runaround.",
+      body: "Clear pricing, no upsells, no lecture about willpower.",
     },
     {
-      title: "Private from the start",
-      body: "Complete your health intake online and receive discreet treatment delivery where available.",
+      title: "Handled privately.",
+      body: "Complete everything online — no waiting room, no small talk.",
     },
     {
-      title: "Built around a busy schedule",
-      body: "Complete the intake on your own time without sitting in a traditional waiting room.",
+      title: "Built around your schedule.",
+      body: "Do the visit at 6am or 11pm. Meds come to you.",
     },
     {
-      title: "More than a prescription",
-      body: "A licensed provider reviews your medical information and determines whether an available treatment may be appropriate for you.",
+      title: "A provider, not just a prescription.",
+      body: "A licensed clinician reviews your history and stays with you.",
     },
   ];
 
