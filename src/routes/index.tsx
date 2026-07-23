@@ -1140,7 +1140,7 @@ function WeightLossScale() {
             href="#cta"
             className="inline-flex items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:px-14"
           >
-            Check my eligibility — free
+            See what's realistic for me — free
           </a>
           <p className="mt-3 text-[13px] text-white/70">
             Free eligibility check. Takes about 60 seconds. No charge if you don’t qualify.
