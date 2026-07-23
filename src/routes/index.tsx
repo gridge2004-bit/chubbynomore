@@ -824,6 +824,30 @@ function EmotionalTransformation() {
   );
 }
 
+const SUMMARY_CARDS = [
+  {
+    badge: "Most popular",
+    title: "Compounded Semaglutide — GLP-1",
+    meta: "Weekly injection · Starts at $149.99 / 28-day supply",
+    body: "A widely used option for appetite regulation and weight management, prepared by a licensed U.S. compounding pharmacy.",
+    fine: "Compounded medications are not FDA-approved.",
+  },
+  {
+    badge: "Stronger results",
+    title: "Compounded Tirzepatide — GLP-1 + GIP",
+    meta: "Weekly injection · Starts at $249.99 / 28-day supply",
+    body: "Acts on two hormone pathways; in brand-name trials, tirzepatide showed the highest average weight loss.",
+    fine: "Compounded medications are not FDA-approved.",
+  },
+  {
+    badge: "Brand-name / FDA-approved",
+    title: "Brand-name GLP-1s — Wegovy®, Zepbound®, Ozempic®, Mounjaro®, Foundayo™",
+    meta: "FDA-approved · From $199.99/mo · Insurance & savings cards may apply",
+    body: "Prefer a brand-name, FDA-approved medication? Your provider can prescribe where appropriate.",
+    fine: null as string | null,
+  },
+];
+
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
@@ -838,69 +862,83 @@ function MedicationOptions() {
     window.setTimeout(() => triggerRef.current?.focus?.(), 0);
   };
 
-  const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
-  const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
-  const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
-
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-3xl flex-col">
-        <Reveal className="mb-6 text-center">
-          <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
-            Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
+      <div className="mx-auto flex max-w-6xl flex-col">
+        <Reveal className="mb-8 text-center">
+          <h2 className="mx-auto max-w-3xl font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+            One program. The right medication for your body — chosen by your provider.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
-            Your licensed provider will determine which available treatment option may be medically appropriate for you.
+            You don't need to pick a drug off a menu. Complete your visit, and a licensed provider recommends the option that fits your health, goals, and budget. Most men start here:
           </p>
         </Reveal>
 
-        <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
-            Featured treatment options
-          </p>
-          <ul className="divide-y divide-[#1B2147]/10">
-            {featured.map((c) => (
-              <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} />
-              </li>
-            ))}
-            {expanded &&
-              remaining.map((c) => (
-                <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} />
-                </li>
-              ))}
-          </ul>
+        <div className="grid gap-5 md:grid-cols-3">
+          {SUMMARY_CARDS.map((c) => (
+            <div
+              key={c.title}
+              className="flex h-full flex-col rounded-3xl border border-[#1B2147]/10 bg-white p-6 shadow-sm"
+            >
+              <span className="mb-4 inline-flex w-fit rounded-full bg-[#1B2147]/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]">
+                {c.badge}
+              </span>
+              <h3 className="font-serif text-xl leading-snug text-[#1B2147]">{c.title}</h3>
+              <p className="mt-2 text-sm font-medium text-[#1B2147]/80">{c.meta}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#1B2147]/75">{c.body}</p>
+              {c.fine && (
+                <p className="mt-auto pt-4 text-[11px] leading-relaxed text-[#1B2147]/60">
+                  {c.fine}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
 
-        <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
-          <span aria-hidden="true">*</span>
-          {INSURANCE_DISCLAIMER}
-        </p>
+        <div className="mt-8 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+            aria-expanded={expanded}
+            aria-controls="all-medications"
+          >
+            {expanded ? "Hide all medications & pricing" : "See all medications & pricing →"}
+            <ChevronDown
+              className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
+        </div>
 
-        {remaining.length > 0 && (
-          <div className="mt-6 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
-              aria-expanded={expanded}
-            >
-              {expanded ? "Show fewer treatment options" : "Show more treatment options"}
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
-              />
-            </button>
+        {expanded && (
+          <div id="all-medications" className="mt-8">
+            <div id="pricing" className="mx-auto max-w-3xl rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
+              <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+                All treatment options
+              </p>
+              <ul className="divide-y divide-[#1B2147]/10">
+                {detailedCards.map((c) => (
+                  <li key={c.id}>
+                    <MedicationRow card={c} onInfo={openInfo} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="mx-auto mt-4 max-w-3xl text-[11px] leading-relaxed text-[#1B2147]/70">
+              <span aria-hidden="true">*</span>
+              {INSURANCE_DISCLAIMER}
+            </p>
           </div>
         )}
 
-        <div className="mt-8 flex flex-col items-center gap-3 text-center">
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
             className="inline-flex items-center justify-center rounded-full bg-[#1B2147] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
-            See which treatment may be right for me
+            See which option fits me — free
           </button>
           <p className="text-[12px] text-[#1B2147]/60">
             Educational information only. This list is not a product selector — a licensed provider decides what may be appropriate.
