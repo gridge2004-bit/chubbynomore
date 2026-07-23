@@ -205,13 +205,13 @@ function Hero() {
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
         <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
-          For men who are done waiting to feel like themselves again
+          GLP-1 CARE FOR MEN
         </Reveal>
-        <Reveal as="h1" className="mt-4 font-serif text-6xl leading-[0.95] tracking-tight text-[#1B2147] sm:text-7xl md:text-[96px]">
-          Serious GLP-1 care, built for men.
+        <Reveal as="h1" className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#1B2147]">
+          You didn't fail the diet. The diet failed you.
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
-          Complete a private online evaluation with a licensed provider. If treatment is medically appropriate, available options may include compounded semaglutide or tirzepatide and select FDA-approved brand-name medications, delivered to your door where available. Compounded semaglutide starts at $149.99 per 28-day supply. No insurance required.
+          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99/mo.
         </Reveal>
         <Reveal delay={200}>
           <a
