@@ -810,7 +810,7 @@ function EmotionalTransformation() {
   return (
     <section className="bg-white px-4 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {heroTiles.map((t, i) => (
             <Reveal key={t.id} delay={i * 100}>
               <a href="#cta" className="block h-full" aria-label={`Start intake form for ${t.title}`}>
