@@ -250,8 +250,8 @@ type Tile = {
 const tiles: Tile[] = [
   {
     id: "feel",
-    title: "Feel like yourself again",
-    subtitle: "Sustained energy for the moments that matter most.",
+    title: "Keep up — and outlast them.",
+    subtitle: "Energy for early meetings, long days, and your kids on the weekend.",
     icon: "bolt",
     img: feelLikeYourselfAsset.url,
     imgAlt: "Father playing with his children in the front yard at golden hour",
@@ -259,11 +259,20 @@ const tiles: Tile[] = [
   },
   {
     id: "love",
-    title: "Love what you see",
-    subtitle: "Confidence that shows in every part of your life.",
+    title: "Strong where it counts.",
+    subtitle: "Lose fat without losing the muscle and drive you've worked for.",
     icon: "user",
     img: loveWhatYouSeeAsset.url,
     imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
+    variant: "image-hero",
+  },
+  {
+    id: "confidence",
+    title: "Confidence with your shirt off.",
+    subtitle: "And in the room, at work, everywhere it matters.",
+    icon: "bolt",
+    img: ctaImg,
+    imgAlt: "Confident man living an active, healthy life",
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
