@@ -250,8 +250,8 @@ type Tile = {
 const tiles: Tile[] = [
   {
     id: "feel",
-    title: "Feel like yourself again",
-    subtitle: "Sustained energy for the moments that matter most.",
+    title: "Keep up — and outlast them.",
+    subtitle: "Energy for early meetings, long days, and your kids on the weekend.",
     icon: "bolt",
     img: feelLikeYourselfAsset.url,
     imgAlt: "Father playing with his children in the front yard at golden hour",
@@ -259,11 +259,20 @@ const tiles: Tile[] = [
   },
   {
     id: "love",
-    title: "Love what you see",
-    subtitle: "Confidence that shows in every part of your life.",
+    title: "Strong where it counts.",
+    subtitle: "Lose fat without losing the muscle and drive you've worked for.",
     icon: "user",
     img: loveWhatYouSeeAsset.url,
     imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
+    variant: "image-hero",
+  },
+  {
+    id: "confidence",
+    title: "Confidence with your shirt off.",
+    subtitle: "And in the room, at work, everywhere it matters.",
+    icon: "bolt",
+    img: ctaImg,
+    imgAlt: "Confident man living an active, healthy life",
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
@@ -801,7 +810,7 @@ function EmotionalTransformation() {
   return (
     <section className="bg-white px-4 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {heroTiles.map((t, i) => (
             <Reveal key={t.id} delay={i * 100}>
               <a href="#cta" className="block h-full" aria-label={`Start intake form for ${t.title}`}>
@@ -1131,7 +1140,7 @@ function WeightLossScale() {
             href="#cta"
             className="inline-flex items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:px-14"
           >
-            Check my eligibility — free
+            See what's realistic for me — free
           </a>
           <p className="mt-3 text-[13px] text-white/70">
             Free eligibility check. Takes about 60 seconds. No charge if you don’t qualify.
@@ -1231,20 +1240,20 @@ function CompoundedVsBrand() {
 function WhyChoose() {
   const benefits = [
     {
-      title: "Direct, straightforward care",
-      body: "Clear information, transparent starting prices, and no unnecessary runaround.",
+      title: "Straight answers, no runaround.",
+      body: "Clear pricing, no upsells, no lecture about willpower.",
     },
     {
-      title: "Private from the start",
-      body: "Complete your health intake online and receive discreet treatment delivery where available.",
+      title: "Handled privately.",
+      body: "Complete everything online — no waiting room, no small talk.",
     },
     {
-      title: "Built around a busy schedule",
-      body: "Complete the intake on your own time without sitting in a traditional waiting room.",
+      title: "Built around your schedule.",
+      body: "Do the visit at 6am or 11pm. Meds come to you.",
     },
     {
-      title: "More than a prescription",
-      body: "A licensed provider reviews your medical information and determines whether an available treatment may be appropriate for you.",
+      title: "A provider, not just a prescription.",
+      body: "A licensed clinician reviews your history and stays with you.",
     },
   ];
 
