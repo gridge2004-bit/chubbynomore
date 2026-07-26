@@ -829,69 +829,73 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
     : "bg-[#D8DCEF] text-[#1B2147]";
 
   return (
-    <article className="flex h-full flex-col rounded-3xl bg-[#EFEFED] p-6 sm:p-8">
-      <div className="flex flex-wrap gap-2">
-        {card.tags.map((t) => (
-          <span
-            key={t}
-            className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${tagClass}`}
-          >
-            {t}
-          </span>
-        ))}
-      </div>
+    <article className="flex h-full flex-col gap-6 rounded-3xl bg-[#EFEFED] p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
+      <img
+        src={card.img}
+        alt={card.imgAlt}
+        loading="lazy"
+        className="h-28 w-28 shrink-0 self-start rounded-xl object-cover sm:h-32 sm:w-32 lg:order-2 lg:h-40 lg:w-40 lg:self-center"
+      />
 
-      <div className="mt-6 flex items-start justify-between gap-4">
-        <h3 className="min-w-0 text-[26px] font-bold leading-tight text-[#1B2147] sm:text-[30px]">
-          {card.name}
-        </h3>
-        <img
-          src={card.img}
-          alt={card.imgAlt}
-          loading="lazy"
-          className="h-24 w-24 shrink-0 rounded-lg object-cover sm:h-28 sm:w-28"
-        />
-      </div>
-
-      <p className="mt-5 text-[15px] leading-relaxed text-[#1B2147]/75 sm:text-base">
-        {card.desc}
-      </p>
-
-      <div className="mt-auto pt-6">
-        <div className="flex flex-wrap items-baseline gap-x-2">
-          <span className="text-[15px] text-[#1B2147]/80">Starting at</span>
-          <span className="text-[34px] font-bold leading-none tracking-tight text-[#1B2147] sm:text-[40px]">
-            {formatUSD(card.fullSupplyPrice)}
-          </span>
-          <span className="text-[15px] text-[#1B2147]/80">/{card.supplyLabel}</span>
+      <div className="flex min-w-0 flex-1 flex-col lg:order-1">
+        <div className="flex flex-wrap gap-2">
+          {card.tags.map((t) => (
+            <span
+              key={t}
+              className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${tagClass}`}
+            >
+              {t}
+            </span>
+          ))}
         </div>
 
-        {isCompounded && (
-          <p className="mt-3 text-[12px] italic leading-relaxed text-[#1B2147]/65">
-            Compounded medications are not FDA-approved for safety, effectiveness, or quality.
-          </p>
-        )}
+        <h3 className="mt-4 text-[26px] font-bold leading-tight text-[#1B2147] sm:text-[30px]">
+          {card.name}
+        </h3>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
-            className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
-          >
-            See if I qualify — free
-          </button>
-          <Link
-            to="/medications/$slug"
-            params={{ slug: card.id }}
-            className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
-          >
-            Learn more
-          </Link>
+        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#1B2147]/75 sm:text-base">
+          {card.desc}
+        </p>
+
+        <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <span className="text-[15px] text-[#1B2147]/80">Starting at</span>
+              <span className="text-[32px] font-bold leading-none tracking-tight text-[#1B2147] sm:text-[38px]">
+                {formatUSD(card.fullSupplyPrice)}
+              </span>
+              <span className="text-[15px] text-[#1B2147]/80">/{card.supplyLabel}</span>
+            </div>
+
+            {isCompounded && (
+              <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#1B2147]/65">
+                Compounded medications are not FDA-approved for safety, effectiveness, or quality.
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] lg:flex-none"
+            >
+              See if I qualify — free
+            </button>
+            <Link
+              to="/medications/$slug"
+              params={{ slug: card.id }}
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white lg:flex-none"
+            >
+              Learn more
+            </Link>
+          </div>
         </div>
       </div>
     </article>
   );
 }
+
 
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
@@ -927,7 +931,7 @@ function MedicationOptions() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5">
             {featured.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
                 <DetailedProductCard card={c} />
