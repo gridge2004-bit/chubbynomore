@@ -913,7 +913,7 @@ function MedicationOptions() {
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-3xl flex-col">
+      <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
             Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
@@ -923,24 +923,25 @@ function MedicationOptions() {
           </p>
         </Reveal>
 
-        <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+        <div id="pricing" className="mt-2">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
-          <ul className="divide-y divide-[#1B2147]/10">
-            {featured.map((c) => (
-              <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} />
-              </li>
+          <div className="grid gap-5 md:grid-cols-2">
+            {featured.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <DetailedProductCard card={c} />
+              </Reveal>
             ))}
             {expanded &&
-              remaining.map((c) => (
-                <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} />
-                </li>
+              remaining.map((c, i) => (
+                <Reveal key={c.id} delay={i * 60} className="h-full">
+                  <DetailedProductCard card={c} />
+                </Reveal>
               ))}
-          </ul>
+          </div>
         </div>
+
 
         <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
           <span aria-hidden="true">*</span>
