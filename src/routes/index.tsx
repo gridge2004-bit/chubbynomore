@@ -931,7 +931,7 @@ function MedicationOptions() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5">
             {featured.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
                 <DetailedProductCard card={c} />
