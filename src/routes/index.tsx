@@ -19,7 +19,7 @@ import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 import intakeManAsset from "@/assets/intake-man.png.asset.json";
-import treadmillManAsset from "@/assets/treadmill-man.jpg.asset.json";
+import mensHealthTelehealthAsset from "@/assets/mens-health-telehealth.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -270,8 +270,8 @@ const tiles: Tile[] = [
     title: "Confidence with your shirt off.",
     subtitle: "And in the room, at work, everywhere it matters.",
     icon: "bolt",
-    img: treadmillManAsset.url,
-    imgAlt: "Man running on a treadmill in a bright gym",
+    img: mensHealthTelehealthAsset.url,
+    imgAlt: "Man in a navy suit presenting Men's Health Telehealth Solutions in an office",
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
@@ -1606,7 +1606,7 @@ function FinalCTA() {
     <section id="cta" className="w-full bg-[#E8EDF8]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={treadmillManAsset.url} alt="Man running on a treadmill in a bright gym" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <img src={mensHealthTelehealthAsset.url} alt="Man in a navy suit presenting Men's Health Telehealth Solutions in an office" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
