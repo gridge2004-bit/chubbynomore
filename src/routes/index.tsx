@@ -134,7 +134,6 @@ function Index() {
       <EmotionalTransformation />
       <MedicationOptions />
 
-      <GLP1Highlights />
       <WeightLossScale />
       <WhoQualifies />
       <SemaVsTirz />
@@ -962,58 +961,6 @@ function SwitchingCare() {
               Continuation of treatment and dosing are determined by the licensed provider based on your medical history and current treatment.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function GLP1Highlights() {
-  return (
-    <section className="bg-[#E8EAF0] px-6 py-20 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <Reveal as="h2" className="font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
-          Weight loss is about more than willpower.
-        </Reveal>
-        <Reveal as="p" className="mt-5 max-w-3xl text-[17px] leading-[1.5] text-[#1B2147]/85">
-          For many people, biology makes losing weight—and keeping it off—far more difficult. GLP-1 medications can help regulate appetite, improve satiety, and reduce food intake as part of a medically supervised weight-management plan.
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
-          {/* Card 1 — Tirzepatide */}
-          <Reveal className="rounded-3xl bg-gradient-to-b from-white to-[#EEF0F7] p-7 md:p-9 shadow-sm">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
-              Body weight support (Tirzepatide)
-            </div>
-            <h3 className="mt-5 font-serif text-[40px] leading-none text-[#1B2147] md:text-[52px]">
-              GLP-1 + GIP
-            </h3>
-            <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
-              Tirzepatide acts on GLP-1 and GIP pathways involved in appetite and metabolic regulation. A licensed provider will determine whether it may be appropriate for you. Individual results vary.
-            </p>
-          </Reveal>
-
-          {/* Card 2 — Semaglutide */}
-          <Reveal delay={120} className="rounded-3xl bg-gradient-to-b from-white to-[#EEF0F7] p-7 md:p-9 shadow-sm">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
-              Body weight support (Semaglutide)
-            </div>
-            <h3 className="mt-5 font-serif text-[40px] leading-none text-[#1B2147] md:text-[52px]">
-              GLP-1
-            </h3>
-            <p className="mt-5 text-[17px] leading-[1.5] text-[#1B2147]/85">
-              Semaglutide acts on the GLP-1 pathway involved in appetite regulation and satiety. A licensed provider will determine whether it may be appropriate for you. Individual results vary.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="mt-6 md:mt-8">
-          <a
-            href="#cta"
-            className="flex w-full items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:mx-auto md:w-auto md:px-14"
-          >
-            See if I qualify — free
-          </a>
         </div>
       </div>
     </section>
