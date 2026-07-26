@@ -19,6 +19,8 @@ import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
+import intakeManAsset from "@/assets/intake-man.jpg.asset.json";
+import treadmillManAsset from "@/assets/treadmill-man.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -83,7 +85,7 @@ const products = [
 ];
 
 const steps = [
-  { n: "01", img: step1Img, title: "Complete your intake", imgAlt: "Complete your intake", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
+  { n: "01", img: intakeManAsset.url, title: "Complete your intake", imgAlt: "Smiling man in a white t-shirt standing against a coral background", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
   { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
   { n: "03", img: step3Img, title: "Receive your medication", imgAlt: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
@@ -269,8 +271,8 @@ const tiles: Tile[] = [
     title: "Confidence with your shirt off.",
     subtitle: "And in the room, at work, everywhere it matters.",
     icon: "bolt",
-    img: ctaImg,
-    imgAlt: "Confident man living an active, healthy life",
+    img: treadmillManAsset.url,
+    imgAlt: "Man running on a treadmill in a bright gym",
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
@@ -1605,7 +1607,7 @@ function FinalCTA() {
     <section id="cta" className="w-full bg-[#E8EDF8]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={ctaImg} alt="Patient living an active life" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <img src={treadmillManAsset.url} alt="Man running on a treadmill in a bright gym" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
