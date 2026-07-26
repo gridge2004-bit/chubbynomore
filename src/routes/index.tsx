@@ -18,7 +18,7 @@ import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
-import intakeManAsset from "@/assets/intake-man.jpg.asset.json";
+import intakeManAsset from "@/assets/intake-man.png.asset.json";
 import treadmillManAsset from "@/assets/treadmill-man.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -84,7 +84,7 @@ const products = [
 ];
 
 const steps = [
-  { n: "01", img: intakeManAsset.url, title: "Complete your intake", imgAlt: "Smiling man in a white t-shirt standing against a coral background", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
+  { n: "01", img: intakeManAsset.url, title: "Complete your intake", imgAlt: "Man completing his online health intake on his phone while seated at a desk", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
   { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
   { n: "03", img: step3Img, title: "Receive your medication", imgAlt: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
