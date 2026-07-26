@@ -7,7 +7,6 @@ import semaglutideImg from "@/assets/compounded-weightloss.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
 import oralTablets2Img from "@/assets/oral-tablets-2.png";
-import step1Img from "@/assets/step1.jpg";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
