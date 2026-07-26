@@ -321,7 +321,7 @@ type DetailedCard = {
 };
 
 
-const FEATURED_IDS = ["semaglutide", "tirzepatide", "zepbound"];
+const FEATURED_IDS = ["semaglutide", "wegovy-tablets", "zepbound"];
 const CARD_META: Record<string, { format: string; activeIngredient: string }> = {
   semaglutide: { format: "Weekly injection", activeIngredient: "Semaglutide" },
   tirzepatide: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
@@ -350,17 +350,17 @@ function formatUSD(n: number) {
 
 const detailedCards: DetailedCard[] = [
   {
-    id: "tirzepatide",
-    tags: ["COMPOUNDED", "GLP-1 + GIP"],
-    tagTone: "tan",
-    name: "Tirzepatide",
-    desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
-    img: semaglutideImg,
-    imgAlt: "Compounded Tirzepatide vial",
+    id: "wegovy-tablets",
+    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
+    tagTone: "lavender",
+    name: "Wegovy® Tablets",
+    desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
+    img: wegovyPillAsset.url,
+    imgAlt: "Wegovy tablet",
     fullSupplyPrice: 249.99,
-    supplyLabel: "28-day supply",
-    dosesPerSupply: 4,
-    doseLabel: "weekly dose",
+    supplyLabel: "30-day supply",
+    dosesPerSupply: 30,
+    doseLabel: "daily dose",
   },
   {
     id: "semaglutide",
@@ -389,17 +389,17 @@ const detailedCards: DetailedCard[] = [
     doseLabel: "daily dose",
   },
   {
-    id: "wegovy-tablets",
-    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
-    tagTone: "lavender",
-    name: "Wegovy® Tablets",
-    desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
-    img: wegovyPillAsset.url,
-    imgAlt: "Wegovy tablet",
+    id: "tirzepatide",
+    tags: ["COMPOUNDED", "GLP-1 + GIP"],
+    tagTone: "tan",
+    name: "Tirzepatide",
+    desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
+    img: semaglutideImg,
+    imgAlt: "Compounded Tirzepatide vial",
     fullSupplyPrice: 249.99,
-    supplyLabel: "30-day supply",
-    dosesPerSupply: 30,
-    doseLabel: "daily dose",
+    supplyLabel: "28-day supply",
+    dosesPerSupply: 4,
+    doseLabel: "weekly dose",
   },
   {
     id: "zepbound",
