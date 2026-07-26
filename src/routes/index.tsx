@@ -359,7 +359,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     img: semaglutideImg,
     imgAlt: "Compounded Tirzepatide vial",
-    fullSupplyPrice: 70.0,
+    fullSupplyPrice: 249.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -372,7 +372,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A clinician-prescribed GLP-1 treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     img: semaglutideImg,
     imgAlt: "Compounded Semaglutide vial",
-    fullSupplyPrice: 38.0,
+    fullSupplyPrice: 149.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -411,7 +411,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
-    fullSupplyPrice: 1129.97,
+    fullSupplyPrice: 449.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -424,7 +424,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
-    fullSupplyPrice: 1402.0,
+    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -437,7 +437,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
-    fullSupplyPrice: 1029.0,
+    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -450,7 +450,7 @@ const detailedCards: DetailedCard[] = [
     desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
-    fullSupplyPrice: 1100.0,
+    fullSupplyPrice: 1249.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -824,30 +824,6 @@ function EmotionalTransformation() {
   );
 }
 
-const SUMMARY_CARDS = [
-  {
-    badge: "Most popular",
-    title: "Compounded Semaglutide — GLP-1",
-    meta: "Weekly injection · Starts at $149.99 / 28-day supply",
-    body: "A widely used option for appetite regulation and weight management, prepared by a licensed U.S. compounding pharmacy.",
-    fine: "Compounded medications are not FDA-approved.",
-  },
-  {
-    badge: "Stronger results",
-    title: "Compounded Tirzepatide — GLP-1 + GIP",
-    meta: "Weekly injection · Starts at $249.99 / 28-day supply",
-    body: "Acts on two hormone pathways; in brand-name trials, tirzepatide showed the highest average weight loss.",
-    fine: "Compounded medications are not FDA-approved.",
-  },
-  {
-    badge: "Brand-name / FDA-approved",
-    title: "Brand-name GLP-1s — Wegovy®, Zepbound®, Ozempic®, Mounjaro®, Foundayo™",
-    meta: "FDA-approved · From $199.99/mo · Insurance & savings cards may apply",
-    body: "Prefer a brand-name, FDA-approved medication? Your provider can prescribe where appropriate.",
-    fine: null as string | null,
-  },
-];
-
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
@@ -862,83 +838,69 @@ function MedicationOptions() {
     window.setTimeout(() => triggerRef.current?.focus?.(), 0);
   };
 
+  const byId = Object.fromEntries(detailedCards.map((c) => [c.id, c]));
+  const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean) as DetailedCard[];
+  const remaining = detailedCards.filter((c) => !FEATURED_IDS.includes(c.id));
+
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-6xl flex-col">
-        <Reveal className="mb-8 text-center">
-          <h2 className="mx-auto max-w-3xl font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
-            One program. The right medication for your body — chosen by your provider.
+      <div className="mx-auto flex max-w-3xl flex-col">
+        <Reveal className="mb-6 text-center">
+          <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+            Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
-            You don't need to pick a drug off a menu. Complete your visit, and a licensed provider recommends the option that fits your health, goals, and budget. Most men start here:
+            Your licensed provider will determine which available treatment option may be medically appropriate for you.
           </p>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {SUMMARY_CARDS.map((c) => (
-            <div
-              key={c.title}
-              className="flex h-full flex-col rounded-3xl border border-[#1B2147]/10 bg-white p-6 shadow-sm"
+        <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
+          <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+            Featured treatment options
+          </p>
+          <ul className="divide-y divide-[#1B2147]/10">
+            {featured.map((c) => (
+              <li key={c.id}>
+                <MedicationRow card={c} onInfo={openInfo} />
+              </li>
+            ))}
+            {expanded &&
+              remaining.map((c) => (
+                <li key={c.id}>
+                  <MedicationRow card={c} onInfo={openInfo} />
+                </li>
+              ))}
+          </ul>
+        </div>
+
+        <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
+          <span aria-hidden="true">*</span>
+          {INSURANCE_DISCLAIMER}
+        </p>
+
+        {remaining.length > 0 && (
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+              aria-expanded={expanded}
             >
-              <span className="mb-4 inline-flex w-fit rounded-full bg-[#1B2147]/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]">
-                {c.badge}
-              </span>
-              <h3 className="font-serif text-xl leading-snug text-[#1B2147]">{c.title}</h3>
-              <p className="mt-2 text-sm font-medium text-[#1B2147]/80">{c.meta}</p>
-              <p className="mt-3 text-sm leading-relaxed text-[#1B2147]/75">{c.body}</p>
-              {c.fine && (
-                <p className="mt-auto pt-4 text-[11px] leading-relaxed text-[#1B2147]/60">
-                  {c.fine}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
-            aria-expanded={expanded}
-            aria-controls="all-medications"
-          >
-            {expanded ? "Hide all medications & pricing" : "See all medications & pricing →"}
-            <ChevronDown
-              className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
-            />
-          </button>
-        </div>
-
-        {expanded && (
-          <div id="all-medications" className="mt-8">
-            <div id="pricing" className="mx-auto max-w-3xl rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-              <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
-                All treatment options
-              </p>
-              <ul className="divide-y divide-[#1B2147]/10">
-                {detailedCards.map((c) => (
-                  <li key={c.id}>
-                    <MedicationRow card={c} onInfo={openInfo} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <p className="mx-auto mt-4 max-w-3xl text-[11px] leading-relaxed text-[#1B2147]/70">
-              <span aria-hidden="true">*</span>
-              {INSURANCE_DISCLAIMER}
-            </p>
+              {expanded ? "Show fewer treatment options" : "Show more treatment options"}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+              />
+            </button>
           </div>
         )}
 
-        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+        <div className="mt-8 flex flex-col items-center gap-3 text-center">
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
             className="inline-flex items-center justify-center rounded-full bg-[#1B2147] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
           >
-            See which option fits me — free
+            See which treatment may be right for me
           </button>
           <p className="text-[12px] text-[#1B2147]/60">
             Educational information only. This list is not a product selector — a licensed provider decides what may be appropriate.
