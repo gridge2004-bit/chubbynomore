@@ -822,6 +822,77 @@ function EmotionalTransformation() {
   );
 }
 
+function DetailedProductCard({ card }: { card: DetailedCard }) {
+  const isCompounded = card.tags.includes("COMPOUNDED");
+  const tagClass = isCompounded
+    ? "bg-[#E6D4B8] text-[#1B2147]"
+    : "bg-[#D8DCEF] text-[#1B2147]";
+
+  return (
+    <article className="flex h-full flex-col rounded-3xl bg-[#EFEFED] p-6 sm:p-8">
+      <div className="flex flex-wrap gap-2">
+        {card.tags.map((t) => (
+          <span
+            key={t}
+            className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${tagClass}`}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-6 flex items-start justify-between gap-4">
+        <h3 className="min-w-0 text-[26px] font-bold leading-tight text-[#1B2147] sm:text-[30px]">
+          {card.name}
+        </h3>
+        <img
+          src={card.img}
+          alt={card.imgAlt}
+          loading="lazy"
+          className="h-24 w-24 shrink-0 rounded-lg object-cover sm:h-28 sm:w-28"
+        />
+      </div>
+
+      <p className="mt-5 text-[15px] leading-relaxed text-[#1B2147]/75 sm:text-base">
+        {card.desc}
+      </p>
+
+      <div className="mt-auto pt-6">
+        <div className="flex flex-wrap items-baseline gap-x-2">
+          <span className="text-[15px] text-[#1B2147]/80">Starting at</span>
+          <span className="text-[34px] font-bold leading-none tracking-tight text-[#1B2147] sm:text-[40px]">
+            {formatUSD(card.fullSupplyPrice)}
+          </span>
+          <span className="text-[15px] text-[#1B2147]/80">/{card.supplyLabel}</span>
+        </div>
+
+        {isCompounded && (
+          <p className="mt-3 text-[12px] italic leading-relaxed text-[#1B2147]/65">
+            Compounded medications are not FDA-approved for safety, effectiveness, or quality.
+          </p>
+        )}
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+            className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+          >
+            See if I qualify — free
+          </button>
+          <Link
+            to="/medications/$slug"
+            params={{ slug: card.id }}
+            className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+          >
+            Learn more
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function MedicationOptions() {
   const [expanded, setExpanded] = useState(false);
   const [infoCard, setInfoCard] = useState<DetailedCard | null>(null);
@@ -842,7 +913,7 @@ function MedicationOptions() {
 
   return (
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
-      <div className="mx-auto flex max-w-3xl flex-col">
+      <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
             Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
@@ -852,24 +923,25 @@ function MedicationOptions() {
           </p>
         </Reveal>
 
-        <div id="pricing" className="mt-2 rounded-3xl border border-[#1B2147]/10 bg-white px-4 sm:px-6">
-          <p className="mt-5 border-b border-[#1B2147]/10 pb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+        <div id="pricing" className="mt-2">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
             Featured treatment options
           </p>
-          <ul className="divide-y divide-[#1B2147]/10">
-            {featured.map((c) => (
-              <li key={c.id}>
-                <MedicationRow card={c} onInfo={openInfo} />
-              </li>
+          <div className="grid gap-5 md:grid-cols-2">
+            {featured.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <DetailedProductCard card={c} />
+              </Reveal>
             ))}
             {expanded &&
-              remaining.map((c) => (
-                <li key={c.id}>
-                  <MedicationRow card={c} onInfo={openInfo} />
-                </li>
+              remaining.map((c, i) => (
+                <Reveal key={c.id} delay={i * 60} className="h-full">
+                  <DetailedProductCard card={c} />
+                </Reveal>
               ))}
-          </ul>
+          </div>
         </div>
+
 
         <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
           <span aria-hidden="true">*</span>
