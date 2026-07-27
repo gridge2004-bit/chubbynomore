@@ -225,7 +225,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       </div>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-[60] sm:hidden">
+        <div className="fixed inset-0 z-[60] lg:hidden">
           <div
             className="absolute inset-0 bg-[#103942]/40"
             onClick={() => setMenuOpen(false)}
@@ -238,9 +238,8 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             className="absolute inset-x-0 top-0 rounded-b-3xl bg-white px-4 pb-6 pt-3 shadow-xl"
           >
             <div className="flex items-center justify-between gap-3">
-              <a href="/" onClick={() => setMenuOpen(false)} className="flex min-w-0 items-center gap-2">
-                <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-10 w-auto shrink-0" />
-                <span className="font-sans text-[20px] font-black tracking-tight text-[#103942] whitespace-nowrap">Chubby No More</span>
+              <a href="/" aria-label="Chubby No More home" onClick={() => setMenuOpen(false)} className="flex shrink-0 items-center py-1">
+                <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
               </a>
               <button
                 type="button"
