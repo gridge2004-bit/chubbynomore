@@ -159,7 +159,8 @@ function PromoBanner() {
     <div className="w-full bg-[#103942] text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[12px]">
         <span className="hidden h-1.5 w-1.5 rounded-full bg-[#42D1C3] sm:inline-block" />
-        <span>Free online eligibility check — takes 60 seconds</span>
+        <span className="sm:hidden">Free eligibility check · 60 seconds</span>
+        <span className="hidden sm:inline">Free online eligibility check — takes 60 seconds</span>
       </div>
     </div>
   );
