@@ -34,6 +34,8 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://chubbynomore.com/" },
       { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
       { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
+      { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
   }),
@@ -178,17 +180,15 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
-            <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-7 w-auto shrink-0 sm:h-9" />
-            <span className="font-serif text-[20px] font-bold text-[#103942] whitespace-nowrap sm:text-[24px]">ChubbyNoMore</span>
+            <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-10 w-auto shrink-0 sm:h-12" />
+            <span className="font-sans text-[20px] font-black tracking-tight text-[#103942] whitespace-nowrap sm:text-[24px]">Chubby No More</span>
           </a>
-          <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
+          <nav className="hidden items-center gap-4 sm:flex sm:gap-6 md:gap-10">
             {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm ${
-                  l.label === "Medications" || l.label === "Pricing" ? "" : "hidden md:inline-flex"
-                }`}
+                className="text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm"
               >
                 {l.label}
               </a>
@@ -261,21 +261,21 @@ const tiles: Tile[] = [
     variant: "image-hero",
   },
   {
-    id: "love",
-    title: "Strong where it counts.",
-    subtitle: "Lose fat without losing the muscle and drive you've worked for.",
-    icon: "user",
-    img: loveWhatYouSeeAsset.url,
-    imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
+    id: "confidence",
+    title: "Confidence that carries into every room.",
+    subtitle: "Feel sharper, move with confidence, and show up like yourself again.",
+    icon: "bolt",
+    img: mensHealthTelehealthAsset.url,
+    imgAlt: "Man in a navy suit presenting confidently in a modern office boardroom",
     variant: "image-hero",
   },
   {
-    id: "confidence",
-    title: "Confidence with your shirt off.",
-    subtitle: "And in the room, at work, everywhere it matters.",
-    icon: "bolt",
-    img: mensHealthTelehealthAsset.url,
-    imgAlt: "Man in a navy suit presenting Men's Health Telehealth Solutions in an office",
+    id: "love",
+    title: "Feel confident in your body again.",
+    subtitle: "In your clothes, in your relationships, and in the moments that matter.",
+    icon: "user",
+    img: loveWhatYouSeeAsset.url,
+    imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
@@ -1143,7 +1143,7 @@ function WeightLossScale() {
                 strokeLinejoin="round"
               />
             </svg>
-            <div className="rounded-full bg-[#103942] px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-white shadow-md">
+            <div className="rounded-full bg-white px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-[#103942] shadow-md">
               −{potentialLoss} lbs
             </div>
           </div>
@@ -1165,7 +1165,7 @@ function WeightLossScale() {
         <div className="mt-8 text-center">
           <a
             href="#cta"
-            className="inline-flex items-center justify-center rounded-full bg-[#103942] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#42D1C3] md:px-14"
+            className="inline-flex items-center justify-center rounded-full bg-[#42D1C3] px-8 py-4 text-base font-semibold text-[#103942] shadow-sm transition hover:bg-white hover:text-[#103942] md:px-14"
           >
             See what's realistic for me — free
           </a>
@@ -1644,25 +1644,25 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#103942] text-white">
+    <footer className="bg-[#F5F5F7] text-[#103942]">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3">
-              <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-10 w-auto shrink-0" />
-              <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
+              <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-12 w-auto shrink-0" />
+              <div className="font-sans text-2xl font-black tracking-tight text-[#103942] sm:text-3xl">Chubby No More</div>
             </div>
 
-            <p className="mt-4 max-w-xs text-sm text-white/70">
+            <p className="mt-4 max-w-xs text-sm text-[#103942]/70">
               Online prescription weight-management care with clinician review and home delivery, where available.
             </p>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-white/60">Program</div>
+            <div className="text-xs uppercase tracking-[0.2em] text-[#103942]/65">Program</div>
             <ul className="mt-4 space-y-2.5 text-sm">
               {programLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-white/85 transition hover:text-[#42D1C3]">
+                  <a href={l.href} className="text-[#103942] transition hover:text-[#42D1C3]">
                     {l.label}
                   </a>
                 </li>
@@ -1670,8 +1670,8 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/60 md:flex-row">
-          <span>© {new Date().getFullYear()} ChubbyNoMore. All rights reserved.</span>
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-xs text-[#103942]/65 md:flex-row">
+          <span>© {new Date().getFullYear()} Chubby No More. All rights reserved.</span>
         </div>
       </div>
     </footer>
