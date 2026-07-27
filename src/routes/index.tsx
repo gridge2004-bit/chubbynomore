@@ -183,14 +183,12 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-10 w-auto shrink-0 sm:h-12" />
             <span className="font-sans text-[20px] font-black tracking-tight text-[#103942] whitespace-nowrap sm:text-[24px]">Chubby No More</span>
           </a>
-          <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
+          <nav className="hidden items-center gap-4 sm:flex sm:gap-6 md:gap-10">
             {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm ${
-                  l.label === "Medications" || l.label === "Pricing" ? "" : "hidden md:inline-flex"
-                }`}
+                className="text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm"
               >
                 {l.label}
               </a>
