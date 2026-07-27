@@ -23,21 +23,21 @@
 }
 
 :root {
-  --cream: #FAF8F5;
-  --forest: #1B2147;
+  --cream: #F5F5F7;
+  --forest: #103942;
   --forest-foreground: #FFFFFF;
-  --teal: #1B2147;
-  --navy: #1B2147;
-  --ivory: #FAF8F5;
-  --softgray: #F7F7F7;
-  --periwinkle: #E8EDF8;
+  --teal: #103942;
+  --navy: #103942;
+  --ivory: #F5F5F7;
+  --softgray: #F5F5F7;
+  --periwinkle: #F5F5F7;
   --background: #FFFFFF;
-  --foreground: #1B2147;
+  --foreground: #103942;
   --card: #FFFFFF;
-  --card-foreground: #1B2147;
-  --border: #E7E8EE;
-  --muted: #F7F7F7;
-  --muted-foreground: #5A6075;
+  --card-foreground: #103942;
+  --border: #E1E7E8;
+  --muted: #F5F5F7;
+  --muted-foreground: #58747B;
 }
 
 
@@ -63,7 +63,7 @@
     font-family: var(--font-button); font-weight: 800; font-size: 0.875rem;
     transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
   }
-  .btn-pill:hover { background: #14321f; transform: translateY(-1px); box-shadow: 0 10px 24px -12px rgba(26,61,46,.45); }
+  .btn-pill:hover { background: #42D1C3; transform: translateY(-1px); box-shadow: 0 10px 24px -12px rgba(26,61,46,.45); }
   .btn-pill-outline {
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.85rem 1.4rem; border-radius: 9999px;
@@ -128,7 +128,7 @@
     width: 22px;
     height: 22px;
     border-radius: 9999px;
-    background: #B8C4E6;
+    background: #42D1C3;
     border: 2px solid #fff;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
@@ -137,7 +137,7 @@
     width: 22px;
     height: 22px;
     border-radius: 9999px;
-    background: #B8C4E6;
+    background: #42D1C3;
     border: 2px solid #fff;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
