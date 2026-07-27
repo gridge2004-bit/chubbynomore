@@ -1120,13 +1120,13 @@ function MedicationOptions() {
           <div className="grid grid-cols-1 gap-5">
             {featured.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
-                <DetailedProductCard card={c} />
+                <DetailedProductCard card={c} onInfo={openInfo} />
               </Reveal>
             ))}
             {expanded &&
               remaining.map((c, i) => (
                 <Reveal key={c.id} delay={i * 60} className="h-full">
-                  <DetailedProductCard card={c} />
+                  <DetailedProductCard card={c} onInfo={openInfo} />
                 </Reveal>
               ))}
           </div>
