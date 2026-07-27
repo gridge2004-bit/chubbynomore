@@ -91,7 +91,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
     links: [
-      { rel: "canonical", href: "https://chubbynomore.com/" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", href: "/favicon-48x48.png", sizes: "48x48" },
