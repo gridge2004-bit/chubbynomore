@@ -1655,7 +1655,7 @@ function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {programLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-white/85 transition hover:text-white">
+                  <a href={l.href} className="text-white/85 transition hover:text-[#42D1C3]">
                     {l.label}
                   </a>
                 </li>
