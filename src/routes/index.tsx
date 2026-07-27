@@ -198,7 +198,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           <a href="/" aria-label="Chubby No More home" className="flex shrink-0 items-center py-1">
             <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
           </a>
-          <nav className="hidden items-center gap-6 lg:flex lg:gap-10">
+          <nav className="hidden items-center gap-6 md:flex lg:gap-10">
             {navLinks.map((l) => (
               <a
                 key={l.href}
@@ -210,18 +210,22 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             ))}
           </nav>
         </div>
-        <a href="#cta" className="hidden shrink-0 items-center justify-center rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:inline-flex">
-          See if I qualify — free
-        </a>
-        <button
-          type="button"
-          aria-label="Open navigation menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
-          className="inline-flex shrink-0 items-center justify-center rounded-full p-2 text-[#103942] transition hover:text-[#42D1C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3] lg:hidden"
-        >
-          <Menu className="h-7 w-7" strokeWidth={2} />
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <a href="#cta" className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:px-7 sm:py-3.5 sm:text-sm">
+            <span className="sm:hidden">See if I qualify</span>
+            <span className="hidden sm:inline">See if I qualify — free</span>
+          </a>
+          <button
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
+            className="inline-flex shrink-0 items-center justify-center rounded-full p-2 text-[#103942] transition hover:text-[#42D1C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3] md:hidden"
+          >
+            <Menu className="h-7 w-7" strokeWidth={2} />
+          </button>
+        </div>
+
       </div>
 
       {menuOpen && (
