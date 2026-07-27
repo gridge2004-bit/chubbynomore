@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Info, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
@@ -710,10 +710,29 @@ function MedicationInfoPanel({
   onClose: () => void;
 }) {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (!card) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const nodes = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -726,6 +745,7 @@ function MedicationInfoPanel({
       window.clearTimeout(t);
     };
   }, [card, onClose]);
+
 
 
   if (!card) return null;
@@ -748,14 +768,25 @@ function MedicationInfoPanel({
         onClick={onClose}
         className="absolute inset-0 bg-black/40"
       />
-      <div className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
+      <div ref={panelRef} className="relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
         <div className="flex items-start justify-between gap-4 border-b border-[#103942]/10 px-6 py-5">
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]/60">
               Treatment information
             </p>
             <h3 className="mt-1 text-[22px] font-semibold text-[#103942]">{card.name}</h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {card.tags.map((t) => (
+                <span
+                  key={t}
+                  className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#103942] ${isCompounded ? "bg-[#D5F3EF]" : "bg-[#F5F5F7]"}`}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
+
           <button
             ref={closeBtnRef}
             type="button"
@@ -930,79 +961,157 @@ function EmotionalTransformation() {
   );
 }
 
-function DetailedProductCard({ card }: { card: DetailedCard }) {
+const MOBILE_SUMMARY: Record<string, string> = {
+  semaglutide: "Clinician-prescribed GLP-1 care for eligible patients.",
+  tirzepatide: "Clinician-prescribed GLP-1 + GIP care for eligible patients.",
+};
+
+function DetailedProductCard({
+  card,
+  onInfo,
+}: {
+  card: DetailedCard;
+  onInfo?: (card: DetailedCard, trigger: HTMLElement) => void;
+}) {
   const isCompounded = card.tags.includes("COMPOUNDED");
   const tagClass = isCompounded
     ? "bg-[#D5F3EF] text-[#103942]"
     : "bg-[#F5F5F7] text-[#103942]";
+  const summary =
+    MOBILE_SUMMARY[card.id] ?? "Clinician-prescribed treatment for eligible patients.";
 
   return (
-    <article className="flex h-full flex-col gap-6 rounded-3xl bg-[#F5F5F7] p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
-      <img
-        src={card.img}
-        alt={card.imgAlt}
-        loading="lazy"
-        className="h-28 w-28 shrink-0 self-start rounded-xl object-cover sm:h-32 sm:w-32 lg:order-2 lg:h-40 lg:w-40 lg:self-center"
-      />
-
-      <div className="flex min-w-0 flex-1 flex-col lg:order-1">
+    <article className="h-full rounded-3xl bg-[#F5F5F7] p-[22px] sm:p-8">
+      {/* Mobile-only layout (< 640px) */}
+      <div className="flex flex-col sm:hidden">
         <div className="flex flex-wrap gap-2">
           {card.tags.map((t) => (
             <span
               key={t}
-              className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${tagClass}`}
+              className={`rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#103942] ${isCompounded ? "bg-[#D5F3EF]" : ""}`}
             >
               {t}
             </span>
           ))}
         </div>
 
-        <h3 className="mt-4 text-[26px] font-bold leading-tight text-[#103942] sm:text-[30px]">
-          {card.name}
-        </h3>
+        <h3 className="mt-3 text-[26px] font-bold leading-tight text-[#103942]">{card.name}</h3>
 
-        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#103942]/75 sm:text-base">
-          {card.desc}
-        </p>
+        <div className="mt-4 grid aspect-[4/3] max-h-[230px] w-full place-items-center overflow-hidden rounded-2xl bg-white">
+          <img
+            src={card.img}
+            alt={card.imgAlt}
+            loading="lazy"
+            className="h-full w-full object-contain p-3"
+          />
+        </div>
 
-        <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <div className="flex flex-wrap items-baseline gap-x-2">
-              <span className="text-[15px] text-[#103942]/80">Starting at</span>
-              <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
-                {formatUSD(card.fullSupplyPrice)}
+        <div className="mt-4">
+          <p className="text-[14px] text-[#103942]/80">Starting at</p>
+          <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
+            <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
+              {formatUSD(card.fullSupplyPrice)}
+            </span>
+            <span className="text-[14px] text-[#103942]/80">/{card.supplyLabel}</span>
+          </p>
+        </div>
+
+        <p className="mt-3 text-[15px] leading-snug text-[#103942]/75">{summary}</p>
+
+        <div className="mt-5 flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+            className="inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition active:bg-[#42D1C3] active:text-[#103942]"
+          >
+            See if I qualify — free
+          </button>
+          <button
+            type="button"
+            onClick={(e) => onInfo?.(card, e.currentTarget)}
+            className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full border border-[#103942]/25 bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition active:bg-[#F5F5F7]"
+          >
+            <Info className="h-4 w-4" aria-hidden="true" />
+            Details
+          </button>
+        </div>
+
+        {isCompounded && (
+          <p className="mt-4 text-[12px] italic leading-relaxed text-[#103942]/65">
+            Compounded medications are not FDA-approved.
+          </p>
+        )}
+      </div>
+
+      {/* Tablet + desktop layout (unchanged) */}
+      <div className="hidden gap-6 sm:flex sm:flex-col lg:flex-row lg:items-center lg:gap-10">
+        <img
+          src={card.img}
+          alt={card.imgAlt}
+          loading="lazy"
+          className="h-28 w-28 shrink-0 self-start rounded-xl object-cover sm:h-32 sm:w-32 lg:order-2 lg:h-40 lg:w-40 lg:self-center"
+        />
+
+        <div className="flex min-w-0 flex-1 flex-col lg:order-1">
+          <div className="flex flex-wrap gap-2">
+            {card.tags.map((t) => (
+              <span
+                key={t}
+                className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] ${tagClass}`}
+              >
+                {t}
               </span>
-              <span className="text-[15px] text-[#103942]/80">/{card.supplyLabel}</span>
-            </div>
-
-            {isCompounded && (
-              <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#103942]/65">
-                Compounded medications are not FDA-approved for safety, effectiveness, or quality.
-              </p>
-            )}
+            ))}
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:flex-none"
-            >
-              See if I qualify — free
-            </button>
-            <Link
-              to="/medications/$slug"
-              params={{ slug: card.id }}
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] lg:flex-none"
-            >
-              Learn more
-            </Link>
+          <h3 className="mt-4 text-[26px] font-bold leading-tight text-[#103942] sm:text-[30px]">
+            {card.name}
+          </h3>
+
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#103942]/75 sm:text-base">
+            {card.desc}
+          </p>
+
+          <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="flex flex-wrap items-baseline gap-x-2">
+                <span className="text-[15px] text-[#103942]/80">Starting at</span>
+                <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
+                  {formatUSD(card.fullSupplyPrice)}
+                </span>
+                <span className="text-[15px] text-[#103942]/80">/{card.supplyLabel}</span>
+              </div>
+
+              {isCompounded && (
+                <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#103942]/65">
+                  Compounded medications are not FDA-approved for safety, effectiveness, or quality.
+                </p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:flex-none"
+              >
+                See if I qualify — free
+              </button>
+              <Link
+                to="/medications/$slug"
+                params={{ slug: card.id }}
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] lg:flex-none"
+              >
+                Learn more
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </article>
   );
 }
+
 
 
 function MedicationOptions() {
@@ -1039,16 +1148,16 @@ function MedicationOptions() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]/60">
             Featured treatment options
           </p>
-          <div className="grid grid-cols-1 gap-5">
+          <div className="grid grid-cols-1 gap-6 sm:gap-5">
             {featured.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
-                <DetailedProductCard card={c} />
+                <DetailedProductCard card={c} onInfo={openInfo} />
               </Reveal>
             ))}
             {expanded &&
               remaining.map((c, i) => (
                 <Reveal key={c.id} delay={i * 60} className="h-full">
-                  <DetailedProductCard card={c} />
+                  <DetailedProductCard card={c} onInfo={openInfo} />
                 </Reveal>
               ))}
           </div>
