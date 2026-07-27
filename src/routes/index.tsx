@@ -10,6 +10,7 @@ import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import cnmLogoAsset from "@/assets/cnm-logo.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
