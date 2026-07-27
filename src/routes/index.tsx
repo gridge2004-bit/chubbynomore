@@ -20,7 +20,7 @@ import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 import intakeManAsset from "@/assets/intake-man.png.asset.json";
 import mensHealthTelehealthAsset from "@/assets/mens-health-telehealth.png.asset.json";
-import laptopConsultAsset from "@/assets/laptop-consult-man.png.asset.json";
+import dinnerCoupleAsset from "@/assets/dinner-couple.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -1607,7 +1607,7 @@ function FinalCTA() {
     <section id="cta" className="w-full bg-[#E8EDF8]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={laptopConsultAsset.url} alt="Smiling man having an online consultation on his laptop at home" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
