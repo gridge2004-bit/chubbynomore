@@ -164,7 +164,7 @@ function PromoBanner() {
 function PillButton({ href, children, variant = "primary" }: { href: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   const base = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition";
   if (variant === "secondary") {
-    return <a href={href} className={`${base} border border-[#103942] text-[#103942] hover:bg-[#103942] hover:text-white`}>{children}</a>;
+    return <a href={href} className={`${base} border border-[#103942] text-[#103942] hover:bg-[#F5F5F7] hover:text-[#103942]`}>{children}</a>;
   }
   return <a href={href} className={`${base} bg-[#103942] text-white hover:bg-[#42D1C3] hover:text-[#103942]`}>{children}</a>;
 }
@@ -172,7 +172,7 @@ function PillButton({ href, children, variant = "primary" }: { href: string; chi
 function Nav({ scrolled }: { scrolled: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
+    <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(16,57,66,0.08),0_8px_24px_-16px_rgba(16,57,66,0.18)]" : ""}`}>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
@@ -516,7 +516,7 @@ function MedicationRow({
           onClick={(e) => onInfo(card, e.currentTarget)}
           aria-label={`More information about ${card.name}`}
           aria-haspopup="dialog"
-          className="ml-auto grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-[#103942]/25 text-[#103942] transition hover:bg-[#103942] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942] sm:order-last sm:ml-1"
+          className="ml-auto grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-[#103942]/25 text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942] sm:order-last sm:ml-1"
         >
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
@@ -655,7 +655,7 @@ function MedicationInfoPanel({
             type="button"
             onClick={onClose}
             aria-label="Close information panel"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#103942]/20 text-[#103942] hover:bg-[#103942] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942]"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#103942]/20 text-[#103942] hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942]"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -760,7 +760,7 @@ function MedicationInfoPanel({
             to="/medications/$slug"
             params={{ slug: card.id }}
             onClick={onClose}
-            className="inline-flex w-full items-center justify-center rounded-full border border-[#103942]/25 px-5 py-3 text-sm font-semibold text-[#103942] transition hover:bg-[#103942] hover:text-white"
+            className="inline-flex w-full items-center justify-center rounded-full border border-[#103942]/25 px-5 py-3 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
           >
             View full medication details
           </Link>
@@ -887,7 +887,7 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
             <Link
               to="/medications/$slug"
               params={{ slug: card.id }}
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#103942] hover:text-white lg:flex-none"
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] lg:flex-none"
             >
               Learn more
             </Link>
@@ -959,7 +959,7 @@ function MedicationOptions() {
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#103942]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#103942] hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-[#103942]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
               aria-expanded={expanded}
             >
               {expanded ? "Show fewer treatment options" : "Show more treatment options"}
@@ -1030,7 +1030,7 @@ function SwitchingCare() {
             </p>
             <a
               href="#cta"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#103942] bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#103942] hover:text-white"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#103942] bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
             >
               Switch and keep my momentum →
             </a>
@@ -2178,7 +2178,7 @@ function QualifyModal() {
           type="button"
           onClick={requestClose}
           aria-label="Close questionnaire"
-          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E1E7E8] bg-white text-[#103942] transition hover:bg-[#103942] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E1E7E8] bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           <span aria-hidden="true">✕</span>
         </button>
