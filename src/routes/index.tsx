@@ -177,6 +177,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
+            <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-7 w-auto shrink-0 sm:h-9" />
             <span className="font-serif text-[20px] font-bold text-[#103942] whitespace-nowrap sm:text-[24px]">ChubbyNoMore</span>
           </a>
           <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
