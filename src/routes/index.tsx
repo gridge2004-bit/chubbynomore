@@ -981,7 +981,7 @@ function DetailedProductCard({
     MOBILE_SUMMARY[card.id] ?? "Clinician-prescribed treatment for eligible patients.";
 
   return (
-    <article className="h-full rounded-3xl bg-[#F5F5F7] p-[22px] sm:p-8">
+    <article className="h-full rounded-3xl bg-[#F5F5F7] p-[18px] sm:p-8">
       {/* Mobile-only layout (< 640px) */}
       <div className="flex flex-col sm:hidden">
         <div className="flex flex-wrap gap-2">
@@ -995,19 +995,18 @@ function DetailedProductCard({
           ))}
         </div>
 
-        <h3 className="mt-3 text-[26px] font-bold leading-tight text-[#103942]">{card.name}</h3>
+        <h3 className="mt-2.5 text-[26px] font-bold leading-tight text-[#103942]">{card.name}</h3>
 
-        <div className="mt-4 flex aspect-[4/3] max-h-[230px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-3">
+        <div className="mt-3 flex h-[150px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white">
           <img
             src={card.img}
             alt={card.imgAlt}
             loading="lazy"
-            className="block max-h-full max-w-full object-contain"
+            className="block h-full w-auto max-w-full object-contain"
           />
         </div>
 
-
-        <div className="mt-4">
+        <div className="mt-3">
           <p className="text-[14px] text-[#103942]/80">Starting at</p>
           <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
             <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
@@ -1017,9 +1016,10 @@ function DetailedProductCard({
           </p>
         </div>
 
-        <p className="mt-3 text-[15px] leading-snug text-[#103942]/75">{summary}</p>
+        <p className="mt-2.5 text-[15px] leading-snug text-[#103942]/75">{summary}</p>
 
-        <div className="mt-5 flex flex-col gap-3">
+        <div className="mt-4 flex flex-col gap-2.5">
+
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
@@ -1038,9 +1038,10 @@ function DetailedProductCard({
         </div>
 
         {isCompounded && (
-          <p className="mt-4 text-[12px] italic leading-relaxed text-[#103942]/65">
+          <p className="mt-3 text-[12px] italic leading-relaxed text-[#103942]/65">
             Compounded medications are not FDA-approved.
           </p>
+
         )}
       </div>
 
