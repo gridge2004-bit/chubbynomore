@@ -1,4 +1,5 @@
-import semaglutideImg from "@/assets/compounded-weightloss.jpg";
+import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
+import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
@@ -36,8 +37,8 @@ export const medications: Medication[] = [
     frequency: "Once weekly",
     price: "$149.99",
     period: "/28-day supply",
-    img: semaglutideImg,
-    imgAlt: "Compounded semaglutide vial",
+    img: cnmSemaVialsAsset.url,
+    imgAlt: "Compounded semaglutide vials with discreet CNM branding",
     summary:
       "Semaglutide mimics the GLP-1 hormone your body already makes, slowing digestion and reducing appetite so it's easier to stay in a calorie deficit. Compounded versions contain the same active ingredient as Ozempic® and Wegovy® and are prepared by licensed US pharmacies.",
     candidateProfile: [
@@ -91,8 +92,8 @@ export const medications: Medication[] = [
     frequency: "Once weekly",
     price: "$249.99",
     period: "/28-day supply",
-    img: semaglutideImg,
-    imgAlt: "Compounded tirzepatide vial",
+    img: cnmTirzVialsAsset.url,
+    imgAlt: "Compounded tirzepatide vials with discreet CNM branding",
     summary:
       "Tirzepatide activates both GLP-1 and GIP receptors, producing greater average weight loss than GLP-1 alone in clinical trials. Compounded versions contain the same active ingredient as Mounjaro® and Zepbound®.",
     candidateProfile: [
