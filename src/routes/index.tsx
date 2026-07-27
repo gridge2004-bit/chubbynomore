@@ -755,7 +755,18 @@ function MedicationInfoPanel({
               Treatment information
             </p>
             <h3 className="mt-1 text-[22px] font-semibold text-[#103942]">{card.name}</h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {card.tags.map((t) => (
+                <span
+                  key={t}
+                  className={`rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#103942] ${isCompounded ? "bg-[#D5F3EF]" : "bg-[#F5F5F7]"}`}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
+
           <button
             ref={closeBtnRef}
             type="button"
