@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Info, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
