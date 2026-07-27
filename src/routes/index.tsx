@@ -10,6 +10,7 @@ import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step2Img from "@/assets/step2.jpg";
 import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import cnmLogoAsset from "@/assets/cnm-logo.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
@@ -177,6 +178,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
+            <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-7 w-auto shrink-0 sm:h-9" />
             <span className="font-serif text-[20px] font-bold text-[#103942] whitespace-nowrap sm:text-[24px]">ChubbyNoMore</span>
           </a>
           <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
@@ -1646,7 +1648,10 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
-            <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
+            <div className="flex items-center gap-3">
+              <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-10 w-auto shrink-0" />
+              <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
+            </div>
 
             <p className="mt-4 max-w-xs text-sm text-white/70">
               Online prescription weight-management care with clinician review and home delivery, where available.
