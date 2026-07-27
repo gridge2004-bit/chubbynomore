@@ -1648,7 +1648,10 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
-            <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
+            <div className="flex items-center gap-3">
+              <img src={cnmLogoAsset.url} alt="ChubbyNoMore" className="h-10 w-auto shrink-0" />
+              <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
+            </div>
 
             <p className="mt-4 max-w-xs text-sm text-white/70">
               Online prescription weight-management care with clinician review and home delivery, where available.
