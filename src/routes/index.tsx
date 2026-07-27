@@ -768,7 +768,7 @@ function MedicationInfoPanel({
         onClick={onClose}
         className="absolute inset-0 bg-black/40"
       />
-      <div className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
+      <div ref={panelRef} className="relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
         <div className="flex items-start justify-between gap-4 border-b border-[#103942]/10 px-6 py-5">
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]/60">
