@@ -34,6 +34,8 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://chubbynomore.com/" },
       { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
       { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
+      { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
   }),
