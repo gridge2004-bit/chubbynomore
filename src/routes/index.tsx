@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
 import heroImg from "@/assets/hero.jpg";
-import semaglutideImg from "@/assets/compounded-weightloss.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
 import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step2Img from "@/assets/step2.jpg";
-import step3Img from "@/assets/step3.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
+import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
+import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
 import cnmLogoAsset from "@/assets/cnm-logo.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
@@ -71,7 +72,7 @@ const products = [
       { label: "GLP-1 + GIP (Tirzepatide)", price: "$249.99", period: "per 28-day supply" },
       { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "per 28-day supply" },
     ],
-    img: semaglutideImg,
+    img: cnmSemaVialsAsset.url,
   },
   {
     id: "brand",
@@ -91,7 +92,7 @@ const products = [
 const steps = [
   { n: "01", img: intakeManAsset.url, title: "Complete your intake", imgAlt: "Man completing his online health intake on his phone while seated at a desk", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
   { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
-  { n: "03", img: step3Img, title: "Receive your medication", imgAlt: "Receive your medication", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
+  { n: "03", img: cnmBoxAsset.url, title: "Receive your medication", imgAlt: "Plain white shipping box with a subtle CNM logo on a kitchen counter", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 
@@ -356,7 +357,7 @@ const tiles: Tile[] = [
     imgAlt: "Smiling man in a white shirt looking in the mirror with his partner",
     variant: "image-hero",
   },
-  { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: semaglutideImg, imgAlt: "Compounded GLP-1 medication", variant: "row" },
+  { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: cnmSemaVialsAsset.url, imgAlt: "Compounded GLP-1 medication", variant: "row" },
   { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
   { id: "cravings", title: "Curb cravings & appetite", img: oralTablets1Img, imgAlt: "Oral weight-loss tablets", variant: "half" },
   { id: "metabolic", title: "Metabolic health", img: oralTablets2Img, imgAlt: "Oral metabolic health tablets", variant: "half" },
@@ -451,8 +452,8 @@ const detailedCards: DetailedCard[] = [
     tagTone: "tan",
     name: "Semaglutide",
     desc: "A clinician-prescribed GLP-1 treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
-    img: semaglutideImg,
-    imgAlt: "Compounded Semaglutide vial",
+    img: cnmSemaVialsAsset.url,
+    imgAlt: "Compounded semaglutide vials with discreet CNM branding",
     fullSupplyPrice: 149.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
@@ -477,8 +478,8 @@ const detailedCards: DetailedCard[] = [
     tagTone: "tan",
     name: "Tirzepatide",
     desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
-    img: semaglutideImg,
-    imgAlt: "Compounded Tirzepatide vial",
+    img: cnmTirzVialsAsset.url,
+    imgAlt: "Compounded tirzepatide vials with discreet CNM branding",
     fullSupplyPrice: 249.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
