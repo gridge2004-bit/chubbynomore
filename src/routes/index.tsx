@@ -194,24 +194,23 @@ function Nav({ scrolled }: { scrolled: boolean }) {
   return (
     <header className={`sticky top-0 z-50 w-full max-w-full border-b border-[#103942]/10 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(16,57,66,0.08),0_8px_24px_-16px_rgba(16,57,66,0.18)]" : ""}`}>
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
-        <div className="flex min-w-0 items-center gap-3 sm:gap-6 md:gap-10">
-          <a href="/" className="flex min-w-0 items-center gap-2">
-            <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-10 w-auto shrink-0 sm:h-12" />
-            <span className="font-sans text-[20px] font-black tracking-tight text-[#103942] whitespace-nowrap sm:text-[24px]">Chubby No More</span>
+        <div className="flex min-w-0 items-center gap-3 sm:gap-6 lg:gap-10">
+          <a href="/" aria-label="Chubby No More home" className="flex shrink-0 items-center py-1">
+            <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
           </a>
-          <nav className="hidden items-center gap-4 sm:flex sm:gap-6 md:gap-10">
+          <nav className="hidden items-center gap-6 lg:flex lg:gap-10">
             {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm"
+                className="text-sm font-medium text-[#103942]/80 transition hover:text-[#42D1C3]"
               >
                 {l.label}
               </a>
             ))}
           </nav>
         </div>
-        <a href="#cta" className="hidden shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:inline-flex sm:px-7 sm:py-3.5 sm:text-sm">
+        <a href="#cta" className="hidden shrink-0 items-center justify-center rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:inline-flex">
           See if I qualify — free
         </a>
         <button
@@ -219,7 +218,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           aria-label="Open navigation menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(true)}
-          className="inline-flex shrink-0 items-center justify-center rounded-full p-2 text-[#103942] transition hover:text-[#42D1C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3] sm:hidden"
+          className="inline-flex shrink-0 items-center justify-center rounded-full p-2 text-[#103942] transition hover:text-[#42D1C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3] lg:hidden"
         >
           <Menu className="h-7 w-7" strokeWidth={2} />
         </button>
