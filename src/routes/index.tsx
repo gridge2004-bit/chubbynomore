@@ -177,9 +177,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
-            <img src={logoAsset.url} alt="ChubbyNoMore" className="h-8 w-auto sm:h-10" />
-            <span className="font-serif text-[18px] font-bold text-[#103942] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
-
+            <span className="font-serif text-[20px] font-bold text-[#103942] whitespace-nowrap sm:text-[24px]">ChubbyNoMore</span>
           </a>
           <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
             {navLinks.map((l) => (
@@ -1648,8 +1646,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
-            <img src={logoAsset.url} alt="ChubbyNoMore" className="h-12 w-auto" />
-            <div className="mt-3 font-serif text-3xl">ChubbyNoMore</div>
+            <div className="font-serif text-3xl text-white">ChubbyNoMore</div>
 
             <p className="mt-4 max-w-xs text-sm text-white/70">
               Online prescription weight-management care with clinician review and home delivery, where available.
