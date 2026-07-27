@@ -229,7 +229,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       </div>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden">
+        <div className="fixed inset-0 z-[60] md:hidden">
           <div
             className="absolute inset-0 bg-[#103942]/40"
             onClick={() => setMenuOpen(false)}
