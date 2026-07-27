@@ -28,17 +28,41 @@ import dinnerCoupleAsset from "@/assets/dinner-couple.png.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { title: "Online GLP-1 Weight Loss Program | Chubby No More" },
       { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide, tirzepatide, and select FDA-approved brand-name options." },
-      { property: "og:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { property: "og:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
       { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:site_name", content: "Chubby No More" },
       { property: "og:url", content: "https://chubbynomore.com/" },
-      { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | ChubbyNoMore" },
+      { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
       { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
       { property: "og:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
       { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://chubbynomore.com/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Chubby No More",
+          alternateName: ["ChubbyNoMore", "CNM", "chubbynomore.com"],
+          url: "https://chubbynomore.com/",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Chubby No More",
+          alternateName: "ChubbyNoMore",
+          url: "https://chubbynomore.com/",
+          logo: "https://chubbynomore.com/icon-512x512.png",
+        }),
+      },
+    ],
   }),
   component: Index,
 });
