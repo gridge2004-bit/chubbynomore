@@ -23,22 +23,31 @@
 }
 
 :root {
-  --cream: #F5F5F7;
-  --forest: #103942;
-  --forest-foreground: #FFFFFF;
-  --teal: #103942;
-  --navy: #103942;
-  --ivory: #F5F5F7;
-  --softgray: #F5F5F7;
-  --periwinkle: #F5F5F7;
-  --background: #FFFFFF;
-  --foreground: #103942;
-  --card: #FFFFFF;
-  --card-foreground: #103942;
-  --border: #E1E7E8;
-  --muted: #F5F5F7;
-  --muted-foreground: #58747B;
+  /* ChubbyNoMore approved brand palette */
+  --brand-turquoise: #42D1C3;
+  --brand-dark: #103942;
+  --brand-light-grey: #F5F5F7;
+  --brand-white: #FFFFFF;
+  --brand-black: #000000;
+
+  /* semantic aliases */
+  --cream: var(--brand-light-grey);
+  --forest: var(--brand-dark);
+  --forest-foreground: var(--brand-white);
+  --teal: var(--brand-turquoise);
+  --navy: var(--brand-dark);
+  --ivory: var(--brand-light-grey);
+  --softgray: var(--brand-light-grey);
+  --periwinkle: var(--brand-light-grey);
+  --background: var(--brand-white);
+  --foreground: var(--brand-dark);
+  --card: var(--brand-white);
+  --card-foreground: var(--brand-dark);
+  --border: color-mix(in srgb, var(--brand-dark) 12%, transparent);
+  --muted: var(--brand-light-grey);
+  --muted-foreground: color-mix(in srgb, var(--brand-dark) 70%, var(--brand-white));
 }
+
 
 
 @layer base {
