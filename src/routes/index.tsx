@@ -1038,9 +1038,10 @@ function DetailedProductCard({
         </div>
 
         {isCompounded && (
-          <p className="mt-4 text-[12px] italic leading-relaxed text-[#103942]/65">
+          <p className="mt-3 text-[12px] italic leading-relaxed text-[#103942]/65">
             Compounded medications are not FDA-approved.
           </p>
+
         )}
       </div>
 
