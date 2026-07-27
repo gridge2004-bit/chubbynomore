@@ -172,7 +172,7 @@ function PillButton({ href, children, variant = "primary" }: { href: string; chi
 function Nav({ scrolled }: { scrolled: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(16,57,66,0.08),0_8px_24px_-16px_rgba(16,57,66,0.18)]" : ""}`}>
+    <header className={`sticky top-0 z-50 w-full max-w-full border-b border-[#103942]/10 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(16,57,66,0.08),0_8px_24px_-16px_rgba(16,57,66,0.18)]" : ""}`}>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
@@ -183,7 +183,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-xs font-medium text-[#103942]/80 transition hover:text-[#103942] sm:text-sm ${
+                className={`text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm ${
                   l.label === "Medications" || l.label === "Pricing" ? "" : "hidden md:inline-flex"
                 }`}
               >
@@ -225,7 +225,7 @@ function Hero() {
           Takes about 60 seconds. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
-          <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#103942] underline underline-offset-4 transition hover:text-[#103942]">
+          <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#103942] underline underline-offset-4 transition hover:text-[#42D1C3]">
             Already taking a GLP-1? Explore switching your care →
           </a>
         </Reveal>
