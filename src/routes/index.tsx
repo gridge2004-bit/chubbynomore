@@ -18,6 +18,7 @@ import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
 import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
+import logoAsset from "@/assets/chubbynomore-logo.png.asset.json";
 import intakeManAsset from "@/assets/intake-man.png.asset.json";
 import mensHealthTelehealthAsset from "@/assets/mens-health-telehealth.png.asset.json";
 import dinnerCoupleAsset from "@/assets/dinner-couple.png.asset.json";
