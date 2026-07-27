@@ -997,14 +997,15 @@ function DetailedProductCard({
 
         <h3 className="mt-3 text-[26px] font-bold leading-tight text-[#103942]">{card.name}</h3>
 
-        <div className="mt-4 grid aspect-[4/3] max-h-[230px] w-full place-items-center overflow-hidden rounded-2xl bg-white">
+        <div className="mt-4 flex aspect-[4/3] max-h-[230px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-3">
           <img
             src={card.img}
             alt={card.imgAlt}
             loading="lazy"
-            className="h-full w-full object-contain p-3"
+            className="block max-h-full max-w-full object-contain"
           />
         </div>
+
 
         <div className="mt-4">
           <p className="text-[14px] text-[#103942]/80">Starting at</p>
