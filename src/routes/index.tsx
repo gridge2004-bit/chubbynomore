@@ -113,7 +113,7 @@ const faqs = [
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
 ];
 
-const NAVY = "#1B2147";
+const NAVY = "#103942";
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
@@ -125,7 +125,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white text-[#1B2147]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white text-[#103942]">
       <PromoBanner />
       <Nav scrolled={scrolled} />
       <Hero />
@@ -152,9 +152,9 @@ function Index() {
 
 function PromoBanner() {
   return (
-    <div className="w-full bg-[#1B2147] text-white">
+    <div className="w-full bg-[#103942] text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[12px]">
-        <span className="hidden h-1.5 w-1.5 rounded-full bg-[#E8B45A] sm:inline-block" />
+        <span className="hidden h-1.5 w-1.5 rounded-full bg-[#42D1C3] sm:inline-block" />
         <span>Free online eligibility check — takes 60 seconds</span>
       </div>
     </div>
@@ -164,26 +164,26 @@ function PromoBanner() {
 function PillButton({ href, children, variant = "primary" }: { href: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   const base = "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition";
   if (variant === "secondary") {
-    return <a href={href} className={`${base} border border-[#1B2147] text-[#1B2147] hover:bg-[#1B2147] hover:text-white`}>{children}</a>;
+    return <a href={href} className={`${base} border border-[#103942] text-[#103942] hover:bg-[#F5F5F7] hover:text-[#103942]`}>{children}</a>;
   }
-  return <a href={href} className={`${base} bg-[#1B2147] text-white hover:bg-[#0F1432]`}>{children}</a>;
+  return <a href={href} className={`${base} bg-[#103942] text-white hover:bg-[#42D1C3] hover:text-[#103942]`}>{children}</a>;
 }
 
 function Nav({ scrolled }: { scrolled: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className={`sticky top-0 z-50 w-full max-w-full bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(27,33,71,0.08),0_8px_24px_-16px_rgba(27,33,71,0.18)]" : ""}`}>
+    <header className={`sticky top-0 z-50 w-full max-w-full border-b border-[#103942]/10 bg-white transition-shadow ${scrolled ? "shadow-[0_1px_0_0_rgba(16,57,66,0.08),0_8px_24px_-16px_rgba(16,57,66,0.18)]" : ""}`}>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
           <a href="/" className="flex min-w-0 items-center gap-2">
-            <span className="font-serif text-[18px] font-bold text-[#1B2147] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
+            <span className="font-serif text-[18px] font-bold text-[#103942] whitespace-nowrap sm:text-[22px]">ChubbyNoMore</span>
           </a>
           <nav className="flex items-center gap-4 sm:gap-6 md:gap-10">
             {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-xs font-medium text-[#1B2147]/80 transition hover:text-[#1B2147] sm:text-sm ${
+                className={`text-xs font-medium text-[#103942]/80 transition hover:text-[#42D1C3] sm:text-sm ${
                   l.label === "Medications" || l.label === "Pricing" ? "" : "hidden md:inline-flex"
                 }`}
               >
@@ -192,7 +192,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             ))}
           </nav>
         </div>
-        <a href="#cta" className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#1B2147] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#0F1432] sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm">
+        <a href="#cta" className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm">
           See if I qualify — free
         </a>
       </div>
@@ -204,28 +204,28 @@ function Hero() {
   return (
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+        <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
           GLP-1 CARE FOR MEN
         </Reveal>
-        <Reveal as="h1" className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#1B2147]">
+        <Reveal as="h1" className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#103942]">
           You didn't fail the diet. The diet failed you.
         </Reveal>
-        <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#1B2147] sm:text-lg">
+        <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
           For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99/mo.
         </Reveal>
         <Reveal delay={200}>
           <a
             href="#cta"
-            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2147] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#0F1432]"
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See if I qualify — free
           </a>
         </Reveal>
-        <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#1B2147]/70">
+        <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#103942]/70">
           Takes about 60 seconds. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
         </Reveal>
         <Reveal delay={320}>
-          <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#1B2147] underline underline-offset-4 transition hover:text-[#3454C7]">
+          <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#103942] underline underline-offset-4 transition hover:text-[#42D1C3]">
             Already taking a GLP-1? Explore switching your care →
           </a>
         </Reveal>
@@ -468,8 +468,8 @@ function MedicationRow({
   const meta = CARD_META[card.id];
   const isCompounded = card.tags.includes("COMPOUNDED");
   const badgeClass = isCompounded
-    ? "bg-[#E6D4B8] text-[#1B2147]"
-    : "bg-[#D8DCEF] text-[#1B2147]";
+    ? "bg-[#D5F3EF] text-[#103942]"
+    : "bg-[#F5F5F7] text-[#103942]";
   const isWeekly = card.doseLabel.toLowerCase().includes("week");
   const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
 
@@ -488,7 +488,7 @@ function MedicationRow({
   return (
     <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-start sm:gap-5 sm:py-6">
       <div className="flex items-start gap-3 sm:contents">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#EEF0EC] sm:h-20 sm:w-20">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F5F5F7] sm:h-20 sm:w-20">
           <img
             src={card.img}
             alt={card.imgAlt}
@@ -498,7 +498,7 @@ function MedicationRow({
         </div>
         <div className="min-w-0 flex-1 sm:flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <h3 className="text-[15px] font-semibold leading-tight text-[#1B2147] sm:text-[18px]">
+            <h3 className="text-[15px] font-semibold leading-tight text-[#103942] sm:text-[18px]">
               {card.name}
             </h3>
             <span
@@ -507,7 +507,7 @@ function MedicationRow({
               {isCompounded ? "COMPOUNDED" : "BRAND-NAME"}
             </span>
           </div>
-          <p className="mt-1 text-[12px] text-[#1B2147]/70 sm:text-[14px]">
+          <p className="mt-1 text-[12px] text-[#103942]/70 sm:text-[14px]">
             {meta?.format ?? "Prescription treatment"}
           </p>
         </div>
@@ -516,7 +516,7 @@ function MedicationRow({
           onClick={(e) => onInfo(card, e.currentTarget)}
           aria-label={`More information about ${card.name}`}
           aria-haspopup="dialog"
-          className="ml-auto grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-[#1B2147]/25 text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147] sm:order-last sm:ml-1"
+          className="ml-auto grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-[#103942]/25 text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942] sm:order-last sm:ml-1"
         >
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
@@ -530,40 +530,40 @@ function MedicationRow({
         {isCompounded ? (
           <>
             {/* Cash pay — highlighted for compounded */}
-            <div className="rounded-xl bg-[#EEF0EC] px-3 py-2 sm:px-3 sm:py-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+            <div className="rounded-xl bg-[#F5F5F7] px-3 py-2 sm:px-3 sm:py-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
                 Cash pay
               </p>
-              <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+              <p className="mt-1 text-[16px] font-bold leading-tight text-[#103942]">
                 {formatUSD(card.fullSupplyPrice)}
-                <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                <span className="ml-1 text-[12px] font-normal text-[#103942]/70">
                   per {card.supplyLabel}
                 </span>
               </p>
             </div>
-            <p className="px-1 text-[12px] leading-snug text-[#1B2147]/70">
+            <p className="px-1 text-[12px] leading-snug text-[#103942]/70">
               Insurance &amp; savings not currently available.
             </p>
           </>
         ) : (
           <>
             {/* Insurance & savings — highlighted for brand-name */}
-            <div className="rounded-xl bg-[#EEF0EC] px-3 py-2 sm:px-3 sm:py-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+            <div className="rounded-xl bg-[#F5F5F7] px-3 py-2 sm:px-3 sm:py-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
                 Eligible insurance &amp; savings
               </p>
               {insuranceVerified && ins ? (
-                <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+                <p className="mt-1 text-[16px] font-bold leading-tight text-[#103942]">
                   As low as {ins.insuranceHeadline}
-                  <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                  <span className="ml-1 text-[12px] font-normal text-[#103942]/70">
                     {ins.insuranceSupplyLabel}
                     <span aria-hidden="true">*</span>
                   </span>
                 </p>
               ) : (
-                <p className="mt-1 text-[16px] font-bold leading-tight text-[#1B2147]">
+                <p className="mt-1 text-[16px] font-bold leading-tight text-[#103942]">
                   As low as {card.insuranceSavingsPrice ?? "$XX.XX"}
-                  <span className="ml-1 text-[12px] font-normal text-[#1B2147]/70">
+                  <span className="ml-1 text-[12px] font-normal text-[#103942]/70">
                     per {card.insuranceSavingsSupplyLabel ?? card.supplyLabel}
                     <span aria-hidden="true">*</span>
                   </span>
@@ -572,17 +572,17 @@ function MedicationRow({
             </div>
             {/* Cash pay — smaller, underneath */}
             <div className="px-1">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
                 Cash pay
               </p>
-              <p className="mt-0.5 text-[13px] leading-tight text-[#1B2147]/80">
+              <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
                 From {formatUSD(card.fullSupplyPrice)}
-                <span className="ml-1 text-[11px] text-[#1B2147]/60">
+                <span className="ml-1 text-[11px] text-[#103942]/60">
                   per {card.supplyLabel}
                 </span>
               </p>
               {isWeekly && (
-                <p className="mt-0.5 text-[11px] text-[#1B2147]/55">
+                <p className="mt-0.5 text-[11px] text-[#103942]/55">
                   {formatUSD(perDose)} per {card.doseLabel}
                 </p>
               )}
@@ -643,19 +643,19 @@ function MedicationInfoPanel({
         className="absolute inset-0 bg-black/40"
       />
       <div className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:w-[440px] sm:rounded-none">
-        <div className="flex items-start justify-between gap-4 border-b border-[#1B2147]/10 px-6 py-5">
+        <div className="flex items-start justify-between gap-4 border-b border-[#103942]/10 px-6 py-5">
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]/60">
               Treatment information
             </p>
-            <h3 className="mt-1 text-[22px] font-semibold text-[#1B2147]">{card.name}</h3>
+            <h3 className="mt-1 text-[22px] font-semibold text-[#103942]">{card.name}</h3>
           </div>
           <button
             ref={closeBtnRef}
             type="button"
             onClick={onClose}
             aria-label="Close information panel"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#1B2147]/20 text-[#1B2147] hover:bg-[#1B2147] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1B2147]"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#103942]/20 text-[#103942] hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942]"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -663,41 +663,41 @@ function MedicationInfoPanel({
             </svg>
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto px-6 py-6 text-[#1B2147]">
+        <div className="flex-1 overflow-y-auto px-6 py-6 text-[#103942]">
           <div className="mb-5 flex items-center gap-4">
-            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-[#EEF0EC]">
+            <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-[#F5F5F7]">
               <img src={card.img} alt={card.imgAlt} className="max-h-16 w-auto object-contain mix-blend-multiply" />
             </div>
             <div className="min-w-0 text-sm">
-              <p><span className="text-[#1B2147]/60">Active ingredient: </span><span className="font-semibold">{meta?.activeIngredient ?? "—"}</span></p>
-              <p className="mt-1"><span className="text-[#1B2147]/60">Format: </span><span className="font-semibold">{meta?.format ?? "—"}</span></p>
-              <p className="mt-1"><span className="text-[#1B2147]/60">Status: </span><span className="font-semibold">{status}</span></p>
+              <p><span className="text-[#103942]/60">Active ingredient: </span><span className="font-semibold">{meta?.activeIngredient ?? "—"}</span></p>
+              <p className="mt-1"><span className="text-[#103942]/60">Format: </span><span className="font-semibold">{meta?.format ?? "—"}</span></p>
+              <p className="mt-1"><span className="text-[#103942]/60">Status: </span><span className="font-semibold">{status}</span></p>
             </div>
           </div>
           <div>
-            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#1B2147]/60">Approved or intended use</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">Approved or intended use</p>
             <p className="mt-2 text-[14.5px] leading-relaxed">{card.desc}</p>
           </div>
-          <div className="mt-5 rounded-2xl bg-[#EEF0EC] px-4 py-4">
-            <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">Starting price</p>
+          <div className="mt-5 rounded-2xl bg-[#F5F5F7] px-4 py-4">
+            <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">Starting price</p>
             <p className="mt-1 text-[22px] font-bold">
               From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
-              <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">per {card.doseLabel}</span>
+              <span className="ml-1 text-[13px] font-normal text-[#103942]/70">per {card.doseLabel}</span>
             </p>
-            <p className="mt-1 text-[13px] text-[#1B2147]/80">
+            <p className="mt-1 text-[13px] text-[#103942]/80">
               {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
             </p>
-            <p className="mt-2 text-[11px] leading-relaxed text-[#1B2147]/60">{PER_DOSE_INFO}</p>
+            <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PER_DOSE_INFO}</p>
           </div>
           {(() => {
             const ins = card.insurance;
             if (isCompounded) {
               return (
-                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
-                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                <div className="mt-4 rounded-2xl border border-[#103942]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">
                     Insurance & savings
                   </p>
-                  <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                  <p className="mt-1 text-[13px] leading-relaxed text-[#103942]/80">
                     {INSURANCE_UNAVAILABLE_COMPOUNDED}
                   </p>
                 </div>
@@ -705,22 +705,22 @@ function MedicationInfoPanel({
             }
             if (ins?.insurancePricingEnabled && ins.savingsProgramType !== "coverage-check" && ins.insuranceHeadline && ins.insuranceSupplyLabel && ins.termsUrl && ins.offerExpiration && ins.lastVerifiedDate) {
               return (
-                <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
-                  <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+                <div className="mt-4 rounded-2xl border border-[#103942]/15 px-4 py-4">
+                  <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">
                     Eligible insurance & savings
                   </p>
-                  <p className="mt-1 text-[18px] font-bold text-[#1B2147]">
+                  <p className="mt-1 text-[18px] font-bold text-[#103942]">
                     As low as {ins.insuranceHeadline}
-                    <span className="ml-1 text-[13px] font-normal text-[#1B2147]/70">
+                    <span className="ml-1 text-[13px] font-normal text-[#103942]/70">
                       {ins.insuranceSupplyLabel}
                     </span>
                   </p>
                   {ins.insuranceExplanation && (
-                    <p className="mt-2 text-[13px] leading-relaxed text-[#1B2147]/80">
+                    <p className="mt-2 text-[13px] leading-relaxed text-[#103942]/80">
                       {ins.insuranceExplanation}
                     </p>
                   )}
-                  <div className="mt-2 space-y-0.5 text-[11px] text-[#1B2147]/60">
+                  <div className="mt-2 space-y-0.5 text-[11px] text-[#103942]/60">
                     <p>Offer valid through {ins.offerExpiration}.</p>
                     <p>Last verified {ins.lastVerifiedDate}.</p>
                   </div>
@@ -728,7 +728,7 @@ function MedicationInfoPanel({
                     href={ins.termsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-2 inline-block text-[12px] font-semibold text-[#1B2147] underline"
+                    className="mt-2 inline-block text-[12px] font-semibold text-[#103942] underline"
                   >
                     Official savings-program terms
                   </a>
@@ -736,31 +736,31 @@ function MedicationInfoPanel({
               );
             }
             return (
-              <div className="mt-4 rounded-2xl border border-[#1B2147]/15 px-4 py-4">
-                <p className="text-[12px] uppercase tracking-wide text-[#1B2147]/60">
+              <div className="mt-4 rounded-2xl border border-[#103942]/15 px-4 py-4">
+                <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">
                   Eligible insurance & savings
                 </p>
-                <p className="mt-1 text-[13px] leading-relaxed text-[#1B2147]/80">
+                <p className="mt-1 text-[13px] leading-relaxed text-[#103942]/80">
                   {INSURANCE_UNVERIFIED_BRAND}
                 </p>
               </div>
             );
           })()}
           {isCompounded && (
-            <p className="mt-4 text-[12px] italic leading-relaxed text-[#1B2147]/70">
+            <p className="mt-4 text-[12px] italic leading-relaxed text-[#103942]/70">
               Compounded medications are not FDA-approved for safety, effectiveness, or quality. Availability varies.
             </p>
           )}
-          <p className="mt-3 text-[12px] leading-relaxed text-[#1B2147]/70">
+          <p className="mt-3 text-[12px] leading-relaxed text-[#103942]/70">
             Individual results vary. Weight loss is not guaranteed. A licensed provider determines whether any treatment is medically appropriate.
           </p>
         </div>
-        <div className="border-t border-[#1B2147]/10 px-6 py-4">
+        <div className="border-t border-[#103942]/10 px-6 py-4">
           <Link
             to="/medications/$slug"
             params={{ slug: card.id }}
             onClick={onClose}
-            className="inline-flex w-full items-center justify-center rounded-full border border-[#1B2147]/25 px-5 py-3 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+            className="inline-flex w-full items-center justify-center rounded-full border border-[#103942]/25 px-5 py-3 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
           >
             View full medication details
           </Link>
@@ -772,7 +772,7 @@ function MedicationInfoPanel({
 
 function HeroTile({ tile }: { tile: Tile }) {
   return (
-    <article className="card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-[#F2F3F0]">
+    <article className="card-lift flex h-full flex-col overflow-hidden rounded-3xl bg-[#F5F5F7]">
       <div className="aspect-[4/3] w-full overflow-hidden">
         <img
           src={tile.img}
@@ -782,7 +782,7 @@ function HeroTile({ tile }: { tile: Tile }) {
         />
       </div>
       <div className="flex items-center gap-4 px-6 py-6 sm:px-7 sm:py-7">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#1B2147]/25 text-[#1B2147] sm:h-12 sm:w-12">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#103942]/25 text-[#103942] sm:h-12 sm:w-12">
           {tile.icon === "user" ? (
             <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="8" r="4" />
@@ -795,9 +795,9 @@ function HeroTile({ tile }: { tile: Tile }) {
           )}
         </div>
         <div className="min-w-0">
-          <h3 className="text-[20px] font-bold leading-tight text-[#1B2147] sm:text-[22px]">{tile.title}</h3>
+          <h3 className="text-[20px] font-bold leading-tight text-[#103942] sm:text-[22px]">{tile.title}</h3>
           {tile.subtitle && (
-            <p className="mt-1 text-[14px] leading-snug text-[#1B2147]/70 sm:text-[15px]">{tile.subtitle}</p>
+            <p className="mt-1 text-[14px] leading-snug text-[#103942]/70 sm:text-[15px]">{tile.subtitle}</p>
           )}
         </div>
       </div>
@@ -827,11 +827,11 @@ function EmotionalTransformation() {
 function DetailedProductCard({ card }: { card: DetailedCard }) {
   const isCompounded = card.tags.includes("COMPOUNDED");
   const tagClass = isCompounded
-    ? "bg-[#E6D4B8] text-[#1B2147]"
-    : "bg-[#D8DCEF] text-[#1B2147]";
+    ? "bg-[#D5F3EF] text-[#103942]"
+    : "bg-[#F5F5F7] text-[#103942]";
 
   return (
-    <article className="flex h-full flex-col gap-6 rounded-3xl bg-[#EFEFED] p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
+    <article className="flex h-full flex-col gap-6 rounded-3xl bg-[#F5F5F7] p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10">
       <img
         src={card.img}
         alt={card.imgAlt}
@@ -851,26 +851,26 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
           ))}
         </div>
 
-        <h3 className="mt-4 text-[26px] font-bold leading-tight text-[#1B2147] sm:text-[30px]">
+        <h3 className="mt-4 text-[26px] font-bold leading-tight text-[#103942] sm:text-[30px]">
           {card.name}
         </h3>
 
-        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#1B2147]/75 sm:text-base">
+        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#103942]/75 sm:text-base">
           {card.desc}
         </p>
 
         <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <div className="flex flex-wrap items-baseline gap-x-2">
-              <span className="text-[15px] text-[#1B2147]/80">Starting at</span>
-              <span className="text-[32px] font-bold leading-none tracking-tight text-[#1B2147] sm:text-[38px]">
+              <span className="text-[15px] text-[#103942]/80">Starting at</span>
+              <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
                 {formatUSD(card.fullSupplyPrice)}
               </span>
-              <span className="text-[15px] text-[#1B2147]/80">/{card.supplyLabel}</span>
+              <span className="text-[15px] text-[#103942]/80">/{card.supplyLabel}</span>
             </div>
 
             {isCompounded && (
-              <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#1B2147]/65">
+              <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#103942]/65">
                 Compounded medications are not FDA-approved for safety, effectiveness, or quality.
               </p>
             )}
@@ -880,14 +880,14 @@ function DetailedProductCard({ card }: { card: DetailedCard }) {
             <button
               type="button"
               onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] lg:flex-none"
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:flex-none"
             >
               See if I qualify — free
             </button>
             <Link
               to="/medications/$slug"
               params={{ slug: card.id }}
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white lg:flex-none"
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] lg:flex-none"
             >
               Learn more
             </Link>
@@ -921,16 +921,16 @@ function MedicationOptions() {
     <section id="medications" className="bg-white px-4 pt-12 md:pt-16 pb-16 sm:px-6">
       <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
-          <h2 className="font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+          <h2 className="font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
             Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
           </p>
         </Reveal>
 
         <div id="pricing" className="mt-2">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1B2147]/60">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]/60">
             Featured treatment options
           </p>
           <div className="grid grid-cols-1 gap-5">
@@ -949,7 +949,7 @@ function MedicationOptions() {
         </div>
 
 
-        <p className="mt-4 text-[11px] leading-relaxed text-[#1B2147]/70">
+        <p className="mt-4 text-[11px] leading-relaxed text-[#103942]/70">
           <span aria-hidden="true">*</span>
           {INSURANCE_DISCLAIMER}
         </p>
@@ -959,7 +959,7 @@ function MedicationOptions() {
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-full border border-[#1B2147]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-[#103942]/25 bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
               aria-expanded={expanded}
             >
               {expanded ? "Show fewer treatment options" : "Show more treatment options"}
@@ -974,11 +974,11 @@ function MedicationOptions() {
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
-            className="inline-flex items-center justify-center rounded-full bg-[#1B2147] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#0F1432]"
+            className="inline-flex items-center justify-center rounded-full bg-[#103942] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See which treatment may be right for me
           </button>
-          <p className="text-[12px] text-[#1B2147]/60">
+          <p className="text-[12px] text-[#103942]/60">
             Educational information only. This list is not a product selector — a licensed provider decides what may be appropriate.
           </p>
         </div>
@@ -993,7 +993,7 @@ function MedicationOptions() {
 function TrustMarquee() {
   const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
   return (
-    <section className="overflow-hidden bg-[#1B2147] py-5 text-white">
+    <section className="overflow-hidden bg-[#103942] py-5 text-white">
       <div className="marquee-track text-sm font-medium uppercase tracking-[0.18em]">
         {items.map((t, i) => (
           <span key={i} className="flex items-center gap-12">
@@ -1012,29 +1012,29 @@ function SwitchingCare() {
   return (
     <section id="switching" className="bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 rounded-3xl border border-[#1B2147]/8 bg-[#FAF8F5] p-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-12 lg:p-14">
+        <div className="grid gap-10 rounded-3xl border border-[#103942]/8 bg-[#F5F5F7] p-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12 md:p-12 lg:p-14">
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
               ALREADY TAKING A GLP-1?
             </div>
-            <h2 className="mt-4 font-serif text-[34px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[44px] lg:text-[52px]">
+            <h2 className="mt-4 font-serif text-[34px] leading-[1.05] tracking-tight text-[#103942] md:text-[44px] lg:text-[52px]">
               Switching your care can be simple.
             </h2>
-            <p className="mt-5 text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+            <p className="mt-5 text-[16px] leading-relaxed text-[#103942]/85 md:text-[17px]">
               Already taking semaglutide or tirzepatide through another provider? Complete a brief online intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing your treatment—and at what dose—is medically appropriate.
             </p>
           </div>
           <div className="flex flex-col items-start md:items-start">
-            <p className="text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+            <p className="text-[15px] leading-relaxed text-[#103942]/80 md:text-[16px]">
               If prescribed, medication is dispensed by a licensed U.S. pharmacy and delivered discreetly to your door where available.
             </p>
             <a
               href="#cta"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#1B2147] bg-white px-6 py-3.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#103942] bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
             >
               Switch and keep my momentum →
             </a>
-            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[#1B2147]/60">
+            <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-[#103942]/60">
               Continuation of treatment and dosing are determined by the licensed provider based on your medical history and current treatment.
             </p>
           </div>
@@ -1056,12 +1056,12 @@ function WeightLossScale() {
 
   const tabBase =
     "flex-1 rounded-full px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition";
-  const tabOn = "bg-white text-[#0F1E3F]";
+  const tabOn = "bg-white text-[#103942]";
   const tabOff = "bg-transparent text-white/75 hover:text-white";
 
   return (
-    <section className="bg-[#E8EAF0] px-6 pb-20 md:pb-24">
-      <div className="mx-auto max-w-3xl rounded-3xl bg-[#0F1E3F] p-8 text-white shadow-sm md:p-14">
+    <section className="bg-[#F5F5F7] px-6 pb-20 md:pb-24">
+      <div className="mx-auto max-w-3xl rounded-3xl bg-[#103942] p-8 text-white shadow-sm md:p-14">
         <h2 className="font-serif text-[36px] leading-[1.1] tracking-tight md:text-[52px]">
           What could {potentialLoss} fewer pounds change for you?
         </h2>
@@ -1140,7 +1140,7 @@ function WeightLossScale() {
                 strokeLinejoin="round"
               />
             </svg>
-            <div className="rounded-full bg-[#3454C7] px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-white shadow-md">
+            <div className="rounded-full bg-[#103942] px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-white shadow-md">
               −{potentialLoss} lbs
             </div>
           </div>
@@ -1162,7 +1162,7 @@ function WeightLossScale() {
         <div className="mt-8 text-center">
           <a
             href="#cta"
-            className="inline-flex items-center justify-center rounded-full bg-[#3454C7] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#2a45a8] md:px-14"
+            className="inline-flex items-center justify-center rounded-full bg-[#103942] px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#42D1C3] md:px-14"
           >
             See what's realistic for me — free
           </a>
@@ -1206,14 +1206,14 @@ function CompoundedVsBrand() {
   ];
 
   return (
-    <section className="bg-[#FAF8F5] px-6 py-16 md:py-20">
+    <section className="bg-[#F5F5F7] px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
         <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
             Compounded vs Brand-name
           </div>
-          <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[64px]">
-            <em className="italic text-[#3454C7]">Different treatment options.</em>{" "}
+          <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#103942] md:text-[64px]">
+            <em className="italic text-[#103942]">Different treatment options.</em>{" "}
             Different regulatory pathways.
           </h2>
         </Reveal>
@@ -1223,23 +1223,23 @@ function CompoundedVsBrand() {
             <Reveal
               key={c.tag}
               delay={idx * 120}
-              className="rounded-3xl bg-[#EFEFEC] p-7 md:p-10"
+              className="rounded-3xl bg-[#F5F5F7] p-7 md:p-10"
             >
               <div className="flex justify-center">
-                <span className="inline-block rounded-md bg-[#1B2147] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+                <span className="inline-block rounded-md bg-[#103942] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
                   {c.tag}
                 </span>
               </div>
-              <h3 className="mt-7 font-serif text-[32px] leading-tight text-[#1B2147] md:text-[40px]">
+              <h3 className="mt-7 font-serif text-[32px] leading-tight text-[#103942] md:text-[40px]">
                 {c.title}
               </h3>
-              <p className="mt-4 text-[16px] font-medium text-[#3454C7]">{c.meds}</p>
-              <ul className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#1B2147]/85 md:text-[16px]">
+              <p className="mt-4 text-[16px] font-medium text-[#103942]">{c.meds}</p>
+              <ul className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#103942]/85 md:text-[16px]">
                 {c.rows.map(([label, body]) => (
                   <li key={label} className="flex gap-3">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1B2147]" />
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#103942]" />
                     <span>
-                      <strong className="font-semibold text-[#1B2147]">{label}:</strong> {body}
+                      <strong className="font-semibold text-[#103942]">{label}:</strong> {body}
                     </span>
                   </li>
                 ))}
@@ -1249,10 +1249,10 @@ function CompoundedVsBrand() {
         </div>
 
         <Reveal className="mt-10 text-center md:mt-14">
-          <p className="font-semibold text-[#1B2147]">
+          <p className="font-semibold text-[#103942]">
             A licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
           </p>
-          <p className="mt-3 text-sm text-[#1B2147]/70">
+          <p className="mt-3 text-sm text-[#103942]/70">
             Compounded medications are not FDA-approved for safety, efficacy, or quality.
           </p>
         </Reveal>
@@ -1285,13 +1285,13 @@ function WhyChoose() {
     <section className="bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-7xl">
         <Reveal className="text-center">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
             WHY MEN CHOOSE CHUBBYNOMORE
           </div>
-          <h2 className="mx-auto mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#1B2147] sm:text-4xl md:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
             Straightforward care, without the usual friction.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#1B2147]/70 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
             Chubby No More is designed for men who want direct answers, private care, transparent pricing, and a medically supervised plan that fits into real life.
           </p>
         </Reveal>
@@ -1301,12 +1301,12 @@ function WhyChoose() {
             <Reveal
               key={b.title}
               delay={i * 100}
-              className="flex flex-col rounded-2xl bg-[#FAF8F5] p-7 md:p-8"
+              className="flex flex-col rounded-2xl bg-[#F5F5F7] p-7 md:p-8"
             >
-              <h3 className="font-serif text-xl text-[#1B2147] md:text-2xl">
+              <h3 className="font-serif text-xl text-[#103942] md:text-2xl">
                 {b.title}
               </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-[#1B2147]/75">
+              <p className="mt-3 text-[15px] leading-relaxed text-[#103942]/75">
                 {b.body}
               </p>
             </Reveal>
@@ -1324,9 +1324,9 @@ function WhyChoose() {
 function HowItWorks() {
 
   return (
-    <section id="how" className="bg-[#FAF8F5] px-6 py-16">
+    <section id="how" className="bg-[#F5F5F7] px-6 py-16">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#1B2147] md:text-5xl">
+        <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#103942] md:text-5xl">
           Three steps to <em className="italic">a healthier you.</em>
         </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
@@ -1335,9 +1335,9 @@ function HowItWorks() {
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
                 <img src={s.img} alt={s.imgAlt} className="h-full w-full object-cover" loading="lazy" />
               </div>
-              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9298AB]">Step {s.n}</div>
-              <h3 className="mt-2 font-serif text-2xl text-[#1B2147]">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#5A6075]">{s.desc}</p>
+              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#58747B]">Step {s.n}</div>
+              <h3 className="mt-2 font-serif text-2xl text-[#103942]">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#58747B]">{s.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -1363,12 +1363,12 @@ function FAQ() {
     <section id="faq" className="bg-white px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1fr_1.4fr]">
         <Reveal>
-          <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl">
+          <h2 className="font-serif text-4xl leading-[1.1] text-[#103942] md:text-5xl">
             Frequently asked <em className="italic">questions.</em>
           </h2>
         </Reveal>
         <div>
-          <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
+          <div className="divide-y divide-[#E1E7E8] border-y border-[#E1E7E8]">
             {faqs.map((f, i) => {
               const isOpen = openSet.has(i);
               const panelId = `faq-panel-${i}`;
@@ -1381,12 +1381,12 @@ function FAQ() {
                     onClick={() => toggle(i)}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
-                    className="flex w-full items-center justify-between gap-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2147] focus-visible:ring-offset-2"
+                    className="flex w-full items-center justify-between gap-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#103942] focus-visible:ring-offset-2"
                   >
-                    <span className="font-serif text-lg text-[#1B2147] md:text-xl">{f.q}</span>
+                    <span className="font-serif text-lg text-[#103942] md:text-xl">{f.q}</span>
                     <ChevronDown
                       aria-hidden
-                      className={`h-5 w-5 shrink-0 text-[#1B2147] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      className={`h-5 w-5 shrink-0 text-[#103942] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                     />
                   </button>
                   <div
@@ -1397,14 +1397,14 @@ function FAQ() {
                     className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}
                   >
                     <div className="min-h-0">
-                      <p className="max-w-2xl text-sm leading-relaxed text-[#5A6075] md:text-base">{f.a}</p>
+                      <p className="max-w-2xl text-sm leading-relaxed text-[#58747B] md:text-base">{f.a}</p>
                     </div>
                   </div>
                 </Reveal>
               );
             })}
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-[#5A6075] md:text-sm">
+          <p className="mt-6 text-xs leading-relaxed text-[#58747B] md:text-sm">
             Prescription treatment requires an online medical evaluation. Not everyone qualifies. Individual results vary.
           </p>
         </div>
@@ -1484,26 +1484,26 @@ function TrustedCare() {
     >
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1B2147]/60">
+          <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#103942]/60">
             Trusted care
           </div>
           <h2
             id="trusted-care-heading"
-            className="mt-4 font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl"
+            className="mt-4 font-serif text-4xl leading-[1.1] text-[#103942] md:text-5xl"
           >
             Trusted care, built around real medical review
           </h2>
         </div>
 
         {/* Provider area */}
-        <div className="mt-14 rounded-2xl border border-[#1B2147]/10 bg-[#F5F1EA] p-8 md:p-12">
-          <h3 className="font-serif text-2xl text-[#1B2147] md:text-3xl">
+        <div className="mt-14 rounded-2xl border border-[#103942]/10 bg-[#F5F5F7] p-8 md:p-12">
+          <h3 className="font-serif text-2xl text-[#103942] md:text-3xl">
             Care reviewed by licensed medical professionals
           </h3>
 
           {providerConfig.verified ? (
             <div className="mt-8 grid gap-8 md:grid-cols-[180px_1fr] md:items-start">
-              <div className="h-40 w-40 overflow-hidden rounded-full bg-white ring-1 ring-[#1B2147]/10 md:h-44 md:w-44">
+              <div className="h-40 w-40 overflow-hidden rounded-full bg-white ring-1 ring-[#103942]/10 md:h-44 md:w-44">
                 {providerConfig.headshot ? (
                   <img
                     src={providerConfig.headshot}
@@ -1515,19 +1515,19 @@ function TrustedCare() {
               </div>
               <div>
                 {providerConfig.name && (
-                  <div className="font-serif text-xl text-[#1B2147]">{providerConfig.name}</div>
+                  <div className="font-serif text-xl text-[#103942]">{providerConfig.name}</div>
                 )}
                 {providerConfig.title && (
-                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.title}</div>
+                  <div className="mt-1 text-sm text-[#103942]/70">{providerConfig.title}</div>
                 )}
                 {providerConfig.credential && (
-                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.credential}</div>
+                  <div className="mt-1 text-sm text-[#103942]/70">{providerConfig.credential}</div>
                 )}
                 {providerConfig.license && (
-                  <div className="mt-1 text-sm text-[#1B2147]/70">{providerConfig.license}</div>
+                  <div className="mt-1 text-sm text-[#103942]/70">{providerConfig.license}</div>
                 )}
                 {providerConfig.bio && (
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#1B2147]/80">
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#103942]/80">
                     {providerConfig.bio}
                   </p>
                 )}
@@ -1539,14 +1539,14 @@ function TrustedCare() {
         {/* Testimonial area — only rendered when enabled */}
         {testimonialsEnabled && testimonialConfig.length > 0 && (
           <div className="mt-12">
-            <h3 className="font-serif text-2xl text-[#1B2147] md:text-3xl">
+            <h3 className="font-serif text-2xl text-[#103942] md:text-3xl">
               What patients are saying
             </h3>
             <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {testimonialConfig.slice(0, 3).map((t, i) => (
                 <figure
                   key={i}
-                  className="flex h-full flex-col rounded-2xl border border-[#1B2147]/10 bg-white p-6 shadow-sm"
+                  className="flex h-full flex-col rounded-2xl border border-[#103942]/10 bg-white p-6 shadow-sm"
                 >
                   {t.photo && (
                     <img
@@ -1556,13 +1556,13 @@ function TrustedCare() {
                       loading="lazy"
                     />
                   )}
-                  <blockquote className="text-sm leading-relaxed text-[#1B2147]/85">
+                  <blockquote className="text-sm leading-relaxed text-[#103942]/85">
                     “{t.text}”
                   </blockquote>
-                  <figcaption className="mt-5 text-sm font-semibold text-[#1B2147]">
+                  <figcaption className="mt-5 text-sm font-semibold text-[#103942]">
                     {t.firstName} {t.lastInitial}.
                   </figcaption>
-                  <div className="mt-2 space-y-1 text-xs text-[#1B2147]/60">
+                  <div className="mt-2 space-y-1 text-xs text-[#103942]/60">
                     {t.compensated && <div>Compensated for their time.</div>}
                     {t.disclaimer && <div>{t.disclaimer}</div>}
                   </div>
@@ -1574,7 +1574,7 @@ function TrustedCare() {
 
         {/* Statistics area — each stat hidden if value not supplied */}
         {visibleStats.length > 0 && (
-          <div className="mt-12 grid gap-6 rounded-2xl bg-[#1B2147] p-8 text-white sm:grid-cols-2 md:grid-cols-3 md:p-10">
+          <div className="mt-12 grid gap-6 rounded-2xl bg-[#103942] p-8 text-white sm:grid-cols-2 md:grid-cols-3 md:p-10">
             {visibleStats.map((s) => (
               <div key={s.label}>
                 <div className="font-serif text-3xl md:text-4xl">{s.value}</div>
@@ -1587,7 +1587,7 @@ function TrustedCare() {
         )}
 
         {showDisclaimer && (
-          <p className="mt-8 max-w-3xl text-xs leading-relaxed text-[#1B2147]/60">
+          <p className="mt-8 max-w-3xl text-xs leading-relaxed text-[#103942]/60">
             Individual experiences and results vary. Testimonials do not guarantee that other patients will achieve the same outcome.
           </p>
         )}
@@ -1604,19 +1604,19 @@ function FinalCTA() {
     "Availability varies by state",
   ];
   return (
-    <section id="cta" className="w-full bg-[#E8EDF8]">
+    <section id="cta" className="w-full bg-[#F5F5F7]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
           <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
-          <h2 className="font-serif text-4xl leading-[1.1] text-[#1B2147] md:text-5xl lg:text-[52px]">
+          <h2 className="font-serif text-4xl leading-[1.1] text-[#103942] md:text-5xl lg:text-[52px]">
             Ready to see if GLP-1 is right for you? <em className="italic">ChubbyNoMore is with you every step.</em>
           </h2>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {checks.map((c) => (
-              <li key={c} className="flex items-start gap-3 text-sm text-[#1B2147]">
-                <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-[#1B2147]" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <li key={c} className="flex items-start gap-3 text-sm text-[#103942]">
+                <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-[#103942]" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span>{c}</span>
@@ -1641,7 +1641,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#1B2147] text-white">
+    <footer className="bg-[#103942] text-white">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
         <div className="grid gap-12 md:grid-cols-2">
           <div>
@@ -1655,7 +1655,7 @@ function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {programLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-white/85 transition hover:text-white">
+                  <a href={l.href} className="text-white/85 transition hover:text-[#42D1C3]">
                     {l.label}
                   </a>
                 </li>
@@ -1678,7 +1678,7 @@ function Footer() {
    "open-qualify-modal" window event does the same.
 ------------------------------------------------------------------------- */
 
-const MINT = "#6FBF9F";
+const MINT = "#42D1C3";
 
 type QuestionStep = {
   id: string;
@@ -1768,7 +1768,7 @@ const questionSteps: QuestionStep[] = [
         <div>
           <h2
             id="qualify-modal-title"
-            className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+            className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
           >
             What is your current weight?
           </h2>
@@ -1795,11 +1795,11 @@ const questionSteps: QuestionStep[] = [
                 }}
                 aria-invalid={showError || undefined}
                 aria-describedby={showError ? "q-current-weight-err" : undefined}
-                className="w-full rounded-2xl border border-[#E7E8EE] bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#1B2147] outline-none transition focus:border-[#1B2147] focus:ring-2 focus:ring-[#6FBF9F]"
+                className="w-full rounded-2xl border border-[#E1E7E8] bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
               />
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#5A6075]"
+                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#58747B]"
               >
                 lbs
               </span>
@@ -1834,11 +1834,11 @@ const questionSteps: QuestionStep[] = [
         <div>
           <h2
             id="qualify-modal-title"
-            className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+            className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
           >
             Are you currently taking a GLP-1 medication?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">
+          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
             Examples may include semaglutide, tirzepatide, Wegovy, Zepbound,
             Ozempic, or Mounjaro.
           </p>
@@ -1856,17 +1856,17 @@ const questionSteps: QuestionStep[] = [
                   role="radio"
                   aria-checked={selected}
                   onClick={() => setAnswer("current_glp1", o.id)}
-                  className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left text-base font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] ${
+                  className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left text-base font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] ${
                     selected
-                      ? "border-[#1B2147] bg-[#1B2147] text-white"
-                      : "border-[#E7E8EE] bg-white text-[#1B2147] hover:border-[#1B2147]"
+                      ? "border-[#103942] bg-[#103942] text-white"
+                      : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
                   }`}
                 >
                   <span>{o.label}</span>
                   <span
                     aria-hidden="true"
                     className={`grid h-5 w-5 place-items-center rounded-full border-2 ${
-                      selected ? "border-white" : "border-[#C9CBD6]"
+                      selected ? "border-white" : "border-[#D3DBDD]"
                     }`}
                   >
                     {selected && (
@@ -1911,8 +1911,8 @@ const questionSteps: QuestionStep[] = [
           <label
             className={`flex cursor-pointer items-start gap-3 rounded-2xl border px-4 py-3.5 text-left text-sm leading-relaxed transition sm:text-base ${
               checked
-                ? "border-[#1B2147] bg-[#F5F6FB] text-[#1B2147]"
-                : "border-[#E7E8EE] bg-white text-[#1B2147] hover:border-[#1B2147]"
+                ? "border-[#103942] bg-[#F5F5F7] text-[#103942]"
+                : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
             }`}
           >
             <input
@@ -1925,8 +1925,8 @@ const questionSteps: QuestionStep[] = [
               aria-hidden="true"
               className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 ${
                 checked
-                  ? "border-[#1B2147] bg-[#1B2147] text-white"
-                  : "border-[#C9CBD6] bg-white"
+                  ? "border-[#103942] bg-[#103942] text-white"
+                  : "border-[#D3DBDD] bg-white"
               }`}
             >
               {checked && (
@@ -1949,18 +1949,18 @@ const questionSteps: QuestionStep[] = [
         <div>
           <h2
             id="qualify-modal-title"
-            className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+            className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
           >
             Do any of the following apply to you?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#5A6075]">
+          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
             Select all that apply.
           </p>
           <div className="mt-6 flex flex-col gap-2.5">
             {HEALTH_OPTIONS.map((opt) => (
               <Row key={opt} opt={opt} />
             ))}
-            <div className="mt-2 border-t border-[#E7E8EE] pt-2.5">
+            <div className="mt-2 border-t border-[#E1E7E8] pt-2.5">
               <Row opt={HEALTH_NONE} />
             </div>
           </div>
@@ -2167,7 +2167,7 @@ function QualifyModal() {
       onClick={(e) => {
         if (e.target === e.currentTarget) requestClose();
       }}
-      className="fixed inset-0 z-[300] flex items-stretch justify-center bg-[#1B2147]/60 backdrop-blur-sm sm:items-center sm:px-4 sm:py-6"
+      className="fixed inset-0 z-[300] flex items-stretch justify-center bg-[#103942]/60 backdrop-blur-sm sm:items-center sm:px-4 sm:py-6"
     >
       <div
         ref={dialogRef}
@@ -2178,18 +2178,18 @@ function QualifyModal() {
           type="button"
           onClick={requestClose}
           aria-label="Close questionnaire"
-          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E7E8EE] bg-white text-[#1B2147] transition hover:bg-[#1B2147] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E1E7E8] bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           <span aria-hidden="true">✕</span>
         </button>
 
         {/* Header + progress */}
-        <div className="border-b border-[#E7E8EE] px-6 pt-6 pb-4 sm:px-8">
-          <span className="font-serif text-[20px] font-bold text-[#1B2147]">
+        <div className="border-b border-[#E1E7E8] px-6 pt-6 pb-4 sm:px-8">
+          <span className="font-serif text-[20px] font-bold text-[#103942]">
             ChubbyNoMore
           </span>
           <div
-            className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[#F0F0EF]"
+            className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[#F5F5F7]"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={100}
@@ -2258,11 +2258,11 @@ function IntroScreen({
     <div>
       <h2
         id="qualify-modal-title"
-        className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+        className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
       >
         See whether you may be a fit for treatment
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
         Answer a few initial questions to help us determine the appropriate
         next step. A licensed provider must review your complete health
         information before any treatment can be prescribed.
@@ -2273,20 +2273,20 @@ function IntroScreen({
           type="button"
           onClick={onStart}
           disabled={!canStart}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
         >
           Start questionnaire
         </button>
         <button
           type="button"
           onClick={onDismiss}
-          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#1B2147] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#103942] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           Not right now
         </button>
       </div>
 
-      <p className="mt-6 text-xs leading-relaxed text-[#5A6075]">
+      <p className="mt-6 text-xs leading-relaxed text-[#58747B]">
         This initial questionnaire does not guarantee approval or a
         prescription.
       </p>
@@ -2323,32 +2323,32 @@ function OutcomeScreen({
     <div>
       <h2
         id="qualify-modal-title"
-        className="font-serif text-2xl font-semibold leading-tight text-[#1B2147] sm:text-3xl"
+        className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
       >
         {heading}
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#5A6075] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
         {body}
       </p>
 
       <div className="mt-8 flex flex-col gap-3">
         <a
           href={primaryHref}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1B2147] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0F1432] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] focus-visible:ring-offset-2"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] focus-visible:ring-offset-2"
         >
           {primaryLabel}
         </a>
         <button
           type="button"
           onClick={onReview}
-          className="inline-flex w-full items-center justify-center rounded-full border border-[#1B2147] bg-white px-6 py-3 text-sm font-semibold text-[#1B2147] transition hover:bg-[#F5F6FB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+          className="inline-flex w-full items-center justify-center rounded-full border border-[#103942] bg-white px-6 py-3 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           Review my answers
         </button>
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#1B2147] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#103942] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           Return to the homepage
         </button>
@@ -2376,7 +2376,7 @@ function ModalNav({
         <button
           type="button"
           onClick={onBack}
-          className="rounded-full border border-[#E7E8EE] bg-white px-5 py-2.5 text-sm font-semibold text-[#1B2147] transition hover:bg-[#F0F0EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F]"
+          className="rounded-full border border-[#E1E7E8] bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           ← Back
         </button>
@@ -2388,7 +2388,7 @@ function ModalNav({
         onClick={onNext}
         disabled={nextDisabled}
         aria-disabled={nextDisabled}
-        className="inline-flex items-center gap-2 rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0F1432] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6FBF9F] disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-full bg-[#103942] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {nextLabel} →
       </button>
@@ -2403,14 +2403,14 @@ function WhoQualifies() {
     <section className="bg-white px-6 py-16 md:py-20">
       <div className="mx-auto max-w-4xl">
         <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#3454C7]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
             Eligibility
           </div>
-          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[52px]">
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#103942] md:text-[52px]">
             Who may qualify for prescription weight loss treatment?
           </h2>
         </Reveal>
-        <Reveal delay={80} className="mt-6 space-y-4 text-[16px] leading-relaxed text-[#1B2147]/85 md:text-[17px]">
+        <Reveal delay={80} className="mt-6 space-y-4 text-[16px] leading-relaxed text-[#103942]/85 md:text-[17px]">
           <p>
             Adults with a BMI of <strong>30 or higher</strong>, or a BMI of <strong>27 or higher</strong> with at least one weight-related condition, may be candidates for certain prescription weight-management medications. Meeting these general criteria does not guarantee eligibility.
           </p>
@@ -2424,7 +2424,7 @@ function WhoQualifies() {
         <Reveal delay={140} className="mt-8">
           <a
             href="#cta"
-            className="inline-flex rounded-full bg-[#1B2147] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#0F1432]"
+            className="inline-flex rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See if I qualify — free
           </a>
@@ -2451,20 +2451,20 @@ function WhoNotFor() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
             Safety first
           </div>
-          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#1B2147] md:text-[48px]">
+          <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#103942] md:text-[48px]">
             Important safety considerations
           </h2>
-          <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-[#1B2147]/90 md:text-[17px]">
+          <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-[#103942]/90 md:text-[17px]">
             Prescription GLP-1 and GIP/GLP-1 medications are not appropriate for everyone. Safety and eligibility depend on the specific medication, your medical history, current medications, and other clinical factors. Tell your licensed provider if any of the following apply to you:
           </p>
         </Reveal>
 
         <Reveal delay={100} className="mt-8 md:mt-10">
-          <ul className="divide-y divide-[#1B2147]/10">
+          <ul className="divide-y divide-[#103942]/10">
             {items.map((item) => (
               <li key={item} className="flex gap-4 py-5 md:py-6">
                 <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#B84B4B]" />
-                <span className="text-[15px] leading-relaxed text-[#1B2147] md:text-[16px]">
+                <span className="text-[15px] leading-relaxed text-[#103942] md:text-[16px]">
                   {item}
                 </span>
               </li>
@@ -2472,8 +2472,8 @@ function WhoNotFor() {
           </ul>
         </Reveal>
 
-        <Reveal delay={180} className="mt-10 border-t border-[#1B2147]/10 pt-6 md:mt-12 md:pt-8">
-          <p className="max-w-4xl text-[15px] leading-relaxed text-[#1B2147]/80 md:text-[16px]">
+        <Reveal delay={180} className="mt-10 border-t border-[#103942]/10 pt-6 md:mt-12 md:pt-8">
+          <p className="max-w-4xl text-[15px] leading-relaxed text-[#103942]/80 md:text-[16px]">
             This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
           </p>
         </Reveal>

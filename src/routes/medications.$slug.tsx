@@ -58,10 +58,10 @@ export const Route = createFileRoute("/medications/$slug")({
     };
   },
   notFoundComponent: () => (
-    <div className="mx-auto max-w-2xl px-6 py-24 text-center text-[#1B2147]">
+    <div className="mx-auto max-w-2xl px-6 py-24 text-center text-[#103942]">
       <h1 className="font-serif text-4xl">Medication not found</h1>
-      <p className="mt-4 text-[#1B2147]/70">We don't have a page for that medication.</p>
-      <Link to="/" className="mt-6 inline-block text-[#3454C7] underline">← Back to home</Link>
+      <p className="mt-4 text-[#103942]/70">We don't have a page for that medication.</p>
+      <Link to="/" className="mt-6 inline-block text-[#103942] underline">← Back to home</Link>
     </div>
   ),
   component: MedicationDetail,
@@ -71,26 +71,26 @@ function MedicationDetail() {
   const { med } = Route.useLoaderData() as { med: Medication };
 
   return (
-    <div className="min-h-screen bg-white text-[#1B2147]">
-      <header className="border-b border-[#1B2147]/10 bg-white">
+    <div className="min-h-screen bg-white text-[#103942]">
+      <header className="border-b border-[#103942]/10 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" className="font-serif text-[22px] font-bold text-[#1B2147]">
+          <Link to="/" className="font-serif text-[22px] font-bold text-[#103942]">
             ChubbyNoMore
           </Link>
-          <Link to="/" className="text-sm text-[#1B2147]/70 hover:text-[#1B2147]">
+          <Link to="/" className="text-sm text-[#103942]/70 hover:text-[#103942]">
             ← All medications
           </Link>
         </div>
       </header>
 
-      <section className="bg-[#EEF0EC] px-6 py-14">
+      <section className="bg-[#F5F5F7] px-6 py-14">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.4fr_1fr]">
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#3454C7]">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#103942]">
               {med.category} · {med.drugClass}
             </div>
             <h1 className="mt-4 font-serif text-4xl leading-[1.05] md:text-6xl">{med.name}</h1>
-            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[#1B2147]/85">
+            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[#103942]/85">
               {med.summary}
             </p>
             <div className="mt-6 flex items-baseline gap-2">
@@ -101,13 +101,13 @@ function MedicationDetail() {
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="/#cta"
-                className="rounded-full bg-[#1B2147] px-6 py-3 text-sm font-semibold text-white hover:bg-[#0F1432]"
+                className="rounded-full bg-[#103942] px-6 py-3 text-sm font-semibold text-white hover:bg-[#42D1C3] hover:text-[#103942]"
               >
                 Check If I Qualify
               </a>
               <a
                 href="#faqs"
-                className="rounded-full border border-[#1B2147]/30 px-6 py-3 text-sm font-semibold hover:border-[#1B2147]"
+                className="rounded-full border border-[#103942]/30 px-6 py-3 text-sm font-semibold hover:border-[#103942]"
               >
                 Read the FAQs
               </a>
@@ -135,7 +135,7 @@ function MedicationDetail() {
         <ul className="grid gap-3">
           {med.candidateProfile.map((c) => (
             <li key={c} className="flex gap-3 text-[15px] leading-relaxed">
-              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3454C7]" />
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#103942]" />
               <span>{c}</span>
             </li>
           ))}
@@ -154,9 +154,9 @@ function MedicationDetail() {
       </Section>
 
       <Section title="Dosage overview">
-        <div className="overflow-hidden rounded-2xl border border-[#1B2147]/10">
+        <div className="overflow-hidden rounded-2xl border border-[#103942]/10">
           <table className="w-full text-left text-[15px]">
-            <thead className="bg-[#1B2147] text-white">
+            <thead className="bg-[#103942] text-white">
               <tr>
                 <th className="px-4 py-3">Phase</th>
                 <th className="px-4 py-3">Dose</th>
@@ -164,9 +164,9 @@ function MedicationDetail() {
             </thead>
             <tbody>
               {med.dosage.map((d) => (
-                <tr key={d.label} className="border-t border-[#1B2147]/10">
+                <tr key={d.label} className="border-t border-[#103942]/10">
                   <td className="w-40 px-4 py-3 font-semibold">{d.label}</td>
-                  <td className="px-4 py-3 text-[#1B2147]/85">{d.detail}</td>
+                  <td className="px-4 py-3 text-[#103942]/85">{d.detail}</td>
                 </tr>
               ))}
             </tbody>
@@ -177,7 +177,7 @@ function MedicationDetail() {
       <Section title="Side effects to know about">
         <div className="grid gap-8 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#3454C7]">Common</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#103942]">Common</h3>
             <ul className="mt-3 space-y-2 text-[15px]">
               {med.sideEffects.common.map((s) => (
                 <li key={s}>· {s}</li>
@@ -199,7 +199,7 @@ function MedicationDetail() {
         <ul className="grid gap-3">
           {med.monitoring.map((m) => (
             <li key={m} className="flex gap-3 text-[15px]">
-              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3454C7]" />
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#103942]" />
               <span>{m}</span>
             </li>
           ))}
@@ -214,7 +214,7 @@ function MedicationDetail() {
       </Section>
 
       <Section id="faqs" title="Common questions">
-        <div className="divide-y divide-[#E7E8EE] border-y border-[#E7E8EE]">
+        <div className="divide-y divide-[#E1E7E8] border-y border-[#E1E7E8]">
           {med.faqs.map((f) => (
             <details key={f.q} className="group py-4">
               <summary className="flex cursor-pointer items-center justify-between font-serif text-lg">
@@ -222,13 +222,13 @@ function MedicationDetail() {
                 <span aria-hidden className="text-xl group-open:hidden">+</span>
                 <span aria-hidden className="hidden text-xl group-open:inline">−</span>
               </summary>
-              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#5A6075]">{f.a}</p>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#58747B]">{f.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
-      <section className="bg-[#1B2147] px-6 py-16 text-white">
+      <section className="bg-[#103942] px-6 py-16 text-white">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="font-serif text-3xl md:text-5xl">Ready to see if {med.name.split(/[®™]/)[0].trim()} is right for you?</h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
@@ -237,7 +237,7 @@ function MedicationDetail() {
           </p>
           <a
             href="/#cta"
-            className="mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-semibold text-[#1B2147]"
+            className="mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-semibold text-[#103942]"
           >
             Check If I Qualify — Free &amp; Fast
           </a>
@@ -255,13 +255,13 @@ function MedicationDetail() {
                   key={m.slug}
                   to="/medications/$slug"
                   params={{ slug: m.slug }}
-                  className="rounded-2xl border border-[#1B2147]/10 p-4 hover:border-[#1B2147]/40"
+                  className="rounded-2xl border border-[#103942]/10 p-4 hover:border-[#103942]/40"
                 >
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]">
                     {m.category}
                   </div>
                   <div className="mt-2 font-serif text-lg">{m.name}</div>
-                  <div className="mt-1 text-sm text-[#1B2147]/70">
+                  <div className="mt-1 text-sm text-[#103942]/70">
                     From {m.price}
                     {m.period}
                   </div>
@@ -291,8 +291,8 @@ function Section({
       className={`px-6 py-12 ${tone === "warn" ? "bg-[#FBF3F0]" : "bg-white"}`}
     >
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-serif text-2xl leading-tight text-[#1B2147] md:text-3xl">{title}</h2>
-        <div className="mt-6 text-[#1B2147]">{children}</div>
+        <h2 className="font-serif text-2xl leading-tight text-[#103942] md:text-3xl">{title}</h2>
+        <div className="mt-6 text-[#103942]">{children}</div>
       </div>
     </section>
   );
@@ -300,11 +300,11 @@ function Section({
 
 function Fact({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-[#F5F6F3] p-5">
-      <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3454C7]">
+    <div className="rounded-2xl bg-[#F5F5F7] p-5">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#103942]">
         {label}
       </div>
-      <div className="mt-2 text-[16px] font-medium text-[#1B2147]">{value}</div>
+      <div className="mt-2 text-[16px] font-medium text-[#103942]">{value}</div>
     </div>
   );
 }
