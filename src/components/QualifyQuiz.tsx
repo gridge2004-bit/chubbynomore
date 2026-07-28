@@ -5,18 +5,15 @@ import { ContactCaptureStep } from "@/components/ContactCaptureStep";
 const MINT = "#42D1C3";
 
 /**
- * Verified support email. No verified Chubby No More support address has been
- * provided yet (legal pages still show a "SUPPORT EMAIL" placeholder), so the
- * secondary email link stays hidden until one is supplied. Do NOT invent one.
+ * Verified Chubby No More support email. The mailto link carries no health
+ * information — subject and body are fixed, generic, and URL-encoded.
  */
-const SUPPORT_EMAIL: string | null = null;
-const SUPPORT_MAILTO = SUPPORT_EMAIL
-  ? `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
-      "Question about Chubby No More",
-    )}&body=${encodeURIComponent(
-      "Hi Chubby No More team,\n\nI completed the online questionnaire and have a question about my results.",
-    )}`
-  : null;
+const SUPPORT_EMAIL = "hello@chubbynomore.com";
+const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
+  "Question about Chubby No More",
+)}&body=${encodeURIComponent(
+  "Hi Chubby No More team,\n\nI completed the online questionnaire and have a question about my results.",
+)}`;
 
 type Answers = Record<string, unknown>;
 
