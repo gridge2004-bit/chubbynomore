@@ -92,11 +92,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico?v=6", sizes: "any" },
-      { rel: "icon", type: "image/png", href: "/favicon-48x48.png?v=6", sizes: "48x48" },
-      { rel: "icon", type: "image/png", href: "/favicon-96x96.png?v=6", sizes: "96x96" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=6" },
-      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "icon", href: "/favicon.ico?v=7", sizes: "any" },
+      { rel: "shortcut icon", href: "/favicon.ico?v=7" },
+      { rel: "icon", type: "image/png", href: "/favicon-16x16.png?v=7", sizes: "16x16" },
+      { rel: "icon", type: "image/png", href: "/favicon-32x32.png?v=7", sizes: "32x32" },
+      { rel: "icon", type: "image/png", href: "/favicon-48x48.png?v=7", sizes: "48x48" },
+      { rel: "icon", type: "image/png", href: "/favicon-96x96.png?v=7", sizes: "96x96" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=7" },
+      { rel: "manifest", href: "/site.webmanifest?v=7" },
+
 
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
