@@ -22,6 +22,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
+import { Route as ApiPublicLlDiagRouteImport } from './routes/api/public/ll-diag'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -89,6 +90,11 @@ const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
   path: '/medications/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLlDiagRoute = ApiPublicLlDiagRouteImport.update({
+  id: '/api/public/ll-diag',
+  path: '/api/public/ll-diag',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/api/public/ll-diag': typeof ApiPublicLlDiagRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/api/public/ll-diag': typeof ApiPublicLlDiagRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/api/public/ll-diag': typeof ApiPublicLlDiagRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/api/public/ll-diag'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/api/public/ll-diag'
   id:
     | '__root__'
     | '/'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/api/public/ll-diag'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
   MedicationsSlugRoute: typeof MedicationsSlugRoute
+  ApiPublicLlDiagRoute: typeof ApiPublicLlDiagRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MedicationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/ll-diag': {
+      id: '/api/public/ll-diag'
+      path: '/api/public/ll-diag'
+      fullPath: '/api/public/ll-diag'
+      preLoaderRoute: typeof ApiPublicLlDiagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -319,7 +339,18 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TermsOfUseRoute: TermsOfUseRoute,
   MedicationsSlugRoute: MedicationsSlugRoute,
+  ApiPublicLlDiagRoute: ApiPublicLlDiagRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
