@@ -297,6 +297,16 @@ function ClinicalIntake() {
           {section.intro}
         </p>
       )}
+      {section.id === "consents" && (
+        <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
+          Review the{" "}
+          <a href="/telehealth-consent" className="underline underline-offset-2">Telehealth Consent</a>,{" "}
+          <a href="/notice-of-privacy-practices" className="underline underline-offset-2">Notice of Privacy Practices</a>,{" "}
+          <a href="/privacy-policy" className="underline underline-offset-2">Privacy Policy</a>, and{" "}
+          <a href="/safety-information" className="underline underline-offset-2">Safety Information</a>.
+        </p>
+      )}
+
 
       <div className="mt-8">
         {section.awaitingClinicalApproval ? (
