@@ -36,7 +36,7 @@ export const medications: Medication[] = [
     form: "Vial + syringe (subcutaneous injection)",
     frequency: "Once weekly",
     price: "$149.99",
-    period: "/28-day supply",
+    period: " / 28-day supply",
     img: cnmSemaVialsAsset.url,
     imgAlt: "Compounded semaglutide vials with discreet CNM branding",
     summary:
@@ -90,8 +90,8 @@ export const medications: Medication[] = [
     drugClass: "Dual GLP-1 / GIP receptor agonist",
     form: "Vial + syringe (subcutaneous injection)",
     frequency: "Once weekly",
-    price: "$249.99",
-    period: "/28-day supply",
+    price: "$279",
+    period: " / 28-day supply",
     img: cnmTirzVialsAsset.url,
     imgAlt: "Compounded tirzepatide vials with discreet CNM branding",
     summary:
@@ -134,7 +134,7 @@ export const medications: Medication[] = [
     form: "Oral tablet",
     frequency: "Once daily",
     price: "$199.99",
-    period: "/mo",
+    period: " / 30-day supply",
     img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
     summary:
@@ -169,8 +169,8 @@ export const medications: Medication[] = [
     drugClass: "GLP-1 receptor agonist (oral semaglutide)",
     form: "Oral tablet",
     frequency: "Once daily",
-    price: "$249.99",
-    period: "/mo",
+    price: "Pricing pending confirmation",
+    period: "",
     img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
     summary:
@@ -205,8 +205,8 @@ export const medications: Medication[] = [
     drugClass: "Dual GLP-1 / GIP receptor agonist (tirzepatide)",
     form: "Pre-filled injection pen",
     frequency: "Once weekly",
-    price: "$449.99",
-    period: "/mo",
+    price: "Available on request",
+    period: "",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
     summary:
@@ -241,8 +241,8 @@ export const medications: Medication[] = [
     drugClass: "GLP-1 receptor agonist (semaglutide)",
     form: "Pre-filled injection pen",
     frequency: "Once weekly",
-    price: "$349.99",
-    period: "/mo",
+    price: "Available on request",
+    period: "",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
     summary:
@@ -274,8 +274,8 @@ export const medications: Medication[] = [
     drugClass: "GLP-1 receptor agonist (semaglutide)",
     form: "Pre-filled injection pen",
     frequency: "Once weekly",
-    price: "$349.99",
-    period: "/mo",
+    price: "Available on request",
+    period: "",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
     summary:
@@ -307,8 +307,8 @@ export const medications: Medication[] = [
     drugClass: "Dual GLP-1 / GIP receptor agonist (tirzepatide)",
     form: "Pre-filled injection pen",
     frequency: "Once weekly",
-    price: "$1,249.99",
-    period: "/mo",
+    price: "Available on request",
+    period: "",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
     summary:
