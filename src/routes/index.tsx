@@ -94,8 +94,8 @@ const products = [
     desc: "Custom-formulated GLP-1 medications compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides what's right for you.",
     bullets: ["Once-weekly injection", "Physician-titrated dosing", "Free shipping, cancel anytime"],
       options: [
-      { label: "GLP-1 + GIP (Tirzepatide)", price: "$249.99", period: "per 28-day supply" },
-      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "per 28-day supply" },
+      { label: "GLP-1 + GIP (Tirzepatide)", price: "$279", period: "/ 28-day supply" },
+      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "/ 28-day supply" },
     ],
     img: cnmSemaVialsAsset.url,
   },
@@ -108,7 +108,7 @@ const products = [
     desc: "Brand-name GLP-1 medications dispensed by a licensed US pharmacy. Prescribed online by a board-certified physician based on your eligibility and goals.",
     bullets: ["Authentic manufacturer product", "Physician-managed care", "Shipped discreetly to your door"],
     options: [
-      { label: "Starting at", price: "$399", period: "/month" },
+      { label: "Available on request", price: "", period: "" },
     ],
     img: tirzepatideImg,
   },
@@ -140,7 +140,7 @@ const faqs = [
       </>
     ),
   },
-  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
+  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
 ];
 
 const NAVY = "#103942";
@@ -318,7 +318,7 @@ function Hero() {
           You didn't fail the diet. The diet failed you.
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
-          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99/mo.
+          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99 / 28-day supply.
         </Reveal>
         <Reveal delay={200}>
           <a
@@ -418,8 +418,12 @@ type DetailedCard = {
   desc: string;
   img: string;
   imgAlt: string;
-  fullSupplyPrice: number;
+  fullSupplyPrice?: number;
   supplyLabel: string; // e.g. "28-day supply"
+  // "fixed" shows a public price. "onRequest" and "pending" suppress it.
+  priceMode?: "fixed" | "onRequest" | "pending";
+  flatDosePricing?: boolean;
+  prepay?: { total: number; perSupply: number; savings: number };
   dosesPerSupply: number;
   doseLabel: string; // e.g. "weekly dose"
   // Placeholder insurance/savings price shown on brand-name rows until a
@@ -453,6 +457,18 @@ const INSURANCE_UNAVAILABLE_COMPOUNDED =
 const INSURANCE_UNVERIFIED_BRAND =
   "Check insurance coverage and available savings";
 
+const ON_REQUEST_COPY =
+  "Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability.";
+const PENDING_COPY =
+  "Pricing pending confirmation.";
+const FLAT_DOSE_COPY = "Flat pricing across available prescribed doses.";
+const COMPOUNDED_FDA_QUALIFIER =
+  "Compounded medications are not FDA-approved for safety, effectiveness, or quality.";
+const PRESCRIPTION_QUALIFIER =
+  "Prescription required. A licensed provider determines whether treatment is medically appropriate. Medication and dose are not guaranteed.";
+const SUPPLY_PERIOD_QUALIFIER =
+  "Prices shown apply to the stated supply period and may vary if the prescribed treatment, pharmacy, or product changes.";
+
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
@@ -466,10 +482,10 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
     img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
-    fullSupplyPrice: 249.99,
     supplyLabel: "30-day supply",
     dosesPerSupply: 30,
     doseLabel: "daily dose",
+    priceMode: "pending",
   },
   {
     id: "semaglutide",
@@ -483,6 +499,9 @@ const detailedCards: DetailedCard[] = [
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
+    priceMode: "fixed",
+    flatDosePricing: true,
+    prepay: { total: 399, perSupply: 133, savings: 50.97 },
   },
   {
     id: "foundayo",
@@ -493,6 +512,7 @@ const detailedCards: DetailedCard[] = [
     img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
     fullSupplyPrice: 199.99,
+    priceMode: "fixed",
     supplyLabel: "30-day supply",
     dosesPerSupply: 30,
     doseLabel: "daily dose",
@@ -505,10 +525,13 @@ const detailedCards: DetailedCard[] = [
     desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     img: cnmTirzVialsAsset.url,
     imgAlt: "Compounded tirzepatide vials with discreet CNM branding",
-    fullSupplyPrice: 249.99,
+    fullSupplyPrice: 279,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
+    priceMode: "fixed",
+    flatDosePricing: true,
+    prepay: { total: 747, perSupply: 249, savings: 90 },
   },
   {
     id: "zepbound",
@@ -518,8 +541,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
-    fullSupplyPrice: 449.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -531,8 +554,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
-    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -544,8 +567,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
-    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -557,8 +580,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
-    fullSupplyPrice: 1249.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -1140,7 +1163,7 @@ function MedicationOptions() {
       <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
-            Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
+            Plans start at $149.99 / 28-day supply.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
@@ -1405,7 +1428,7 @@ function CompoundedVsBrand() {
       meds: "Tirzepatide, Semaglutide",
       rows: [
         ["Regulation", "Prepared by licensed US compounding pharmacies."],
-        ["Cost", "$149.99–$249.99 per 28-day supply, out of pocket. No insurance required."],
+        ["Cost", "$149.99–$279 / 28-day supply, out of pocket. No insurance required."],
         ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
         ["Supply", "Availability varies and is confirmed at the time of prescribing."],
       ],
@@ -1416,7 +1439,7 @@ function CompoundedVsBrand() {
       meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
       rows: [
         ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "From $199.99 per month. Insurance and savings cards may apply."],
+        ["Cost", "Available on request. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
         ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
         ["Supply", "Subject to manufacturer shortages from time to time."],
       ],
