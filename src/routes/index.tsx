@@ -2058,7 +2058,7 @@ function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-sm text-[#103942]/65 md:flex-row">
-          <span>© {new Date().getFullYear()} Chubby No More. All rights reserved.</span>
+          <span>© 2026 Chubby No More Inc. All rights reserved.</span>
         </div>
       </div>
     </footer>
