@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
+import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
   path: '/medications/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
+  id: '/intake/clinical',
+  path: '/intake/clinical',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/medications/$slug'
+  fullPaths: '/' | '/intake/clinical' | '/medications/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/medications/$slug'
-  id: '__root__' | '/' | '/medications/$slug'
+  to: '/' | '/intake/clinical' | '/medications/$slug'
+  id: '__root__' | '/' | '/intake/clinical' | '/medications/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IntakeClinicalRoute: typeof IntakeClinicalRoute
   MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MedicationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/intake/clinical': {
+      id: '/intake/clinical'
+      path: '/intake/clinical'
+      fullPath: '/intake/clinical'
+      preLoaderRoute: typeof IntakeClinicalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IntakeClinicalRoute: IntakeClinicalRoute,
   MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
