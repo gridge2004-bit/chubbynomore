@@ -1,8 +1,7 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Info, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
-import { ContactCaptureStep } from "@/components/ContactCaptureStep";
 import heroImg from "@/assets/hero.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
