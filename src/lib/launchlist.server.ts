@@ -1,8 +1,9 @@
 /**
  * LaunchList forwarding (server-only).
  *
- * Sends marketing-safe contact fields to the LaunchList waitlist form
- * endpoint. Never send clinical / health questionnaire answers here.
+ * Sends marketing-safe contact fields to the LaunchList waitlist endpoint.
+ * NEVER send clinical / health questionnaire answers, weight, BMI,
+ * conditions, medication history, or provider decisions here.
  */
 
 export type LaunchListContact = {
@@ -10,21 +11,22 @@ export type LaunchListContact = {
   lastName: string;
   email: string;
   phone?: string;
-  state?: string;
-  utm?: {
-    source?: string;
-    medium?: string;
-    campaign?: string;
-    term?: string;
-    content?: string;
-  };
+  marketingConsentAt: string;
+  consentTextVersion: string;
+  source: string;
 };
 
-export async function sendToLaunchList(contact: LaunchListContact) {
+export type LaunchListResult =
+  | { forwarded: true }
+  | { forwarded: false; errorCode: string };
+
+export async function sendToLaunchList(
+  contact: LaunchListContact,
+): Promise<LaunchListResult> {
   const formKey = process.env.LAUNCHLIST_FORM_KEY;
   if (!formKey) {
     console.warn("[launchlist] LAUNCHLIST_FORM_KEY not configured; skipping");
-    return { forwarded: false as const, reason: "not_configured" as const };
+    return { forwarded: false, errorCode: "not_configured" };
   }
 
   const body = new URLSearchParams();
@@ -33,12 +35,9 @@ export async function sendToLaunchList(contact: LaunchListContact) {
   body.set("last_name", contact.lastName);
   body.set("name", `${contact.firstName} ${contact.lastName}`.trim());
   if (contact.phone) body.set("phone", contact.phone);
-  if (contact.state) body.set("state", contact.state);
-  if (contact.utm?.source) body.set("utm_source", contact.utm.source);
-  if (contact.utm?.medium) body.set("utm_medium", contact.utm.medium);
-  if (contact.utm?.campaign) body.set("utm_campaign", contact.utm.campaign);
-  if (contact.utm?.term) body.set("utm_term", contact.utm.term);
-  if (contact.utm?.content) body.set("utm_content", contact.utm.content);
+  body.set("source", contact.source);
+  body.set("marketing_consent_at", contact.marketingConsentAt);
+  body.set("consent_text_version", contact.consentTextVersion);
 
   try {
     const res = await fetch(`https://getlaunchlist.com/s/${formKey}`, {
@@ -48,14 +47,14 @@ export async function sendToLaunchList(contact: LaunchListContact) {
     });
     if (!res.ok) {
       console.error("[launchlist] rejected submission", res.status);
-      return { forwarded: false as const, reason: "rejected" as const };
+      return { forwarded: false, errorCode: `http_${res.status}` };
     }
-    return { forwarded: true as const };
+    return { forwarded: true };
   } catch (err) {
     console.error(
       "[launchlist] request failed",
       err instanceof Error ? err.message : "unknown",
     );
-    return { forwarded: false as const, reason: "network_error" as const };
+    return { forwarded: false, errorCode: "network_error" };
   }
 }
