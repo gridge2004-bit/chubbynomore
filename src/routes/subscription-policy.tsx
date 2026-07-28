@@ -178,7 +178,7 @@ function SubscriptionPolicyPage() {
       <Section n={20} title="Contact information">
         <UL
           items={[
-            <>Support contact: <Todo>SUPPORT EMAIL AND TELEPHONE NUMBER</Todo></>,
+            <>Support contact: hello@chubbynomore.com, telephone <Todo>TELEPHONE NUMBER</Todo></>,
             <>Support hours: <Todo>SUPPORT HOURS</Todo></>,
             <>Mailing address: <Todo>LEGAL BUSINESS ADDRESS</Todo></>,
           ]}

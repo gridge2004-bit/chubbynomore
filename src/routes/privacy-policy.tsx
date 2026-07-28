@@ -158,7 +158,7 @@ function PrivacyPolicyPage() {
           Promotional email and text messages are sent only where you separately opted in.
           Promotional consent is never a condition of purchasing or receiving care. You may opt out
           at any time by using the unsubscribe link, replying STOP to a text message, or contacting
-          us at <Todo>SUPPORT EMAIL</Todo>. Message and data rates may apply; message frequency
+          us at hello@chubbynomore.com. Message and data rates may apply; message frequency
           varies.
         </P>
       </Section>
@@ -268,7 +268,7 @@ function PrivacyPolicyPage() {
           items={[
             <>Legal business address: <Todo>LEGAL BUSINESS ADDRESS</Todo></>,
             <>Privacy email: <Todo>PRIVACY EMAIL</Todo></>,
-            <>Support email: <Todo>SUPPORT EMAIL</Todo></>,
+            <>Support email: hello@chubbynomore.com</>,
             <>Telephone: <Todo>TELEPHONE NUMBER</Todo></>,
             <>Privacy-request submission method: <Todo>PRIVACY-REQUEST SUBMISSION METHOD</Todo></>,
           ]}

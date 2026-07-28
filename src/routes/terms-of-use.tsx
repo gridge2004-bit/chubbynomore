@@ -130,7 +130,7 @@ function TermsOfUsePage() {
 
       <Section n={14} title="Account security">
         <P>
-          Keep your credentials confidential and notify us promptly at <Todo>SUPPORT EMAIL</Todo> if
+          Keep your credentials confidential and notify us promptly at hello@chubbynomore.com if
           you suspect unauthorized access. You are responsible for activity conducted through your
           account, except to the extent applicable law provides otherwise.
         </P>
@@ -282,7 +282,7 @@ function TermsOfUsePage() {
           items={[
             <>Company address: <Todo>LEGAL BUSINESS ADDRESS</Todo></>,
             <>Legal contact: <Todo>LEGAL CONTACT NAME AND EMAIL</Todo></>,
-            <>Support email: <Todo>SUPPORT EMAIL</Todo></>,
+            <>Support email: hello@chubbynomore.com</>,
             <>Telephone: <Todo>TELEPHONE NUMBER</Todo></>,
           ]}
         />
