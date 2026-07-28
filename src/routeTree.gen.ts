@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntakeRoute = IntakeRouteImport.update({
   id: '/intake',
   path: '/intake',
@@ -38,12 +44,14 @@ const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
@@ -51,25 +59,50 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
+  fullPaths:
+    | '/'
+    | '/intake'
+    | '/privacy-policy'
+    | '/intake/clinical'
+    | '/medications/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
-  id: '__root__' | '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
+  to:
+    | '/'
+    | '/intake'
+    | '/privacy-policy'
+    | '/intake/clinical'
+    | '/medications/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/intake'
+    | '/privacy-policy'
+    | '/intake/clinical'
+    | '/medications/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntakeRoute: typeof IntakeRouteWithChildren
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/intake': {
       id: '/intake'
       path: '/intake'
@@ -115,6 +148,7 @@ const IntakeRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntakeRoute: IntakeRouteWithChildren,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
