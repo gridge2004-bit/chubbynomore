@@ -601,7 +601,8 @@ function MedicationRow({
     ? "bg-[#D5F3EF] text-[#103942]"
     : "bg-[#F5F5F7] text-[#103942]";
   const isWeekly = card.doseLabel.toLowerCase().includes("week");
-  const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
+  const hasPrice = card.priceMode !== "onRequest" && card.priceMode !== "pending" && typeof card.fullSupplyPrice === "number";
+  const perDose = Math.round(((card.fullSupplyPrice ?? 0) / card.dosesPerSupply) * 100) / 100;
 
   const ins = card.insurance;
   const insuranceVerified =
@@ -665,9 +666,9 @@ function MedicationRow({
                 Cash pay
               </p>
               <p className="mt-1 text-[16px] font-bold leading-tight text-[#103942]">
-                {formatUSD(card.fullSupplyPrice)}
+                {formatUSD(card.fullSupplyPrice ?? 0)}
                 <span className="ml-1 text-[12px] font-normal text-[#103942]/70">
-                  per {card.supplyLabel}
+                  / {card.supplyLabel}
                 </span>
               </p>
             </div>
@@ -705,15 +706,23 @@ function MedicationRow({
               <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
                 Cash pay
               </p>
-              <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
-                From {formatUSD(card.fullSupplyPrice)}
-                <span className="ml-1 text-[11px] text-[#103942]/60">
-                  per {card.supplyLabel}
-                </span>
-              </p>
-              {isWeekly && (
-                <p className="mt-0.5 text-[11px] text-[#103942]/55">
-                  {formatUSD(perDose)} per {card.doseLabel}
+              {hasPrice ? (
+                <>
+                  <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
+                    From {formatUSD(card.fullSupplyPrice ?? 0)}
+                    <span className="ml-1 text-[11px] text-[#103942]/60">
+                      / {card.supplyLabel}
+                    </span>
+                  </p>
+                  {isWeekly && (
+                    <p className="mt-0.5 text-[11px] text-[#103942]/55">
+                      {formatUSD(perDose)} per {card.doseLabel}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
+                  {card.priceMode === "pending" ? PENDING_COPY : "Available on request"}
                 </p>
               )}
             </div>
@@ -841,14 +850,35 @@ function MedicationInfoPanel({
           </div>
           <div className="mt-5 rounded-2xl bg-[#F5F5F7] px-4 py-4">
             <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">Starting price</p>
-            <p className="mt-1 text-[22px] font-bold">
-              From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
-              <span className="ml-1 text-[13px] font-normal text-[#103942]/70">per {card.doseLabel}</span>
-            </p>
-            <p className="mt-1 text-[13px] text-[#103942]/80">
-              {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
-            </p>
-            <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PER_DOSE_INFO}</p>
+            {typeof card.fullSupplyPrice === "number" && card.priceMode === "fixed" ? (
+              <>
+                <p className="mt-1 text-[22px] font-bold">
+                  {formatUSD(card.fullSupplyPrice)}
+                  <span className="ml-1 text-[13px] font-normal text-[#103942]/70">/ {card.supplyLabel}</span>
+                </p>
+                <p className="mt-1 text-[13px] text-[#103942]/80">
+                  {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)} per {card.doseLabel}
+                </p>
+                {card.flatDosePricing && (
+                  <p className="mt-1 text-[13px] text-[#103942]/80">{FLAT_DOSE_COPY}</p>
+                )}
+                {card.prepay && (
+                  <p className="mt-2 text-[13px] text-[#103942]/80">
+                    Or {formatUSD(card.prepay.total)} prepaid for 3 consecutive 28-day supplies (84 days) — equivalent to {formatUSD(card.prepay.perSupply)} per 28-day supply. Save {formatUSD(card.prepay.savings)} compared with purchasing three individual fills.
+                  </p>
+                )}
+                <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PER_DOSE_INFO}</p>
+              </>
+            ) : (
+              <>
+                <p className="mt-1 text-[20px] font-bold">
+                  {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                </p>
+                <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{ON_REQUEST_COPY}</p>
+              </>
+            )}
+            <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PRESCRIPTION_QUALIFIER}</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-[#103942]/60">{SUPPLY_PERIOD_QUALIFIER}</p>
           </div>
           {(() => {
             const ins = card.insurance;
@@ -985,6 +1015,69 @@ function EmotionalTransformation() {
   );
 }
 
+function PlanCompare({ card }: { card: DetailedCard }) {
+  const [plan, setPlan] = useState<"single" | "prepay">("single");
+  if (!card.prepay || typeof card.fullSupplyPrice !== "number") return null;
+  const p = card.prepay;
+  const base =
+    "rounded-2xl border px-4 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942]";
+  const on = "border-[#103942] bg-white";
+  const off = "border-[#103942]/20 bg-white/60 hover:border-[#103942]/40";
+  return (
+    <div className="mt-4">
+      <div
+        role="radiogroup"
+        aria-label={`${card.name} supply options`}
+        className="grid gap-2 sm:grid-cols-2"
+      >
+        <button
+          type="button"
+          role="radio"
+          aria-checked={plan === "single"}
+          onClick={() => setPlan("single")}
+          className={`${base} ${plan === "single" ? on : off}`}
+        >
+          <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
+            Individual fill
+          </span>
+          <span className="mt-1 block text-[20px] font-bold leading-none text-[#103942]">
+            {formatUSD(card.fullSupplyPrice)}
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">/ 28-day supply</span>
+        </button>
+        <button
+          type="button"
+          role="radio"
+          aria-checked={plan === "prepay"}
+          onClick={() => setPlan("prepay")}
+          className={`${base} ${plan === "prepay" ? on : off}`}
+        >
+          <span className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
+              3-fill prepay
+            </span>
+            <span className="rounded-full bg-[#D5F3EF] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#103942]">
+              Best value
+            </span>
+          </span>
+          <span className="mt-1 block text-[20px] font-bold leading-none text-[#103942]">
+            {formatUSD(p.total)}
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">
+            prepaid for 3 consecutive 28-day supplies (84 days)
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">
+            Equivalent to {formatUSD(p.perSupply)} per 28-day supply.
+          </span>
+          <span className="mt-0.5 block text-[12px] font-semibold text-[#103942]">
+            Save {formatUSD(p.savings)} compared with purchasing three individual fills.
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 const MOBILE_SUMMARY: Record<string, string> = {
   semaglutide: "Clinician-prescribed GLP-1 care for eligible patients.",
   tirzepatide: "Clinician-prescribed GLP-1 + GIP care for eligible patients.",
@@ -1031,14 +1124,32 @@ function DetailedProductCard({
         </div>
 
         <div className="mt-3">
-          <p className="text-[14px] text-[#103942]/80">Starting at</p>
-          <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
-            <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
-              {formatUSD(card.fullSupplyPrice)}
-            </span>
-            <span className="text-[14px] text-[#103942]/80">/{card.supplyLabel}</span>
-          </p>
+          {card.priceMode === "fixed" && typeof card.fullSupplyPrice === "number" ? (
+            <>
+              <p className="text-[14px] text-[#103942]/80">Starting at</p>
+              <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
+                <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
+                  {formatUSD(card.fullSupplyPrice)}
+                </span>
+                <span className="text-[14px] text-[#103942]/80">/ {card.supplyLabel}</span>
+              </p>
+              {card.flatDosePricing && (
+                <span className="mt-2 inline-flex rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-[#103942]">
+                  {FLAT_DOSE_COPY}
+                </span>
+              )}
+            </>
+          ) : (
+            <>
+              <p className="text-[20px] font-bold leading-tight text-[#103942]">
+                {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+              </p>
+              <p className="mt-1.5 text-[12px] leading-snug text-[#103942]/70">{ON_REQUEST_COPY}</p>
+            </>
+          )}
         </div>
+
+        <PlanCompare card={card} />
 
         <p className="mt-2.5 text-[15px] leading-snug text-[#103942]/75">{summary}</p>
 
@@ -1099,18 +1210,37 @@ function DetailedProductCard({
           </p>
 
           <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <div className="flex flex-wrap items-baseline gap-x-2">
-                <span className="text-[15px] text-[#103942]/80">Starting at</span>
-                <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
-                  {formatUSD(card.fullSupplyPrice)}
-                </span>
-                <span className="text-[15px] text-[#103942]/80">/{card.supplyLabel}</span>
-              </div>
+            <div className="max-w-xl">
+              {card.priceMode === "fixed" && typeof card.fullSupplyPrice === "number" ? (
+                <>
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-[15px] text-[#103942]/80">Starting at</span>
+                    <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
+                      {formatUSD(card.fullSupplyPrice)}
+                    </span>
+                    <span className="text-[15px] text-[#103942]/80">/ {card.supplyLabel}</span>
+                  </div>
+                  {card.flatDosePricing && (
+                    <span className="mt-2 inline-flex rounded-full bg-white px-3 py-1 text-[12px] font-semibold text-[#103942]">
+                      {FLAT_DOSE_COPY}
+                    </span>
+                  )}
+                  <PlanCompare card={card} />
+                </>
+              ) : (
+                <>
+                  <div className="text-[24px] font-bold leading-tight text-[#103942] sm:text-[28px]">
+                    {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                  </div>
+                  <p className="mt-2 max-w-md text-[13px] leading-relaxed text-[#103942]/70">
+                    {ON_REQUEST_COPY}
+                  </p>
+                </>
+              )}
 
               {isCompounded && (
                 <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#103942]/65">
-                  Compounded medications are not FDA-approved for safety, effectiveness, or quality.
+                  {COMPOUNDED_FDA_QUALIFIER}
                 </p>
               )}
             </div>
@@ -1190,10 +1320,15 @@ function MedicationOptions() {
         </div>
 
 
-        <p className="mt-4 text-[11px] leading-relaxed text-[#103942]/70">
-          <span aria-hidden="true">*</span>
-          {INSURANCE_DISCLAIMER}
-        </p>
+        <div className="mt-4 space-y-1.5 text-[11px] leading-relaxed text-[#103942]/70">
+          <p>{COMPOUNDED_FDA_QUALIFIER}</p>
+          <p>{PRESCRIPTION_QUALIFIER}</p>
+          <p>{SUPPLY_PERIOD_QUALIFIER}</p>
+          <p>
+            <span aria-hidden="true">*</span>
+            {INSURANCE_DISCLAIMER}
+          </p>
+        </div>
 
         {remaining.length > 0 && (
           <div className="mt-6 flex justify-center">
