@@ -11,7 +11,8 @@ import ctaImg from "@/assets/cta.jpg";
 import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
 import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
-import cnmLogoAsset from "@/assets/cnm-logo.png.asset.json";
+import cnmMarkAsset from "@/assets/cnm-mark.png.asset.json";
+import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
@@ -221,7 +222,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex min-w-0 items-center gap-3 sm:gap-6 lg:gap-10">
           <a href="/" aria-label="Chubby No More home" className="flex shrink-0 items-center py-1">
-            <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
+            <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
           </a>
           <nav className="hidden items-center gap-6 md:flex lg:gap-10">
             {navLinks.map((l) => (
@@ -268,7 +269,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           >
             <div className="flex items-center justify-between gap-3">
               <a href="/" aria-label="Chubby No More home" onClick={() => setMenuOpen(false)} className="flex shrink-0 items-center py-1">
-                <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
+                <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
               </a>
               <button
                 type="button"
@@ -1552,9 +1553,9 @@ function HowItWorks() {
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
                 <img src={s.img} alt={s.imgAlt} className="h-full w-full object-cover" loading="lazy" />
               </div>
-              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#58747B]">Step {s.n}</div>
+              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#103942]/70">Step {s.n}</div>
               <h3 className="mt-2 font-serif text-2xl text-[#103942]">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#58747B]">{s.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#103942]/70">{s.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -1585,7 +1586,7 @@ function FAQ() {
           </h2>
         </Reveal>
         <div>
-          <div className="divide-y divide-[#E1E7E8] border-y border-[#E1E7E8]">
+          <div className="divide-y divide-[#103942]/12 border-y border-[#103942]/12">
             {faqs.map((f, i) => {
               const isOpen = openSet.has(i);
               const panelId = `faq-panel-${i}`;
@@ -1614,14 +1615,14 @@ function FAQ() {
                     className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}
                   >
                     <div className="min-h-0">
-                      <p className="max-w-2xl text-sm leading-relaxed text-[#58747B] md:text-base">{f.a}</p>
+                      <p className="max-w-2xl text-sm leading-relaxed text-[#103942]/70 md:text-base">{f.a}</p>
                     </div>
                   </div>
                 </Reveal>
               );
             })}
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-[#58747B] md:text-sm">
+          <p className="mt-6 text-xs leading-relaxed text-[#103942]/70 md:text-sm">
             Prescription treatment requires an online medical evaluation. Not everyone qualifies. Individual results vary.
           </p>
         </div>
@@ -1863,8 +1864,7 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3">
-              <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-12 w-auto shrink-0" />
-              <div className="font-sans text-2xl font-black tracking-tight text-[#103942] sm:text-3xl">Chubby No More</div>
+              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-14 w-auto shrink-0 md:h-16" />
             </div>
 
             <p className="mt-4 max-w-xs text-sm text-[#103942]/70">
@@ -2016,11 +2016,11 @@ const questionSteps: QuestionStep[] = [
                 }}
                 aria-invalid={showError || undefined}
                 aria-describedby={showError ? "q-current-weight-err" : undefined}
-                className="w-full rounded-2xl border border-[#E1E7E8] bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
+                className="w-full rounded-2xl border border-[#103942]/12 bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
               />
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#58747B]"
+                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#103942]/70"
               >
                 lbs
               </span>
@@ -2028,7 +2028,7 @@ const questionSteps: QuestionStep[] = [
             {showError && (
               <p
                 id="q-current-weight-err"
-                className="mt-2 text-sm text-[#B4442A]"
+                className="mt-2 text-sm text-[#B00020]"
               >
                 Please enter your current weight.
               </p>
@@ -2059,7 +2059,7 @@ const questionSteps: QuestionStep[] = [
           >
             Are you currently taking a GLP-1 medication?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
+          <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
             Examples may include semaglutide, tirzepatide, Wegovy, Zepbound,
             Ozempic, or Mounjaro.
           </p>
@@ -2080,14 +2080,14 @@ const questionSteps: QuestionStep[] = [
                   className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left text-base font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] ${
                     selected
                       ? "border-[#103942] bg-[#103942] text-white"
-                      : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
+                      : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]"
                   }`}
                 >
                   <span>{o.label}</span>
                   <span
                     aria-hidden="true"
                     className={`grid h-5 w-5 place-items-center rounded-full border-2 ${
-                      selected ? "border-white" : "border-[#D3DBDD]"
+                      selected ? "border-white" : "border-[#103942]/30"
                     }`}
                   >
                     {selected && (
@@ -2133,7 +2133,7 @@ const questionSteps: QuestionStep[] = [
             className={`flex cursor-pointer items-start gap-3 rounded-2xl border px-4 py-3.5 text-left text-sm leading-relaxed transition sm:text-base ${
               checked
                 ? "border-[#103942] bg-[#F5F5F7] text-[#103942]"
-                : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
+                : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]"
             }`}
           >
             <input
@@ -2147,7 +2147,7 @@ const questionSteps: QuestionStep[] = [
               className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 ${
                 checked
                   ? "border-[#103942] bg-[#103942] text-white"
-                  : "border-[#D3DBDD] bg-white"
+                  : "border-[#103942]/30 bg-white"
               }`}
             >
               {checked && (
@@ -2174,14 +2174,14 @@ const questionSteps: QuestionStep[] = [
           >
             Do any of the following apply to you?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
+          <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
             Select all that apply.
           </p>
           <div className="mt-6 flex flex-col gap-2.5">
             {HEALTH_OPTIONS.map((opt) => (
               <Row key={opt} opt={opt} />
             ))}
-            <div className="mt-2 border-t border-[#E1E7E8] pt-2.5">
+            <div className="mt-2 border-t border-[#103942]/12 pt-2.5">
               <Row opt={HEALTH_NONE} />
             </div>
           </div>
@@ -2399,13 +2399,13 @@ function QualifyModal() {
           type="button"
           onClick={requestClose}
           aria-label="Close questionnaire"
-          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E1E7E8] bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#103942]/12 bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           <span aria-hidden="true">✕</span>
         </button>
 
         {/* Header + progress */}
-        <div className="border-b border-[#E1E7E8] px-6 pt-6 pb-4 sm:px-8">
+        <div className="border-b border-[#103942]/12 px-6 pt-6 pb-4 sm:px-8">
           <span className="font-serif text-[20px] font-bold text-[#103942]">
             ChubbyNoMore
           </span>
@@ -2483,7 +2483,7 @@ function IntroScreen({
       >
         See whether you may be a fit for treatment
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
         Answer a few initial questions to help us determine the appropriate
         next step. A licensed provider must review your complete health
         information before any treatment can be prescribed.
@@ -2507,7 +2507,7 @@ function IntroScreen({
         </button>
       </div>
 
-      <p className="mt-6 text-xs leading-relaxed text-[#58747B]">
+      <p className="mt-6 text-xs leading-relaxed text-[#103942]/70">
         This initial questionnaire does not guarantee approval or a
         prescription.
       </p>
@@ -2548,7 +2548,7 @@ function OutcomeScreen({
       >
         {heading}
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
         {body}
       </p>
 
@@ -2597,7 +2597,7 @@ function ModalNav({
         <button
           type="button"
           onClick={onBack}
-          className="rounded-full border border-[#E1E7E8] bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+          className="rounded-full border border-[#103942]/12 bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           ← Back
         </button>
@@ -2666,10 +2666,10 @@ function WhoNotFor() {
     "Age eligibility varies by medication and program availability.",
   ];
   return (
-    <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
+    <section className="bg-[#F5F5F7] px-6 py-16 md:py-20">
       <div className="mx-auto max-w-[1100px]">
         <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]/70">
             Safety first
           </div>
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#103942] md:text-[48px]">
@@ -2684,7 +2684,7 @@ function WhoNotFor() {
           <ul className="divide-y divide-[#103942]/10">
             {items.map((item) => (
               <li key={item} className="flex gap-4 py-5 md:py-6">
-                <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#B84B4B]" />
+                <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#42D1C3]" />
                 <span className="text-[15px] leading-relaxed text-[#103942] md:text-[16px]">
                   {item}
                 </span>

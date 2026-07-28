@@ -146,7 +146,7 @@ function MedicationDetail() {
         <ul className="grid gap-3">
           {med.notFor.map((c) => (
             <li key={c} className="flex gap-3 text-[15px] leading-relaxed">
-              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#B84B4B]" />
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#B00020]" />
               <span>{c}</span>
             </li>
           ))}
@@ -185,7 +185,7 @@ function MedicationDetail() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#B84B4B]">Serious (call your doctor)</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#B00020]">Serious (call your doctor)</h3>
             <ul className="mt-3 space-y-2 text-[15px]">
               {med.sideEffects.serious.map((s) => (
                 <li key={s}>· {s}</li>
@@ -214,7 +214,7 @@ function MedicationDetail() {
       </Section>
 
       <Section id="faqs" title="Common questions">
-        <div className="divide-y divide-[#E1E7E8] border-y border-[#E1E7E8]">
+        <div className="divide-y divide-[#103942]/12 border-y border-[#103942]/12">
           {med.faqs.map((f) => (
             <details key={f.q} className="group py-4">
               <summary className="flex cursor-pointer items-center justify-between font-serif text-lg">
@@ -222,7 +222,7 @@ function MedicationDetail() {
                 <span aria-hidden className="text-xl group-open:hidden">+</span>
                 <span aria-hidden className="hidden text-xl group-open:inline">−</span>
               </summary>
-              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#58747B]">{f.a}</p>
+              <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-[#103942]/70">{f.a}</p>
             </details>
           ))}
         </div>
@@ -288,7 +288,7 @@ function Section({
   return (
     <section
       id={id}
-      className={`px-6 py-12 ${tone === "warn" ? "bg-[#FBF3F0]" : "bg-white"}`}
+      className={`px-6 py-12 ${tone === "warn" ? "bg-[#F5F5F7]" : "bg-white"}`}
     >
       <div className="mx-auto max-w-4xl">
         <h2 className="font-serif text-2xl leading-tight text-[#103942] md:text-3xl">{title}</h2>
