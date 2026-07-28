@@ -11,7 +11,8 @@ import ctaImg from "@/assets/cta.jpg";
 import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
 import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
-import cnmLogoAsset from "@/assets/cnm-logo.png.asset.json";
+import cnmMarkAsset from "@/assets/cnm-mark.png.asset.json";
+import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
 import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
@@ -221,7 +222,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex min-w-0 items-center gap-3 sm:gap-6 lg:gap-10">
           <a href="/" aria-label="Chubby No More home" className="flex shrink-0 items-center py-1">
-            <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
+            <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
           </a>
           <nav className="hidden items-center gap-6 md:flex lg:gap-10">
             {navLinks.map((l) => (
@@ -268,7 +269,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           >
             <div className="flex items-center justify-between gap-3">
               <a href="/" aria-label="Chubby No More home" onClick={() => setMenuOpen(false)} className="flex shrink-0 items-center py-1">
-                <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
+                <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
               </a>
               <button
                 type="button"
@@ -1863,8 +1864,7 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3">
-              <img src={cnmLogoAsset.url} alt="Chubby No More" className="h-12 w-auto shrink-0" />
-              <div className="font-sans text-2xl font-black tracking-tight text-[#103942] sm:text-3xl">Chubby No More</div>
+              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-12 w-auto shrink-0" />
             </div>
 
             <p className="mt-4 max-w-xs text-sm text-[#103942]/70">
@@ -2028,7 +2028,7 @@ const questionSteps: QuestionStep[] = [
             {showError && (
               <p
                 id="q-current-weight-err"
-                className="mt-2 text-sm text-[#B4442A]"
+                className="mt-2 text-sm text-[#B00020]"
               >
                 Please enter your current weight.
               </p>
@@ -2666,10 +2666,10 @@ function WhoNotFor() {
     "Age eligibility varies by medication and program availability.",
   ];
   return (
-    <section className="bg-[#FBF3F0] px-6 py-16 md:py-20">
+    <section className="bg-[#F5F5F7] px-6 py-16 md:py-20">
       <div className="mx-auto max-w-[1100px]">
         <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B84B4B]">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]/70">
             Safety first
           </div>
           <h2 className="mt-4 font-serif text-[36px] leading-[1.05] tracking-tight text-[#103942] md:text-[48px]">
@@ -2684,7 +2684,7 @@ function WhoNotFor() {
           <ul className="divide-y divide-[#103942]/10">
             {items.map((item) => (
               <li key={item} className="flex gap-4 py-5 md:py-6">
-                <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#B84B4B]" />
+                <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#42D1C3]" />
                 <span className="text-[15px] leading-relaxed text-[#103942] md:text-[16px]">
                   {item}
                 </span>
