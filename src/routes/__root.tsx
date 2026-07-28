@@ -92,11 +92,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico?v=4", sizes: "any" },
-      { rel: "icon", type: "image/png", href: "/favicon-48x48.png?v=4", sizes: "48x48" },
-      { rel: "icon", type: "image/png", href: "/favicon-96x96.png?v=4", sizes: "96x96" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=4" },
+      { rel: "icon", href: "/favicon.ico?v=5", sizes: "any" },
+      { rel: "icon", type: "image/png", href: "/favicon-48x48.png?v=5", sizes: "48x48" },
+      { rel: "icon", type: "image/png", href: "/favicon-96x96.png?v=5", sizes: "96x96" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=5" },
       { rel: "manifest", href: "/site.webmanifest" },
+
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
