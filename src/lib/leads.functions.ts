@@ -49,7 +49,7 @@ export const createLead = createServerFn({ method: "POST" })
         email: data.email.toLowerCase(),
         phone: data.phone,
         state: data.state,
-        funnel_source: data.funnelSource ?? "homepage_quiz",
+        funnel_source: data.funnelSource ?? "website_intake",
         referring_page: data.referringPage ?? null,
         utm_source: data.utm?.source ?? null,
         utm_medium: data.utm?.medium ?? null,
@@ -61,6 +61,11 @@ export const createLead = createServerFn({ method: "POST" })
         operational_consent_at: now,
         marketing_consent: data.marketingConsent,
         marketing_consent_at: data.marketingConsent ? now : null,
+        marketing_sync_provider: data.marketingConsent ? "launchlist" : null,
+        marketing_sync_status: data.marketingConsent
+          ? "pending"
+          : "not_requested",
+        marketing_sync_attempted_at: data.marketingConsent ? now : null,
         consent_text_version: data.consentTextVersion,
         last_activity_at: now,
       })
@@ -72,29 +77,64 @@ export const createLead = createServerFn({ method: "POST" })
       throw new Error("We couldn't save your information. Please try again.");
     }
 
-    // Forward marketing-safe contact fields to LaunchList. Never blocks the
-    // funnel: a LaunchList failure is logged, not surfaced to the user.
-    let launchList: { forwarded: boolean } = { forwarded: false };
-    try {
-      const { sendToLaunchList } = await import("@/lib/launchlist.server");
-      launchList = await sendToLaunchList({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email.toLowerCase(),
-        phone: data.phone,
-        state: data.state,
-        utm: data.utm,
-      });
-    } catch (err) {
-      console.error(
-        "[launchlist] unexpected error",
-        err instanceof Error ? err.message : "unknown",
-      );
+    const leadId = row.id as string;
+
+    // Marketing sync is strictly opt-in and never blocks the funnel.
+    let marketingSyncStatus:
+      | "not_requested"
+      | "pending"
+      | "synced"
+      | "failed" = "not_requested";
+
+    if (data.marketingConsent) {
+      marketingSyncStatus = "pending";
+      let errorCode: string | null = null;
+      try {
+        const { sendToLaunchList } = await import("@/lib/launchlist.server");
+        const result = await sendToLaunchList({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email.toLowerCase(),
+          phone: data.phone,
+          marketingConsentAt: now,
+          consentTextVersion: data.consentTextVersion,
+          source: "website_intake",
+        });
+        if (result.forwarded) {
+          marketingSyncStatus = "synced";
+        } else {
+          marketingSyncStatus = "failed";
+          errorCode = result.errorCode;
+        }
+      } catch (err) {
+        marketingSyncStatus = "failed";
+        errorCode = "unexpected_error";
+        console.error(
+          "[launchlist] unexpected error",
+          err instanceof Error ? err.message : "unknown",
+        );
+      }
+
+      const completedAt = new Date().toISOString();
+      const { error: syncError } = await supabaseAdmin
+        .from("leads")
+        .update({
+          marketing_sync_provider: "launchlist",
+          marketing_sync_status: marketingSyncStatus,
+          marketing_sync_attempted_at: now,
+          marketing_sync_completed_at:
+            marketingSyncStatus === "synced" ? completedAt : null,
+          marketing_sync_error_code: errorCode,
+        })
+        .eq("id", leadId);
+      if (syncError) {
+        console.error("[leads] sync status update failed", syncError.message);
+      }
     }
 
     return {
-      leadId: row.id as string,
+      leadId,
       funnelStatus: "contact_captured",
-      launchListForwarded: launchList.forwarded,
+      marketingSyncStatus,
     };
   });
