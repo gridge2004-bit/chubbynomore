@@ -2126,8 +2126,6 @@ const HEALTH_ROUTING: {
 
 // TODO: Replace these placeholders with the confirmed provider-booking
 // and full-intake destinations once those systems are connected.
-const PROVIDER_BOOKING_URL_PLACEHOLDER = "#provider-booking-placeholder";
-const FULL_INTAKE_URL_PLACEHOLDER = "#full-intake-placeholder";
 
 const questionSteps: QuestionStep[] = [
   {
@@ -2451,11 +2449,6 @@ function QualifyModal() {
 
   // Close without the "answers will not be saved" confirm — used from
   // outcome-screen actions where the flow is intentionally complete.
-  const closeNow = () => {
-    setOpen(false);
-    setTimeout(reset, 0);
-  };
-  const reviewAnswers = () => setStep(1);
 
   /* ─────────── QUESTIONNAIRE RESULT (in-memory only) ───────────
      Structured screening result built when the user reaches the
