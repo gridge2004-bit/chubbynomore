@@ -1552,9 +1552,9 @@ function HowItWorks() {
               <div className="aspect-square overflow-hidden rounded-2xl bg-white">
                 <img src={s.img} alt={s.imgAlt} className="h-full w-full object-cover" loading="lazy" />
               </div>
-              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#58747B]">Step {s.n}</div>
+              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#103942]/70">Step {s.n}</div>
               <h3 className="mt-2 font-serif text-2xl text-[#103942]">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#58747B]">{s.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#103942]/70">{s.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -1585,7 +1585,7 @@ function FAQ() {
           </h2>
         </Reveal>
         <div>
-          <div className="divide-y divide-[#E1E7E8] border-y border-[#E1E7E8]">
+          <div className="divide-y divide-[#103942] border-y border-[#103942]">
             {faqs.map((f, i) => {
               const isOpen = openSet.has(i);
               const panelId = `faq-panel-${i}`;
@@ -1614,14 +1614,14 @@ function FAQ() {
                     className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}
                   >
                     <div className="min-h-0">
-                      <p className="max-w-2xl text-sm leading-relaxed text-[#58747B] md:text-base">{f.a}</p>
+                      <p className="max-w-2xl text-sm leading-relaxed text-[#103942]/70 md:text-base">{f.a}</p>
                     </div>
                   </div>
                 </Reveal>
               );
             })}
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-[#58747B] md:text-sm">
+          <p className="mt-6 text-xs leading-relaxed text-[#103942]/70 md:text-sm">
             Prescription treatment requires an online medical evaluation. Not everyone qualifies. Individual results vary.
           </p>
         </div>
@@ -2016,11 +2016,11 @@ const questionSteps: QuestionStep[] = [
                 }}
                 aria-invalid={showError || undefined}
                 aria-describedby={showError ? "q-current-weight-err" : undefined}
-                className="w-full rounded-2xl border border-[#E1E7E8] bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
+                className="w-full rounded-2xl border border-[#103942] bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
               />
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#58747B]"
+                className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-sm font-semibold text-[#103942]/70"
               >
                 lbs
               </span>
@@ -2059,7 +2059,7 @@ const questionSteps: QuestionStep[] = [
           >
             Are you currently taking a GLP-1 medication?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
+          <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
             Examples may include semaglutide, tirzepatide, Wegovy, Zepbound,
             Ozempic, or Mounjaro.
           </p>
@@ -2080,7 +2080,7 @@ const questionSteps: QuestionStep[] = [
                   className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left text-base font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] ${
                     selected
                       ? "border-[#103942] bg-[#103942] text-white"
-                      : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
+                      : "border-[#103942] bg-white text-[#103942] hover:border-[#103942]"
                   }`}
                 >
                   <span>{o.label}</span>
@@ -2133,7 +2133,7 @@ const questionSteps: QuestionStep[] = [
             className={`flex cursor-pointer items-start gap-3 rounded-2xl border px-4 py-3.5 text-left text-sm leading-relaxed transition sm:text-base ${
               checked
                 ? "border-[#103942] bg-[#F5F5F7] text-[#103942]"
-                : "border-[#E1E7E8] bg-white text-[#103942] hover:border-[#103942]"
+                : "border-[#103942] bg-white text-[#103942] hover:border-[#103942]"
             }`}
           >
             <input
@@ -2174,14 +2174,14 @@ const questionSteps: QuestionStep[] = [
           >
             Do any of the following apply to you?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#58747B]">
+          <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
             Select all that apply.
           </p>
           <div className="mt-6 flex flex-col gap-2.5">
             {HEALTH_OPTIONS.map((opt) => (
               <Row key={opt} opt={opt} />
             ))}
-            <div className="mt-2 border-t border-[#E1E7E8] pt-2.5">
+            <div className="mt-2 border-t border-[#103942] pt-2.5">
               <Row opt={HEALTH_NONE} />
             </div>
           </div>
@@ -2399,13 +2399,13 @@ function QualifyModal() {
           type="button"
           onClick={requestClose}
           aria-label="Close questionnaire"
-          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#E1E7E8] bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+          className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full border border-[#103942] bg-white text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           <span aria-hidden="true">✕</span>
         </button>
 
         {/* Header + progress */}
-        <div className="border-b border-[#E1E7E8] px-6 pt-6 pb-4 sm:px-8">
+        <div className="border-b border-[#103942] px-6 pt-6 pb-4 sm:px-8">
           <span className="font-serif text-[20px] font-bold text-[#103942]">
             ChubbyNoMore
           </span>
@@ -2483,7 +2483,7 @@ function IntroScreen({
       >
         See whether you may be a fit for treatment
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
         Answer a few initial questions to help us determine the appropriate
         next step. A licensed provider must review your complete health
         information before any treatment can be prescribed.
@@ -2507,7 +2507,7 @@ function IntroScreen({
         </button>
       </div>
 
-      <p className="mt-6 text-xs leading-relaxed text-[#58747B]">
+      <p className="mt-6 text-xs leading-relaxed text-[#103942]/70">
         This initial questionnaire does not guarantee approval or a
         prescription.
       </p>
@@ -2548,7 +2548,7 @@ function OutcomeScreen({
       >
         {heading}
       </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#58747B] sm:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
         {body}
       </p>
 
@@ -2597,7 +2597,7 @@ function ModalNav({
         <button
           type="button"
           onClick={onBack}
-          className="rounded-full border border-[#E1E7E8] bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+          className="rounded-full border border-[#103942] bg-white px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
         >
           ← Back
         </button>
