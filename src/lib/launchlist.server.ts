@@ -23,7 +23,7 @@ export type LaunchListResult =
 export async function sendToLaunchList(
   contact: LaunchListContact,
 ): Promise<LaunchListResult> {
-  const formKey = process.env.LAUNCHLIST_FORM_KEY;
+  const formKey = process.env.LAUNCHLIST_FORM_KEY?.trim();
   if (!formKey) {
     console.warn("[launchlist] LAUNCHLIST_FORM_KEY not configured; skipping");
     return { forwarded: false, errorCode: "not_configured" };
