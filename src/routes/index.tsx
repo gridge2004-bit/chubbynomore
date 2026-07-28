@@ -14,6 +14,7 @@ import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
 import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
 import cnmMarkAsset from "@/assets/cnm-mark.png.asset.json";
+import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
 import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
@@ -223,7 +224,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:gap-3 sm:px-6 sm:py-4">
         <div className="flex min-w-0 items-center gap-3 sm:gap-6 lg:gap-10">
           <a href="/" aria-label="Chubby No More home" className="flex shrink-0 items-center py-1">
-            <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10 lg:h-12" />
+            <img src={cnmHeaderLogoAsset.url} alt="Chubby No More" className="h-7 w-auto max-w-[150px] object-contain sm:h-8 sm:max-w-[190px] lg:h-9 lg:max-w-none" />
           </a>
           <nav className="hidden items-center gap-6 md:flex lg:gap-10">
             {navLinks.map((l) => (
@@ -270,7 +271,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           >
             <div className="flex items-center justify-between gap-3">
               <a href="/" aria-label="Chubby No More home" onClick={() => setMenuOpen(false)} className="flex shrink-0 items-center py-1">
-                <img src={cnmMarkAsset.url} alt="Chubby No More" className="h-9 w-auto object-contain sm:h-10" />
+                <img src={cnmHeaderLogoAsset.url} alt="Chubby No More" className="h-7 w-auto max-w-[150px] object-contain sm:h-8 sm:max-w-[190px]" />
               </a>
               <button
                 type="button"
