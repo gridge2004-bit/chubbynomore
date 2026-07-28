@@ -109,7 +109,7 @@ function MedicationDetail() {
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="/#cta"
+                href="/intake"
                 className="rounded-full bg-[#103942] px-6 py-3 text-sm font-semibold text-white hover:bg-[#42D1C3] hover:text-[#103942]"
               >
                 Check If I Qualify
@@ -262,7 +262,7 @@ function MedicationDetail() {
             prescribes if it's safe and appropriate for you.
           </p>
           <a
-            href="/#cta"
+            href="/intake"
             className="mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-semibold text-[#103942]"
           >
             Check If I Qualify — Free &amp; Fast
