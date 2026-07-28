@@ -13,7 +13,6 @@ import ctaImg from "@/assets/cta.jpg";
 import cnmSemaVialsAsset from "@/assets/cnm-sema-vials.jpg.asset.json";
 import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
-import cnmMarkAsset from "@/assets/cnm-mark.png.asset.json";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
