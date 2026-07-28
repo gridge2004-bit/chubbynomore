@@ -312,11 +312,12 @@ export function ContactCaptureStep({
         </label>
       </div>
 
+      {/* TODO: swap placeholder legal URLs for the real pages once published. */}
       <p className="mt-5 text-xs leading-relaxed text-[#103942]/70">
         By continuing you agree to our{" "}
-        <a href="/privacy" className="underline underline-offset-2">Privacy Policy</a>,{" "}
-        <a href="/terms" className="underline underline-offset-2">Terms of Use</a>, and{" "}
-        <a href="/telehealth-consent" className="underline underline-offset-2">Telehealth Consent</a>.
+        <a href="/privacy-policy-placeholder" className="underline underline-offset-2">Privacy Policy</a>,{" "}
+        <a href="/terms-of-use-placeholder" className="underline underline-offset-2">Terms of Use</a>, and{" "}
+        <a href="/telehealth-consent-placeholder" className="underline underline-offset-2">Telehealth Consent</a>.
       </p>
 
       {formError && (
