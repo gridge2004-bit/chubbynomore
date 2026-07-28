@@ -133,10 +133,10 @@ const faqs = [
     a: (
       <>
         Your health information is collected through the private online intake and used to evaluate and coordinate your care. It should only be shared with the providers, pharmacies, and service partners involved in delivering that care, as permitted by applicable law and the Chubby No More Privacy Policy.{" "}
-        {/* TODO: Replace /privacy-policy-placeholder with the actual privacy-policy URL once it exists. */}
-        <a href="/privacy-policy-placeholder" className="underline hover:no-underline">
+        <a href="/privacy-policy" className="underline hover:no-underline">
           Read our Privacy Policy
         </a>
+
       </>
     ),
   },
