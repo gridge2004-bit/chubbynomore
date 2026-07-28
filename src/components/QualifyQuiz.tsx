@@ -602,7 +602,7 @@ export function QualifyQuiz() {
             <ResultCard
               outcome={outcome}
               onJoin={() => setShowContact(true)}
-              onBack={underAge ? undefined : goBack}
+              onBack={underAge ? () => setAnswer("is_adult", undefined) : goBack}
             />
           )}
 
