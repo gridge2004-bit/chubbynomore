@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { Confetti } from "@/components/Confetti";
 import { createLead, CONSENT_TEXT_VERSION } from "@/lib/leads.functions";
 
 const MINT = "#42D1C3";
@@ -49,6 +50,7 @@ export function ContactCaptureStep({
   onBack: () => void;
   onSaved: (leadId: string) => void;
 }) {
+  const [saved, setSaved] = useState<{ leadId: string } | null>(null);
   const submitLead = useServerFn(createLead);
   const [values, setValues] = useState({
     firstName: "",
@@ -62,6 +64,13 @@ export function ContactCaptureStep({
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const errorRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (formError && errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [formError]);
 
   const set = (key: keyof typeof values, value: string) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -86,6 +95,7 @@ export function ContactCaptureStep({
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) return;
+    if (submitting || saved) return; // prevent duplicate submissions
 
     setSubmitting(true);
     try {
@@ -103,7 +113,7 @@ export function ContactCaptureStep({
           operationalConsent: true as const,
           marketingConsent: marketing,
           consentTextVersion: CONSENT_TEXT_VERSION,
-          funnelSource: "homepage_quiz",
+          funnelSource: "website_intake",
           referringPage:
             typeof document !== "undefined"
               ? document.referrer || window.location.pathname
@@ -118,16 +128,64 @@ export function ContactCaptureStep({
         },
       });
       if (!res?.leadId) throw new Error("No lead id returned");
-      onSaved(res.leadId);
+      setSaved({ leadId: res.leadId });
     } catch {
       // Keep every entered value in state so nothing is lost.
       setFormError(
-        "We couldn't save your information. Please check your connection and try again."
+        "We couldn\u2019t save your information. Your entries are still here. Please try again."
       );
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (saved) {
+    return (
+      <div className="relative">
+        <Confetti />
+        <div className="relative py-2 text-center">
+          <div
+            aria-hidden="true"
+            className="mx-auto flex h-14 w-14 animate-[cnm-pop_420ms_ease-out] items-center justify-center rounded-full"
+            style={{ backgroundColor: MINT }}
+          >
+            <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="#103942" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 12.5l5 5L20 6.5" />
+            </svg>
+          </div>
+          <p
+            className="mt-5 text-[11px] font-bold uppercase tracking-[0.16em]"
+            style={{ color: MINT }}
+          >
+            Progress saved
+          </p>
+          <h2
+            id="qualify-modal-title"
+            className="mt-2 font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
+          >
+            Great start, {values.firstName.trim()}.
+          </h2>
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#103942]/70">
+            Your information has been securely saved. You\u2019re ready to continue
+            your health assessment.
+          </p>
+          <div role="status" aria-live="polite" className="sr-only">
+            Your information has been securely saved.
+          </div>
+          <button
+            type="button"
+            onClick={() => onSaved(saved.leadId)}
+            style={{ backgroundColor: MINT }}
+            className="relative z-10 mt-7 inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-[#103942] transition hover:opacity-90 sm:w-auto"
+          >
+            Continue my assessment
+          </button>
+        </div>
+        <style>{`@keyframes cnm-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion: reduce){.animate-\\[cnm-pop_420ms_ease-out\\]{animation:none}}`}</style>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={onSubmit} noValidate>
@@ -322,10 +380,12 @@ export function ContactCaptureStep({
 
       {formError && (
         <div
+          ref={errorRef}
           role="alert"
+          aria-live="assertive"
           className="mt-5 rounded-2xl border border-[#103942]/20 bg-[#F5F5F7] px-4 py-3 text-sm font-medium text-[#103942]"
         >
-          {formError} Your answers have been kept — press Continue to retry.
+          {formError}
         </div>
       )}
 
@@ -344,7 +404,17 @@ export function ContactCaptureStep({
           style={{ backgroundColor: submitting ? undefined : MINT }}
           className="inline-flex items-center justify-center rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold text-[#103942] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {submitting ? "Saving…" : "Continue"}
+          {submitting ? (
+            <>
+              <span
+                aria-hidden="true"
+                className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-[#103942]/30 border-t-[#103942]"
+              />
+              Saving your progress…
+            </>
+          ) : (
+            "Save and continue"
+          )}
         </button>
       </div>
     </form>
