@@ -176,7 +176,6 @@ function Index() {
       <FinalCTA />
       <FAQ />
       <Footer />
-      <QualifyModal />
     </div>
   );
 }
@@ -238,7 +237,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           </nav>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <a href="#cta" className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:px-7 sm:py-3.5 sm:text-sm">
+          <a href="/intake" className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:px-7 sm:py-3.5 sm:text-sm">
             <span className="sm:hidden">See if I qualify</span>
             <span className="hidden sm:inline">See if I qualify — free</span>
           </a>
@@ -294,7 +293,7 @@ function Nav({ scrolled }: { scrolled: boolean }) {
               ))}
             </nav>
             <a
-              href="#cta"
+              href="/intake"
               onClick={() => setMenuOpen(false)}
               className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3]"
             >
@@ -323,7 +322,7 @@ function Hero() {
         </p>
         <div>
           <a
-            href="#cta"
+            href="/intake"
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See if I qualify — free
@@ -1006,7 +1005,7 @@ function EmotionalTransformation() {
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {heroTiles.map((t, i) => (
             <Reveal key={t.id} delay={i * 100}>
-              <a href="#cta" className="block h-full" aria-label={`Start intake form for ${t.title}`}>
+              <a href="/intake" className="block h-full" aria-label={`Start intake form for ${t.title}`}>
                 <HeroTile tile={t} />
               </a>
             </Reveal>
@@ -1159,7 +1158,7 @@ function DetailedProductCard({
 
           <button
             type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+            onClick={() => window.location.assign("/intake")}
             className="inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition active:bg-[#42D1C3] active:text-[#103942]"
           >
             See if I qualify — free
@@ -1250,7 +1249,7 @@ function DetailedProductCard({
             <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
               <button
                 type="button"
-                onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+                onClick={() => window.location.assign("/intake")}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] lg:flex-none"
               >
                 See if I qualify — free
@@ -1351,7 +1350,7 @@ function MedicationOptions() {
         <div className="mt-8 flex flex-col items-center gap-3 text-center">
           <button
             type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-qualify-modal"))}
+            onClick={() => window.location.assign("/intake")}
             className="inline-flex items-center justify-center rounded-full bg-[#103942] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See which treatment may be right for me
@@ -1407,7 +1406,7 @@ function SwitchingCare() {
               If prescribed, medication is dispensed by a licensed U.S. pharmacy and delivered discreetly to your door where available.
             </p>
             <a
-              href="#cta"
+              href="/intake"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#103942] bg-white px-6 py-3.5 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] hover:text-[#103942]"
             >
               Switch and keep my momentum →
@@ -1539,7 +1538,7 @@ function WeightLossScale() {
 
         <div className="mt-8 text-center">
           <a
-            href="#cta"
+            href="/intake"
             className="inline-flex items-center justify-center rounded-full bg-[#42D1C3] px-8 py-4 text-base font-semibold text-[#103942] shadow-sm transition hover:bg-white hover:text-[#103942] md:px-14"
           >
             See what's realistic for me — free
@@ -1692,7 +1691,7 @@ function WhyChoose() {
         </div>
 
         <Reveal delay={400} className="mt-12 text-center md:mt-14">
-          <PillButton href="#cta">See if I qualify — free</PillButton>
+          <PillButton href="/intake">See if I qualify — free</PillButton>
         </Reveal>
       </div>
     </section>
@@ -1720,7 +1719,7 @@ function HowItWorks() {
           ))}
         </div>
         <Reveal className="mt-14 text-center">
-          <PillButton href="#cta">See if I qualify — free</PillButton>
+          <PillButton href="/intake">See if I qualify — free</PillButton>
         </Reveal>
       </div>
     </section>
@@ -1982,7 +1981,7 @@ function FinalCTA() {
     "Availability varies by state",
   ];
   return (
-    <section id="cta" className="w-full bg-[#F5F5F7]">
+    <section id="start" className="w-full bg-[#F5F5F7]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
           <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
@@ -2002,7 +2001,7 @@ function FinalCTA() {
             ))}
           </ul>
           <div className="mt-9">
-            <PillButton href="#cta">See if I qualify — free</PillButton>
+            <PillButton href="/intake">See if I qualify — free</PillButton>
           </div>
         </div>
       </div>
@@ -2055,7 +2054,7 @@ function Footer() {
 /* ───────────────── QUALIFY QUESTIONNAIRE (framework) ─────────────────
    Multi-step screening questionnaire. Currently only the intro screen is
    implemented — question steps will be added in follow-up prompts.
-   Any anchor on the page pointing to href="#cta" opens this flow, and the
+   Any anchor on the page pointing to href="/intake" opens this flow, and the
    "open-qualify-modal" window event does the same.
 ------------------------------------------------------------------------- */
 
@@ -2387,7 +2386,7 @@ function QualifyModal() {
 
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      const anchor = target?.closest('a[href="#cta"]') as HTMLAnchorElement | null;
+      const anchor = target?.closest('a[href="/intake"]') as HTMLAnchorElement | null;
       if (!anchor) return;
       e.preventDefault();
       openQuestionnaire();
@@ -2745,7 +2744,7 @@ function WhoQualifies() {
         </Reveal>
         <Reveal delay={140} className="mt-8">
           <a
-            href="#cta"
+            href="/intake"
             className="inline-flex rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold text-white hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See if I qualify — free

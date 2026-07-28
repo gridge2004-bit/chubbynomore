@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 
+const IntakeRoute = IntakeRouteImport.update({
+  id: '/intake',
+  path: '/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -24,43 +30,53 @@ const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
-  id: '/intake/clinical',
-  path: '/intake/clinical',
-  getParentRoute: () => rootRouteImport,
+  id: '/clinical',
+  path: '/clinical',
+  getParentRoute: () => IntakeRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/intake': typeof IntakeRouteWithChildren
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/intake/clinical' | '/medications/$slug'
+  fullPaths: '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/intake/clinical' | '/medications/$slug'
-  id: '__root__' | '/' | '/intake/clinical' | '/medications/$slug'
+  to: '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
+  id: '__root__' | '/' | '/intake' | '/intake/clinical' | '/medications/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  IntakeClinicalRoute: typeof IntakeClinicalRoute
+  IntakeRoute: typeof IntakeRouteWithChildren
   MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/intake': {
+      id: '/intake'
+      path: '/intake'
+      fullPath: '/intake'
+      preLoaderRoute: typeof IntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -77,17 +93,28 @@ declare module '@tanstack/react-router' {
     }
     '/intake/clinical': {
       id: '/intake/clinical'
-      path: '/intake/clinical'
+      path: '/clinical'
       fullPath: '/intake/clinical'
       preLoaderRoute: typeof IntakeClinicalRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof IntakeRoute
     }
   }
 }
 
+interface IntakeRouteChildren {
+  IntakeClinicalRoute: typeof IntakeClinicalRoute
+}
+
+const IntakeRouteChildren: IntakeRouteChildren = {
+  IntakeClinicalRoute: IntakeClinicalRoute,
+}
+
+const IntakeRouteWithChildren =
+  IntakeRoute._addFileChildren(IntakeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  IntakeClinicalRoute: IntakeClinicalRoute,
+  IntakeRoute: IntakeRouteWithChildren,
   MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
