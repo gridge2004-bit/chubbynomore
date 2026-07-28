@@ -1438,16 +1438,16 @@ function WeightLossScale() {
   const tabOff = "bg-transparent text-white/75 hover:text-white";
 
   return (
-    <section className="bg-[#F5F5F7] px-6 pb-20 md:pb-24">
-      <div className="mx-auto max-w-3xl rounded-3xl bg-[#103942] p-8 text-white shadow-sm md:p-14">
-        <h2 className="font-serif text-[36px] leading-[1.1] tracking-tight md:text-[52px]">
+    <section className="bg-[#F5F5F7] px-4 pb-14 sm:px-6 md:pb-24">
+      <div className="mx-auto max-w-3xl rounded-3xl bg-[#103942] p-5 text-white shadow-sm sm:p-8 md:p-14">
+        <h2 className="font-serif text-[24px] leading-[1.12] tracking-tight sm:text-[36px] md:text-[52px]">
           What could {potentialLoss} fewer pounds change for you?
         </h2>
-        <p className="mt-5 text-[15px] text-white/80 md:text-base">
-          More confidence in your clothes. More energy for the people and moments that matter. A lighter version of everyday life.
+        <p className="mt-3 text-[13px] leading-relaxed text-white/80 sm:mt-5 sm:text-[15px] md:text-base">
+          More confidence in your clothes. More energy for the people and moments that matter.
         </p>
 
-        <div className="mt-8" role="tablist" aria-label="Trial average">
+        <div className="mt-4 sm:mt-8" role="tablist" aria-label="Trial average">
           <div className="mx-auto flex max-w-md gap-1 rounded-full border border-white/15 bg-white/5 p-1">
             <button
               type="button"
@@ -1470,16 +1470,16 @@ function WeightLossScale() {
           </div>
         </div>
 
-        <div className="mt-10 text-center">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+        <div className="mt-5 text-center sm:mt-10">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/85 sm:text-[11px]">
             Your current weight (lbs):
           </div>
-          <div className="mt-3 font-serif text-[72px] leading-none md:text-[96px]">
+          <div className="mt-1.5 font-serif text-[44px] leading-none sm:mt-3 sm:text-[72px] md:text-[96px]">
             {weight}
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-4 sm:mt-8">
           <input
             type="range"
             min={120}
@@ -1492,19 +1492,19 @@ function WeightLossScale() {
           />
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-10">
+        <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:mt-12 sm:flex sm:flex-col sm:justify-center sm:gap-8 md:flex-row md:gap-10">
           <div className="text-center md:min-w-[140px]">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+            <div className="text-[9px] font-semibold uppercase leading-tight tracking-[0.14em] text-white/85 sm:text-[11px] sm:tracking-[0.18em]">
               Your starting point
             </div>
-            <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
-              {weight} <span className="text-[24px] md:text-[28px]">lbs</span>
+            <div className="mt-1 font-serif text-[30px] leading-none sm:mt-2 sm:text-[48px] md:text-[64px]">
+              {weight} <span className="text-[15px] sm:text-[24px] md:text-[28px]">lbs</span>
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-3">
+          <div className="flex flex-col items-center gap-1.5 sm:gap-3">
             <svg
-              className="h-6 w-14 text-white/60 md:h-8 md:w-20"
+              className="hidden h-6 w-14 text-white/60 sm:block md:h-8 md:w-20"
               viewBox="0 0 80 28"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -1518,40 +1518,41 @@ function WeightLossScale() {
                 strokeLinejoin="round"
               />
             </svg>
-            <div className="rounded-full bg-white px-5 py-2.5 text-center font-button text-[15px] font-extrabold text-[#103942] shadow-md">
+            <div className="whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-center font-button text-[12px] font-extrabold text-[#103942] shadow-md sm:px-5 sm:py-2.5 sm:text-[15px]">
               −{potentialLoss} lbs
             </div>
           </div>
 
           <div className="text-center md:min-w-[140px]">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+            <div className="text-[9px] font-semibold uppercase leading-tight tracking-[0.14em] text-white/85 sm:text-[11px] sm:tracking-[0.18em]">
               {endingLabel}
             </div>
-            <div className="mt-2 font-serif text-[48px] leading-none md:text-[64px]">
-              {illustrativeWeight} <span className="text-[24px] md:text-[28px]">lbs</span>
+            <div className="mt-1 font-serif text-[30px] leading-none sm:mt-2 sm:text-[48px] md:text-[64px]">
+              {illustrativeWeight} <span className="text-[15px] sm:text-[24px] md:text-[28px]">lbs</span>
             </div>
           </div>
         </div>
 
-        <p className="mt-10 text-center text-[15px] text-white/90 md:text-base">
+        <p className="mt-5 hidden text-center text-[15px] text-white/90 sm:block md:text-base">
           Imagine what carrying {potentialLoss} fewer pounds could mean for your confidence, energy, and everyday movement.
         </p>
 
-        <div className="mt-8 text-center">
+        <div className="mt-5 text-center sm:mt-8">
           <a
             href="/intake"
-            className="inline-flex items-center justify-center rounded-full bg-[#42D1C3] px-8 py-4 text-base font-semibold text-[#103942] shadow-sm transition hover:bg-white hover:text-[#103942] md:px-14"
+            className="inline-flex w-full items-center justify-center rounded-full bg-[#42D1C3] px-6 py-3 text-[15px] font-semibold text-[#103942] shadow-sm transition hover:bg-white hover:text-[#103942] sm:w-auto sm:px-8 sm:py-4 sm:text-base md:px-14"
           >
             See what's realistic for me — free
           </a>
-          <p className="mt-3 text-[13px] text-white/70">
-            Free eligibility check. Takes about 60 seconds. No charge if you don’t qualify.
+          <p className="mt-2 text-[12px] text-white/70 sm:mt-3 sm:text-[13px]">
+            Free eligibility check. Takes about 60 seconds.
           </p>
         </div>
 
-        <p className="mx-auto mt-12 max-w-xl text-center text-[13px] leading-relaxed text-white/70">
+        <p className="mx-auto mt-5 max-w-xl text-center text-[11px] leading-relaxed text-white/70 sm:mt-12 sm:text-[13px]">
           This is an educational illustration of clinical-trial averages ({trialLabel}), not a prediction or promise of personal results. Individual results vary. Weight loss is not guaranteed. These results do not establish the safety, effectiveness, or quality of compounded medications.
         </p>
+
       </div>
     </section>
   );
