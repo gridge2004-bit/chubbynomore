@@ -166,7 +166,7 @@ export function ContactCaptureStep({
             Great start, {values.firstName.trim()}.
           </h2>
           <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#103942]/70">
-            Your information has been securely saved. You\u2019re ready to continue
+            Your information has been securely saved. You’re ready to continue
             your health assessment.
           </p>
           <div role="status" aria-live="polite" className="sr-only">
