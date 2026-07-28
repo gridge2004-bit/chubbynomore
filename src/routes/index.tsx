@@ -1,7 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Info, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
+import { ContactCaptureStep } from "@/components/ContactCaptureStep";
 import heroImg from "@/assets/hero.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
@@ -2353,6 +2354,7 @@ const questionSteps: QuestionStep[] = [
 function QualifyModal() {
   const [open, setOpen] = useState(false);
   // step 0 = intro; 1..questionSteps.length = questions
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, unknown>>({});
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -2613,10 +2615,20 @@ function QualifyModal() {
           )}
 
           {isOutcome && (
-            <OutcomeScreen
-              variant={needsReview ? "review" : "continue"}
-              onReview={reviewAnswers}
-              onClose={closeNow}
+            <ContactCaptureStep
+              onBack={goBack}
+              onSaved={(leadId) => {
+                // Lead ID travels via sessionStorage — never the URL.
+                // No quiz / health answers are stored or passed along.
+                try {
+                  sessionStorage.setItem("cnm_lead_id", leadId);
+                } catch {
+                  /* storage unavailable — continue anyway */
+                }
+                setOpen(false);
+                setTimeout(reset, 0);
+                navigate({ to: "/intake/clinical" });
+              }}
             />
           )}
         </div>
@@ -2670,69 +2682,6 @@ function IntroScreen({
         This initial questionnaire does not guarantee approval or a
         prescription.
       </p>
-    </div>
-  );
-}
-
-function OutcomeScreen({
-  variant,
-  onReview,
-  onClose,
-}: {
-  variant: "review" | "continue";
-  onReview: () => void;
-  onClose: () => void;
-}) {
-  const isReview = variant === "review";
-  const heading = isReview
-    ? "Let’s find the right next step"
-    : "You’re ready to continue";
-  const body = isReview
-    ? "One or more of your answers requires additional review before you continue. This does not necessarily mean treatment is unavailable. A licensed provider can review your health history and help determine which options may be appropriate for you."
-    : "Your initial answers did not identify one of the listed issues requiring additional review. This is not a medical approval and does not guarantee a prescription. A licensed provider must still review your complete health history and determine whether treatment is appropriate.";
-  const primaryLabel = isReview
-    ? "Speak with a provider"
-    : "Continue to full intake";
-  // Placeholder destinations — replace once the real booking / intake URLs
-  // are connected (see PROVIDER_BOOKING_URL_PLACEHOLDER / FULL_INTAKE_URL_PLACEHOLDER).
-  const primaryHref = isReview
-    ? PROVIDER_BOOKING_URL_PLACEHOLDER
-    : FULL_INTAKE_URL_PLACEHOLDER;
-
-  return (
-    <div>
-      <h2
-        id="qualify-modal-title"
-        className="font-serif text-2xl font-semibold leading-tight text-[#103942] sm:text-3xl"
-      >
-        {heading}
-      </h2>
-      <p className="mt-4 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
-        {body}
-      </p>
-
-      <div className="mt-8 flex flex-col gap-3">
-        <a
-          href={primaryHref}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103942] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] focus-visible:ring-offset-2"
-        >
-          {primaryLabel}
-        </a>
-        <button
-          type="button"
-          onClick={onReview}
-          className="inline-flex w-full items-center justify-center rounded-full border border-[#103942] bg-white px-6 py-3 text-sm font-semibold text-[#103942] transition hover:bg-[#F5F5F7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
-        >
-          Review my answers
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="inline-flex w-full items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold text-[#103942] underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
-        >
-          Return to the homepage
-        </button>
-      </div>
     </div>
   );
 }
