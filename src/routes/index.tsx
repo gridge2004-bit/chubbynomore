@@ -1864,7 +1864,7 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3">
-              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-12 w-auto shrink-0" />
+              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-14 w-auto shrink-0 md:h-16" />
             </div>
 
             <p className="mt-4 max-w-xs text-sm text-[#103942]/70">
