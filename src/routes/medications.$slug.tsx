@@ -295,7 +295,18 @@ function MedicationDetail() {
           </div>
         </div>
       </section>
+
+      <section className="border-t border-[#103942]/10 bg-white px-6 py-10">
+        <div className="mx-auto flex max-w-4xl flex-wrap gap-x-5 gap-y-2 text-sm text-[#103942]/70">
+          <a href="/safety-information" className="underline underline-offset-2 hover:no-underline">Safety Information</a>
+          <a href="/pharmacy-disclosure" className="underline underline-offset-2 hover:no-underline">Pharmacy &amp; Medication Disclosure</a>
+          <a href="/telehealth-consent" className="underline underline-offset-2 hover:no-underline">Telehealth Consent</a>
+          <a href="/privacy-policy" className="underline underline-offset-2 hover:no-underline">Privacy Policy</a>
+          <a href="/terms-of-use" className="underline underline-offset-2 hover:no-underline">Terms of Use</a>
+        </div>
+      </section>
     </div>
+
   );
 }
 
