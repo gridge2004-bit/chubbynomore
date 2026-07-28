@@ -311,31 +311,32 @@ function Hero() {
   return (
     <section className="w-full bg-white px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
       <div className="mx-auto max-w-7xl">
-        <Reveal as="div" className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
           GLP-1 CARE FOR MEN
-        </Reveal>
-        <Reveal as="h1" className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#103942]">
+        </div>
+        <h1 className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#103942]">
           You didn't fail the diet. The diet failed you.
-        </Reveal>
-        <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
+        </h1>
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
           For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99 / 28-day supply.
-        </Reveal>
-        <Reveal delay={200}>
+        </p>
+        <div>
           <a
             href="#cta"
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
             See if I qualify — free
           </a>
-        </Reveal>
-        <Reveal as="p" delay={260} className="mt-3 max-w-xl text-sm text-[#103942]/70">
+        </div>
+        <p className="mt-3 max-w-xl text-sm text-[#103942]/70">
           Takes about 60 seconds. No charge if you don't qualify. Prescription only — not everyone qualifies. Compounded medications are not FDA-approved.
-        </Reveal>
-        <Reveal delay={320}>
+        </p>
+        <div>
           <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#103942] underline underline-offset-4 transition hover:text-[#42D1C3]">
             Already taking a GLP-1? Explore switching your care →
           </a>
-        </Reveal>
+        </div>
+
       </div>
     </section>
   );
