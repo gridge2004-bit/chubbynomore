@@ -1433,7 +1433,7 @@ function WeightLossScale() {
   const illustrativeWeight = Math.round(weight - potentialLoss);
 
   const tabBase =
-    "flex-1 rounded-full px-4 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] transition";
+    "flex-1 rounded-full px-2 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] transition sm:px-4 sm:py-2.5 sm:text-[12px] sm:tracking-[0.14em]";
   const tabOn = "bg-white text-[#103942]";
   const tabOff = "bg-transparent text-white/75 hover:text-white";
 
