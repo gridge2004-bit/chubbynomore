@@ -1,7 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  BACKEND_REQUIREMENTS,
+  PROVIDER_INTEGRATION_CONNECTED,
+  PROVIDER_INTEGRATION_REQUIREMENTS,
+  resumeIntake,
+  saveIntakeProgress,
+  startClinicalIntake,
+  submitIntakeForProviderReview,
+} from "@/lib/intake.functions";
+import {
   INTAKE_SECTIONS,
   type IntakeField,
   type IntakeSection,
@@ -31,13 +39,17 @@ export const Route = createFileRoute("/intake/clinical")({
 });
 
 /**
- * A secure clinical backend is NOT connected. Until it is:
- *  - answers live in React state only (no localStorage/sessionStorage, no network)
- *  - final submission is disabled
- *  - a development-only warning is shown (hidden from production users)
+ * Clinical answers are persisted server-side in the access-controlled
+ * `clinical_intakes` store (RLS on, service-role only). Nothing clinical is
+ * written to localStorage; only the intake id and an opaque resume token are
+ * held in sessionStorage for the current tab.
+ *
+ * Final provider submission stays disabled until an approved provider-review
+ * destination exists.
  */
-const CLINICAL_BACKEND_CONNECTED = false;
 const IS_DEV = import.meta.env.DEV;
+const SS_INTAKE = "cnm_intake_id";
+const SS_TOKEN = "cnm_intake_token";
 
 type AnswerValue = string | boolean;
 type Answers = Record<string, AnswerValue>;
@@ -79,11 +91,46 @@ function fieldError(field: IntakeField, value: AnswerValue | undefined): string 
 }
 
 function ClinicalIntake() {
+  const start = useServerFn(startClinicalIntake);
+  const save = useServerFn(saveIntakeProgress);
+  const resume = useServerFn(resumeIntake);
+  const submit = useServerFn(submitIntakeForProviderReview);
+
+  const [session, setSession] = useState<{ intakeId: string; token: string } | null>(null);
+  const [resumeGate, setResumeGate] = useState<string | null>(null);
+  const [saveState, setSaveState] = useState<"idle" | "saving" | "error">("idle");
+  const [resumeLink, setResumeLink] = useState<string | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showConfirmationPreview, setShowConfirmationPreview] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // A ?resume=<opaque token> link requires identity verification before any
+  // saved answer is returned. The token carries no personal or clinical data.
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("resume");
+    if (token) {
+      setResumeGate(token);
+      return;
+    }
+    const existingId = sessionStorage.getItem(SS_INTAKE);
+    const existingToken = sessionStorage.getItem(SS_TOKEN);
+    if (existingId && existingToken) {
+      setSession({ intakeId: existingId, token: existingToken });
+      return;
+    }
+    const leadId = sessionStorage.getItem("cnm_lead_id");
+    start({ data: { leadId: leadId || null } })
+      .then((r) => {
+        sessionStorage.setItem(SS_INTAKE, r.intakeId);
+        sessionStorage.setItem(SS_TOKEN, r.resumeToken);
+        setSession({ intakeId: r.intakeId, token: r.resumeToken });
+      })
+      .catch(() => setSaveState("error"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sections = INTAKE_SECTIONS;
   const section = sections[stepIndex];
@@ -136,7 +183,25 @@ function ClinicalIntake() {
       if (firstId) document.getElementById(firstId)?.focus();
       return;
     }
+    persist(section.id, sections[stepIndex + 1]?.id ?? section.id, false);
     goTo(stepIndex + 1);
+  };
+
+  const persist = (completedStep: string, nextStep: string, completed: boolean) => {
+    if (!session) return;
+    setSaveState("saving");
+    save({
+      data: {
+        intakeId: session.intakeId,
+        resumeToken: session.token,
+        currentStep: nextStep,
+        lastCompletedStep: completedStep,
+        answers,
+        completed,
+      },
+    })
+      .then(() => setSaveState("idle"))
+      .catch(() => setSaveState("error"));
   };
 
   const answeredSections = useMemo(
@@ -151,6 +216,26 @@ function ClinicalIntake() {
         })),
     [sections, answers],
   );
+
+  if (resumeGate) {
+    return (
+      <ResumeGate
+        onVerify={async (lastName, dob) => {
+          const r = await resume({
+            data: { resumeToken: resumeGate, lastName, dateOfBirth: dob },
+          });
+          sessionStorage.setItem(SS_INTAKE, r.intakeId);
+          sessionStorage.setItem(SS_TOKEN, resumeGate);
+          setSession({ intakeId: r.intakeId, token: resumeGate });
+          setAnswers(r.answers);
+          const idx = sections.findIndex((s) => s.id === (r.currentStep ?? "identity"));
+          setStepIndex(idx >= 0 ? idx : 0);
+          window.history.replaceState({}, "", "/intake/clinical");
+          setResumeGate(null);
+        }}
+      />
+    );
+  }
 
   if (showConfirmationPreview) {
     return (
@@ -175,7 +260,7 @@ function ClinicalIntake() {
 
   return (
     <main className="mx-auto w-full max-w-2xl px-5 py-10 sm:px-6 sm:py-16">
-      {IS_DEV && !CLINICAL_BACKEND_CONNECTED && <DevWarning />}
+      {IS_DEV && !PROVIDER_INTEGRATION_CONNECTED && <DevWarning />}
 
       {/* Progress */}
       <div className="mb-8">
@@ -241,8 +326,14 @@ function ClinicalIntake() {
         {section.isReview ? (
           <button
             type="button"
-            disabled={!CLINICAL_BACKEND_CONNECTED}
-            onClick={() => setShowConfirmationPreview(true)}
+            disabled={!PROVIDER_INTEGRATION_CONNECTED || !session}
+            onClick={async () => {
+              persist(section.id, section.id, true);
+              const r = await submit({
+                data: { intakeId: session!.intakeId, resumeToken: session!.token },
+              });
+              if (r.submitted) setShowConfirmationPreview(true);
+            }}
             className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] disabled:cursor-not-allowed disabled:bg-[#103942]/25 disabled:hover:text-white sm:w-auto"
           >
             Submit for provider review
@@ -267,10 +358,16 @@ function ClinicalIntake() {
         </button>
       </div>
 
-      {section.isReview && !CLINICAL_BACKEND_CONNECTED && (
+      {section.isReview && !PROVIDER_INTEGRATION_CONNECTED && (
         <p className="mt-4 text-sm leading-relaxed text-[#103942]/70">
-          Submission is turned off until the secure clinical system is connected. Nothing you enter
-          here is sent or stored.
+          Submission is turned off until the licensed-provider review destination is connected. Your
+          answers are saved securely, but nothing has been sent for review.
+        </p>
+      )}
+      {saveState === "error" && (
+        <p role="alert" className="mt-4 text-sm font-semibold text-[#103942]">
+          <span aria-hidden="true">⚠ </span>We couldn't save your progress. Check your connection and
+          try again.
         </p>
       )}
 
@@ -278,17 +375,37 @@ function ClinicalIntake() {
       <div className="mt-10 rounded-2xl bg-[#F5F5F7] p-5">
         <p className="text-sm font-semibold text-[#103942]">Save and return later</p>
         <p className="mt-1 text-sm leading-relaxed text-[#103942]/70">
-          Saving your progress requires the secure clinical system and a signed-in session. It is
-          not available yet, so your answers stay in this browser tab only and are cleared when you
-          leave.
+          Your progress is saved securely as you go. Create a private return link that expires in 72
+          hours — you'll confirm your last name and date of birth before anything is shown again.
         </p>
         <button
           type="button"
-          disabled
-          className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-[#103942]/15 px-5 py-2.5 text-sm font-semibold text-[#103942] disabled:cursor-not-allowed disabled:opacity-40"
+          disabled={!session}
+          onClick={() => {
+            persist(section.id, section.id, false);
+            setResumeLink(`${window.location.origin}/intake/clinical?resume=${session!.token}`);
+          }}
+          className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-[#103942]/15 px-5 py-2.5 text-sm font-semibold text-[#103942] transition hover:border-[#103942] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Save and finish later
         </button>
+        {resumeLink && (
+          <div className="mt-3">
+            <label htmlFor="resume-link" className="block text-sm font-semibold text-[#103942]">
+              Your private return link
+            </label>
+            <input
+              id="resume-link"
+              readOnly
+              value={resumeLink}
+              onFocus={(e) => e.currentTarget.select()}
+              className="mt-2 w-full rounded-xl border border-[#103942]/15 bg-white px-4 py-3 text-sm text-[#103942]"
+            />
+            <p className="mt-2 text-sm text-[#103942]/70">
+              Keep this private. Anyone with the link still needs your last name and date of birth.
+            </p>
+          </div>
+        )}
       </div>
     </main>
   );
@@ -305,11 +422,11 @@ function DevWarning({ preview }: { preview?: boolean }) {
       </p>
       <p className="mt-2 text-sm leading-relaxed text-[#103942]/80">
         {preview
-          ? "This is a preview of the confirmation screen. Nothing was submitted, sent, or stored."
-          : "No secure clinical backend is connected. Answers exist in memory only — they are not sent, emailed, or written to browser storage, and final submission is disabled."}
+          ? "This is a preview of the confirmation screen. No intake has been sent to a licensed provider."
+          : "Answers are saved to the access-controlled clinical store, but no licensed-provider review destination is connected, so final submission is disabled and nothing is transmitted."}
       </p>
       <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[#103942]/80">
-        {BACKEND_REQUIREMENTS.map((r) => (
+        {PROVIDER_INTEGRATION_REQUIREMENTS.map((r) => (
           <li key={r}>{r}</li>
         ))}
       </ul>
@@ -499,5 +616,86 @@ function ReviewStep({
         medication is recommended or confirmed at this stage.
       </p>
     </div>
+  );
+}
+
+function ResumeGate({
+  onVerify,
+}: {
+  onVerify: (lastName: string, dob: string) => Promise<void>;
+}) {
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  return (
+    <main className="mx-auto w-full max-w-2xl px-5 py-10 sm:px-6 sm:py-16">
+      <h1 className="font-serif text-2xl leading-tight text-[#103942] sm:text-3xl">
+        Confirm it's you to continue
+      </h1>
+      <p className="mt-3 text-sm leading-relaxed text-[#103942]/70 sm:text-base">
+        For your privacy, confirm these details before we show your saved assessment.
+      </p>
+      <form
+        className="mt-8 space-y-5"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setError(null);
+          if (!lastName.trim() || !dob) {
+            setError("Enter your last name and date of birth.");
+            return;
+          }
+          setBusy(true);
+          try {
+            await onVerify(lastName, dob);
+          } catch {
+            setError(
+              "This link is no longer valid or the details didn't match. Please start a new assessment.",
+            );
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        <div>
+          <label htmlFor="resume_last_name" className="block text-sm font-semibold text-[#103942]">
+            Last name
+          </label>
+          <input
+            id="resume_last_name"
+            autoComplete="family-name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className={`${inputBase} mt-2 border-[#103942]/15`}
+          />
+        </div>
+        <div>
+          <label htmlFor="resume_dob" className="block text-sm font-semibold text-[#103942]">
+            Date of birth
+          </label>
+          <input
+            id="resume_dob"
+            type="date"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            className={`${inputBase} mt-2 border-[#103942]/15`}
+          />
+        </div>
+        {error && (
+          <p role="alert" className="text-sm font-semibold text-[#103942]">
+            <span aria-hidden="true">⚠ </span>
+            {error}
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={busy}
+          className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-[#42D1C3] hover:text-[#103942] disabled:opacity-60 sm:w-auto"
+        >
+          {busy ? "Checking…" : "Continue"}
+        </button>
+      </form>
+    </main>
   );
 }

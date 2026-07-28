@@ -14,12 +14,124 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinical_intakes: {
+        Row: {
+          answers: Json
+          completed_at: string | null
+          created_at: string
+          current_step: string | null
+          id: string
+          last_activity_at: string
+          last_completed_step: string | null
+          lead_id: string | null
+          provider_review_status: string
+          resume_attempts: number
+          resume_token_expires_at: string | null
+          resume_token_hash: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+          verify_dob: string | null
+          verify_last_name: string | null
+        }
+        Insert: {
+          answers?: Json
+          completed_at?: string | null
+          created_at?: string
+          current_step?: string | null
+          id?: string
+          last_activity_at?: string
+          last_completed_step?: string | null
+          lead_id?: string | null
+          provider_review_status?: string
+          resume_attempts?: number
+          resume_token_expires_at?: string | null
+          resume_token_hash?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          verify_dob?: string | null
+          verify_last_name?: string | null
+        }
+        Update: {
+          answers?: Json
+          completed_at?: string | null
+          created_at?: string
+          current_step?: string | null
+          id?: string
+          last_activity_at?: string
+          last_completed_step?: string | null
+          lead_id?: string | null
+          provider_review_status?: string
+          resume_attempts?: number
+          resume_token_expires_at?: string | null
+          resume_token_hash?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          verify_dob?: string | null
+          verify_last_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_intakes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      intake_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          intake_id: string | null
+          lead_id: string | null
+          step: string | null
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          intake_id?: string | null
+          lead_id?: string | null
+          step?: string | null
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          intake_id?: string | null
+          lead_id?: string | null
+          step?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_events_intake_id_fkey"
+            columns: ["intake_id"]
+            isOneToOne: false
+            referencedRelation: "clinical_intakes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "intake_events_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
+          clinical_intake_id: string | null
           consent_text_version: string
           created_at: string
           email: string
           first_name: string
+          funnel_completed_at: string | null
           funnel_source: string
           funnel_status: string
           id: string
@@ -39,10 +151,12 @@ export type Database = {
           utm_term: string | null
         }
         Insert: {
+          clinical_intake_id?: string | null
           consent_text_version: string
           created_at?: string
           email: string
           first_name: string
+          funnel_completed_at?: string | null
           funnel_source?: string
           funnel_status?: string
           id?: string
@@ -62,10 +176,12 @@ export type Database = {
           utm_term?: string | null
         }
         Update: {
+          clinical_intake_id?: string | null
           consent_text_version?: string
           created_at?: string
           email?: string
           first_name?: string
+          funnel_completed_at?: string | null
           funnel_source?: string
           funnel_status?: string
           id?: string
@@ -84,7 +200,15 @@ export type Database = {
           utm_source?: string | null
           utm_term?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "leads_clinical_intake_id_fkey"
+            columns: ["clinical_intake_id"]
+            isOneToOne: false
+            referencedRelation: "clinical_intakes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
