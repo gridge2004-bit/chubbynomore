@@ -72,5 +72,29 @@ export const createLead = createServerFn({ method: "POST" })
       throw new Error("We couldn't save your information. Please try again.");
     }
 
-    return { leadId: row.id as string, funnelStatus: "contact_captured" };
+    // Forward marketing-safe contact fields to LaunchList. Never blocks the
+    // funnel: a LaunchList failure is logged, not surfaced to the user.
+    let launchList: { forwarded: boolean } = { forwarded: false };
+    try {
+      const { sendToLaunchList } = await import("@/lib/launchlist.server");
+      launchList = await sendToLaunchList({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email.toLowerCase(),
+        phone: data.phone,
+        state: data.state,
+        utm: data.utm,
+      });
+    } catch (err) {
+      console.error(
+        "[launchlist] unexpected error",
+        err instanceof Error ? err.message : "unknown",
+      );
+    }
+
+    return {
+      leadId: row.id as string,
+      funnelStatus: "contact_captured",
+      launchListForwarded: launchList.forwarded,
+    };
   });
