@@ -2019,7 +2019,7 @@ function Footer() {
   return (
     <footer className="bg-[#F5F5F7] text-[#103942]">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
-        <div className="grid gap-12 md:grid-cols-2">
+        <div className="grid gap-12 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
               <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-24 w-auto shrink-0 md:h-28" />
@@ -2041,7 +2041,20 @@ function Footer() {
               ))}
             </ul>
           </div>
+          <div>
+            <div className="text-sm uppercase tracking-[0.2em] text-[#103942]/65">Legal</div>
+            <ul className="mt-4 space-y-3 text-base md:text-lg">
+              {LEGAL_LINKS.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-[#103942] transition hover:text-[#42D1C3]">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-sm text-[#103942]/65 md:flex-row">
           <span>© {new Date().getFullYear()} Chubby No More. All rights reserved.</span>
         </div>
