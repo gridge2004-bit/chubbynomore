@@ -139,6 +139,11 @@ export type Database = {
           last_name: string
           marketing_consent: boolean
           marketing_consent_at: string | null
+          marketing_sync_attempted_at: string | null
+          marketing_sync_completed_at: string | null
+          marketing_sync_error_code: string | null
+          marketing_sync_provider: string | null
+          marketing_sync_status: string
           operational_consent: boolean
           operational_consent_at: string | null
           phone: string
@@ -164,6 +169,11 @@ export type Database = {
           last_name: string
           marketing_consent?: boolean
           marketing_consent_at?: string | null
+          marketing_sync_attempted_at?: string | null
+          marketing_sync_completed_at?: string | null
+          marketing_sync_error_code?: string | null
+          marketing_sync_provider?: string | null
+          marketing_sync_status?: string
           operational_consent?: boolean
           operational_consent_at?: string | null
           phone: string
@@ -189,6 +199,11 @@ export type Database = {
           last_name?: string
           marketing_consent?: boolean
           marketing_consent_at?: string | null
+          marketing_sync_attempted_at?: string | null
+          marketing_sync_completed_at?: string | null
+          marketing_sync_error_code?: string | null
+          marketing_sync_provider?: string | null
+          marketing_sync_status?: string
           operational_consent?: boolean
           operational_consent_at?: string | null
           phone?: string
