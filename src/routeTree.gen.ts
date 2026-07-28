@@ -9,58 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as TelehealthConsentRouteImport } from './routes/telehealth-consent'
-import { Route as SubscriptionPolicyRouteImport } from './routes/subscription-policy'
-import { Route as SafetyInformationRouteImport } from './routes/safety-information'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PharmacyDisclosureRouteImport } from './routes/pharmacy-disclosure'
-import { Route as NoticeOfPrivacyPracticesRouteImport } from './routes/notice-of-privacy-practices'
-import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
+import { Route as IntakeRouteImport } from './routes/intake'
+import { Route as NoticeOfPrivacyPracticesRouteImport } from './routes/notice-of-privacy-practices'
+import { Route as PharmacyDisclosureRouteImport } from './routes/pharmacy-disclosure'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SafetyInformationRouteImport } from './routes/safety-information'
+import { Route as SubscriptionPolicyRouteImport } from './routes/subscription-policy'
+import { Route as TelehealthConsentRouteImport } from './routes/telehealth-consent'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
+import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 
-const TermsOfUseRoute = TermsOfUseRouteImport.update({
-  id: '/terms-of-use',
-  path: '/terms-of-use',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TelehealthConsentRoute = TelehealthConsentRouteImport.update({
-  id: '/telehealth-consent',
-  path: '/telehealth-consent',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SubscriptionPolicyRoute = SubscriptionPolicyRouteImport.update({
-  id: '/subscription-policy',
-  path: '/subscription-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SafetyInformationRoute = SafetyInformationRouteImport.update({
-  id: '/safety-information',
-  path: '/safety-information',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PharmacyDisclosureRoute = PharmacyDisclosureRouteImport.update({
-  id: '/pharmacy-disclosure',
-  path: '/pharmacy-disclosure',
+const IntakeRoute = IntakeRouteImport.update({
+  id: '/intake',
+  path: '/intake',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticeOfPrivacyPracticesRoute =
@@ -69,25 +39,55 @@ const NoticeOfPrivacyPracticesRoute =
     path: '/notice-of-privacy-practices',
     getParentRoute: () => rootRouteImport,
   } as any)
-const IntakeRoute = IntakeRouteImport.update({
-  id: '/intake',
-  path: '/intake',
+const PharmacyDisclosureRoute = PharmacyDisclosureRouteImport.update({
+  id: '/pharmacy-disclosure',
+  path: '/pharmacy-disclosure',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
-  id: '/medications/$slug',
-  path: '/medications/$slug',
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyInformationRoute = SafetyInformationRouteImport.update({
+  id: '/safety-information',
+  path: '/safety-information',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionPolicyRoute = SubscriptionPolicyRouteImport.update({
+  id: '/subscription-policy',
+  path: '/subscription-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelehealthConsentRoute = TelehealthConsentRouteImport.update({
+  id: '/telehealth-consent',
+  path: '/telehealth-consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfUseRoute = TermsOfUseRouteImport.update({
+  id: '/terms-of-use',
+  path: '/terms-of-use',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
   id: '/clinical',
   path: '/clinical',
   getParentRoute: () => IntakeRoute,
+} as any)
+const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
+  id: '/medications/$slug',
+  path: '/medications/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -201,67 +201,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms-of-use': {
-      id: '/terms-of-use'
-      path: '/terms-of-use'
-      fullPath: '/terms-of-use'
-      preLoaderRoute: typeof TermsOfUseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/telehealth-consent': {
-      id: '/telehealth-consent'
-      path: '/telehealth-consent'
-      fullPath: '/telehealth-consent'
-      preLoaderRoute: typeof TelehealthConsentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/subscription-policy': {
-      id: '/subscription-policy'
-      path: '/subscription-policy'
-      fullPath: '/subscription-policy'
-      preLoaderRoute: typeof SubscriptionPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/safety-information': {
-      id: '/safety-information'
-      path: '/safety-information'
-      fullPath: '/safety-information'
-      preLoaderRoute: typeof SafetyInformationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pharmacy-disclosure': {
-      id: '/pharmacy-disclosure'
-      path: '/pharmacy-disclosure'
-      fullPath: '/pharmacy-disclosure'
-      preLoaderRoute: typeof PharmacyDisclosureRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/notice-of-privacy-practices': {
-      id: '/notice-of-privacy-practices'
-      path: '/notice-of-privacy-practices'
-      fullPath: '/notice-of-privacy-practices'
-      preLoaderRoute: typeof NoticeOfPrivacyPracticesRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intake': {
@@ -271,18 +215,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntakeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/notice-of-privacy-practices': {
+      id: '/notice-of-privacy-practices'
+      path: '/notice-of-privacy-practices'
+      fullPath: '/notice-of-privacy-practices'
+      preLoaderRoute: typeof NoticeOfPrivacyPracticesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/medications/$slug': {
-      id: '/medications/$slug'
-      path: '/medications/$slug'
-      fullPath: '/medications/$slug'
-      preLoaderRoute: typeof MedicationsSlugRouteImport
+    '/pharmacy-disclosure': {
+      id: '/pharmacy-disclosure'
+      path: '/pharmacy-disclosure'
+      fullPath: '/pharmacy-disclosure'
+      preLoaderRoute: typeof PharmacyDisclosureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety-information': {
+      id: '/safety-information'
+      path: '/safety-information'
+      fullPath: '/safety-information'
+      preLoaderRoute: typeof SafetyInformationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription-policy': {
+      id: '/subscription-policy'
+      path: '/subscription-policy'
+      fullPath: '/subscription-policy'
+      preLoaderRoute: typeof SubscriptionPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/telehealth-consent': {
+      id: '/telehealth-consent'
+      path: '/telehealth-consent'
+      fullPath: '/telehealth-consent'
+      preLoaderRoute: typeof TelehealthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-use': {
+      id: '/terms-of-use'
+      path: '/terms-of-use'
+      fullPath: '/terms-of-use'
+      preLoaderRoute: typeof TermsOfUseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intake/clinical': {
@@ -291,6 +284,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/intake/clinical'
       preLoaderRoute: typeof IntakeClinicalRouteImport
       parentRoute: typeof IntakeRoute
+    }
+    '/medications/$slug': {
+      id: '/medications/$slug'
+      path: '/medications/$slug'
+      fullPath: '/medications/$slug'
+      preLoaderRoute: typeof MedicationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
