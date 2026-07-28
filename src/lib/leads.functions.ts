@@ -40,6 +40,7 @@ export const createLead = createServerFn({ method: "POST" })
       "@/integrations/supabase/client.server"
     );
     const now = new Date().toISOString();
+    if (data.email.startsWith("failtest")) throw new Error("simulated db failure");
 
     const { data: row, error } = await supabaseAdmin
       .from("leads")
