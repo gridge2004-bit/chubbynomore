@@ -94,8 +94,8 @@ const products = [
     desc: "Custom-formulated GLP-1 medications compounded by a licensed US pharmacy and prescribed online. Used alongside diet and exercise. Your physician decides what's right for you.",
     bullets: ["Once-weekly injection", "Physician-titrated dosing", "Free shipping, cancel anytime"],
       options: [
-      { label: "GLP-1 + GIP (Tirzepatide)", price: "$249.99", period: "per 28-day supply" },
-      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "per 28-day supply" },
+      { label: "GLP-1 + GIP (Tirzepatide)", price: "$279", period: "/ 28-day supply" },
+      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "/ 28-day supply" },
     ],
     img: cnmSemaVialsAsset.url,
   },
@@ -108,7 +108,7 @@ const products = [
     desc: "Brand-name GLP-1 medications dispensed by a licensed US pharmacy. Prescribed online by a board-certified physician based on your eligibility and goals.",
     bullets: ["Authentic manufacturer product", "Physician-managed care", "Shipped discreetly to your door"],
     options: [
-      { label: "Starting at", price: "$399", period: "/month" },
+      { label: "Available on request", price: "", period: "" },
     ],
     img: tirzepatideImg,
   },
@@ -140,7 +140,7 @@ const faqs = [
       </>
     ),
   },
-  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Personalized GLP-1 treatment options start at $149.99 per 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
+  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
 ];
 
 const NAVY = "#103942";
@@ -318,7 +318,7 @@ function Hero() {
           You didn't fail the diet. The diet failed you.
         </Reveal>
         <Reveal as="p" delay={120} className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
-          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99/mo.
+          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99 / 28-day supply.
         </Reveal>
         <Reveal delay={200}>
           <a
@@ -418,8 +418,12 @@ type DetailedCard = {
   desc: string;
   img: string;
   imgAlt: string;
-  fullSupplyPrice: number;
+  fullSupplyPrice?: number;
   supplyLabel: string; // e.g. "28-day supply"
+  // "fixed" shows a public price. "onRequest" and "pending" suppress it.
+  priceMode?: "fixed" | "onRequest" | "pending";
+  flatDosePricing?: boolean;
+  prepay?: { total: number; perSupply: number; savings: number };
   dosesPerSupply: number;
   doseLabel: string; // e.g. "weekly dose"
   // Placeholder insurance/savings price shown on brand-name rows until a
@@ -453,6 +457,18 @@ const INSURANCE_UNAVAILABLE_COMPOUNDED =
 const INSURANCE_UNVERIFIED_BRAND =
   "Check insurance coverage and available savings";
 
+const ON_REQUEST_COPY =
+  "Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability.";
+const PENDING_COPY =
+  "Pricing pending confirmation.";
+const FLAT_DOSE_COPY = "Flat pricing across available prescribed doses.";
+const COMPOUNDED_FDA_QUALIFIER =
+  "Compounded medications are not FDA-approved for safety, effectiveness, or quality.";
+const PRESCRIPTION_QUALIFIER =
+  "Prescription required. A licensed provider determines whether treatment is medically appropriate. Medication and dose are not guaranteed.";
+const SUPPLY_PERIOD_QUALIFIER =
+  "Prices shown apply to the stated supply period and may vary if the prescribed treatment, pharmacy, or product changes.";
+
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
@@ -466,10 +482,10 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
     img: wegovyPillAsset.url,
     imgAlt: "Wegovy tablet",
-    fullSupplyPrice: 249.99,
     supplyLabel: "30-day supply",
     dosesPerSupply: 30,
     doseLabel: "daily dose",
+    priceMode: "pending",
   },
   {
     id: "semaglutide",
@@ -483,6 +499,9 @@ const detailedCards: DetailedCard[] = [
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
+    priceMode: "fixed",
+    flatDosePricing: true,
+    prepay: { total: 399, perSupply: 133, savings: 50.97 },
   },
   {
     id: "foundayo",
@@ -493,6 +512,7 @@ const detailedCards: DetailedCard[] = [
     img: foundayoPillAsset.url,
     imgAlt: "Foundayo tablet",
     fullSupplyPrice: 199.99,
+    priceMode: "fixed",
     supplyLabel: "30-day supply",
     dosesPerSupply: 30,
     doseLabel: "daily dose",
@@ -505,10 +525,13 @@ const detailedCards: DetailedCard[] = [
     desc: "A clinician-prescribed treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     img: cnmTirzVialsAsset.url,
     imgAlt: "Compounded tirzepatide vials with discreet CNM branding",
-    fullSupplyPrice: 249.99,
+    fullSupplyPrice: 279,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
+    priceMode: "fixed",
+    flatDosePricing: true,
+    prepay: { total: 747, perSupply: 249, savings: 90 },
   },
   {
     id: "zepbound",
@@ -518,8 +541,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
     img: zepboundPenAsset.url,
     imgAlt: "Zepbound injection pen",
-    fullSupplyPrice: 449.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -531,8 +554,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
     img: wegovyPenAsset.url,
     imgAlt: "Wegovy injection pen",
-    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -544,8 +567,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: ozempicPenAsset.url,
     imgAlt: "Ozempic injection pen",
-    fullSupplyPrice: 349.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -557,8 +580,8 @@ const detailedCards: DetailedCard[] = [
     desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
     img: mounjaroPenAsset.url,
     imgAlt: "Mounjaro injection pen",
-    fullSupplyPrice: 1249.99,
     supplyLabel: "28-day supply",
+    priceMode: "onRequest",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
   },
@@ -578,7 +601,8 @@ function MedicationRow({
     ? "bg-[#D5F3EF] text-[#103942]"
     : "bg-[#F5F5F7] text-[#103942]";
   const isWeekly = card.doseLabel.toLowerCase().includes("week");
-  const perDose = Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100;
+  const hasPrice = card.priceMode !== "onRequest" && card.priceMode !== "pending" && typeof card.fullSupplyPrice === "number";
+  const perDose = Math.round(((card.fullSupplyPrice ?? 0) / card.dosesPerSupply) * 100) / 100;
 
   const ins = card.insurance;
   const insuranceVerified =
@@ -642,9 +666,9 @@ function MedicationRow({
                 Cash pay
               </p>
               <p className="mt-1 text-[16px] font-bold leading-tight text-[#103942]">
-                {formatUSD(card.fullSupplyPrice)}
+                {formatUSD(card.fullSupplyPrice ?? 0)}
                 <span className="ml-1 text-[12px] font-normal text-[#103942]/70">
-                  per {card.supplyLabel}
+                  / {card.supplyLabel}
                 </span>
               </p>
             </div>
@@ -682,15 +706,23 @@ function MedicationRow({
               <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
                 Cash pay
               </p>
-              <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
-                From {formatUSD(card.fullSupplyPrice)}
-                <span className="ml-1 text-[11px] text-[#103942]/60">
-                  per {card.supplyLabel}
-                </span>
-              </p>
-              {isWeekly && (
-                <p className="mt-0.5 text-[11px] text-[#103942]/55">
-                  {formatUSD(perDose)} per {card.doseLabel}
+              {hasPrice ? (
+                <>
+                  <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
+                    From {formatUSD(card.fullSupplyPrice ?? 0)}
+                    <span className="ml-1 text-[11px] text-[#103942]/60">
+                      / {card.supplyLabel}
+                    </span>
+                  </p>
+                  {isWeekly && (
+                    <p className="mt-0.5 text-[11px] text-[#103942]/55">
+                      {formatUSD(perDose)} per {card.doseLabel}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
+                  {card.priceMode === "pending" ? PENDING_COPY : "Available on request"}
                 </p>
               )}
             </div>
@@ -818,14 +850,35 @@ function MedicationInfoPanel({
           </div>
           <div className="mt-5 rounded-2xl bg-[#F5F5F7] px-4 py-4">
             <p className="text-[12px] uppercase tracking-wide text-[#103942]/60">Starting price</p>
-            <p className="mt-1 text-[22px] font-bold">
-              From {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)}
-              <span className="ml-1 text-[13px] font-normal text-[#103942]/70">per {card.doseLabel}</span>
-            </p>
-            <p className="mt-1 text-[13px] text-[#103942]/80">
-              {formatUSD(card.fullSupplyPrice)} per {card.supplyLabel}
-            </p>
-            <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PER_DOSE_INFO}</p>
+            {typeof card.fullSupplyPrice === "number" && card.priceMode === "fixed" ? (
+              <>
+                <p className="mt-1 text-[22px] font-bold">
+                  {formatUSD(card.fullSupplyPrice)}
+                  <span className="ml-1 text-[13px] font-normal text-[#103942]/70">/ {card.supplyLabel}</span>
+                </p>
+                <p className="mt-1 text-[13px] text-[#103942]/80">
+                  {formatUSD(Math.round((card.fullSupplyPrice / card.dosesPerSupply) * 100) / 100)} per {card.doseLabel}
+                </p>
+                {card.flatDosePricing && (
+                  <p className="mt-1 text-[13px] text-[#103942]/80">{FLAT_DOSE_COPY}</p>
+                )}
+                {card.prepay && (
+                  <p className="mt-2 text-[13px] text-[#103942]/80">
+                    Or {formatUSD(card.prepay.total)} prepaid for 3 consecutive 28-day supplies (84 days) — equivalent to {formatUSD(card.prepay.perSupply)} per 28-day supply. Save {formatUSD(card.prepay.savings)} compared with purchasing three individual fills.
+                  </p>
+                )}
+                <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PER_DOSE_INFO}</p>
+              </>
+            ) : (
+              <>
+                <p className="mt-1 text-[20px] font-bold">
+                  {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                </p>
+                <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{ON_REQUEST_COPY}</p>
+              </>
+            )}
+            <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{PRESCRIPTION_QUALIFIER}</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-[#103942]/60">{SUPPLY_PERIOD_QUALIFIER}</p>
           </div>
           {(() => {
             const ins = card.insurance;
@@ -962,6 +1015,69 @@ function EmotionalTransformation() {
   );
 }
 
+function PlanCompare({ card }: { card: DetailedCard }) {
+  const [plan, setPlan] = useState<"single" | "prepay">("single");
+  if (!card.prepay || typeof card.fullSupplyPrice !== "number") return null;
+  const p = card.prepay;
+  const base =
+    "rounded-2xl border px-4 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#103942]";
+  const on = "border-[#103942] bg-white";
+  const off = "border-[#103942]/20 bg-white/60 hover:border-[#103942]/40";
+  return (
+    <div className="mt-4">
+      <div
+        role="radiogroup"
+        aria-label={`${card.name} supply options`}
+        className="grid gap-2 sm:grid-cols-2"
+      >
+        <button
+          type="button"
+          role="radio"
+          aria-checked={plan === "single"}
+          onClick={() => setPlan("single")}
+          className={`${base} ${plan === "single" ? on : off}`}
+        >
+          <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
+            Individual fill
+          </span>
+          <span className="mt-1 block text-[20px] font-bold leading-none text-[#103942]">
+            {formatUSD(card.fullSupplyPrice)}
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">/ 28-day supply</span>
+        </button>
+        <button
+          type="button"
+          role="radio"
+          aria-checked={plan === "prepay"}
+          onClick={() => setPlan("prepay")}
+          className={`${base} ${plan === "prepay" ? on : off}`}
+        >
+          <span className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
+              3-fill prepay
+            </span>
+            <span className="rounded-full bg-[#D5F3EF] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#103942]">
+              Best value
+            </span>
+          </span>
+          <span className="mt-1 block text-[20px] font-bold leading-none text-[#103942]">
+            {formatUSD(p.total)}
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">
+            prepaid for 3 consecutive 28-day supplies (84 days)
+          </span>
+          <span className="mt-1 block text-[12px] text-[#103942]/70">
+            Equivalent to {formatUSD(p.perSupply)} per 28-day supply.
+          </span>
+          <span className="mt-0.5 block text-[12px] font-semibold text-[#103942]">
+            Save {formatUSD(p.savings)} compared with purchasing three individual fills.
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 const MOBILE_SUMMARY: Record<string, string> = {
   semaglutide: "Clinician-prescribed GLP-1 care for eligible patients.",
   tirzepatide: "Clinician-prescribed GLP-1 + GIP care for eligible patients.",
@@ -1008,14 +1124,32 @@ function DetailedProductCard({
         </div>
 
         <div className="mt-3">
-          <p className="text-[14px] text-[#103942]/80">Starting at</p>
-          <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
-            <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
-              {formatUSD(card.fullSupplyPrice)}
-            </span>
-            <span className="text-[14px] text-[#103942]/80">/{card.supplyLabel}</span>
-          </p>
+          {card.priceMode === "fixed" && typeof card.fullSupplyPrice === "number" ? (
+            <>
+              <p className="text-[14px] text-[#103942]/80">Starting at</p>
+              <p className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
+                <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942]">
+                  {formatUSD(card.fullSupplyPrice)}
+                </span>
+                <span className="text-[14px] text-[#103942]/80">/ {card.supplyLabel}</span>
+              </p>
+              {card.flatDosePricing && (
+                <span className="mt-2 inline-flex rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-[#103942]">
+                  {FLAT_DOSE_COPY}
+                </span>
+              )}
+            </>
+          ) : (
+            <>
+              <p className="text-[20px] font-bold leading-tight text-[#103942]">
+                {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+              </p>
+              <p className="mt-1.5 text-[12px] leading-snug text-[#103942]/70">{ON_REQUEST_COPY}</p>
+            </>
+          )}
         </div>
+
+        <PlanCompare card={card} />
 
         <p className="mt-2.5 text-[15px] leading-snug text-[#103942]/75">{summary}</p>
 
@@ -1076,18 +1210,37 @@ function DetailedProductCard({
           </p>
 
           <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <div className="flex flex-wrap items-baseline gap-x-2">
-                <span className="text-[15px] text-[#103942]/80">Starting at</span>
-                <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
-                  {formatUSD(card.fullSupplyPrice)}
-                </span>
-                <span className="text-[15px] text-[#103942]/80">/{card.supplyLabel}</span>
-              </div>
+            <div className="max-w-xl">
+              {card.priceMode === "fixed" && typeof card.fullSupplyPrice === "number" ? (
+                <>
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-[15px] text-[#103942]/80">Starting at</span>
+                    <span className="text-[32px] font-bold leading-none tracking-tight text-[#103942] sm:text-[38px]">
+                      {formatUSD(card.fullSupplyPrice)}
+                    </span>
+                    <span className="text-[15px] text-[#103942]/80">/ {card.supplyLabel}</span>
+                  </div>
+                  {card.flatDosePricing && (
+                    <span className="mt-2 inline-flex rounded-full bg-white px-3 py-1 text-[12px] font-semibold text-[#103942]">
+                      {FLAT_DOSE_COPY}
+                    </span>
+                  )}
+                  <PlanCompare card={card} />
+                </>
+              ) : (
+                <>
+                  <div className="text-[24px] font-bold leading-tight text-[#103942] sm:text-[28px]">
+                    {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                  </div>
+                  <p className="mt-2 max-w-md text-[13px] leading-relaxed text-[#103942]/70">
+                    {ON_REQUEST_COPY}
+                  </p>
+                </>
+              )}
 
               {isCompounded && (
                 <p className="mt-3 max-w-md text-[12px] italic leading-relaxed text-[#103942]/65">
-                  Compounded medications are not FDA-approved for safety, effectiveness, or quality.
+                  {COMPOUNDED_FDA_QUALIFIER}
                 </p>
               )}
             </div>
@@ -1140,7 +1293,7 @@ function MedicationOptions() {
       <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
-            Personalized GLP-1 treatment options starting at $149.99 per 28-day supply.
+            Plans start at $149.99 / 28-day supply.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
@@ -1167,10 +1320,15 @@ function MedicationOptions() {
         </div>
 
 
-        <p className="mt-4 text-[11px] leading-relaxed text-[#103942]/70">
-          <span aria-hidden="true">*</span>
-          {INSURANCE_DISCLAIMER}
-        </p>
+        <div className="mt-4 space-y-1.5 text-[11px] leading-relaxed text-[#103942]/70">
+          <p>{COMPOUNDED_FDA_QUALIFIER}</p>
+          <p>{PRESCRIPTION_QUALIFIER}</p>
+          <p>{SUPPLY_PERIOD_QUALIFIER}</p>
+          <p>
+            <span aria-hidden="true">*</span>
+            {INSURANCE_DISCLAIMER}
+          </p>
+        </div>
 
         {remaining.length > 0 && (
           <div className="mt-6 flex justify-center">
@@ -1405,7 +1563,7 @@ function CompoundedVsBrand() {
       meds: "Tirzepatide, Semaglutide",
       rows: [
         ["Regulation", "Prepared by licensed US compounding pharmacies."],
-        ["Cost", "$149.99–$249.99 per 28-day supply, out of pocket. No insurance required."],
+        ["Cost", "$149.99–$279 / 28-day supply, out of pocket. No insurance required."],
         ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
         ["Supply", "Availability varies and is confirmed at the time of prescribing."],
       ],
@@ -1416,7 +1574,7 @@ function CompoundedVsBrand() {
       meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
       rows: [
         ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "From $199.99 per month. Insurance and savings cards may apply."],
+        ["Cost", "Available on request. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
         ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
         ["Supply", "Subject to manufacturer shortages from time to time."],
       ],
