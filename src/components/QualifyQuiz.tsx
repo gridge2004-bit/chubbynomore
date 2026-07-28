@@ -709,14 +709,12 @@ function ResultCard({
           </a>
         )}
 
-        {SUPPORT_MAILTO && (
-          <a
-            href={SUPPORT_MAILTO}
-            className="text-sm font-semibold text-[#103942] underline-offset-4 hover:underline"
-          >
-            Have a question? Email our team
-          </a>
-        )}
+        <a
+          href={SUPPORT_MAILTO}
+          className="text-sm font-semibold text-[#103942] underline-offset-4 hover:underline"
+        >
+          Have a question? Email our team
+        </a>
 
         {onBack && (
           <button
