@@ -2016,7 +2016,7 @@ const questionSteps: QuestionStep[] = [
                 }}
                 aria-invalid={showError || undefined}
                 aria-describedby={showError ? "q-current-weight-err" : undefined}
-                className="w-full rounded-2xl border border-[#103942]/12 bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942]/12 focus:ring-2 focus:ring-[#42D1C3]"
+                className="w-full rounded-2xl border border-[#103942]/12 bg-white px-5 py-4 pr-16 text-lg font-semibold text-[#103942] outline-none transition focus:border-[#103942] focus:ring-2 focus:ring-[#42D1C3]"
               />
               <span
                 aria-hidden="true"
@@ -2080,14 +2080,14 @@ const questionSteps: QuestionStep[] = [
                   className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left text-base font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3] ${
                     selected
                       ? "border-[#103942] bg-[#103942] text-white"
-                      : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]/12"
+                      : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]"
                   }`}
                 >
                   <span>{o.label}</span>
                   <span
                     aria-hidden="true"
                     className={`grid h-5 w-5 place-items-center rounded-full border-2 ${
-                      selected ? "border-white" : "border-[#103942]"
+                      selected ? "border-white" : "border-[#103942]/30"
                     }`}
                   >
                     {selected && (
@@ -2133,7 +2133,7 @@ const questionSteps: QuestionStep[] = [
             className={`flex cursor-pointer items-start gap-3 rounded-2xl border px-4 py-3.5 text-left text-sm leading-relaxed transition sm:text-base ${
               checked
                 ? "border-[#103942] bg-[#F5F5F7] text-[#103942]"
-                : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]/12"
+                : "border-[#103942]/12 bg-white text-[#103942] hover:border-[#103942]"
             }`}
           >
             <input
@@ -2147,7 +2147,7 @@ const questionSteps: QuestionStep[] = [
               className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 ${
                 checked
                   ? "border-[#103942] bg-[#103942] text-white"
-                  : "border-[#103942] bg-white"
+                  : "border-[#103942]/30 bg-white"
               }`}
             >
               {checked && (
