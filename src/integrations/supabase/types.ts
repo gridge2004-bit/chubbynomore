@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          consent_text_version: string
+          created_at: string
+          email: string
+          first_name: string
+          funnel_source: string
+          funnel_status: string
+          id: string
+          last_activity_at: string
+          last_name: string
+          marketing_consent: boolean
+          marketing_consent_at: string | null
+          operational_consent: boolean
+          operational_consent_at: string | null
+          phone: string
+          referring_page: string | null
+          state: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          consent_text_version: string
+          created_at?: string
+          email: string
+          first_name: string
+          funnel_source?: string
+          funnel_status?: string
+          id?: string
+          last_activity_at?: string
+          last_name: string
+          marketing_consent?: boolean
+          marketing_consent_at?: string | null
+          operational_consent?: boolean
+          operational_consent_at?: string | null
+          phone: string
+          referring_page?: string | null
+          state: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          consent_text_version?: string
+          created_at?: string
+          email?: string
+          first_name?: string
+          funnel_source?: string
+          funnel_status?: string
+          id?: string
+          last_activity_at?: string
+          last_name?: string
+          marketing_consent?: boolean
+          marketing_consent_at?: string | null
+          operational_consent?: boolean
+          operational_consent_at?: string | null
+          phone?: string
+          referring_page?: string | null
+          state?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
