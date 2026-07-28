@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Info, Menu, X } from "lucide-react";
 import { Reveal, useParallax } from "@/components/Reveal";
+import { LEGAL_LINKS } from "@/components/LegalPage";
+
 import heroImg from "@/assets/hero.jpg";
 import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
@@ -133,10 +135,10 @@ const faqs = [
     a: (
       <>
         Your health information is collected through the private online intake and used to evaluate and coordinate your care. It should only be shared with the providers, pharmacies, and service partners involved in delivering that care, as permitted by applicable law and the Chubby No More Privacy Policy.{" "}
-        {/* TODO: Replace /privacy-policy-placeholder with the actual privacy-policy URL once it exists. */}
-        <a href="/privacy-policy-placeholder" className="underline hover:no-underline">
+        <a href="/privacy-policy" className="underline hover:no-underline">
           Read our Privacy Policy
         </a>
+
       </>
     ),
   },
@@ -2019,7 +2021,7 @@ function Footer() {
   return (
     <footer className="bg-[#F5F5F7] text-[#103942]">
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-10">
-        <div className="grid gap-12 md:grid-cols-2">
+        <div className="grid gap-12 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
               <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-24 w-auto shrink-0 md:h-28" />
@@ -2041,7 +2043,20 @@ function Footer() {
               ))}
             </ul>
           </div>
+          <div>
+            <div className="text-sm uppercase tracking-[0.2em] text-[#103942]/65">Legal</div>
+            <ul className="mt-4 space-y-3 text-base md:text-lg">
+              {LEGAL_LINKS.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-[#103942] transition hover:text-[#42D1C3]">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+
         <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-sm text-[#103942]/65 md:flex-row">
           <span>© {new Date().getFullYear()} Chubby No More. All rights reserved.</span>
         </div>
