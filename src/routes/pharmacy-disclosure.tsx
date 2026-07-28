@@ -102,7 +102,7 @@ function PharmacyDisclosurePage() {
       </Section>
 
       <Section n={10} title="FDA-approval distinction">
-        <P className-="">
+        <P>
           <strong>Compounded medications are not FDA-approved for safety, effectiveness, or quality.</strong>{" "}
           This differs from brand-name products, which have undergone FDA review for their approved
           indications.

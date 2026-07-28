@@ -9,15 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as TelehealthConsentRouteImport } from './routes/telehealth-consent'
+import { Route as SubscriptionPolicyRouteImport } from './routes/subscription-policy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as PharmacyDisclosureRouteImport } from './routes/pharmacy-disclosure'
 import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 
+const TermsOfUseRoute = TermsOfUseRouteImport.update({
+  id: '/terms-of-use',
+  path: '/terms-of-use',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelehealthConsentRoute = TelehealthConsentRouteImport.update({
+  id: '/telehealth-consent',
+  path: '/telehealth-consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionPolicyRoute = SubscriptionPolicyRouteImport.update({
+  id: '/subscription-policy',
+  path: '/subscription-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PharmacyDisclosureRoute = PharmacyDisclosureRouteImport.update({
+  id: '/pharmacy-disclosure',
+  path: '/pharmacy-disclosure',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntakeRoute = IntakeRouteImport.update({
@@ -44,14 +68,22 @@ const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/subscription-policy': typeof SubscriptionPolicyRoute
+  '/telehealth-consent': typeof TelehealthConsentRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/subscription-policy': typeof SubscriptionPolicyRoute
+  '/telehealth-consent': typeof TelehealthConsentRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
@@ -59,7 +91,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/intake': typeof IntakeRouteWithChildren
+  '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/subscription-policy': typeof SubscriptionPolicyRoute
+  '/telehealth-consent': typeof TelehealthConsentRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
 }
@@ -68,21 +104,33 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/intake'
+    | '/pharmacy-disclosure'
     | '/privacy-policy'
+    | '/subscription-policy'
+    | '/telehealth-consent'
+    | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/intake'
+    | '/pharmacy-disclosure'
     | '/privacy-policy'
+    | '/subscription-policy'
+    | '/telehealth-consent'
+    | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
   id:
     | '__root__'
     | '/'
     | '/intake'
+    | '/pharmacy-disclosure'
     | '/privacy-policy'
+    | '/subscription-policy'
+    | '/telehealth-consent'
+    | '/terms-of-use'
     | '/intake/clinical'
     | '/medications/$slug'
   fileRoutesById: FileRoutesById
@@ -90,17 +138,49 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntakeRoute: typeof IntakeRouteWithChildren
+  PharmacyDisclosureRoute: typeof PharmacyDisclosureRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SubscriptionPolicyRoute: typeof SubscriptionPolicyRoute
+  TelehealthConsentRoute: typeof TelehealthConsentRoute
+  TermsOfUseRoute: typeof TermsOfUseRoute
   MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-use': {
+      id: '/terms-of-use'
+      path: '/terms-of-use'
+      fullPath: '/terms-of-use'
+      preLoaderRoute: typeof TermsOfUseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/telehealth-consent': {
+      id: '/telehealth-consent'
+      path: '/telehealth-consent'
+      fullPath: '/telehealth-consent'
+      preLoaderRoute: typeof TelehealthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription-policy': {
+      id: '/subscription-policy'
+      path: '/subscription-policy'
+      fullPath: '/subscription-policy'
+      preLoaderRoute: typeof SubscriptionPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pharmacy-disclosure': {
+      id: '/pharmacy-disclosure'
+      path: '/pharmacy-disclosure'
+      fullPath: '/pharmacy-disclosure'
+      preLoaderRoute: typeof PharmacyDisclosureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intake': {
@@ -148,7 +228,11 @@ const IntakeRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntakeRoute: IntakeRouteWithChildren,
+  PharmacyDisclosureRoute: PharmacyDisclosureRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SubscriptionPolicyRoute: SubscriptionPolicyRoute,
+  TelehealthConsentRoute: TelehealthConsentRoute,
+  TermsOfUseRoute: TermsOfUseRoute,
   MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
