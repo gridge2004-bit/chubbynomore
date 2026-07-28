@@ -19,7 +19,10 @@ export const Route = createFileRoute("/medications/$slug")({
     }
     const { med } = loaderData;
     const title = `${med.name} — Dosage, Side Effects & Pricing | ChubbyNoMore`;
-    const desc = `${med.name} for weight loss: ${med.drugClass}, ${med.frequency.toLowerCase()} ${med.form.toLowerCase()}. Candidate profile, dosing, side effects, monitoring and pricing from ${med.price}${med.period}.`;
+    const priceText = med.price.startsWith("$")
+      ? `pricing from ${med.price}${med.period}`
+      : `pricing ${med.price.toLowerCase()}`;
+    const desc = `${med.name} for weight loss: ${med.drugClass}, ${med.frequency.toLowerCase()} ${med.form.toLowerCase()}. Candidate profile, dosing, side effects, monitoring and ${priceText}.`;
     return {
       meta: [
         { title },
@@ -94,9 +97,15 @@ function MedicationDetail() {
               {med.summary}
             </p>
             <div className="mt-6 flex items-baseline gap-2">
-              <span className="text-sm">Starting at</span>
-              <span className="text-4xl font-bold">{med.price}</span>
-              <span className="text-sm">{med.period}</span>
+              {med.price.startsWith("$") ? (
+                <>
+                  <span className="text-sm">Starting at</span>
+                  <span className="text-4xl font-bold">{med.price}</span>
+                  <span className="text-sm">{med.period}</span>
+                </>
+              ) : (
+                <span className="text-2xl font-bold">{med.price}</span>
+              )}
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -207,9 +216,26 @@ function MedicationDetail() {
       </Section>
 
       <Section title="Pricing">
-        <p className="text-[15px]">
-          <strong>{med.name}</strong> starts at <strong>{med.price}{med.period}</strong>. No insurance
-          required. HSA/FSA eligible. Cancel anytime.
+        {med.price.startsWith("$") ? (
+          <p className="text-[15px]">
+            <strong>{med.name}</strong> starts at{" "}
+            <strong>
+              {med.price}
+              {med.period}
+            </strong>
+            . No insurance required. HSA/FSA eligible.
+          </p>
+        ) : (
+          <p className="text-[15px]">
+            <strong>{med.name}</strong> is <strong>{med.price.toLowerCase()}</strong>. Brand-name
+            medication pricing depends on prescription, insurance or savings-program eligibility,
+            pharmacy pricing, and availability.
+          </p>
+        )}
+        <p className="mt-3 text-[13px] leading-relaxed text-[#103942]/70">
+          Prescription required. A licensed provider determines whether treatment is medically
+          appropriate. Medication and dose are not guaranteed. Prices shown apply to the stated
+          supply period and may vary if the prescribed treatment, pharmacy, or product changes.
         </p>
       </Section>
 
@@ -262,8 +288,7 @@ function MedicationDetail() {
                   </div>
                   <div className="mt-2 font-serif text-lg">{m.name}</div>
                   <div className="mt-1 text-sm text-[#103942]/70">
-                    From {m.price}
-                    {m.period}
+                    {m.price.startsWith("$") ? `From ${m.price}${m.period}` : m.price}
                   </div>
                 </Link>
               ))}
