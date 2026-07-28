@@ -1864,16 +1864,16 @@ function Footer() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="flex items-center gap-3">
-              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-14 w-auto shrink-0 md:h-16" />
+              <img src={cnmLogoFullAsset.url} alt="Chubby No More" className="h-24 w-auto shrink-0 md:h-28" />
             </div>
 
-            <p className="mt-4 max-w-xs text-sm text-[#103942]/70">
+            <p className="mt-5 max-w-sm text-base leading-relaxed text-[#103942]/70 md:text-lg">
               Online prescription weight-management care with clinician review and home delivery, where available.
             </p>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-[#103942]/65">Program</div>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <div className="text-sm uppercase tracking-[0.2em] text-[#103942]/65">Program</div>
+            <ul className="mt-4 space-y-3 text-base md:text-lg">
               {programLinks.map((l) => (
                 <li key={l.label}>
                   <a href={l.href} className="text-[#103942] transition hover:text-[#42D1C3]">
@@ -1884,7 +1884,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-xs text-[#103942]/65 md:flex-row">
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#103942]/10 pt-8 text-sm text-[#103942]/65 md:flex-row">
           <span>© {new Date().getFullYear()} Chubby No More. All rights reserved.</span>
         </div>
       </div>
