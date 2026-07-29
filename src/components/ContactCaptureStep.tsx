@@ -394,6 +394,38 @@ export function ContactCaptureStep({
           </p>
         )}
 
+        <label htmlFor="consent-storage" className="flex gap-3 text-sm leading-relaxed text-[#103942]">
+          <input
+            id="consent-storage"
+            type="checkbox"
+            required
+            aria-required="true"
+            aria-invalid={!!errors.storageAck}
+            aria-describedby={errors.storageAck ? "err-storage" : undefined}
+            checked={storageAck}
+            onChange={(e) => setStorageAck(e.target.checked)}
+            className="mt-1 h-5 w-5 shrink-0 rounded border-[#103942]/30 accent-[#42D1C3]"
+          />
+          <span>
+            {SCREENING_CONSENT_TEXT}
+            <Req /> See our{" "}
+            <a href="/privacy-policy" className="underline underline-offset-2">
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a href="/telehealth-consent" className="underline underline-offset-2">
+              Telehealth Consent
+            </a>
+            .
+          </span>
+        </label>
+        {errors.storageAck && (
+          <p id="err-storage" className="text-xs font-medium text-[#103942]">
+            {errors.storageAck}
+          </p>
+        )}
+
+
         <label htmlFor="consent-marketing" className="flex gap-3 text-xs leading-relaxed text-[#103942]/70">
           <input
             id="consent-marketing"
