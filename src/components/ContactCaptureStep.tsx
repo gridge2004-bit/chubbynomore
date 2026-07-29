@@ -57,18 +57,22 @@ function Req() {
 }
 
 /**
- * Contact capture step. Collects contact details + consents only.
- * PRIVACY: no quiz / health answers are read, sent, or stored here.
+ * Contact capture step. Collects contact details, consents, and submits the
+ * complete questionnaire through a single server function.
+ * PRIVACY: health answers are passed in memory only — never to localStorage,
+ * sessionStorage, URLs, analytics, or the marketing sync payload.
  */
 export function ContactCaptureStep({
   onBack,
   onSaved,
+  screening,
 }: {
   onBack: () => void;
   onSaved: (leadId: string) => void;
+  screening: ScreeningPayload;
 }) {
   const [saved, setSaved] = useState<{ leadId: string } | null>(null);
-  const submitLead = useServerFn(createLead);
+  const submit = useServerFn(submitScreening);
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -77,11 +81,13 @@ export function ContactCaptureStep({
     state: "",
   });
   const [operational, setOperational] = useState(false);
+  const [storageAck, setStorageAck] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const errorRef = useRef<HTMLDivElement | null>(null);
+  const inFlight = useRef(false);
 
   useEffect(() => {
     if (formError && errorRef.current) {
@@ -103,6 +109,8 @@ export function ContactCaptureStep({
     if (!values.state) e.state = "Select your state of residence.";
     if (!operational)
       e.operational = "This permission is required to continue.";
+    if (!storageAck)
+      e.storageAck = "This acknowledgment is required to continue.";
     return e;
   };
 
@@ -112,39 +120,49 @@ export function ContactCaptureStep({
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) return;
-    if (submitting || saved) return; // prevent duplicate submissions
+    if (submitting || saved || inFlight.current) return; // duplicate-click guard
 
+    inFlight.current = true;
     setSubmitting(true);
     try {
       const params =
         typeof window !== "undefined"
           ? new URLSearchParams(window.location.search)
           : new URLSearchParams();
-      const res = await submitLead({
+      const res = await submit({
         data: {
-          firstName: values.firstName.trim(),
-          lastName: values.lastName.trim(),
-          email: values.email.trim(),
-          phone: values.phone.trim(),
-          state: values.state,
-          operationalConsent: true as const,
-          marketingConsent: marketing,
-          consentTextVersion: CONSENT_TEXT_VERSION,
-          funnelSource: "website_intake",
-          referringPage:
-            typeof document !== "undefined"
-              ? document.referrer || window.location.pathname
-              : undefined,
-          utm: {
-            source: params.get("utm_source") ?? undefined,
-            medium: params.get("utm_medium") ?? undefined,
-            campaign: params.get("utm_campaign") ?? undefined,
-            term: params.get("utm_term") ?? undefined,
-            content: params.get("utm_content") ?? undefined,
+          contact: {
+            firstName: values.firstName.trim(),
+            lastName: values.lastName.trim(),
+            email: values.email.trim(),
+            phone: values.phone.trim(),
+            state: values.state,
+            operationalConsent: true as const,
+            marketingConsent: marketing,
+            consentTextVersion: CONSENT_TEXT_VERSION,
+            funnelSource: "website_intake",
+            referringPage:
+              typeof document !== "undefined"
+                ? document.referrer || window.location.pathname
+                : undefined,
+            utm: {
+              source: params.get("utm_source") ?? undefined,
+              medium: params.get("utm_medium") ?? undefined,
+              campaign: params.get("utm_campaign") ?? undefined,
+              term: params.get("utm_term") ?? undefined,
+              content: params.get("utm_content") ?? undefined,
+            },
+          },
+          screening: {
+            ...screening,
+            completedAt: new Date().toISOString(),
+            consentToStoreScreeningData: true as const,
+            screeningConsentTextVersion: SCREENING_CONSENT_TEXT_VERSION,
           },
         },
       });
       if (!res?.leadId) throw new Error("No lead id returned");
+      // Success card only renders after the database save is confirmed.
       setSaved({ leadId: res.leadId });
     } catch {
       // Keep every entered value in state so nothing is lost.
@@ -152,6 +170,7 @@ export function ContactCaptureStep({
         "We couldn\u2019t save your information. Your entries are still here. Please try again."
       );
     } finally {
+      inFlight.current = false;
       setSubmitting(false);
     }
   };
