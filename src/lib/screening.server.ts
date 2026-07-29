@@ -85,6 +85,8 @@ function hashKey(value: string): string {
 }
 
 export function rateLimitOk(email: string): boolean {
+  // Development/preview builds are used for repeated manual testing.
+  if (isDevelopmentEnvironment()) return true;
   const key = hashKey(email.toLowerCase());
   const now = Date.now();
   const recent = (attempts.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
