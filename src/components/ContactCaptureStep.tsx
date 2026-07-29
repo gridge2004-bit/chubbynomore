@@ -1,7 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Confetti } from "@/components/Confetti";
-import { createLead, CONSENT_TEXT_VERSION } from "@/lib/leads.functions";
+import { CONSENT_TEXT_VERSION } from "@/lib/leads.functions";
+import { submitScreening } from "@/lib/screening.functions";
+
+/** Screening answers handed over from the questionnaire (React state only). */
+export type ScreeningPayload = {
+  isAdult: "yes" | "no";
+  priorGlp1Use?: "yes" | "no" | "unsure";
+  healthConditions: string[];
+  heightFeet?: number;
+  heightInches?: number;
+  weightPounds?: number;
+  weightRelatedConditionResponse?: "yes" | "no" | "unsure";
+  startedAt?: string;
+};
+
+export const SCREENING_CONSENT_TEXT =
+  "I understand that the information I provide will be stored and used to evaluate my request, coordinate next steps, and support the operation of the Chubby No More service. This questionnaire does not guarantee eligibility, treatment, or a prescription.";
+export const SCREENING_CONSENT_TEXT_VERSION = "2026-07-29.v1";
 
 const MINT = "#42D1C3";
 
@@ -40,18 +57,22 @@ function Req() {
 }
 
 /**
- * Contact capture step. Collects contact details + consents only.
- * PRIVACY: no quiz / health answers are read, sent, or stored here.
+ * Contact capture step. Collects contact details, consents, and submits the
+ * complete questionnaire through a single server function.
+ * PRIVACY: health answers are passed in memory only — never to localStorage,
+ * sessionStorage, URLs, analytics, or the marketing sync payload.
  */
 export function ContactCaptureStep({
   onBack,
   onSaved,
+  screening,
 }: {
   onBack: () => void;
   onSaved: (leadId: string) => void;
+  screening: ScreeningPayload;
 }) {
   const [saved, setSaved] = useState<{ leadId: string } | null>(null);
-  const submitLead = useServerFn(createLead);
+  const submit = useServerFn(submitScreening);
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -60,11 +81,13 @@ export function ContactCaptureStep({
     state: "",
   });
   const [operational, setOperational] = useState(false);
+  const [storageAck, setStorageAck] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const errorRef = useRef<HTMLDivElement | null>(null);
+  const inFlight = useRef(false);
 
   useEffect(() => {
     if (formError && errorRef.current) {
@@ -86,6 +109,8 @@ export function ContactCaptureStep({
     if (!values.state) e.state = "Select your state of residence.";
     if (!operational)
       e.operational = "This permission is required to continue.";
+    if (!storageAck)
+      e.storageAck = "This acknowledgment is required to continue.";
     return e;
   };
 
@@ -95,39 +120,49 @@ export function ContactCaptureStep({
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) return;
-    if (submitting || saved) return; // prevent duplicate submissions
+    if (submitting || saved || inFlight.current) return; // duplicate-click guard
 
+    inFlight.current = true;
     setSubmitting(true);
     try {
       const params =
         typeof window !== "undefined"
           ? new URLSearchParams(window.location.search)
           : new URLSearchParams();
-      const res = await submitLead({
+      const res = await submit({
         data: {
-          firstName: values.firstName.trim(),
-          lastName: values.lastName.trim(),
-          email: values.email.trim(),
-          phone: values.phone.trim(),
-          state: values.state,
-          operationalConsent: true as const,
-          marketingConsent: marketing,
-          consentTextVersion: CONSENT_TEXT_VERSION,
-          funnelSource: "website_intake",
-          referringPage:
-            typeof document !== "undefined"
-              ? document.referrer || window.location.pathname
-              : undefined,
-          utm: {
-            source: params.get("utm_source") ?? undefined,
-            medium: params.get("utm_medium") ?? undefined,
-            campaign: params.get("utm_campaign") ?? undefined,
-            term: params.get("utm_term") ?? undefined,
-            content: params.get("utm_content") ?? undefined,
+          contact: {
+            firstName: values.firstName.trim(),
+            lastName: values.lastName.trim(),
+            email: values.email.trim(),
+            phone: values.phone.trim(),
+            state: values.state,
+            operationalConsent: true as const,
+            marketingConsent: marketing,
+            consentTextVersion: CONSENT_TEXT_VERSION,
+            funnelSource: "website_intake",
+            referringPage:
+              typeof document !== "undefined"
+                ? document.referrer || window.location.pathname
+                : undefined,
+            utm: {
+              source: params.get("utm_source") ?? undefined,
+              medium: params.get("utm_medium") ?? undefined,
+              campaign: params.get("utm_campaign") ?? undefined,
+              term: params.get("utm_term") ?? undefined,
+              content: params.get("utm_content") ?? undefined,
+            },
+          },
+          screening: {
+            ...screening,
+            completedAt: new Date().toISOString(),
+            consentToStoreScreeningData: true as const,
+            screeningConsentTextVersion: SCREENING_CONSENT_TEXT_VERSION,
           },
         },
       });
       if (!res?.leadId) throw new Error("No lead id returned");
+      // Success card only renders after the database save is confirmed.
       setSaved({ leadId: res.leadId });
     } catch {
       // Keep every entered value in state so nothing is lost.
@@ -135,6 +170,7 @@ export function ContactCaptureStep({
         "We couldn\u2019t save your information. Your entries are still here. Please try again."
       );
     } finally {
+      inFlight.current = false;
       setSubmitting(false);
     }
   };
@@ -357,6 +393,38 @@ export function ContactCaptureStep({
             {errors.operational}
           </p>
         )}
+
+        <label htmlFor="consent-storage" className="flex gap-3 text-sm leading-relaxed text-[#103942]">
+          <input
+            id="consent-storage"
+            type="checkbox"
+            required
+            aria-required="true"
+            aria-invalid={!!errors.storageAck}
+            aria-describedby={errors.storageAck ? "err-storage" : undefined}
+            checked={storageAck}
+            onChange={(e) => setStorageAck(e.target.checked)}
+            className="mt-1 h-5 w-5 shrink-0 rounded border-[#103942]/30 accent-[#42D1C3]"
+          />
+          <span>
+            {SCREENING_CONSENT_TEXT}
+            <Req /> See our{" "}
+            <a href="/privacy-policy" className="underline underline-offset-2">
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a href="/telehealth-consent" className="underline underline-offset-2">
+              Telehealth Consent
+            </a>
+            .
+          </span>
+        </label>
+        {errors.storageAck && (
+          <p id="err-storage" className="text-xs font-medium text-[#103942]">
+            {errors.storageAck}
+          </p>
+        )}
+
 
         <label htmlFor="consent-marketing" className="flex gap-3 text-xs leading-relaxed text-[#103942]/70">
           <input

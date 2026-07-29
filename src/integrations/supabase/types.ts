@@ -225,6 +225,110 @@ export type Database = {
           },
         ]
       }
+      retention_settings: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          retention_days: number | null
+          setting_key: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          retention_days?: number | null
+          setting_key: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          retention_days?: number | null
+          setting_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      screening_responses: {
+        Row: {
+          bmi_category: string | null
+          calculated_bmi: number | null
+          consent_to_store_screening_data: boolean
+          created_at: string
+          health_conditions: string[]
+          height_feet: number | null
+          height_inches: number | null
+          id: string
+          is_adult: string | null
+          lead_id: string | null
+          prior_glp1_use: string | null
+          questionnaire_version: string
+          screening_completed_at: string | null
+          screening_consent_text_version: string | null
+          screening_consent_timestamp: string | null
+          screening_outcome: string
+          screening_started_at: string | null
+          updated_at: string
+          weight_pounds: number | null
+          weight_related_condition_response: string | null
+        }
+        Insert: {
+          bmi_category?: string | null
+          calculated_bmi?: number | null
+          consent_to_store_screening_data?: boolean
+          created_at?: string
+          health_conditions?: string[]
+          height_feet?: number | null
+          height_inches?: number | null
+          id?: string
+          is_adult?: string | null
+          lead_id?: string | null
+          prior_glp1_use?: string | null
+          questionnaire_version?: string
+          screening_completed_at?: string | null
+          screening_consent_text_version?: string | null
+          screening_consent_timestamp?: string | null
+          screening_outcome: string
+          screening_started_at?: string | null
+          updated_at?: string
+          weight_pounds?: number | null
+          weight_related_condition_response?: string | null
+        }
+        Update: {
+          bmi_category?: string | null
+          calculated_bmi?: number | null
+          consent_to_store_screening_data?: boolean
+          created_at?: string
+          health_conditions?: string[]
+          height_feet?: number | null
+          height_inches?: number | null
+          id?: string
+          is_adult?: string | null
+          lead_id?: string | null
+          prior_glp1_use?: string | null
+          questionnaire_version?: string
+          screening_completed_at?: string | null
+          screening_consent_text_version?: string | null
+          screening_consent_timestamp?: string | null
+          screening_outcome?: string
+          screening_started_at?: string | null
+          updated_at?: string
+          weight_pounds?: number | null
+          weight_related_condition_response?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "screening_responses_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
