@@ -484,6 +484,7 @@ export function QualifyQuiz() {
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<Answers>({});
   const [showContact, setShowContact] = useState(false);
+  const [startedAt] = useState(() => new Date().toISOString());
 
   const setAnswer = (id: string, value: unknown) =>
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -606,6 +607,31 @@ export function QualifyQuiz() {
           {isResult && showContact && (
             <ContactCaptureStep
               onBack={() => setShowContact(false)}
+              screening={{
+                isAdult: answers["is_adult"] === "no" ? "no" : "yes",
+                priorGlp1Use: answers["current_glp1"] as
+                  | "yes"
+                  | "no"
+                  | "unsure"
+                  | undefined,
+                healthConditions:
+                  (answers["health_conditions"] as string[]) ?? [],
+                heightFeet: answers["height_ft"]
+                  ? Number(answers["height_ft"])
+                  : undefined,
+                heightInches:
+                  answers["height_in"] !== undefined &&
+                  answers["height_in"] !== ""
+                    ? Number(answers["height_in"])
+                    : undefined,
+                weightPounds: answers["current_weight"]
+                  ? Number(answers["current_weight"])
+                  : undefined,
+                weightRelatedConditionResponse: answers[
+                  "weight_related_condition"
+                ] as "yes" | "no" | "unsure" | undefined,
+                startedAt: startedAt,
+              }}
               onSaved={(leadId) => {
                 try {
                   sessionStorage.setItem("cnm_lead_id", leadId);
