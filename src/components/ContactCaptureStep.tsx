@@ -1,7 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Confetti } from "@/components/Confetti";
-import { createLead, CONSENT_TEXT_VERSION } from "@/lib/leads.functions";
+import { CONSENT_TEXT_VERSION } from "@/lib/leads.functions";
+import { submitScreening } from "@/lib/screening.functions";
+
+/** Screening answers handed over from the questionnaire (React state only). */
+export type ScreeningPayload = {
+  isAdult: "yes" | "no";
+  priorGlp1Use?: "yes" | "no" | "unsure";
+  healthConditions: string[];
+  heightFeet?: number;
+  heightInches?: number;
+  weightPounds?: number;
+  weightRelatedConditionResponse?: "yes" | "no" | "unsure";
+  startedAt?: string;
+};
+
+export const SCREENING_CONSENT_TEXT =
+  "I understand that the information I provide will be stored and used to evaluate my request, coordinate next steps, and support the operation of the Chubby No More service. This questionnaire does not guarantee eligibility, treatment, or a prescription.";
+export const SCREENING_CONSENT_TEXT_VERSION = "2026-07-29.v1";
 
 const MINT = "#42D1C3";
 
