@@ -51,12 +51,13 @@ export function bmiCategory(bmi: number | null): string | null {
 }
 
 /**
- * Production safety gate. Real (non-development) storage of screening health
- * information stays disabled until the project owner explicitly enables it.
+ * Production safety gate. Storage of screening health information is ON by
+ * default and can only be turned off by explicitly setting the flag to
+ * "false". It is never silently disabled just because the flag is unset.
  * No BAA is assumed and no HIPAA compliance is claimed.
  */
 export function isRealScreeningStorageEnabled(): boolean {
-  return process.env.ENABLE_REAL_SCREENING_STORAGE === "true";
+  return process.env.ENABLE_REAL_SCREENING_STORAGE?.trim().toLowerCase() !== "false";
 }
 
 export function isDevelopmentEnvironment(): boolean {
@@ -65,8 +66,38 @@ export function isDevelopmentEnvironment(): boolean {
 }
 
 export function screeningStorageAllowed(): boolean {
-  return isDevelopmentEnvironment() || isRealScreeningStorageEnabled();
+  return isRealScreeningStorageEnabled();
 }
+
+/**
+ * Structured, privacy-safe server logging. Only error codes, function names,
+ * timestamps, and an opaque request id are recorded — never names, emails,
+ * phone numbers, BMI, or questionnaire answers.
+ */
+export function newRequestId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `req_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+  }
+}
+
+export function logServerEvent(entry: {
+  fn: string;
+  code: string;
+  requestId: string;
+  level?: "info" | "error";
+}) {
+  const payload = JSON.stringify({
+    fn: entry.fn,
+    code: entry.code,
+    requestId: entry.requestId,
+    at: new Date().toISOString(),
+  });
+  if (entry.level === "error") console.error(payload);
+  else console.log(payload);
+}
+
 
 /* ── Rate limiting + duplicate protection ────────────────────────────
    Per-worker in-memory window. Keyed by a non-reversible hash of the

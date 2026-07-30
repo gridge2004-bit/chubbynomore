@@ -9,6 +9,8 @@ import {
   QUESTIONNAIRE_VERSION,
   bmiCategory,
   calculateBmi,
+  logServerEvent,
+  newRequestId,
   rateLimitOk,
   screeningStorageAllowed,
   type ScreeningOutcome,
@@ -56,6 +58,8 @@ export async function runScreeningSubmission(
 ): Promise<SubmitResult> {
   const { contact, screening } = data;
   const email = contact.email.toLowerCase();
+  const requestId = newRequestId();
+  const FN = "submitScreening";
 
   if (!rateLimitOk(email)) {
     throw new Error("Too many attempts. Please wait a few minutes and try again.");
@@ -120,7 +124,7 @@ export async function runScreeningSubmission(
       .update(leadPayload)
       .eq("id", existing.id);
     if (error) {
-      console.error("[screening] lead update failed", error.message);
+      logServerEvent({ fn: FN, code: "lead_update_failed", requestId, level: "error" });
       throw new Error("We couldn't save your information. Please try again.");
     }
     leadId = existing.id;
@@ -131,7 +135,7 @@ export async function runScreeningSubmission(
       .select("id")
       .single();
     if (error || !row) {
-      console.error("[screening] lead insert failed", error?.message);
+      logServerEvent({ fn: FN, code: "lead_insert_failed", requestId, level: "error" });
       throw new Error("We couldn't save your information. Please try again.");
     }
     leadId = row.id;
@@ -178,7 +182,7 @@ export async function runScreeningSubmission(
         .update(screeningPayload)
         .eq("id", recent.id);
       if (error) {
-        console.error("[screening] response update failed", error.message);
+        logServerEvent({ fn: FN, code: "screening_update_failed", requestId, level: "error" });
         throw new Error("We couldn't save your questionnaire. Please try again.");
       }
       screeningId = recent.id;
@@ -189,19 +193,53 @@ export async function runScreeningSubmission(
         .select("id")
         .single();
       if (error || !row) {
-        console.error("[screening] response insert failed", error?.message);
+        logServerEvent({ fn: FN, code: "screening_insert_failed", requestId, level: "error" });
         throw new Error("We couldn't save your questionnaire. Please try again.");
       }
       screeningId = row.id;
     }
 
-    await supabaseAdmin
+    // Confirm the screening row exists and is linked to the correct lead
+    // before anything downstream (marketing sync, success screen) happens.
+    const { data: linked, error: verifyError } = await supabaseAdmin
+      .from("screening_responses")
+      .select("id, lead_id")
+      .eq("id", screeningId)
+      .maybeSingle();
+    if (verifyError || !linked || linked.lead_id !== leadId) {
+      logServerEvent({
+        fn: FN,
+        code: "screening_link_verification_failed",
+        requestId,
+        level: "error",
+      });
+      throw new Error(
+        "We couldn't save your information. Please try again.",
+      );
+    }
+
+    const { error: statusError } = await supabaseAdmin
       .from("leads")
       .update({ funnel_status: "screening_saved", last_activity_at: now })
       .eq("id", leadId);
+    if (statusError) {
+      logServerEvent({
+        fn: FN,
+        code: "lead_status_update_failed",
+        requestId,
+        level: "error",
+      });
+    }
+
   } else {
-    console.warn(
-      "[screening] real screening storage disabled; health answers not stored",
+    logServerEvent({
+      fn: FN,
+      code: "screening_storage_disabled",
+      requestId,
+      level: "error",
+    });
+    throw new Error(
+      "We couldn't save your information. Please try again.",
     );
   }
 
@@ -231,10 +269,12 @@ export async function runScreeningSubmission(
     } catch (err) {
       marketingSyncStatus = "failed";
       errorCode = "unexpected_error";
-      console.error(
-        "[launchlist] unexpected error",
-        err instanceof Error ? err.message : "unknown",
-      );
+      logServerEvent({
+        fn: FN,
+        code: "launchlist_unexpected_error",
+        requestId,
+        level: "error",
+      });
     }
 
     const completedAt = new Date().toISOString();
