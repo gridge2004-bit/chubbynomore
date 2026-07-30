@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_allowlist: {
+        Row: {
+          created_at: string
+          email: string
+          role: Database["public"]["Enums"]["admin_role"]
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          role?: Database["public"]["Enums"]["admin_role"]
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          role?: Database["public"]["Enums"]["admin_role"]
+        }
+        Relationships: []
+      }
+      admin_profiles: {
+        Row: {
+          created_at: string
+          disabled_at: string | null
+          invited_by: string | null
+          last_login_at: string | null
+          role: Database["public"]["Enums"]["admin_role"]
+          status: Database["public"]["Enums"]["admin_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          disabled_at?: string | null
+          invited_by?: string | null
+          last_login_at?: string | null
+          role?: Database["public"]["Enums"]["admin_role"]
+          status?: Database["public"]["Enums"]["admin_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          disabled_at?: string | null
+          invited_by?: string | null
+          last_login_at?: string | null
+          role?: Database["public"]["Enums"]["admin_role"]
+          status?: Database["public"]["Enums"]["admin_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      audit_logs: {
+        Row: {
+          admin_role: Database["public"]["Enums"]["admin_role"] | null
+          admin_user_id: string | null
+          created_at: string
+          event_type: string
+          id: string
+          route: string | null
+          session_id: string | null
+          success: boolean
+          target_record_id: string | null
+        }
+        Insert: {
+          admin_role?: Database["public"]["Enums"]["admin_role"] | null
+          admin_user_id?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          route?: string | null
+          session_id?: string | null
+          success?: boolean
+          target_record_id?: string | null
+        }
+        Update: {
+          admin_role?: Database["public"]["Enums"]["admin_role"] | null
+          admin_user_id?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          route?: string | null
+          session_id?: string | null
+          success?: boolean
+          target_record_id?: string | null
+        }
+        Relationships: []
+      }
       clinical_intakes: {
         Row: {
           answers: Json
@@ -334,10 +421,24 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      current_admin_role: {
+        Args: never
+        Returns: Database["public"]["Enums"]["admin_role"]
+      }
+      is_aal2: { Args: never; Returns: boolean }
+      is_admin_aal2: {
+        Args: { _roles: Database["public"]["Enums"]["admin_role"][] }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      admin_role:
+        | "owner"
+        | "admin"
+        | "support"
+        | "clinical_reviewer"
+        | "read_only"
+      admin_status: "active" | "disabled" | "invited"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -464,6 +565,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      admin_role: [
+        "owner",
+        "admin",
+        "support",
+        "clinical_reviewer",
+        "read_only",
+      ],
+      admin_status: ["active", "disabled", "invited"],
+    },
   },
 } as const

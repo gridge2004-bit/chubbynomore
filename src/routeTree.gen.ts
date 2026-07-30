@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as NoticeOfPrivacyPracticesRouteImport } from './routes/notice-of-privacy-practices'
 import { Route as PharmacyDisclosureRouteImport } from './routes/pharmacy-disclosure'
@@ -20,12 +21,22 @@ import { Route as SubscriptionPolicyRouteImport } from './routes/subscription-po
 import { Route as TelehealthConsentRouteImport } from './routes/telehealth-consent'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminSecurityRouteImport } from './routes/admin.security'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
+import { Route as AdminCustomersIndexRouteImport } from './routes/admin.customers.index'
+import { Route as AdminCustomersLeadIdRouteImport } from './routes/admin.customers.$leadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntakeRoute = IntakeRouteImport.update({
@@ -79,6 +90,21 @@ const TermsOfUseRoute = TermsOfUseRouteImport.update({
   path: '/terms-of-use',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSecurityRoute = AdminSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AdminRoute,
+} as any)
 const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
   id: '/clinical',
   path: '/clinical',
@@ -89,9 +115,20 @@ const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
   path: '/medications/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCustomersIndexRoute = AdminCustomersIndexRouteImport.update({
+  id: '/customers/',
+  path: '/customers/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersLeadIdRoute = AdminCustomersLeadIdRouteImport.update({
+  id: '/customers/$leadId',
+  path: '/customers/$leadId',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/intake': typeof IntakeRouteWithChildren
   '/notice-of-privacy-practices': typeof NoticeOfPrivacyPracticesRoute
   '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
@@ -102,8 +139,13 @@ export interface FileRoutesByFullPath {
   '/telehealth-consent': typeof TelehealthConsentRoute
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
+  '/admin/customers/': typeof AdminCustomersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,12 +159,18 @@ export interface FileRoutesByTo {
   '/telehealth-consent': typeof TelehealthConsentRoute
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
+  '/admin/customers': typeof AdminCustomersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/intake': typeof IntakeRouteWithChildren
   '/notice-of-privacy-practices': typeof NoticeOfPrivacyPracticesRoute
   '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
@@ -133,13 +181,19 @@ export interface FileRoutesById {
   '/telehealth-consent': typeof TelehealthConsentRoute
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
+  '/admin/customers/': typeof AdminCustomersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/intake'
     | '/notice-of-privacy-practices'
     | '/pharmacy-disclosure'
@@ -150,8 +204,13 @@ export interface FileRouteTypes {
     | '/telehealth-consent'
     | '/terms'
     | '/terms-of-use'
+    | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin/'
+    | '/admin/customers/$leadId'
+    | '/admin/customers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -165,11 +224,17 @@ export interface FileRouteTypes {
     | '/telehealth-consent'
     | '/terms'
     | '/terms-of-use'
+    | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin'
+    | '/admin/customers/$leadId'
+    | '/admin/customers'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/intake'
     | '/notice-of-privacy-practices'
     | '/pharmacy-disclosure'
@@ -180,12 +245,18 @@ export interface FileRouteTypes {
     | '/telehealth-consent'
     | '/terms'
     | '/terms-of-use'
+    | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin/'
+    | '/admin/customers/$leadId'
+    | '/admin/customers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   IntakeRoute: typeof IntakeRouteWithChildren
   NoticeOfPrivacyPracticesRoute: typeof NoticeOfPrivacyPracticesRoute
   PharmacyDisclosureRoute: typeof PharmacyDisclosureRoute
@@ -206,6 +277,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/intake': {
@@ -278,6 +356,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsOfUseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/security': {
+      id: '/admin/security'
+      path: '/security'
+      fullPath: '/admin/security'
+      preLoaderRoute: typeof AdminSecurityRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/intake/clinical': {
       id: '/intake/clinical'
       path: '/clinical'
@@ -292,8 +391,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MedicationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/customers/': {
+      id: '/admin/customers/'
+      path: '/customers'
+      fullPath: '/admin/customers/'
+      preLoaderRoute: typeof AdminCustomersIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customers/$leadId': {
+      id: '/admin/customers/$leadId'
+      path: '/customers/$leadId'
+      fullPath: '/admin/customers/$leadId'
+      preLoaderRoute: typeof AdminCustomersLeadIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminSecurityRoute: typeof AdminSecurityRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminCustomersLeadIdRoute: typeof AdminCustomersLeadIdRoute
+  AdminCustomersIndexRoute: typeof AdminCustomersIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+  AdminSecurityRoute: AdminSecurityRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminCustomersLeadIdRoute: AdminCustomersLeadIdRoute,
+  AdminCustomersIndexRoute: AdminCustomersIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface IntakeRouteChildren {
   IntakeClinicalRoute: typeof IntakeClinicalRoute
@@ -308,6 +439,7 @@ const IntakeRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   IntakeRoute: IntakeRouteWithChildren,
   NoticeOfPrivacyPracticesRoute: NoticeOfPrivacyPracticesRoute,
   PharmacyDisclosureRoute: PharmacyDisclosureRoute,
@@ -323,13 +455,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
