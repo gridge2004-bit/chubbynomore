@@ -21,6 +21,7 @@ import { Route as SubscriptionPolicyRouteImport } from './routes/subscription-po
 import { Route as TelehealthConsentRouteImport } from './routes/telehealth-consent'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
@@ -86,6 +87,11 @@ const TermsOfUseRoute = TermsOfUseRouteImport.update({
   path: '/terms-of-use',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -118,10 +124,10 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
   '/intake': typeof IntakeRouteWithChildren
   '/notice-of-privacy-practices': typeof NoticeOfPrivacyPracticesRoute
   '/pharmacy-disclosure': typeof PharmacyDisclosureRoute
@@ -135,6 +141,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -153,6 +160,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -172,10 +180,10 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/intake'
     | '/notice-of-privacy-practices'
     | '/pharmacy-disclosure'
@@ -189,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/intake/clinical'
     | '/medications/$slug'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -310,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsOfUseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -336,10 +353,12 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
