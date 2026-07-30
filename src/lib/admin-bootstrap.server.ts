@@ -26,6 +26,13 @@ export async function requestAdminAccessInternal(email: string, redirectTo: stri
     });
     if (error) return { ok: true as const };
     userId = invited.user?.id ?? null;
+  } else if (!existing?.email_confirmed_at) {
+    // An invited-but-never-confirmed account cannot receive a password-reset
+    // email, so send a sign-in link instead (it also confirms the address).
+    await supabaseAdmin.auth.signInWithOtp({
+      email: clean,
+      options: { shouldCreateUser: false, emailRedirectTo: redirectTo },
+    });
   } else {
     await supabaseAdmin.auth.resetPasswordForEmail(clean, { redirectTo });
   }
