@@ -26,6 +26,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as AdminCustomersIndexRouteImport } from './routes/admin.customers.index'
+import { Route as AdminCustomersLeadIdRouteImport } from './routes/admin.customers.$leadId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -113,6 +114,11 @@ const AdminCustomersIndexRoute = AdminCustomersIndexRouteImport.update({
   path: '/customers/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCustomersLeadIdRoute = AdminCustomersLeadIdRouteImport.update({
+  id: '/customers/$leadId',
+  path: '/customers/$leadId',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
   '/admin/customers/': typeof AdminCustomersIndexRoute
 }
 export interface FileRoutesByTo {
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
   '/admin/customers': typeof AdminCustomersIndexRoute
 }
 export interface FileRoutesById {
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
   '/admin/customers/': typeof AdminCustomersIndexRoute
 }
 export interface FileRouteTypes {
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin/'
+    | '/admin/customers/$leadId'
     | '/admin/customers/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin'
+    | '/admin/customers/$leadId'
     | '/admin/customers'
   id:
     | '__root__'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin/'
+    | '/admin/customers/$leadId'
     | '/admin/customers/'
   fileRoutesById: FileRoutesById
 }
@@ -367,18 +379,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCustomersIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/customers/$leadId': {
+      id: '/admin/customers/$leadId'
+      path: '/customers/$leadId'
+      fullPath: '/admin/customers/$leadId'
+      preLoaderRoute: typeof AdminCustomersLeadIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminCustomersLeadIdRoute: typeof AdminCustomersLeadIdRoute
   AdminCustomersIndexRoute: typeof AdminCustomersIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminCustomersLeadIdRoute: AdminCustomersLeadIdRoute,
   AdminCustomersIndexRoute: AdminCustomersIndexRoute,
 }
 
