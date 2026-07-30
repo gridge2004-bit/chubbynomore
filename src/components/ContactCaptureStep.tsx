@@ -167,7 +167,7 @@ export function ContactCaptureStep({
     } catch {
       // Keep every entered value in state so nothing is lost.
       setFormError(
-        "We couldn\u2019t save your information. Your entries are still here. Please try again."
+        "We couldn\u2019t save your information. Your answers are still here. Please try again."
       );
     } finally {
       inFlight.current = false;
