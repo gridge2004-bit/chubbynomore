@@ -23,6 +23,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminSecurityRouteImport } from './routes/admin.security'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as AdminCustomersIndexRouteImport } from './routes/admin.customers.index'
@@ -99,6 +100,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSecurityRoute = AdminSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => AdminRoute,
+} as any)
 const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
   id: '/clinical',
   path: '/clinical',
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/security': typeof AdminSecurityRoute
   '/intake/clinical': typeof IntakeClinicalRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/terms-of-use'
     | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin/'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/terms-of-use'
     | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/terms-of-use'
     | '/admin/login'
+    | '/admin/security'
     | '/intake/clinical'
     | '/medications/$slug'
     | '/admin/'
@@ -358,6 +370,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/security': {
+      id: '/admin/security'
+      path: '/security'
+      fullPath: '/admin/security'
+      preLoaderRoute: typeof AdminSecurityRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/intake/clinical': {
       id: '/intake/clinical'
       path: '/clinical'
@@ -391,6 +410,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminSecurityRoute: typeof AdminSecurityRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminCustomersLeadIdRoute: typeof AdminCustomersLeadIdRoute
   AdminCustomersIndexRoute: typeof AdminCustomersIndexRoute
@@ -398,6 +418,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
+  AdminSecurityRoute: AdminSecurityRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminCustomersLeadIdRoute: AdminCustomersLeadIdRoute,
   AdminCustomersIndexRoute: AdminCustomersIndexRoute,
