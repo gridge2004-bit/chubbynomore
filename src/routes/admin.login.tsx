@@ -34,7 +34,13 @@ function AdminLogin() {
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash.includes("type=recovery") || hash.includes("type=invite")) {
+    const hasCode = new URLSearchParams(window.location.search).has("code");
+    if (
+      hasCode ||
+      hash.includes("type=recovery") ||
+      hash.includes("type=invite") ||
+      hash.includes("type=magiclink")
+    ) {
       setRecovery(true);
     }
   }, []);
