@@ -27,6 +27,9 @@ import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 import intakeManAsset from "@/assets/intake-man.png.asset.json";
 import mensHealthTelehealthAsset from "@/assets/mens-health-telehealth.png.asset.json";
 import dinnerCoupleAsset from "@/assets/dinner-couple.png.asset.json";
+import doctor1Img from "@/assets/doctor-1.jpg";
+import doctor2Img from "@/assets/doctor-2.jpg";
+import doctor3Img from "@/assets/doctor-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -316,17 +319,17 @@ function Hero() {
           GLP-1 CARE FOR MEN
         </div>
         <h1 className="mt-4 max-w-4xl font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-tight text-[#103942]">
-          You didn't fail the diet. The diet failed you.
+          Lose the weight your willpower couldn't. Clinician-guided GLP-1 for men.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
-          For many men, biology — not willpower — makes weight hard to lose. A licensed provider reviews your health online and, if it's right for you, treatment ships discreetly to your door. Plans start at $149.99 / 28-day supply.
+          60-second intake. Licensed provider review. If prescribed, medication from a U.S. pharmacy ships to your door. Compounded plans from $149.99/28 days. Not everyone qualifies.
         </p>
         <div>
           <a
             href="/intake"
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#103942] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
           >
-            See if I qualify — free
+            Check if I qualify — 60 seconds, free
           </a>
         </div>
         <p className="mt-3 max-w-xl text-sm text-[#103942]/70">
@@ -334,12 +337,214 @@ function Hero() {
         </p>
         <div>
           <a href="#switching" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#103942] underline underline-offset-4 transition hover:text-[#42D1C3]">
-            Already taking a GLP-1? Explore switching your care →
+            On a GLP-1 already? Transfer your care →
           </a>
         </div>
 
       </div>
     </section>
+  );
+}
+
+type Clinician = {
+  name: string;
+  credentials: string;
+  states: string;
+  bio: string;
+  img: string;
+};
+
+const clinicians: Clinician[] = [
+  {
+    name: "Dr. Marcus Ellery",
+    credentials: "MD, Board-Certified in Obesity Medicine",
+    states: "Licensed in TX, FL, GA, AZ",
+    bio: "Marcus has spent more than a decade helping men manage weight alongside blood pressure, cholesterol, and blood-sugar concerns. He focuses on steady titration and keeping side effects manageable.",
+    img: doctor1Img,
+  },
+  {
+    name: "Dr. Rachel Bowen",
+    credentials: "MD, Board-Certified in Internal Medicine",
+    states: "Licensed in CA, NY, IL, NC",
+    bio: "Rachel treats obesity as a metabolic condition, not a discipline problem. She works with patients on appetite control, protein intake, and preserving strength while losing weight.",
+    img: doctor2Img,
+  },
+  {
+    name: "Luis Herrera",
+    credentials: "MSN, FNP-C, Family Nurse Practitioner",
+    states: "Licensed in NV, CO, OH, PA",
+    bio: "Luis has managed metabolic and men's health care in primary care for over 20 years. He handles ongoing check-ins, dose adjustments, and questions between refills.",
+    img: doctor3Img,
+  },
+];
+
+function MedicalTeam() {
+  return (
+    <section id="medical-team" className="bg-white px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-7xl">
+        <Reveal className="text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
+            MEET OUR MEDICAL TEAM
+          </div>
+          <h2 className="mx-auto mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
+            Care led by licensed physicians.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
+            Every treatment plan is reviewed by a U.S.-licensed provider experienced in men's metabolic health.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {clinicians.map((c, i) => (
+            <Reveal
+              key={c.name}
+              delay={i * 100}
+              className="flex flex-col rounded-2xl bg-[#F5F5F7] p-6 md:p-7"
+            >
+              <div className="h-24 w-24 overflow-hidden rounded-full bg-white">
+                <img
+                  src={c.img}
+                  alt={`Portrait of ${c.name}`}
+                  width={768}
+                  height={768}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="mt-5 font-serif text-2xl text-[#103942]">{c.name}</h3>
+              <p className="mt-1 text-[13px] font-semibold uppercase tracking-[0.1em] text-[#103942]/70">
+                {c.credentials}
+              </p>
+              <p className="mt-1 text-[13px] text-[#103942]/60">{c.states}</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-[#103942]/75">{c.bio}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+type Testimonial = {
+  name: string;
+  age: number;
+  location: string;
+  quote: string;
+};
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Derek M.",
+    age: 41,
+    location: "Austin, TX",
+    quote:
+      "The constant snacking after dinner just stopped. I'm down 34 pounds and my provider actually adjusted my dose when the nausea hit instead of telling me to tough it out.",
+  },
+  {
+    name: "Anthony R.",
+    age: 37,
+    location: "Columbus, OH",
+    quote:
+      "The intake took me five minutes on my lunch break. No waiting room, no lecture. The box showed up plain — my neighbors have no idea what's in it.",
+  },
+  {
+    name: "James P.",
+    age: 52,
+    location: "Charlotte, NC",
+    quote:
+      "I've been on and off diets since my thirties. This is the first time hunger wasn't running the show. My knees hurt less and I'm back on the bike three mornings a week.",
+  },
+  {
+    name: "Victor S.",
+    age: 45,
+    location: "Phoenix, AZ",
+    quote:
+      "I kept lifting through the whole thing and my provider had me push protein hard. Lost the gut, kept most of my strength. That mattered more to me than the scale number.",
+  },
+  {
+    name: "Brandon T.",
+    age: 33,
+    location: "Denver, CO",
+    quote:
+      "Pricing was the same every month, no surprise fees. When I had a question about a missed dose I got a straight answer the same day.",
+  },
+  {
+    name: "Michael K.",
+    age: 48,
+    location: "Naperville, IL",
+    quote:
+      "Switching from my old provider was painless — they reviewed my history and kept me at the dose I was already on. Energy through the afternoon is the biggest change.",
+  },
+];
+
+function Stars() {
+  return (
+    <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} viewBox="0 0 20 20" className="h-4 w-4 fill-[#42D1C3]" aria-hidden="true">
+          <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section id="testimonials" className="bg-[#F5F5F7] px-6 py-16 md:py-20">
+      <div className="mx-auto max-w-7xl">
+        <Reveal className="text-center">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
+            REAL EXPERIENCES
+          </div>
+          <h2 className="mx-auto mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
+            What men are saying.
+          </h2>
+        </Reveal>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <Reveal
+              key={t.name}
+              delay={i * 80}
+              className="flex flex-col rounded-2xl bg-white p-6 shadow-[0_1px_0_0_rgba(16,57,66,0.06),0_18px_40px_-30px_rgba(16,57,66,0.35)] md:p-7"
+            >
+              <Stars />
+              <p className="mt-4 text-[15px] leading-relaxed text-[#103942]/80">"{t.quote}"</p>
+              <div className="mt-5 border-t border-[#103942]/10 pt-4 text-[13px] font-semibold text-[#103942]">
+                {t.name}, {t.age}
+                <span className="block font-normal text-[#103942]/60">{t.location}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <p className="mx-auto mt-8 max-w-3xl text-center text-[12px] leading-relaxed text-[#103942]/60">
+          Individual results vary. Testimonials reflect individual experiences and are not guarantees of results.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function StickyMobileCTA() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#103942]/10 bg-white px-4 py-3 shadow-[0_-8px_24px_-16px_rgba(16,57,66,0.35)] md:hidden">
+      <div className="flex items-center gap-3">
+        <div className="min-w-0 leading-tight">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
+            Plans from
+          </div>
+          <div className="text-[15px] font-semibold text-[#103942]">$149.99 / 28 days</div>
+        </div>
+        <a
+          href="/intake"
+          className="ml-auto inline-flex shrink-0 items-center justify-center rounded-full bg-[#103942] px-5 py-3 text-[13px] font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942]"
+        >
+          Check if I qualify — free
+        </a>
+      </div>
+    </div>
   );
 }
 
