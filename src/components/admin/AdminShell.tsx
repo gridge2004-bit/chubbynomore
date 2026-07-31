@@ -39,7 +39,7 @@ function Centered({ children }: { children: React.ReactNode }) {
 
 /**
  * Client-side gate. This is a convenience layer only — the database (RLS) and
- * every server function independently enforce role + MFA (aal2).
+ * every server function independently enforce the admin role.
  */
 export function AdminShell({
   children,
@@ -83,7 +83,6 @@ export function AdminShell({
       if (
         event === "SIGNED_IN" ||
         event === "TOKEN_REFRESHED" ||
-        event === "MFA_CHALLENGE_VERIFIED" ||
         event === "USER_UPDATED"
       ) {
         void queryClient.invalidateQueries({ queryKey: ["admin-session"] });
@@ -122,11 +121,7 @@ export function AdminShell({
     return <Centered><p className="text-sm text-muted-foreground">Checking access…</p></Centered>;
   }
 
-  // State C/D: the admin profile is valid, only the assurance level is missing.
-  // This is never "access denied".
-  // Pre-launch: MFA is disabled server-side, so "mfa_required" is only possible
-  // when the flag is switched back on.
-  if (data.status !== "ok" && !(data.status === "mfa_required" && !data.mfaRequired)) {
+  if (data.status !== "ok") {
     return (
       <Centered>
         <h1 className="text-lg font-semibold">Access denied</h1>
@@ -185,11 +180,6 @@ export function AdminShell({
           </div>
         </div>
       </header>
-      {!data.mfaRequired && (
-        <div className="border-b border-border bg-muted/60 px-4 py-2 text-center text-xs text-foreground">
-          Pre-launch mode: two-factor authentication is currently disabled.
-        </div>
-      )}
       <main className="mx-auto max-w-6xl px-4 py-8">{children(session)}</main>
     </div>
   );

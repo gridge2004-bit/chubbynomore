@@ -16,7 +16,7 @@ const filtersSchema = z.object({
 
 const idSchema = z.object({ leadId: z.string().uuid() });
 
-/** Current admin session: role, capabilities and MFA state. */
+/** Current admin session: role and capabilities. */
 export const getAdminSession = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -27,22 +27,12 @@ export const getAdminSession = createServerFn({ method: "GET" })
         status: "ok" as const,
         role: s.role,
         capabilities: s.capabilities,
-        mfaRequired: await m.requireAdminMfa(),
       };
-    } catch (error) {
-      if (error instanceof m.AccessDenied) {
-        return {
-          status: error.code,
-          role: null,
-          capabilities: null,
-          mfaRequired: await m.requireAdminMfa(),
-        };
-      }
+    } catch {
       return {
         status: "denied" as const,
         role: null,
         capabilities: null,
-        mfaRequired: await m.requireAdminMfa(),
       };
     }
   });
@@ -100,7 +90,7 @@ export const revealCustomerContact = createServerFn({ method: "POST" })
     return revealed;
   });
 
-/** Security page data: identity + MFA state + recent activity. Works pre-MFA. */
+/** Security page data: identity + recent activity. */
 export const getSecurityOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -112,7 +102,7 @@ export const getSecurityOverview = createServerFn({ method: "GET" })
       success: boolean;
       route: string | null;
     }> = [];
-    if (identity.aal === "aal2" || !identity.mfaRequired) {
+    {
       const { data } = await context.supabase
         .from("audit_logs")
         .select("event_type, created_at, success, route")

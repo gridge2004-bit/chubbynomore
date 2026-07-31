@@ -26,40 +26,18 @@ export type AdminSession = {
   role: AdminRole;
   capabilities: AdminCapabilities;
   sessionId: string | null;
-  aal: string;
 };
 
 /** Generic failure — never distinguishes "no account" from "not authorized". */
 export class AccessDenied extends Error {
-  code: "denied" | "mfa_required";
-  constructor(code: "denied" | "mfa_required" = "denied") {
-    super(code === "mfa_required" ? "MFA_REQUIRED" : "ACCESS_DENIED");
-    this.code = code;
-  }
-}
-
-/**
- * Server-side feature flag: REQUIRE_ADMIN_MFA.
- * Source of truth is the database row `admin_security_settings.require_admin_mfa`
- * (also enforced inside the `is_admin_authorized` RLS helper). Fails closed.
- */
-export async function requireAdminMfa(): Promise<boolean> {
-  try {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data, error } = await supabaseAdmin
-      .from("admin_security_settings")
-      .select("enabled")
-      .eq("key", "require_admin_mfa")
-      .maybeSingle();
-    if (error || !data) return true;
-    return data.enabled;
-  } catch {
-    return true;
+  code: "denied";
+  constructor() {
+    super("ACCESS_DENIED");
+    this.code = "denied";
   }
 }
 
 export async function resolveAdmin(ctx: AdminContext): Promise<AdminSession> {
-  const aal = String(ctx.claims.aal ?? "aal1");
   const sessionId =
     typeof ctx.claims.session_id === "string" ? ctx.claims.session_id : null;
 
@@ -70,13 +48,12 @@ export async function resolveAdmin(ctx: AdminContext): Promise<AdminSession> {
     .maybeSingle();
 
   if (error || !data || data.status !== "active") throw new AccessDenied();
-  if (aal !== "aal2" && (await requireAdminMfa())) throw new AccessDenied("mfa_required");
 
   const role = data.role as AdminRole;
-  return { userId: ctx.userId, role, capabilities: capabilitiesFor(role), sessionId, aal };
+  return { userId: ctx.userId, role, capabilities: capabilitiesFor(role), sessionId };
 }
 
-/** Admin identity without the MFA requirement (for the security page only). */
+/** Admin identity for the security page. */
 export async function resolveAdminIdentity(ctx: AdminContext) {
   const { data } = await ctx.supabase
     .from("admin_profiles")
@@ -88,8 +65,6 @@ export async function resolveAdminIdentity(ctx: AdminContext) {
     role: data.role as AdminRole,
     lastLoginAt: data.last_login_at,
     createdAt: data.created_at,
-    aal: String(ctx.claims.aal ?? "aal1"),
-    mfaRequired: await requireAdminMfa(),
     sessionId:
       typeof ctx.claims.session_id === "string" ? ctx.claims.session_id : null,
   };

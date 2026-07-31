@@ -18,7 +18,6 @@ function SecurityPage() {
   const signOut = useAdminSignOut();
   const fetchOverview = useServerFn(getSecurityOverview);
   const [email, setEmail] = useState<string | null>(null);
-  const [aal, setAal] = useState<string>("aal1");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -30,14 +29,8 @@ function SecurityPage() {
     queryFn: () => fetchOverview(),
   });
 
-  const refreshAal = async () => {
-    const { data: level } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    setAal(level?.currentLevel ?? "aal1");
-  };
-
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
-    void refreshAal();
   }, []);
 
   /** Voluntary, self-service password change. Scoped to the signed-in owner only. */
@@ -88,10 +81,6 @@ function SecurityPage() {
               {overview ? ROLE_LABEL[overview.role as AdminRole] : "—"}
             </span>
           </p>
-          <p>
-            Assurance level: <span className="font-medium">{aal}</span>
-
-          </p>
           <p>Last sign-in: {overview?.lastLoginAt ? new Date(overview.lastLoginAt).toLocaleString() : "—"}</p>
           <p className="text-xs text-muted-foreground">
             Active session: {overview?.sessionId ? `${overview.sessionId.slice(0, 8)}…` : "—"}
@@ -105,16 +94,8 @@ function SecurityPage() {
         </button>
       </section>
 
-      <section className={card}>
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          Two-factor authentication
-        </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Two-factor authentication is temporarily disabled during pre-launch testing.
-        </p>
-        {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-        {notice && <p className="mt-3 text-sm text-muted-foreground">{notice}</p>}
-      </section>
+      {error && <p className="text-sm text-destructive">{error}</p>}
+      {notice && <p className="text-sm text-muted-foreground">{notice}</p>}
 
       <section className={card}>
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
