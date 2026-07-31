@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
-import { requestAdminAccess, recordAdminEvent } from "@/lib/admin.functions";
+import { recordAdminEvent } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({
@@ -20,38 +20,13 @@ const LOCKOUT_MS = 5 * 60 * 1000;
 
 function AdminLogin() {
   const navigate = useNavigate();
-  const requestAccess = useServerFn(requestAdminAccess);
   const record = useServerFn(recordAdminEvent);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [mfaFactorId, setMfaFactorId] = useState<string | null>(null);
   const [code, setCode] = useState("");
-  const [recovery, setRecovery] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const [cooldown, setCooldown] = useState(0);
-
-  useEffect(() => {
-    if (cooldown <= 0) return;
-    const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
-    return () => clearTimeout(t);
-  }, [cooldown]);
-
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    const hasCode = new URLSearchParams(window.location.search).has("code");
-    if (
-      hasCode ||
-      hash.includes("type=recovery") ||
-      hash.includes("type=invite") ||
-      hash.includes("type=magiclink")
-    ) {
-      setRecovery(true);
-    }
-  }, []);
 
   const lockedOut = () => {
     const raw = window.localStorage.getItem("admin_login_attempts");
@@ -93,7 +68,6 @@ function AdminLogin() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setMessage(null);
     if (lockedOut()) {
       setError("Too many attempts. Try again later.");
       return;
@@ -145,46 +119,6 @@ function AdminLogin() {
     }
   };
 
-  const onRequestAccess = async () => {
-    setError(null);
-    setMessage(null);
-    if (cooldown > 0) return;
-    setBusy(true);
-    try {
-      await requestAccess({
-        data: {
-          email: email.trim(),
-          redirectTo: `${window.location.origin}/admin/login`,
-        },
-      }).catch(() => undefined);
-      setMessage(
-        "If this address is authorized, you should receive an email shortly. Check your spam or junk folder.",
-      );
-      setCooldown(60);
-    } finally {
-      setBusy(false);
-    }
-  };
-
-
-  const onSetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setError(null);
-    try {
-      const { error: err } = await supabase.auth.updateUser({ password: newPassword });
-      if (err) {
-        setError("Could not update the password. Request a new link and try again.");
-        return;
-      }
-      setRecovery(false);
-      setMessage("Password updated. You can sign in now.");
-      window.location.hash = "";
-    } finally {
-      setBusy(false);
-    }
-  };
-
   const field =
     "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
   const btn =
@@ -198,24 +132,7 @@ function AdminLogin() {
           Authorized personnel only. Accounts are provisioned manually.
         </p>
 
-        {recovery ? (
-          <form onSubmit={onSetPassword} className="mt-6 space-y-3">
-            <label className="block text-sm">
-              New password
-              <input
-                type="password"
-                required
-                minLength={12}
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={`mt-1 ${field}`}
-              />
-            </label>
-            <button className={btn} disabled={busy}>
-              Set password
-            </button>
-          </form>
-        ) : mfaFactorId ? (
+        {mfaFactorId ? (
           <form onSubmit={onVerify} className="mt-6 space-y-3">
             <label className="block text-sm">
               Authenticator code
@@ -259,24 +176,13 @@ function AdminLogin() {
             <button className={btn} disabled={busy}>
               Sign in
             </button>
-            <button
-              type="button"
-              onClick={() => void onRequestAccess()}
-              disabled={busy || !email || cooldown > 0}
-              className="w-full text-xs text-muted-foreground underline disabled:opacity-60 disabled:no-underline"
-            >
-              {busy
-                ? "Sending…"
-                : cooldown > 0
-                  ? `You can request another email in ${cooldown}s`
-                  : "First-time access or forgot password"}
-            </button>
-
+            <p className="pt-1 text-xs text-muted-foreground">
+              Password recovery is currently handled by the system administrator.
+            </p>
           </form>
         )}
 
         {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
-        {message && <p className="mt-4 text-sm text-muted-foreground">{message}</p>}
       </div>
     </div>
   );
