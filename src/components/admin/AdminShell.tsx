@@ -174,6 +174,27 @@ export function AdminShell({
     };
   }, [navigate]);
 
+  // Never serve authorization data from a previous session or assurance level.
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_OUT") {
+        queryClient.clear();
+        navigate({ to: "/admin/login", replace: true });
+        return;
+      }
+      if (
+        event === "SIGNED_IN" ||
+        event === "TOKEN_REFRESHED" ||
+        event === "MFA_CHALLENGE_VERIFIED" ||
+        event === "USER_UPDATED"
+      ) {
+        void queryClient.invalidateQueries({ queryKey: ["admin-session"] });
+      }
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [navigate, queryClient]);
+
+
   // Inactivity expiry: signs out after 15 minutes with no interaction.
   useEffect(() => {
     if (!hasUser) return;
