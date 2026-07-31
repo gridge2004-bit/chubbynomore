@@ -38,6 +38,26 @@ export class AccessDenied extends Error {
   }
 }
 
+/**
+ * Server-side feature flag: REQUIRE_ADMIN_MFA.
+ * Source of truth is the database row `admin_security_settings.require_admin_mfa`
+ * (also enforced inside the `is_admin_authorized` RLS helper). Fails closed.
+ */
+export async function requireAdminMfa(): Promise<boolean> {
+  try {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("admin_security_settings")
+      .select("enabled")
+      .eq("key", "require_admin_mfa")
+      .maybeSingle();
+    if (error || !data) return true;
+    return data.enabled;
+  } catch {
+    return true;
+  }
+}
+
 export async function resolveAdmin(ctx: AdminContext): Promise<AdminSession> {
   const aal = String(ctx.claims.aal ?? "aal1");
   const sessionId =
@@ -50,7 +70,7 @@ export async function resolveAdmin(ctx: AdminContext): Promise<AdminSession> {
     .maybeSingle();
 
   if (error || !data || data.status !== "active") throw new AccessDenied();
-  if (aal !== "aal2") throw new AccessDenied("mfa_required");
+  if (aal !== "aal2" && (await requireAdminMfa())) throw new AccessDenied("mfa_required");
 
   const role = data.role as AdminRole;
   return { userId: ctx.userId, role, capabilities: capabilitiesFor(role), sessionId, aal };
@@ -69,10 +89,12 @@ export async function resolveAdminIdentity(ctx: AdminContext) {
     lastLoginAt: data.last_login_at,
     createdAt: data.created_at,
     aal: String(ctx.claims.aal ?? "aal1"),
+    mfaRequired: await requireAdminMfa(),
     sessionId:
       typeof ctx.claims.session_id === "string" ? ctx.claims.session_id : null,
   };
 }
+
 
 export type AuditEvent =
   | "login_success"
