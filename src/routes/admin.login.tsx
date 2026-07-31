@@ -96,8 +96,7 @@ function AdminLogin() {
           Authorized personnel only. Accounts are provisioned manually.
         </p>
 
-        {(
-          <form onSubmit={onSubmit} className="mt-6 space-y-3">
+        <form onSubmit={onSubmit} className="mt-6 space-y-3">
             <label className="block text-sm">
               Email
               <input
@@ -126,8 +125,7 @@ function AdminLogin() {
             <p className="pt-1 text-xs text-muted-foreground">
               Password recovery is currently handled by the system administrator.
             </p>
-          </form>
-        )}
+        </form>
 
         {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
       </div>
