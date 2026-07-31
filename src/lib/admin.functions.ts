@@ -90,7 +90,7 @@ export const revealCustomerContact = createServerFn({ method: "POST" })
     return revealed;
   });
 
-/** Security page data: identity + MFA state + recent activity. Works pre-MFA. */
+/** Security page data: identity + recent activity. */
 export const getSecurityOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -102,7 +102,7 @@ export const getSecurityOverview = createServerFn({ method: "GET" })
       success: boolean;
       route: string | null;
     }> = [];
-    if (identity.aal === "aal2" || !identity.mfaRequired) {
+    {
       const { data } = await context.supabase
         .from("audit_logs")
         .select("event_type, created_at, success, route")

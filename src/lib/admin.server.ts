@@ -26,7 +26,6 @@ export type AdminSession = {
   role: AdminRole;
   capabilities: AdminCapabilities;
   sessionId: string | null;
-  };
 };
 
 /** Generic failure — never distinguishes "no account" from "not authorized". */
