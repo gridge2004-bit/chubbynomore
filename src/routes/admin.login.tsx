@@ -31,6 +31,14 @@ function AdminLogin() {
   const [code, setCode] = useState("");
   const [recovery, setRecovery] = useState(false);
   const [newPassword, setNewPassword] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown]);
+
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -139,6 +147,8 @@ function AdminLogin() {
 
   const onRequestAccess = async () => {
     setError(null);
+    setMessage(null);
+    if (cooldown > 0) return;
     setBusy(true);
     try {
       await requestAccess({
@@ -148,12 +158,14 @@ function AdminLogin() {
         },
       }).catch(() => undefined);
       setMessage(
-        "If this address is authorized, an email with access instructions has been sent.",
+        "If this address is authorized, you should receive an email shortly. Check your spam or junk folder.",
       );
+      setCooldown(60);
     } finally {
       setBusy(false);
     }
   };
+
 
   const onSetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -250,11 +262,16 @@ function AdminLogin() {
             <button
               type="button"
               onClick={() => void onRequestAccess()}
-              disabled={busy || !email}
-              className="w-full text-xs text-muted-foreground underline"
+              disabled={busy || !email || cooldown > 0}
+              className="w-full text-xs text-muted-foreground underline disabled:opacity-60 disabled:no-underline"
             >
-              First-time access or forgot password
+              {busy
+                ? "Sending…"
+                : cooldown > 0
+                  ? `You can request another email in ${cooldown}s`
+                  : "First-time access or forgot password"}
             </button>
+
           </form>
         )}
 
