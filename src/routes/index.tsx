@@ -249,6 +249,12 @@ function Nav({ scrolled }: { scrolled: boolean }) {
           </nav>
         </div>
         <div className="flex shrink-0 items-center gap-2">
+          <a
+            href="#switching"
+            className="hidden shrink-0 items-center justify-center rounded-full border border-[#103942]/25 px-4 py-2.5 text-xs font-semibold tracking-wide text-[#103942] transition hover:border-[#42D1C3] hover:text-[#42D1C3] sm:inline-flex sm:text-sm"
+          >
+            Switch your care
+          </a>
           <a href="/intake" className="inline-flex shrink-0 items-center justify-center rounded-full bg-[#103942] px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition hover:bg-[#42D1C3] hover:text-[#103942] sm:px-7 sm:py-3.5 sm:text-sm">
             <span className="sm:hidden">See if I qualify</span>
             <span className="hidden sm:inline">See if I qualify — free</span>
