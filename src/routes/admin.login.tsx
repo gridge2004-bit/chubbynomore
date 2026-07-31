@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
-import { requestAdminAccess, recordAdminEvent } from "@/lib/admin.functions";
+import { recordAdminEvent } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({
@@ -20,7 +20,6 @@ const LOCKOUT_MS = 5 * 60 * 1000;
 
 function AdminLogin() {
   const navigate = useNavigate();
-  const requestAccess = useServerFn(requestAdminAccess);
   const record = useServerFn(recordAdminEvent);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
