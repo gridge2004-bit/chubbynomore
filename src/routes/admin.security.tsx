@@ -121,6 +121,36 @@ function SecurityPage() {
       setBusy(false);
     }
   };
+  /** Voluntary, self-service password change. Scoped to the signed-in owner only. */
+  const changePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    try {
+      const { error: reauth } = await supabase.auth.signInWithPassword({
+        email,
+        password: currentPassword,
+      });
+      if (reauth) {
+        setError("Current password is incorrect.");
+        return;
+      }
+      const { error: err } = await supabase.auth.updateUser({ password: newPassword });
+      if (err) {
+        setError("Could not update the password. Choose a longer, unique password.");
+        return;
+      }
+      setCurrentPassword("");
+      setNewPassword("");
+      setNotice("Password updated. Verify your authenticator app again to continue.");
+      await refreshFactors();
+    } finally {
+      setBusy(false);
+    }
+  };
+
 
   const card = "rounded-2xl border border-border bg-card p-5";
 
