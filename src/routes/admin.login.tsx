@@ -262,11 +262,16 @@ function AdminLogin() {
             <button
               type="button"
               onClick={() => void onRequestAccess()}
-              disabled={busy || !email}
-              className="w-full text-xs text-muted-foreground underline"
+              disabled={busy || !email || cooldown > 0}
+              className="w-full text-xs text-muted-foreground underline disabled:opacity-60 disabled:no-underline"
             >
-              First-time access or forgot password
+              {busy
+                ? "Sending…"
+                : cooldown > 0
+                  ? `You can request another email in ${cooldown}s`
+                  : "First-time access or forgot password"}
             </button>
+
           </form>
         )}
 
