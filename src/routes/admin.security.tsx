@@ -217,6 +217,53 @@ function SecurityPage() {
 
       <section className={card}>
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Password
+        </h2>
+        {aal !== "aal2" ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            Complete two-factor verification to change your password.
+          </p>
+        ) : (
+          <form onSubmit={changePassword} className="mt-3 max-w-sm space-y-3">
+            <label className="block text-sm">
+              Current password
+              <input
+                type="password"
+                required
+                autoComplete="current-password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+              />
+            </label>
+            <label className="block text-sm">
+              New password
+              <input
+                type="password"
+                required
+                minLength={12}
+                autoComplete="new-password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+              />
+            </label>
+            <button
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-60"
+              disabled={busy}
+            >
+              Change my password
+            </button>
+            <p className="text-xs text-muted-foreground">
+              Changing your password affects only your own account. You will be asked to verify
+              your authenticator app again afterwards.
+            </p>
+          </form>
+        )}
+      </section>
+
+      <section className={card}>
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           Recent activity
         </h2>
         {overview?.recent?.length ? (
