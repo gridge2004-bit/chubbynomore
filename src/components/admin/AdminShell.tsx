@@ -101,22 +101,10 @@ export function AdminShell({
     return <Centered><p className="text-sm text-muted-foreground">Checking access…</p></Centered>;
   }
 
+  // State C/D: the admin profile is valid, only the assurance level is missing.
+  // This is never "access denied".
   if (data.status === "mfa_required" && requireMfa) {
-    return (
-      <Centered>
-        <h1 className="text-lg font-semibold">Additional verification required</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Two-factor verification with an authenticator app is required before any
-          customer information can be shown.
-        </p>
-        <Link
-          to="/admin/security"
-          className="mt-6 inline-flex rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-        >
-          Continue to verification
-        </Link>
-      </Centered>
-    );
+    return <MfaGate />;
   }
 
   if (data.status !== "ok" && !(requireMfa === false && data.status === "mfa_required")) {
@@ -124,7 +112,7 @@ export function AdminShell({
       <Centered>
         <h1 className="text-lg font-semibold">Access denied</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          You do not have access to this area.
+          This account does not have an active admin profile.
         </p>
         <button
           onClick={() => void signOut()}
@@ -135,6 +123,7 @@ export function AdminShell({
       </Centered>
     );
   }
+
 
   const session: AdminSessionInfo = {
     role: (data.role ?? "read_only") as AdminRole,
