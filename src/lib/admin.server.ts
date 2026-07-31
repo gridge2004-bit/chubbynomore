@@ -107,7 +107,8 @@ export type AuditEvent =
   | "admin_invited"
   | "admin_disabled"
   | "permission_changed"
-  | "access_denied";
+  | "access_denied"
+  | "admin_mfa_requirement_disabled";
 
 /** Append-only. Contains no names, contact details, or health information. */
 export async function audit(input: {
