@@ -65,6 +65,24 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_security_settings: {
+        Row: {
+          enabled: boolean
+          key: string
+          updated_at: string
+        }
+        Insert: {
+          enabled?: boolean
+          key: string
+          updated_at?: string
+        }
+        Update: {
+          enabled?: boolean
+          key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           admin_role: Database["public"]["Enums"]["admin_role"] | null
@@ -430,6 +448,11 @@ export type Database = {
         Args: { _roles: Database["public"]["Enums"]["admin_role"][] }
         Returns: boolean
       }
+      is_admin_authorized: {
+        Args: { _roles: Database["public"]["Enums"]["admin_role"][] }
+        Returns: boolean
+      }
+      require_admin_mfa: { Args: never; Returns: boolean }
     }
     Enums: {
       admin_role:

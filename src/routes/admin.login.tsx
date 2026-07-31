@@ -25,8 +25,6 @@ function AdminLogin() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [mfaFactorId, setMfaFactorId] = useState<string | null>(null);
-  const [code, setCode] = useState("");
 
   const lockedOut = () => {
     const raw = window.localStorage.getItem("admin_login_attempts");
@@ -53,16 +51,11 @@ function AdminLogin() {
     window.localStorage.setItem("admin_login_attempts", JSON.stringify(s));
   };
 
+  // Pre-launch: two-factor is disabled server-side, so a valid password login
+  // for an active admin profile goes straight to the portal.
   const afterSignedIn = async () => {
-    const { data: factors } = await supabase.auth.mfa.listFactors();
-    const verified = factors?.totp?.find((f) => f.status === "verified");
-    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (verified && aal?.currentLevel !== "aal2") {
-      setMfaFactorId(verified.id);
-      return;
-    }
     await record({ data: { event: "login_success" } }).catch(() => undefined);
-    navigate({ to: verified ? "/admin" : "/admin/security", replace: true });
+    navigate({ to: "/admin", replace: true });
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -90,35 +83,6 @@ function AdminLogin() {
     }
   };
 
-  const onVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!mfaFactorId) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const { data: challenge, error: cErr } = await supabase.auth.mfa.challenge({
-        factorId: mfaFactorId,
-      });
-      if (cErr || !challenge) {
-        setError(GENERIC_ERROR);
-        return;
-      }
-      const { error: vErr } = await supabase.auth.mfa.verify({
-        factorId: mfaFactorId,
-        challengeId: challenge.id,
-        code: code.trim(),
-      });
-      if (vErr) {
-        setError("Verification failed.");
-        return;
-      }
-      await record({ data: { event: "login_success" } }).catch(() => undefined);
-      navigate({ to: "/admin", replace: true });
-    } finally {
-      setBusy(false);
-    }
-  };
-
   const field =
     "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
   const btn =
@@ -132,25 +96,7 @@ function AdminLogin() {
           Authorized personnel only. Accounts are provisioned manually.
         </p>
 
-        {mfaFactorId ? (
-          <form onSubmit={onVerify} className="mt-6 space-y-3">
-            <label className="block text-sm">
-              Authenticator code
-              <input
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                required
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                className={`mt-1 ${field}`}
-              />
-            </label>
-            <button className={btn} disabled={busy}>
-              Verify
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={onSubmit} className="mt-6 space-y-3">
+        <form onSubmit={onSubmit} className="mt-6 space-y-3">
             <label className="block text-sm">
               Email
               <input
@@ -179,8 +125,7 @@ function AdminLogin() {
             <p className="pt-1 text-xs text-muted-foreground">
               Password recovery is currently handled by the system administrator.
             </p>
-          </form>
-        )}
+        </form>
 
         {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
       </div>

@@ -38,117 +38,13 @@ function Centered({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Shown when the admin profile is valid but the session is still aal1.
- * - No verified factor  -> enrollment (/admin/security)
- * - Verified factor     -> inline TOTP challenge, then session refresh
- * Never renders "Access denied".
- */
-function MfaGate() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [factorId, setFactorId] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-  const [code, setCode] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    supabase.auth.mfa.listFactors().then(({ data }) => {
-      if (!active) return;
-      const verified = data?.totp?.find((f) => f.status === "verified");
-      if (!verified) {
-        navigate({ to: "/admin/security", replace: true });
-        return;
-      }
-      setFactorId(verified.id);
-      setReady(true);
-    });
-    return () => {
-      active = false;
-    };
-  }, [navigate]);
-
-  const onVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!factorId) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const { data: challenge, error: cErr } = await supabase.auth.mfa.challenge({ factorId });
-      if (cErr || !challenge) {
-        setError("Verification failed. Try again.");
-        return;
-      }
-      const { error: vErr } = await supabase.auth.mfa.verify({
-        factorId,
-        challengeId: challenge.id,
-        code: code.trim(),
-      });
-      if (vErr) {
-        setError("That code was not accepted. Try the next one.");
-        return;
-      }
-      // Replace the session so the new aal2 access token is in use before
-      // any authorization data is re-read.
-      await supabase.auth.refreshSession();
-      const { data: level } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-      if (level?.currentLevel !== "aal2") {
-        setError("Verification did not complete. Try again.");
-        return;
-      }
-      queryClient.clear();
-      await queryClient.invalidateQueries();
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  if (!ready) {
-    return <Centered><p className="text-sm text-muted-foreground">Checking access…</p></Centered>;
-  }
-
-  return (
-    <Centered>
-      <h1 className="text-lg font-semibold">Two-factor verification</h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Enter the six-digit code from your authenticator app to continue.
-      </p>
-      <form onSubmit={onVerify} className="mt-6 space-y-3">
-        <input
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          required
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-center text-sm outline-none focus:ring-2 focus:ring-ring"
-        />
-        <button
-          disabled={busy}
-          className="w-full rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-60"
-        >
-          Verify
-        </button>
-      </form>
-      {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
-      <Link to="/admin/security" className="mt-4 inline-block text-xs underline">
-        Manage authenticator
-      </Link>
-    </Centered>
-  );
-}
-
-
-/**
  * Client-side gate. This is a convenience layer only — the database (RLS) and
  * every server function independently enforce role + MFA (aal2).
  */
 export function AdminShell({
   children,
-  requireMfa = true,
 }: {
   children: (session: AdminSessionInfo) => React.ReactNode;
-  requireMfa?: boolean;
 }) {
   const navigate = useNavigate();
   const signOut = useAdminSignOut();
@@ -228,11 +124,9 @@ export function AdminShell({
 
   // State C/D: the admin profile is valid, only the assurance level is missing.
   // This is never "access denied".
-  if (data.status === "mfa_required" && requireMfa) {
-    return <MfaGate />;
-  }
-
-  if (data.status !== "ok" && !(requireMfa === false && data.status === "mfa_required")) {
+  // Pre-launch: MFA is disabled server-side, so "mfa_required" is only possible
+  // when the flag is switched back on.
+  if (data.status !== "ok" && !(data.status === "mfa_required" && !data.mfaRequired)) {
     return (
       <Centered>
         <h1 className="text-lg font-semibold">Access denied</h1>
@@ -291,6 +185,11 @@ export function AdminShell({
           </div>
         </div>
       </header>
+      {!data.mfaRequired && (
+        <div className="border-b border-border bg-muted/60 px-4 py-2 text-center text-xs text-foreground">
+          Pre-launch mode: two-factor authentication is currently disabled.
+        </div>
+      )}
       <main className="mx-auto max-w-6xl px-4 py-8">{children(session)}</main>
     </div>
   );

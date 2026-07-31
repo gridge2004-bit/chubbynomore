@@ -23,12 +23,27 @@ export const getAdminSession = createServerFn({ method: "GET" })
     const m = await import("@/lib/admin.server");
     try {
       const s = await m.resolveAdmin(context);
-      return { status: "ok" as const, role: s.role, capabilities: s.capabilities };
+      return {
+        status: "ok" as const,
+        role: s.role,
+        capabilities: s.capabilities,
+        mfaRequired: await m.requireAdminMfa(),
+      };
     } catch (error) {
       if (error instanceof m.AccessDenied) {
-        return { status: error.code, role: null, capabilities: null };
+        return {
+          status: error.code,
+          role: null,
+          capabilities: null,
+          mfaRequired: await m.requireAdminMfa(),
+        };
       }
-      return { status: "denied" as const, role: null, capabilities: null };
+      return {
+        status: "denied" as const,
+        role: null,
+        capabilities: null,
+        mfaRequired: await m.requireAdminMfa(),
+      };
     }
   });
 
@@ -97,7 +112,7 @@ export const getSecurityOverview = createServerFn({ method: "GET" })
       success: boolean;
       route: string | null;
     }> = [];
-    if (identity.aal === "aal2") {
+    if (identity.aal === "aal2" || !identity.mfaRequired) {
       const { data } = await context.supabase
         .from("audit_logs")
         .select("event_type, created_at, success, route")
