@@ -146,19 +146,3 @@ export const recordAdminEvent = createServerFn({ method: "POST" })
     });
     return { ok: true };
   });
-
-/** Allowlist-gated first-time access / password reset. Always generic. */
-export const requestAdminAccess = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) =>
-    z
-      .object({
-        email: z.string().trim().email().max(255),
-        redirectTo: z.string().url().max(300),
-      })
-      .parse(data),
-  )
-  .handler(async ({ data }) => {
-    const b = await import("@/lib/admin-bootstrap.server");
-    await b.requestAdminAccessInternal(data.email, data.redirectTo);
-    return { ok: true as const };
-  });
