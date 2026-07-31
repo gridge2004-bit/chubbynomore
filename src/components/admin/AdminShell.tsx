@@ -43,10 +43,8 @@ function Centered({ children }: { children: React.ReactNode }) {
  */
 export function AdminShell({
   children,
-  requireMfa = true,
 }: {
   children: (session: AdminSessionInfo) => React.ReactNode;
-  requireMfa?: boolean;
 }) {
   const navigate = useNavigate();
   const signOut = useAdminSignOut();

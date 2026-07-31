@@ -11,7 +11,7 @@ export const Route = createFileRoute("/admin/security")({
   head: () => ({
     meta: [{ title: "Admin security" }, { name: "robots", content: "noindex, nofollow" }],
   }),
-  component: () => <AdminShell requireMfa={false}>{() => <SecurityPage />}</AdminShell>,
+  component: () => <AdminShell>{() => <SecurityPage />}</AdminShell>,
 });
 
 function SecurityPage() {
@@ -25,7 +25,7 @@ function SecurityPage() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  const { data: overview, refetch } = useQuery({
+  const { data: overview } = useQuery({
     queryKey: ["admin-security"],
     queryFn: () => fetchOverview(),
   });
