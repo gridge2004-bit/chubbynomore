@@ -28,6 +28,8 @@ function SecurityPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const { data: overview, refetch } = useQuery({
     queryKey: ["admin-security"],
