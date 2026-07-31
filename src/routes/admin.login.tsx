@@ -53,16 +53,11 @@ function AdminLogin() {
     window.localStorage.setItem("admin_login_attempts", JSON.stringify(s));
   };
 
+  // Pre-launch: two-factor is disabled server-side, so a valid password login
+  // for an active admin profile goes straight to the portal.
   const afterSignedIn = async () => {
-    const { data: factors } = await supabase.auth.mfa.listFactors();
-    const verified = factors?.totp?.find((f) => f.status === "verified");
-    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (verified && aal?.currentLevel !== "aal2") {
-      setMfaFactorId(verified.id);
-      return;
-    }
     await record({ data: { event: "login_success" } }).catch(() => undefined);
-    navigate({ to: verified ? "/admin" : "/admin/security", replace: true });
+    navigate({ to: "/admin", replace: true });
   };
 
   const onSubmit = async (e: React.FormEvent) => {
