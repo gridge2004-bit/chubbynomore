@@ -671,7 +671,7 @@ const INSURANCE_UNVERIFIED_BRAND =
 const ON_REQUEST_COPY =
   "Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability.";
 const PENDING_COPY =
-  "Pricing pending confirmation.";
+  "Insurance & cash-pay options available — see pricing during intake";
 const FLAT_DOSE_COPY = "Flat pricing across available prescribed doses.";
 const COMPOUNDED_FDA_QUALIFIER =
   "Compounded medications are not FDA-approved for safety, effectiveness, or quality.";
@@ -933,7 +933,7 @@ function MedicationRow({
                 </>
               ) : (
                 <p className="mt-0.5 text-[13px] leading-tight text-[#103942]/80">
-                  {card.priceMode === "pending" ? PENDING_COPY : "Available on request"}
+                  {PENDING_COPY}
                 </p>
               )}
             </div>
@@ -1083,7 +1083,7 @@ function MedicationInfoPanel({
             ) : (
               <>
                 <p className="mt-1 text-[20px] font-bold">
-                  {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                  {PENDING_COPY}
                 </p>
                 <p className="mt-2 text-[11px] leading-relaxed text-[#103942]/60">{ON_REQUEST_COPY}</p>
               </>
@@ -1353,7 +1353,7 @@ function DetailedProductCard({
           ) : (
             <>
               <p className="text-[20px] font-bold leading-tight text-[#103942]">
-                {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                {PENDING_COPY}
               </p>
               <p className="mt-1.5 text-[12px] leading-snug text-[#103942]/70">{ON_REQUEST_COPY}</p>
             </>
@@ -1441,7 +1441,7 @@ function DetailedProductCard({
               ) : (
                 <>
                   <div className="text-[24px] font-bold leading-tight text-[#103942] sm:text-[28px]">
-                    {card.priceMode === "pending" ? "Pricing pending confirmation" : "Available on request"}
+                    {PENDING_COPY}
                   </div>
                   <p className="mt-2 max-w-md text-[13px] leading-relaxed text-[#103942]/70">
                     {ON_REQUEST_COPY}
@@ -1785,7 +1785,7 @@ function CompoundedVsBrand() {
       meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
       rows: [
         ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "Available on request. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
+        ["Cost", "Insurance & cash-pay options available — see pricing during intake. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
         ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
         ["Supply", "Subject to manufacturer shortages from time to time."],
       ],
