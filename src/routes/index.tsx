@@ -146,6 +146,10 @@ const faqs = [
     ),
   },
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
+  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Brand-name medications are priced separately by the pharmacy and depend on prescription, insurance or savings-program eligibility, and availability. Your final cost depends on what a licensed provider prescribes." },
+  { q: "Will a GLP-1 affect my muscle mass or gym performance?", a: "Weight lost on any calorie deficit, including with GLP-1 treatment, can include lean mass as well as fat. Research on strategies to limit lean-mass loss generally points to adequate protein intake and regular resistance training, though individual results vary. Some men also notice lower energy during hard training early on, particularly while appetite and food intake are dropping. Discuss your training goals with your licensed provider so your plan and titration pace can account for them." },
+  { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. There are also once-daily oral options, including Wegovy® tablets and Foundayo™ (orforglipron). Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
+  { q: "How private and discreet is the process?", a: "The intake, provider review, and follow-up messaging all happen online — there is no in-person visit and no waiting room. Medication is shipped in plain packaging with no medication branding on the outside of the box. Your health information is used to evaluate and coordinate your care and is shared only with the providers, pharmacies, and service partners involved in delivering it, as described in the Privacy Policy." },
 ];
 
 const NAVY = "#103942";
@@ -1851,20 +1855,20 @@ function CompoundedVsBrand() {
 function WhyChoose() {
   const benefits = [
     {
-      title: "Straight answers, no runaround.",
-      body: "Clear pricing, no upsells, no lecture about willpower.",
+      title: "Appetite you're not fighting all day.",
+      body: "GLP-1 treatment targets hunger signaling, so the 3pm vending machine run and the late-night grazing get easier to skip.",
     },
     {
-      title: "Handled privately.",
-      body: "Complete everything online — no waiting room, no small talk.",
+      title: "Handled privately, start to finish.",
+      body: "Intake, provider review, and refills happen online. Medication arrives in plain packaging with no branding on the box.",
     },
     {
-      title: "Built around your schedule.",
-      body: "Do the visit at 6am or 11pm. Meds come to you.",
+      title: "Fits a real work week.",
+      body: "Do the intake at 6am or 11pm, dose once a week, and message your provider between refills instead of taking time off for appointments.",
     },
     {
-      title: "A provider, not just a prescription.",
-      body: "A licensed clinician reviews your history and stays with you.",
+      title: "Consistency, not another crash diet.",
+      body: "A licensed provider titrates your dose, tracks how you're tolerating it, and adjusts — so you can keep training and keep going.",
     },
   ];
 
