@@ -11,20 +11,14 @@ export const Route = createFileRoute("/admin/security")({
   head: () => ({
     meta: [{ title: "Admin security" }, { name: "robots", content: "noindex, nofollow" }],
   }),
-  // MFA enrollment must be reachable before aal2 exists.
   component: () => <AdminShell requireMfa={false}>{() => <SecurityPage />}</AdminShell>,
 });
-
-type Factor = { id: string; status: string; friendly_name?: string | null };
 
 function SecurityPage() {
   const signOut = useAdminSignOut();
   const fetchOverview = useServerFn(getSecurityOverview);
   const [email, setEmail] = useState<string | null>(null);
-  const [factors, setFactors] = useState<Factor[]>([]);
   const [aal, setAal] = useState<string>("aal1");
-  const [enroll, setEnroll] = useState<{ id: string; qr: string } | null>(null);
-  const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -36,91 +30,16 @@ function SecurityPage() {
     queryFn: () => fetchOverview(),
   });
 
-  const refreshFactors = async () => {
-    const { data } = await supabase.auth.mfa.listFactors();
-    setFactors((data?.totp ?? []) as Factor[]);
+  const refreshAal = async () => {
     const { data: level } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
     setAal(level?.currentLevel ?? "aal1");
   };
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
-    void refreshFactors();
+    void refreshAal();
   }, []);
 
-  const startEnroll = async () => {
-    setError(null);
-    setBusy(true);
-    try {
-      const { data, error: err } = await supabase.auth.mfa.enroll({
-        factorType: "totp",
-        friendlyName: `Authenticator ${Date.now()}`,
-      });
-      if (err || !data) {
-        setError("Could not start enrollment.");
-        return;
-      }
-      setEnroll({ id: data.id, qr: data.totp.qr_code });
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const verifyEnroll = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!enroll) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const { data: challenge, error: cErr } = await supabase.auth.mfa.challenge({
-        factorId: enroll.id,
-      });
-      if (cErr || !challenge) {
-        setError("Verification failed.");
-        return;
-      }
-      const { error: vErr } = await supabase.auth.mfa.verify({
-        factorId: enroll.id,
-        challengeId: challenge.id,
-        code: code.trim(),
-      });
-      if (vErr) {
-        setError("Verification failed.");
-        return;
-      }
-      // The secret is intentionally discarded after enrollment.
-      setEnroll(null);
-      setCode("");
-      setNotice("Authenticator app verified.");
-      await refreshFactors();
-      await refetch();
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const removeFactor = async (id: string) => {
-    setError(null);
-    const password = window.prompt("Re-enter your password to remove this factor");
-    if (!password || !email) return;
-    setBusy(true);
-    try {
-      const { error: reauth } = await supabase.auth.signInWithPassword({ email, password });
-      if (reauth) {
-        setError("Reauthentication failed.");
-        return;
-      }
-      const { error: err } = await supabase.auth.mfa.unenroll({ factorId: id });
-      if (err) {
-        setError("Could not remove this factor.");
-        return;
-      }
-      setNotice("Factor removed.");
-      await refreshFactors();
-    } finally {
-      setBusy(false);
-    }
-  };
   /** Voluntary, self-service password change. Scoped to the signed-in owner only. */
   const changePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,8 +63,7 @@ function SecurityPage() {
       }
       setCurrentPassword("");
       setNewPassword("");
-      setNotice("Password updated. Verify your authenticator app again to continue.");
-      await refreshFactors();
+      setNotice("Password updated.");
     } finally {
       setBusy(false);
     }
@@ -171,12 +89,8 @@ function SecurityPage() {
             </span>
           </p>
           <p>
-            Assurance level: <span className="font-medium">{aal}</span>{" "}
-            {aal !== "aal2" && (
-              <span className="text-destructive">
-                — customer data stays hidden until two-factor verification is complete.
-              </span>
-            )}
+            Assurance level: <span className="font-medium">{aal}</span>
+
           </p>
           <p>Last sign-in: {overview?.lastLoginAt ? new Date(overview.lastLoginAt).toLocaleString() : "—"}</p>
           <p className="text-xs text-muted-foreground">
@@ -193,56 +107,11 @@ function SecurityPage() {
 
       <section className={card}>
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          Authenticator app (TOTP)
+          Two-factor authentication
         </h2>
-        {factors.length === 0 ? (
-          <p className="mt-2 text-sm text-muted-foreground">No authenticator enrolled.</p>
-        ) : (
-          <ul className="mt-2 space-y-2 text-sm">
-            {factors.map((f) => (
-              <li key={f.id} className="flex items-center justify-between gap-3">
-                <span>
-                  {f.friendly_name || "Authenticator"} — {f.status}
-                </span>
-                <button
-                  onClick={() => void removeFactor(f.id)}
-                  disabled={busy}
-                  className="text-xs underline"
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {enroll ? (
-          <form onSubmit={verifyEnroll} className="mt-4 space-y-3">
-            <img src={enroll.qr} alt="Authenticator enrollment QR code" className="h-44 w-44" />
-            <input
-              inputMode="numeric"
-              placeholder="6-digit code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className="w-48 rounded-lg border border-border bg-background px-3 py-2 text-sm"
-            />
-            <button
-              className="ml-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-              disabled={busy}
-            >
-              Verify
-            </button>
-          </form>
-        ) : (
-          <button
-            onClick={() => void startEnroll()}
-            disabled={busy}
-            className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-          >
-            Enroll an authenticator app
-          </button>
-        )}
-
+        <p className="mt-2 text-sm text-muted-foreground">
+          Two-factor authentication is temporarily disabled during pre-launch testing.
+        </p>
         {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
         {notice && <p className="mt-3 text-sm text-muted-foreground">{notice}</p>}
       </section>
@@ -251,12 +120,7 @@ function SecurityPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           Password
         </h2>
-        {aal !== "aal2" ? (
-          <p className="mt-2 text-sm text-muted-foreground">
-            Complete two-factor verification to change your password.
-          </p>
-        ) : (
-          <form onSubmit={changePassword} className="mt-3 max-w-sm space-y-3">
+        <form onSubmit={changePassword} className="mt-3 max-w-sm space-y-3">
             <label className="block text-sm">
               Current password
               <input
@@ -288,10 +152,9 @@ function SecurityPage() {
             </button>
             <p className="text-xs text-muted-foreground">
               Changing your password affects only your own account. You will be asked to verify
-              your authenticator app again afterwards.
+              own account.
             </p>
-          </form>
-        )}
+        </form>
       </section>
 
       <section className={card}>
@@ -311,7 +174,7 @@ function SecurityPage() {
           </ul>
         ) : (
           <p className="mt-2 text-sm text-muted-foreground">
-            Activity appears after two-factor verification is complete.
+            No recent activity recorded.
           </p>
         )}
       </section>
