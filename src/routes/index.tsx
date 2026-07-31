@@ -317,6 +317,12 @@ function Nav({ scrolled }: { scrolled: boolean }) {
             >
               See if I qualify — free
             </a>
+            <a
+              href="#switching"
+              onClick={() => setMenuOpen(false)}
+              className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-[#103942]/25 px-6 py-3 text-sm font-semibold tracking-wide text-[#103942] transition hover:border-[#42D1C3] hover:text-[#42D1C3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#42D1C3]"
+            >
+            </a>
           </div>
         </div>
       )}
