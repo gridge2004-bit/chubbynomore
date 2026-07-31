@@ -31,6 +31,14 @@ function AdminLogin() {
   const [code, setCode] = useState("");
   const [recovery, setRecovery] = useState(false);
   const [newPassword, setNewPassword] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown]);
+
 
   useEffect(() => {
     const hash = window.location.hash;
