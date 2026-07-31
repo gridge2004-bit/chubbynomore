@@ -122,11 +122,7 @@ export function AdminShell({
     return <Centered><p className="text-sm text-muted-foreground">Checking access…</p></Centered>;
   }
 
-  // State C/D: the admin profile is valid, only the assurance level is missing.
-  // This is never "access denied".
-  // Pre-launch: MFA is disabled server-side, so "mfa_required" is only possible
-  // when the flag is switched back on.
-  if (data.status !== "ok" && !(data.status === "mfa_required" && !data.mfaRequired)) {
+  if (data.status !== "ok") {
     return (
       <Centered>
         <h1 className="text-lg font-semibold">Access denied</h1>
