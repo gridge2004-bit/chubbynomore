@@ -139,6 +139,8 @@ function AdminLogin() {
 
   const onRequestAccess = async () => {
     setError(null);
+    setMessage(null);
+    if (cooldown > 0) return;
     setBusy(true);
     try {
       await requestAccess({
@@ -148,12 +150,14 @@ function AdminLogin() {
         },
       }).catch(() => undefined);
       setMessage(
-        "If this address is authorized, an email with access instructions has been sent.",
+        "If this address is authorized, you should receive an email shortly. Check your spam or junk folder.",
       );
+      setCooldown(60);
     } finally {
       setBusy(false);
     }
   };
+
 
   const onSetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
