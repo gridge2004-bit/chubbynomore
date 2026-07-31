@@ -165,6 +165,7 @@ function Index() {
       <Nav scrolled={scrolled} />
       <Hero />
       <TrustMarquee />
+      <MedicalTeam />
       <SwitchingCare />
       <HowItWorks />
       <WhyChoose />
@@ -178,8 +179,11 @@ function Index() {
 
       <TrustedCare />
       <FinalCTA />
+      <Testimonials />
       <FAQ />
       <Footer />
+      <div className="h-20 md:hidden" aria-hidden="true" />
+      <StickyMobileCTA />
     </div>
   );
 }
@@ -564,8 +568,8 @@ type Tile = {
 const tiles: Tile[] = [
   {
     id: "feel",
-    title: "Keep up — and outlast them.",
-    subtitle: "Energy for early meetings, long days, and your kids on the weekend.",
+    title: "Energy that lasts past 3pm.",
+    subtitle: "Fewer crashes after lunch, and enough left in the tank for the gym or the kids.",
     icon: "bolt",
     img: feelLikeYourselfAsset.url,
     imgAlt: "Father playing with his children in the front yard at golden hour",
@@ -1574,19 +1578,18 @@ function MedicationOptions() {
 
 
 function TrustMarquee() {
-  const items = [...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems];
   return (
-    <section className="overflow-hidden bg-[#103942] py-5 text-white">
-      <div className="marquee-track text-sm font-medium uppercase tracking-[0.18em]">
-        {items.map((t, i) => (
-          <span key={i} className="flex items-center gap-12">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+    <section className="bg-[#103942] px-6 py-5 text-white">
+      <ul className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center text-xs font-medium uppercase tracking-[0.16em] sm:text-sm">
+        {marqueeItems.map((t) => (
+          <li key={t} className="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
               <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             {t}
-          </span>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
@@ -1911,7 +1914,7 @@ function HowItWorks() {
     <section id="how" className="bg-[#F5F5F7] px-6 py-16">
       <div className="mx-auto max-w-7xl">
         <Reveal as="h2" className="text-center font-serif text-4xl leading-tight text-[#103942] md:text-5xl">
-          Three steps to <em className="italic">a healthier you.</em>
+          How it works in <em className="italic">3 steps.</em>
         </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
           {steps.map((s, idx) => (
