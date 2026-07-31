@@ -153,6 +153,8 @@ export function AdminShell({
   const navigate = useNavigate();
   const signOut = useAdminSignOut();
   const fetchSession = useServerFn(getAdminSession);
+  const queryClient = useQueryClient();
+
   const [authChecked, setAuthChecked] = useState(false);
   const [hasUser, setHasUser] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
