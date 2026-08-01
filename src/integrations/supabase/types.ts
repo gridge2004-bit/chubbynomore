@@ -444,10 +444,6 @@ export type Database = {
         Returns: Database["public"]["Enums"]["admin_role"]
       }
       is_aal2: { Args: never; Returns: boolean }
-      is_admin_aal2: {
-        Args: { _roles: Database["public"]["Enums"]["admin_role"][] }
-        Returns: boolean
-      }
       is_admin_authorized: {
         Args: { _roles: Database["public"]["Enums"]["admin_role"][] }
         Returns: boolean
