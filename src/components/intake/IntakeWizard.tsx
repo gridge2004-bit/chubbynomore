@@ -847,7 +847,33 @@ function ConsentRow({
   );
 }
 
+function NotEligible({ onBack }: { onBack: () => void }) {
+  return (
+    <div>
+      <H>We&apos;re not able to move forward right now</H>
+      <p className="mt-4 text-[15px] leading-relaxed text-[#103942]/75">
+        Based on the answers you gave, this treatment is not appropriate for you. Please speak with
+        your own physician about your health and the options that may be right for you.
+      </p>
+      <button
+        type="button"
+        onClick={onBack}
+        className="mt-6 flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[#103942]/15 bg-white text-[14px] font-semibold text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+      >
+        Go back and review my answers
+      </button>
+      <Link
+        to="/"
+        className="mt-4 inline-block min-h-[44px] pt-3 text-[14px] font-semibold text-[#103942] underline underline-offset-4"
+      >
+        Return to the homepage
+      </Link>
+    </div>
+  );
+}
+
 function Confirmation() {
+
   return (
     <div className="space-y-4">
       <H>Your intake is with a provider.</H>
