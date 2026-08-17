@@ -46,11 +46,18 @@ function NotEligiblePage() {
           your own physician about your health and the options that may be right for you.
         </p>
         <Link
+          to="/intake"
+          className="mt-6 flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[#103942]/15 bg-white text-[14px] font-semibold text-[#103942] transition-colors hover:border-[#103942]/40"
+        >
+          Go back and review my answers
+        </Link>
+        <Link
           to="/"
-          className="mt-6 inline-block min-h-[44px] pt-3 text-[14px] font-semibold text-[#103942] underline underline-offset-4"
+          className="mt-4 inline-block min-h-[44px] pt-3 text-[14px] font-semibold text-[#103942] underline underline-offset-4"
         >
           Return to the homepage
         </Link>
+
       </div>
 
       <ComplianceFooter />
