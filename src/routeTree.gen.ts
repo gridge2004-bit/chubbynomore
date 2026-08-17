@@ -24,7 +24,9 @@ import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminSecurityRouteImport } from './routes/admin.security'
+import { Route as ApiIntakeRouteImport } from './routes/api/intake'
 import { Route as IntakeClinicalRouteImport } from './routes/intake.clinical'
+import { Route as IntakeNotEligibleRouteImport } from './routes/intake.not-eligible'
 import { Route as MedicationsSlugRouteImport } from './routes/medications.$slug'
 import { Route as AdminCustomersIndexRouteImport } from './routes/admin.customers.index'
 import { Route as AdminCustomersLeadIdRouteImport } from './routes/admin.customers.$leadId'
@@ -105,9 +107,19 @@ const AdminSecurityRoute = AdminSecurityRouteImport.update({
   path: '/security',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiIntakeRoute = ApiIntakeRouteImport.update({
+  id: '/api/intake',
+  path: '/api/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntakeClinicalRoute = IntakeClinicalRouteImport.update({
   id: '/clinical',
   path: '/clinical',
+  getParentRoute: () => IntakeRoute,
+} as any)
+const IntakeNotEligibleRoute = IntakeNotEligibleRouteImport.update({
+  id: '/not-eligible',
+  path: '/not-eligible',
   getParentRoute: () => IntakeRoute,
 } as any)
 const MedicationsSlugRoute = MedicationsSlugRouteImport.update({
@@ -141,7 +153,9 @@ export interface FileRoutesByFullPath {
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/api/intake': typeof ApiIntakeRoute
   '/intake/clinical': typeof IntakeClinicalRoute
+  '/intake/not-eligible': typeof IntakeNotEligibleRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
@@ -161,7 +175,9 @@ export interface FileRoutesByTo {
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/api/intake': typeof ApiIntakeRoute
   '/intake/clinical': typeof IntakeClinicalRoute
+  '/intake/not-eligible': typeof IntakeNotEligibleRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin': typeof AdminIndexRoute
   '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
@@ -183,7 +199,9 @@ export interface FileRoutesById {
   '/terms-of-use': typeof TermsOfUseRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/security': typeof AdminSecurityRoute
+  '/api/intake': typeof ApiIntakeRoute
   '/intake/clinical': typeof IntakeClinicalRoute
+  '/intake/not-eligible': typeof IntakeNotEligibleRoute
   '/medications/$slug': typeof MedicationsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/customers/$leadId': typeof AdminCustomersLeadIdRoute
@@ -206,7 +224,9 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/admin/login'
     | '/admin/security'
+    | '/api/intake'
     | '/intake/clinical'
+    | '/intake/not-eligible'
     | '/medications/$slug'
     | '/admin/'
     | '/admin/customers/$leadId'
@@ -226,7 +246,9 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/admin/login'
     | '/admin/security'
+    | '/api/intake'
     | '/intake/clinical'
+    | '/intake/not-eligible'
     | '/medications/$slug'
     | '/admin'
     | '/admin/customers/$leadId'
@@ -247,7 +269,9 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/admin/login'
     | '/admin/security'
+    | '/api/intake'
     | '/intake/clinical'
+    | '/intake/not-eligible'
     | '/medications/$slug'
     | '/admin/'
     | '/admin/customers/$leadId'
@@ -267,6 +291,7 @@ export interface RootRouteChildren {
   TelehealthConsentRoute: typeof TelehealthConsentRoute
   TermsRoute: typeof TermsRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
+  ApiIntakeRoute: typeof ApiIntakeRoute
   MedicationsSlugRoute: typeof MedicationsSlugRoute
 }
 
@@ -377,11 +402,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSecurityRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/intake': {
+      id: '/api/intake'
+      path: '/api/intake'
+      fullPath: '/api/intake'
+      preLoaderRoute: typeof ApiIntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/intake/clinical': {
       id: '/intake/clinical'
       path: '/clinical'
       fullPath: '/intake/clinical'
       preLoaderRoute: typeof IntakeClinicalRouteImport
+      parentRoute: typeof IntakeRoute
+    }
+    '/intake/not-eligible': {
+      id: '/intake/not-eligible'
+      path: '/not-eligible'
+      fullPath: '/intake/not-eligible'
+      preLoaderRoute: typeof IntakeNotEligibleRouteImport
       parentRoute: typeof IntakeRoute
     }
     '/medications/$slug': {
@@ -428,10 +467,12 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface IntakeRouteChildren {
   IntakeClinicalRoute: typeof IntakeClinicalRoute
+  IntakeNotEligibleRoute: typeof IntakeNotEligibleRoute
 }
 
 const IntakeRouteChildren: IntakeRouteChildren = {
   IntakeClinicalRoute: IntakeClinicalRoute,
+  IntakeNotEligibleRoute: IntakeNotEligibleRoute,
 }
 
 const IntakeRouteWithChildren =
@@ -450,8 +491,19 @@ const rootRouteChildren: RootRouteChildren = {
   TelehealthConsentRoute: TelehealthConsentRoute,
   TermsRoute: TermsRoute,
   TermsOfUseRoute: TermsOfUseRoute,
+  ApiIntakeRoute: ApiIntakeRoute,
   MedicationsSlugRoute: MedicationsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
