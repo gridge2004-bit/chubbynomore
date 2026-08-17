@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check, CreditCard } from "lucide-react";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import heroImg from "@/assets/tirz-hero.jpg";
@@ -171,13 +171,15 @@ function ProgressBar({ step }: { step: number }) {
 /* ─────────────── wizard ─────────────── */
 
 export function IntakeWizard({ product: productSlug }: { product?: string }) {
-  const navigate = useNavigate();
+  
   const product = (productSlug && PRODUCTS[productSlug]) || DEFAULT_PRODUCT;
 
   const [step, setStep] = useState(1);
   const [fading, setFading] = useState(false);
   const [a, setA] = useState<Answers>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [stopped, setStopped] = useState(false);
+
   const topRef = useRef<HTMLDivElement>(null);
 
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
@@ -275,9 +277,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const handleContinue = async () => {
     if (step === 2 && hardStop) {
-      navigate({ to: "/intake/not-eligible" });
+      setStopped(true);
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
+
     if (step < 5) {
       go(step + 1);
       return;
@@ -305,8 +309,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
     if (window.confirm("Start over? Your answers on this form will be cleared.")) {
       setA(EMPTY);
       setStep(1);
+      setStopped(false);
+      setSubmitted(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-white" ref={topRef}>
@@ -352,7 +359,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
             fading ? "opacity-0" : "opacity-100",
           )}
         >
-          {!submitted && step > 1 ? (
+          {!submitted && !stopped && step > 1 ? (
             <button
               type="button"
               onClick={() => go(step - 1)}
@@ -365,7 +372,10 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
           {submitted ? (
             <Confirmation />
+          ) : stopped ? (
+            <NotEligible onBack={() => setStopped(false)} />
           ) : (
+
             <>
               {step === 1 && <Step1 a={a} set={set} toggleMulti={toggleMulti} dobError={dobError} />}
               {step === 2 && <Step2 a={a} set={set} needsPregnancy={needsPregnancy} />}
@@ -837,7 +847,33 @@ function ConsentRow({
   );
 }
 
+function NotEligible({ onBack }: { onBack: () => void }) {
+  return (
+    <div>
+      <H>We&apos;re not able to move forward right now</H>
+      <p className="mt-4 text-[15px] leading-relaxed text-[#103942]/75">
+        Based on the answers you gave, this treatment is not appropriate for you. Please speak with
+        your own physician about your health and the options that may be right for you.
+      </p>
+      <button
+        type="button"
+        onClick={onBack}
+        className="mt-6 flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[#103942]/15 bg-white text-[14px] font-semibold text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+      >
+        Go back and review my answers
+      </button>
+      <Link
+        to="/"
+        className="mt-4 inline-block min-h-[44px] pt-3 text-[14px] font-semibold text-[#103942] underline underline-offset-4"
+      >
+        Return to the homepage
+      </Link>
+    </div>
+  );
+}
+
 function Confirmation() {
+
   return (
     <div className="space-y-4">
       <H>Your intake is with a provider.</H>
