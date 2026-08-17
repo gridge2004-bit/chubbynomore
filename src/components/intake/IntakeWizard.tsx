@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check, CreditCard } from "lucide-react";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import heroImg from "@/assets/tirz-hero.jpg";
