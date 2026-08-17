@@ -275,9 +275,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const handleContinue = async () => {
     if (step === 2 && hardStop) {
-      navigate({ to: "/intake/not-eligible" });
+      setStopped(true);
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
+
     if (step < 5) {
       go(step + 1);
       return;
