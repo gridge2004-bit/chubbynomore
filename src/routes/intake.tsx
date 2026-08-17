@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IntakeWizard } from "@/components/intake/IntakeWizard";
 
 export const Route = createFileRoute("/intake")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    category: typeof search.category === "string" ? search.category : undefined,
-    product: typeof search.product === "string" ? search.product : undefined,
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { category?: string; product?: string } => ({
+    ...(typeof search.category === "string" ? { category: search.category } : {}),
+    ...(typeof search.product === "string" ? { product: search.product } : {}),
   }),
   head: () => ({
     meta: [
