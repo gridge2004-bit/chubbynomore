@@ -309,8 +309,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
     if (window.confirm("Start over? Your answers on this form will be cleared.")) {
       setA(EMPTY);
       setStep(1);
+      setStopped(false);
+      setSubmitted(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-white" ref={topRef}>
