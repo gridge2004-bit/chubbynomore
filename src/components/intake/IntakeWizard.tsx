@@ -178,6 +178,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const [fading, setFading] = useState(false);
   const [a, setA] = useState<Answers>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [stopped, setStopped] = useState(false);
+
   const topRef = useRef<HTMLDivElement>(null);
 
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
