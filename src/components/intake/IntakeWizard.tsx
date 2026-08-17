@@ -356,7 +356,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
             fading ? "opacity-0" : "opacity-100",
           )}
         >
-          {!submitted && step > 1 ? (
+          {!submitted && !stopped && step > 1 ? (
             <button
               type="button"
               onClick={() => go(step - 1)}
@@ -369,7 +369,10 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
           {submitted ? (
             <Confirmation />
+          ) : stopped ? (
+            <NotEligible onBack={() => setStopped(false)} />
           ) : (
+
             <>
               {step === 1 && <Step1 a={a} set={set} toggleMulti={toggleMulti} dobError={dobError} />}
               {step === 2 && <Step2 a={a} set={set} needsPregnancy={needsPregnancy} />}
