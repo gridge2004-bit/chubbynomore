@@ -171,7 +171,7 @@ function ProgressBar({ step }: { step: number }) {
 /* ─────────────── wizard ─────────────── */
 
 export function IntakeWizard({ product: productSlug }: { product?: string }) {
-  const navigate = useNavigate();
+  
   const product = (productSlug && PRODUCTS[productSlug]) || DEFAULT_PRODUCT;
 
   const [step, setStep] = useState(1);
