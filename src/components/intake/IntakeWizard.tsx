@@ -394,7 +394,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
         </div>
       </div>
 
-      <ComplianceFooter />
+      {step !== 1 && <ComplianceFooter />}
     </div>
   );
 }
