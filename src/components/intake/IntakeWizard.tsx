@@ -383,7 +383,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
               {step === 4 && <Step4 a={a} set={set} />}
               {step === 5 && <Step5 a={a} set={set} />}
 
-              <div className="mt-8">
+              <div className={cn("mt-8", step === 1 && "pb-12")}>
                 <PrimaryButton disabled={!valid} onClick={handleContinue}>
                   {step === 5 ? "Submit for provider review" : "Continue"}
                   {step === 5 ? null : <ArrowRight className="h-4 w-4" />}
