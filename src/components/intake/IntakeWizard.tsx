@@ -184,8 +184,14 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const topRef = useRef<HTMLDivElement>(null);
 
+  /* progressive lead capture — saved as soon as email + phone are valid */
+  const savePartial = useServerFn(savePartialLead);
+  const leadIdRef = useRef<string | null>(null);
+  const lastSavedRef = useRef<string>("");
+
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((prev) => ({ ...prev, [key]: value }));
+
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
