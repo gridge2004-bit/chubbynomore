@@ -504,7 +504,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
-              <Step4 a={a} set={set} />
+              <Step4 a={a} />
               <div className="mt-8 pb-4">
                 <PrimaryButton disabled={!step4Valid} onClick={() => { void persistContact("step_4_completed"); scrollToStep(5); }}>
                   Continue <ArrowRight className="h-4 w-4" />
