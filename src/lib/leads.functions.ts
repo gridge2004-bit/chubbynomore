@@ -138,3 +138,94 @@ export const createLead = createServerFn({ method: "POST" })
       marketingSyncStatus,
     };
   });
+
+/* ───────────── partial (progressive) lead capture ───────────── */
+
+const partialLeadSchema = z.object({
+  leadId: z.string().uuid().nullable().optional(),
+  firstName: z.string().trim().max(80).optional(),
+  lastName: z.string().trim().max(80).optional(),
+  email: z.string().trim().email().max(255),
+  phone: z.string().trim().min(10).max(25),
+  lastCompletedStep: z.string().trim().max(60),
+  funnelSource: z.string().max(80).optional(),
+  referringPage: z.string().max(500).optional(),
+});
+
+export type PartialLeadInput = z.infer<typeof partialLeadSchema>;
+
+/**
+ * Saves/updates a recoverable partial lead as soon as email + phone exist.
+ * Contact data only — never clinical answers, never marketing sync.
+ */
+export const savePartialLead = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => partialLeadSchema.parse(data))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const now = new Date().toISOString();
+    const email = data.email.toLowerCase();
+
+    const base = {
+      email,
+      phone: data.phone,
+      last_completed_step: data.lastCompletedStep,
+      last_activity_at: now,
+    };
+
+    let leadId = data.leadId ?? null;
+
+    if (!leadId) {
+      const { data: existing } = await supabaseAdmin
+        .from("leads")
+        .select("id")
+        .eq("email", email)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      leadId = (existing?.id as string | undefined) ?? null;
+    }
+
+    if (leadId) {
+      const { error } = await supabaseAdmin
+        .from("leads")
+        .update({
+          ...base,
+          ...(data.firstName ? { first_name: data.firstName } : {}),
+          ...(data.lastName ? { last_name: data.lastName } : {}),
+        })
+        .eq("id", leadId);
+      if (error) {
+        console.error("[leads] partial update failed", error.message);
+        throw new Error("We couldn't save your progress. Please try again.");
+      }
+      return { leadId, funnelStatus: "partial_contact" as const };
+    }
+
+    const { data: row, error } = await supabaseAdmin
+      .from("leads")
+      .insert({
+        ...base,
+        first_name: data.firstName || "",
+        last_name: data.lastName || "",
+        state: "",
+        funnel_source: data.funnelSource ?? "website_intake",
+        referring_page: data.referringPage ?? null,
+        funnel_status: "partial_contact",
+        operational_consent: false,
+        marketing_consent: false,
+        marketing_sync_status: "not_requested",
+        consent_text_version: CONSENT_TEXT_VERSION,
+        partial_captured_at: now,
+      })
+      .select("id")
+      .single();
+
+    if (error || !row) {
+      console.error("[leads] partial insert failed", error?.message);
+      throw new Error("We couldn't save your progress. Please try again.");
+    }
+
+    return { leadId: row.id as string, funnelStatus: "partial_contact" as const };
+  });
