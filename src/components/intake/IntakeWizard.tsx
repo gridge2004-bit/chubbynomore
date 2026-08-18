@@ -986,8 +986,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
             </div>
           </>
         )}
-
-        <ComplianceFooter />
       </div>
     </div>
   );
@@ -1180,6 +1178,8 @@ function IntroStep({
           </div>
         </Fieldset>
       </div>
+
+      <ComplianceFooter />
     </div>
   );
 }
