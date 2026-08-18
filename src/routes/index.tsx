@@ -2215,13 +2215,18 @@ function FinalCTA() {
     "Availability varies by state",
   ];
   return (
-    <section id="start" className="w-full bg-[#F5F5F7]">
-      <div className="grid w-full md:grid-cols-[45fr_55fr]">
-        <div className="relative min-h-[360px] overflow-hidden bg-[#103942] md:min-h-[520px]">
-          <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-contain object-center" loading="lazy" />
+    <section id="start" className="w-full bg-[#F5F5F7] py-16 md:py-24">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-14 lg:gap-20">
+        <div className="overflow-hidden rounded-[1.75rem] bg-[#103942] shadow-[0_30px_60px_-40px_rgba(16,57,66,0.55)]">
+          <img
+            src={dinnerCoupleAsset.url}
+            alt="Couple enjoying a candlelit dinner at an upscale restaurant"
+            className="aspect-[4/3] h-full w-full object-cover object-center md:aspect-[5/6] lg:aspect-[4/5]"
+            loading="lazy"
+          />
         </div>
-        <div className="flex flex-col justify-center px-8 py-16 md:px-16">
-          <h2 className="font-serif text-4xl leading-[1.1] text-[#103942] md:text-5xl lg:text-[52px]">
+        <div className="flex flex-col justify-center">
+          <h2 className="font-serif text-3xl leading-[1.12] text-[#103942] sm:text-4xl lg:text-[46px]">
             Ready to see if GLP-1 is right for you? <em className="italic">ChubbyNoMore is with you every step.</em>
           </h2>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -2242,6 +2247,7 @@ function FinalCTA() {
     </section>
   );
 }
+
 
 function Footer() {
   const programLinks = [
