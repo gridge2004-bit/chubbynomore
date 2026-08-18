@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { savePartialLead } from "@/lib/leads.functions";
 import { ArrowLeft, ArrowRight, Check, CreditCard } from "lucide-react";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import heroImg from "@/assets/tirz-hero.jpg";
