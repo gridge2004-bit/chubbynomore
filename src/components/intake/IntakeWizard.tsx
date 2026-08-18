@@ -12,7 +12,9 @@ import {
   Fieldset,
   PrimaryButton,
   inputClass,
+  inputCls,
 } from "./ui";
+
 import { cn } from "@/lib/utils";
 
 /* ─────────────── product catalog for URL preselection ─────────────── */
@@ -294,10 +296,93 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const weeksToGoal = paceLow > 0 ? Math.round((lossTarget / paceLow) * 100) / 100 : 0;
 
   const age = dobAge(a.dob);
-  const dobError =
-    a.dob.length === 10 && (age === null || age < 18)
-      ? "You must be 18 or older to continue."
-      : null;
+
+  /* ── field-level validation ── */
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [showErrors, setShowErrors] = useState(false);
+  const touch = (key: string) => setTouched((prev) => ({ ...prev, [key]: true }));
+
+  const fieldErrors: Record<string, string | null> = {
+    goal: a.goal ? null : "Please choose a goal to continue.",
+    tried: a.tried.length > 0 ? null : "Please select at least one option.",
+    heightFt: a.heightFt === ""
+      ? "Enter your height in feet."
+      : Number(a.heightFt) < 3 || Number(a.heightFt) > 8
+        ? "Height must be between 3 and 8 feet."
+        : null,
+    heightIn: a.heightIn === ""
+      ? "Enter the remaining inches (0–11)."
+      : Number(a.heightIn) > 11
+        ? "Inches must be between 0 and 11."
+        : null,
+    weightLbs: a.weightLbs === ""
+      ? "Enter your current weight in pounds."
+      : Number(a.weightLbs) < 70 || Number(a.weightLbs) > 800
+        ? "Enter a weight between 70 and 800 lbs."
+        : null,
+    firstName: a.firstName.trim().length > 0 ? null : "Please enter your first name.",
+    lastName: a.lastName.trim().length > 0 ? null : "Please enter your last name.",
+    email: a.email.trim().length === 0
+      ? "Please enter your email address."
+      : !a.email.includes("@")
+        ? "Email must include an @ sign (e.g. name@example.com)."
+        : !emailOk(a.email)
+          ? "Enter a valid email address, like name@example.com."
+          : null,
+    phone: digits(a.phone).length === 0
+      ? "Please enter your phone number."
+      : digits(a.phone).length !== 10
+        ? "Enter a 10-digit US phone number, like (555) 123-4567."
+        : null,
+    dob: a.dob.trim().length === 0
+      ? "Please enter your date of birth."
+      : a.dob.length < 10 || age === null
+        ? "Enter your date of birth as MM/DD/YYYY."
+        : age < 18
+          ? "You must be 18 or older to continue."
+          : age > 100
+            ? "Please double-check your date of birth."
+            : null,
+    sex: a.sex ? null : "Please select an option.",
+    goalWeight: a.goalWeight === ""
+      ? "Enter your goal weight in pounds."
+      : Number(a.goalWeight) <= 0
+        ? "Enter a valid goal weight."
+        : startWeight > 0 && Number(a.goalWeight) >= startWeight
+          ? "Your goal weight must be lower than your current weight."
+          : null,
+    pace: a.pace ? null : "Please choose one option.",
+    currentGlp1: a.currentGlp1 ? null : "Please choose one option.",
+    glp1Medication: a.glp1Medication ? null : "Please select the medication.",
+    glp1Strength: a.glp1Strength.trim().length > 0 ? null : "Please enter your last dose strength.",
+    otherMeds: a.otherMeds ? null : "Please choose one option.",
+    otherMedsList: a.otherMedsList.trim().length > 0 ? null : "Please list your medications.",
+    highRisk: a.highRisk.length > 0
+      ? null
+      : "Please select at least one option, or choose “None of the Above”.",
+    conditions: a.conditions.length > 0
+      ? null
+      : "Please select at least one option, or choose “None of the Above”.",
+    surgeries: a.surgeries.trim().length > 0 ? null : "Please answer, or tap N/A.",
+    allergies: a.allergies.trim().length > 0 ? null : "Please answer, or tap N/A.",
+    state: a.state ? null : "Please select the state you live in.",
+    attest: a.attest ? null : "You must attest before continuing.",
+    address1: a.address1.trim().length > 0 ? null : "Please enter your street address.",
+    city: a.city.trim().length > 0 ? null : "Please enter your city.",
+    shipState: a.shipState ? null : "Please select a state.",
+    zip: a.zip.length === 0
+      ? "Please enter your ZIP code."
+      : !/^\d{5}$/.test(a.zip)
+        ? "ZIP code must be 5 digits."
+        : null,
+    consentTelehealth: a.consentTelehealth ? null : "Please accept to continue.",
+    consentCompounded: a.consentCompounded ? null : "Please accept to continue.",
+    consentPrivacy: a.consentPrivacy ? null : "Please accept to continue.",
+  };
+
+  const err = (key: string): string | null =>
+    showErrors || touched[key] ? (fieldErrors[key] ?? null) : null;
+
 
   /* ── step map (steps 7 & 8b are conditional) ── */
   const showGlp1Details = a.currentGlp1 === "Yes, I am";
@@ -388,70 +473,47 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const isFinal = currentKey === "final";
   const pct = (Math.min(step, steps.length) / steps.length) * 100;
 
-  const valid = (() => {
-    switch (currentKey) {
-      case "intro":
-        return (
-          !!a.goal &&
-          a.tried.length > 0 &&
-          a.heightFt !== "" &&
-          a.heightIn !== "" &&
-          a.weightLbs !== "" &&
-          a.firstName.trim().length > 0 &&
-          a.lastName.trim().length > 0 &&
-          emailOk(a.email) &&
-          digits(a.phone).length === 10 &&
-          age !== null &&
-          age >= 18 &&
-          !!a.sex
-        );
-      case "goalWeight":
-        return Number(a.goalWeight) > 0 && Number(a.goalWeight) < startWeight;
-      case "flatPrice":
-      case "encouragement":
-        return true;
-      case "pace":
-        return !!a.pace;
-      case "currentGlp1":
-        return !!a.currentGlp1;
-      case "glp1Details":
-        return !!a.glp1Medication && a.glp1Strength.trim().length > 0;
-      case "otherMeds":
-        return !!a.otherMeds;
-      case "otherMedsDetails":
-        return a.otherMedsList.trim().length > 0;
-      case "highRisk":
-        return a.highRisk.length > 0;
-      case "conditions":
-        return a.conditions.length > 0;
-      case "surgeries":
-        return a.surgeries.trim().length > 0;
-      case "allergies":
-        return a.allergies.trim().length > 0;
-      case "state":
-        return !!a.state;
-      case "confirm":
-        return (
-          a.firstName.trim().length > 0 &&
-          a.lastName.trim().length > 0 &&
-          emailOk(a.email) &&
-          digits(a.phone).length === 10 &&
-          a.attest
-        );
-      case "final":
-        return (
-          a.address1.trim().length > 0 &&
-          a.city.trim().length > 0 &&
-          !!a.shipState &&
-          /^\d{5}$/.test(a.zip) &&
-          a.consentTelehealth &&
-          a.consentCompounded &&
-          a.consentPrivacy
-        );
-      default:
-        return true;
-    }
-  })();
+  const STEP_FIELDS: Record<string, string[]> = {
+    intro: [
+      "goal",
+      "tried",
+      "heightFt",
+      "heightIn",
+      "weightLbs",
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "dob",
+      "sex",
+    ],
+    goalWeight: ["goalWeight"],
+    flatPrice: [],
+    encouragement: [],
+    pace: ["pace"],
+    currentGlp1: ["currentGlp1"],
+    glp1Details: ["glp1Medication", "glp1Strength"],
+    otherMeds: ["otherMeds"],
+    otherMedsDetails: ["otherMedsList"],
+    highRisk: ["highRisk"],
+    conditions: ["conditions"],
+    surgeries: ["surgeries"],
+    allergies: ["allergies"],
+    state: ["state"],
+    confirm: ["firstName", "lastName", "email", "phone", "attest"],
+    final: [
+      "address1",
+      "city",
+      "shipState",
+      "zip",
+      "consentTelehealth",
+      "consentCompounded",
+      "consentPrivacy",
+    ],
+  };
+
+  const currentFields = STEP_FIELDS[currentKey] ?? [];
+  const valid = currentFields.every((k) => !fieldErrors[k]);
 
   const buttonLabel =
     isFinal
@@ -461,11 +523,24 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
         : "Continue";
 
   const advance = async () => {
+    if (!valid) {
+      setShowErrors(true);
+      if (typeof window !== "undefined") {
+        window.setTimeout(() => {
+          const firstError = document.querySelector('[role="alert"]');
+          firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 60);
+      }
+      return;
+    }
+
     if (!isFinal) {
       await persistContact(`step_${step}_${currentKey}`);
+      setShowErrors(false);
       setStep((s) => s + 1);
       return;
     }
+
     setSending(true);
     await persistContact("intake_submitted");
     try {
@@ -490,8 +565,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
       setA(EMPTY);
       setStep(1);
       setSubmitted(false);
+      setTouched({});
+      setShowErrors(false);
     }
   };
+
 
   return (
     <div className="min-h-[100dvh] bg-white pb-10">
@@ -553,7 +631,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                   set={set}
                   toggleMulti={toggleMulti}
                   bmi={bmi}
-                  dobError={dobError}
+                  err={err}
+                  touch={touch}
                 />
               )}
 
@@ -561,12 +640,13 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                 <div>
                   <StepTitle>What&rsquo;s your goal weight?</StepTitle>
                   <div className="mt-5">
-                    <Field label="Goal weight (lbs)">
+                    <Field label="Goal weight (lbs)" error={err("goalWeight")}>
                       <input
-                        className={inputClass}
+                        className={inputCls(err("goalWeight"))}
                         inputMode="numeric"
                         placeholder="-"
                         value={a.goalWeight}
+                        onBlur={() => touch("goalWeight")}
                         onChange={(e) => set("goalWeight", digits(e.target.value).slice(0, 4))}
                       />
                     </Field>
@@ -574,6 +654,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                   </div>
                 </div>
               )}
+
 
               {currentKey === "flatPrice" && (
                 <div className="py-4">
@@ -594,7 +675,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     {a.goalWeight}.
                   </p>
                   <div className="mt-6">
-                    <Fieldset legend="How is that pace for you?">
+                    <Fieldset legend="How is that pace for you?" error={err("pace")}>
                       {PACE_OPTIONS.map((o) => (
                         <ChoiceCard
                           key={o}
@@ -635,6 +716,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                       />
                     ))}
                   </div>
+                  {err("currentGlp1") ? (
+                    <p role="alert" className="mt-2 text-[12px] font-medium text-red-600">
+                      {err("currentGlp1")}
+                    </p>
+                  ) : null}
                 </div>
               )}
 
@@ -644,10 +730,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     Please provide details about the medication you&rsquo;re currently taking
                   </StepTitle>
                   <div className="mt-5 space-y-4">
-                    <Field label="Which medication?">
+                    <Field label="Which medication?" error={err("glp1Medication")}>
                       <select
-                        className={inputClass}
+                        className={inputCls(err("glp1Medication"))}
                         value={a.glp1Medication}
+                        onBlur={() => touch("glp1Medication")}
                         onChange={(e) => set("glp1Medication", e.target.value)}
                       >
                         <option value="">Select medication</option>
@@ -658,11 +745,12 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                         ))}
                       </select>
                     </Field>
-                    <Field label="Strength of your last dose (mg)">
+                    <Field label="Strength of your last dose (mg)" error={err("glp1Strength")}>
                       <input
-                        className={inputClass}
+                        className={inputCls(err("glp1Strength"))}
                         placeholder="e.g. 5"
                         value={a.glp1Strength}
+                        onBlur={() => touch("glp1Strength")}
                         onChange={(e) => set("glp1Strength", e.target.value.slice(0, 20))}
                       />
                     </Field>
@@ -703,6 +791,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                       />
                     ))}
                   </div>
+                  {err("otherMeds") ? (
+                    <p role="alert" className="mt-2 text-[12px] font-medium text-red-600">
+                      {err("otherMeds")}
+                    </p>
+                  ) : null}
                 </div>
               )}
 
@@ -711,15 +804,22 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                   <StepTitle>Please list all medications you are currently taking:</StepTitle>
                   <div className="mt-5">
                     <textarea
-                      className={cn(inputClass, "min-h-[96px]")}
+                      className={cn(inputCls(err("otherMedsList")), "min-h-[96px]")}
                       placeholder="e.g., Metformin 500mg twice daily"
                       value={a.otherMedsList}
+                      onBlur={() => touch("otherMedsList")}
                       onChange={(e) => set("otherMedsList", e.target.value.slice(0, 2000))}
                     />
+                    {err("otherMedsList") ? (
+                      <p role="alert" className="mt-1 text-[12px] font-medium text-red-600">
+                        {err("otherMedsList")}
+                      </p>
+                    ) : null}
                     <Helper>This helps your provider create the perfect plan for you</Helper>
                   </div>
                 </div>
               )}
+
 
               {currentKey === "highRisk" && (
                 <div>
@@ -729,7 +829,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     don&rsquo;t have any medical issues, choose None Of the Above from the list!
                   </Helper>
                   <div className="mt-6">
-                    <Fieldset legend="Do you currently have any of the following high-risk medical conditions?">
+                    <Fieldset legend="Do you currently have any of the following high-risk medical conditions?" error={err("highRisk")}>
                       {HIGH_RISK_CONDITIONS.map((c) => (
                         <ChoiceCard
                           key={c}
@@ -751,7 +851,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     Understanding your health history helps us provide safer, more effective care
                   </Helper>
                   <div className="mt-6">
-                    <Fieldset legend="Please check all current or past medical conditions.">
+                    <Fieldset legend="Please check all current or past medical conditions." error={err("conditions")}>
                       {MEDICAL_CONDITIONS.map((c) => (
                         <ChoiceCard
                           key={c}
@@ -771,17 +871,19 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                   <StepTitle>Let&rsquo;s talk about your health ...</StepTitle>
                   <Helper>Select &lsquo;N/A&rsquo; if you don&rsquo;t have any surgeries to share!</Helper>
                   <div className="mt-6">
-                    <Field label="List any surgeries you have had in the past:">
+                    <Field label="List any surgeries you have had in the past:" error={err("surgeries")}>
                       <div className="flex gap-2">
                         <input
-                          className={inputClass}
+                          className={inputCls(err("surgeries"))}
                           placeholder="e.g., Appendectomy (2019) or N/A"
                           value={a.surgeries}
+                          onBlur={() => touch("surgeries")}
                           onChange={(e) => set("surgeries", e.target.value.slice(0, 500))}
                         />
                         <NAButton onClick={() => set("surgeries", "N/A")} />
                       </div>
                     </Field>
+
                     <Helper>
                       Thank you for being so thorough, this gives us a complete picture
                     </Helper>
@@ -797,17 +899,19 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     to
                   </Helper>
                   <div className="mt-6">
-                    <Field label="Please list all of your known allergies:">
+                    <Field label="Please list all of your known allergies:" error={err("allergies")}>
                       <div className="flex gap-2">
                         <input
-                          className={inputClass}
+                          className={inputCls(err("allergies"))}
                           placeholder="e.g., Penicillin, Pollen, Shellfish, Latex or N/A"
                           value={a.allergies}
+                          onBlur={() => touch("allergies")}
                           onChange={(e) => set("allergies", e.target.value.slice(0, 500))}
                         />
                         <NAButton onClick={() => set("allergies", "N/A")} />
                       </div>
                     </Field>
+
                     <Helper>Type here, or tap N/A on right if not applicable</Helper>
                   </div>
                 </div>
@@ -821,10 +925,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     with your provider
                   </Helper>
                   <div className="mt-6">
-                    <Field label="The state I live in">
+                    <Field label="The state I live in" error={err("state")}>
                       <select
-                        className={inputClass}
+                        className={inputCls(err("state"))}
                         value={a.state}
+                        onBlur={() => touch("state")}
                         onChange={(e) => set("state", e.target.value)}
                       >
                         <option value="">Select state</option>
@@ -847,39 +952,43 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                   </StepTitle>
                   <div className="mt-5 space-y-4">
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <Field label="First name">
+                      <Field label="First name" error={err("firstName")}>
                         <input
-                          className={inputClass}
+                          className={inputCls(err("firstName"))}
                           autoComplete="given-name"
                           value={a.firstName}
+                          onBlur={() => touch("firstName")}
                           onChange={(e) => set("firstName", e.target.value)}
                         />
                       </Field>
-                      <Field label="Last name">
+                      <Field label="Last name" error={err("lastName")}>
                         <input
-                          className={inputClass}
+                          className={inputCls(err("lastName"))}
                           autoComplete="family-name"
                           value={a.lastName}
+                          onBlur={() => touch("lastName")}
                           onChange={(e) => set("lastName", e.target.value)}
                         />
                       </Field>
                     </div>
-                    <Field label="Email">
+                    <Field label="Email" error={err("email")}>
                       <input
-                        className={inputClass}
+                        className={inputCls(err("email"))}
                         type="email"
                         autoComplete="email"
                         value={a.email}
+                        onBlur={() => touch("email")}
                         onChange={(e) => set("email", e.target.value)}
                       />
                     </Field>
-                    <Field label="Phone number">
+                    <Field label="Phone number" error={err("phone")}>
                       <input
-                        className={inputClass}
+                        className={inputCls(err("phone"))}
                         inputMode="tel"
                         autoComplete="tel"
                         placeholder="(555) 123-4567"
                         value={a.phone}
+                        onBlur={() => touch("phone")}
                         onChange={(e) => set("phone", formatPhone(e.target.value))}
                       />
                     </Field>
@@ -891,9 +1000,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                     <CheckRow
                       checked={a.attest}
                       onChange={(v) => set("attest", v)}
+                      error={err("attest")}
                       label="I confirm that I am the patient completing this intake form and have reviewed all questions carefully. I attest that my answers are true, accurate, and complete to the best of my knowledge. I understand the importance of providing my provider with complete and accurate health information for my care."
                     />
                   </div>
+
                 </div>
               )}
 
@@ -901,15 +1012,16 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                 <div>
                   <StepTitle>Where should we send your treatment?</StepTitle>
                   <Helper>
-                    Your card is not charged today. If a licensed provider determines treatment is
-                    appropriate, Chubby No More will contact you before anything ships.
+                    Your card is not charged today. If our licensed provider determines treatment
+                    is appropriate, Chubby No More will contact you before anything ships.
                   </Helper>
                   <div className="mt-6 space-y-4">
-                    <Field label="Address line 1">
+                    <Field label="Address line 1" error={err("address1")}>
                       <input
-                        className={inputClass}
+                        className={inputCls(err("address1"))}
                         autoComplete="address-line1"
                         value={a.address1}
+                        onBlur={() => touch("address1")}
                         onChange={(e) => set("address1", e.target.value)}
                       />
                     </Field>
@@ -922,18 +1034,20 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                       />
                     </Field>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                      <Field label="City" className="sm:col-span-1">
+                      <Field label="City" className="sm:col-span-1" error={err("city")}>
                         <input
-                          className={inputClass}
+                          className={inputCls(err("city"))}
                           autoComplete="address-level2"
                           value={a.city}
+                          onBlur={() => touch("city")}
                           onChange={(e) => set("city", e.target.value)}
                         />
                       </Field>
-                      <Field label="State" className="sm:col-span-1">
+                      <Field label="State" className="sm:col-span-1" error={err("shipState")}>
                         <select
-                          className={inputClass}
+                          className={inputCls(err("shipState"))}
                           value={a.shipState}
+                          onBlur={() => touch("shipState")}
                           onChange={(e) => set("shipState", e.target.value)}
                         >
                           <option value="">State</option>
@@ -944,13 +1058,14 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                           ))}
                         </select>
                       </Field>
-                      <Field label="ZIP code" className="sm:col-span-1">
+                      <Field label="ZIP code" className="sm:col-span-1" error={err("zip")}>
                         <input
-                          className={inputClass}
+                          className={inputCls(err("zip"))}
                           inputMode="numeric"
                           placeholder="12345"
                           autoComplete="postal-code"
                           value={a.zip}
+                          onBlur={() => touch("zip")}
                           onChange={(e) => set("zip", digits(e.target.value).slice(0, 5))}
                         />
                       </Field>
@@ -960,19 +1075,23 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                       <CheckRow
                         checked={a.consentTelehealth}
                         onChange={(v) => set("consentTelehealth", v)}
+                        error={err("consentTelehealth")}
                         label="I consent to receive care through telehealth from an independent licensed provider and agree to Chubby No More’s Telehealth Consent and Terms of Use."
                       />
                       <CheckRow
                         checked={a.consentCompounded}
                         onChange={(v) => set("consentCompounded", v)}
+                        error={err("consentCompounded")}
                         label="I understand compounded medications are not approved by the FDA and are not reviewed by the FDA for safety, effectiveness, or quality."
                       />
                       <CheckRow
                         checked={a.consentPrivacy}
                         onChange={(v) => set("consentPrivacy", v)}
+                        error={err("consentPrivacy")}
                         label="I have reviewed the Notice of Privacy Practices and consent to Chubby No More contacting me about my care."
                       />
                     </div>
+
                   </div>
                 </div>
               )}
@@ -1009,52 +1128,68 @@ function CheckRow({
   checked,
   onChange,
   label,
+  error,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   label: string;
+  error?: string | null;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-relaxed text-[#103942]">
-      <input
-        type="checkbox"
-        className="sr-only"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span
-        aria-hidden
-        className={cn(
-          "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[5px] border",
-          checked ? "border-[#42D1C3] bg-[#42D1C3]" : "border-[#103942]/25 bg-white",
-        )}
-      >
-        {checked ? <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} /> : null}
-      </span>
-      <span>{label}</span>
-    </label>
+    <div>
+      <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-relaxed text-[#103942]">
+        <input
+          type="checkbox"
+          className="sr-only"
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+        />
+        <span
+          aria-hidden
+          className={cn(
+            "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[5px] border",
+            checked
+              ? "border-[#42D1C3] bg-[#42D1C3]"
+              : error
+                ? "border-red-500 bg-red-50"
+                : "border-[#103942]/25 bg-white",
+          )}
+        >
+          {checked ? <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} /> : null}
+        </span>
+        <span>{label}</span>
+      </label>
+      {error ? (
+        <p role="alert" className="mt-1 pl-8 text-[12px] font-medium text-red-600">
+          {error}
+        </p>
+      ) : null}
+    </div>
   );
 }
+
 
 function IntroStep({
   a,
   set,
   toggleMulti,
   bmi,
-  dobError,
+  err,
+  touch,
 }: {
   a: Answers;
   set: <K extends keyof Answers>(key: K, value: Answers[K]) => void;
   toggleMulti: (key: "tried" | "highRisk" | "conditions", label: string) => void;
   bmi: number | null;
-  dobError: string | null;
+  err: (key: string) => string | null;
+  touch: (key: string) => void;
 }) {
   return (
     <div>
       <StepTitle>Your 60 Second Health Intake Form</StepTitle>
 
       <div className="mt-6">
-        <Fieldset legend="What are your weight loss goals?">
+        <Fieldset legend="What are your weight loss goals?" error={err("goal")}>
           {GOALS.map((g) => (
             <ChoiceCard
               key={g}
@@ -1067,7 +1202,10 @@ function IntroStep({
       </div>
 
       <div className="mt-8">
-        <Fieldset legend="What weight loss initiatives have you tried in the past?">
+        <Fieldset
+          legend="What weight loss initiatives have you tried in the past?"
+          error={err("tried")}
+        >
           {INITIATIVES.map((t) => (
             <ChoiceCard
               key={t}
@@ -1085,30 +1223,37 @@ function IntroStep({
           What are your height and weight?
         </p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          <Field label="Height (ft)">
+          <Field label="Height (ft)" error={err("heightFt")}>
             <input
-              className={inputClass}
+              className={inputCls(err("heightFt"))}
               inputMode="numeric"
               placeholder="-"
               value={a.heightFt}
+              onBlur={() => touch("heightFt")}
               onChange={(e) => set("heightFt", digits(e.target.value).slice(0, 1))}
             />
           </Field>
-          <Field label="Height (in)">
+          <Field label="Height (in)" error={err("heightIn")}>
             <input
-              className={inputClass}
+              className={inputCls(err("heightIn"))}
               inputMode="numeric"
               placeholder="-"
               value={a.heightIn}
+              onBlur={() => touch("heightIn")}
               onChange={(e) => set("heightIn", digits(e.target.value).slice(0, 2))}
             />
           </Field>
-          <Field label="Weight (lbs)" className="col-span-2 sm:col-span-1">
+          <Field
+            label="Weight (lbs)"
+            className="col-span-2 sm:col-span-1"
+            error={err("weightLbs")}
+          >
             <input
-              className={inputClass}
+              className={inputCls(err("weightLbs"))}
               inputMode="numeric"
               placeholder="-"
               value={a.weightLbs}
+              onBlur={() => touch("weightLbs")}
               onChange={(e) => set("weightLbs", digits(e.target.value).slice(0, 4))}
             />
           </Field>
@@ -1120,52 +1265,57 @@ function IntroStep({
 
       <div className="mt-8 space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field label="First name">
+          <Field label="First name" error={err("firstName")}>
             <input
-              className={inputClass}
+              className={inputCls(err("firstName"))}
               autoComplete="given-name"
               value={a.firstName}
+              onBlur={() => touch("firstName")}
               onChange={(e) => set("firstName", e.target.value)}
             />
           </Field>
-          <Field label="Last name">
+          <Field label="Last name" error={err("lastName")}>
             <input
-              className={inputClass}
+              className={inputCls(err("lastName"))}
               autoComplete="family-name"
               value={a.lastName}
+              onBlur={() => touch("lastName")}
               onChange={(e) => set("lastName", e.target.value)}
             />
           </Field>
         </div>
-        <Field label="Email">
+        <Field label="Email" error={err("email")}>
           <input
-            className={inputClass}
+            className={inputCls(err("email"))}
             type="email"
             autoComplete="email"
             value={a.email}
+            onBlur={() => touch("email")}
             onChange={(e) => set("email", e.target.value)}
           />
         </Field>
-        <Field label="Phone number">
+        <Field label="Phone number" error={err("phone")}>
           <input
-            className={inputClass}
+            className={inputCls(err("phone"))}
             inputMode="tel"
             autoComplete="tel"
             placeholder="(555) 123-4567"
             value={a.phone}
+            onBlur={() => touch("phone")}
             onChange={(e) => set("phone", formatPhone(e.target.value))}
           />
         </Field>
-        <Field label="Date of birth" error={dobError}>
+        <Field label="Date of birth" error={err("dob")}>
           <input
-            className={inputClass}
+            className={inputCls(err("dob"))}
             inputMode="numeric"
             placeholder="MM/DD/YYYY"
             value={a.dob}
+            onBlur={() => touch("dob")}
             onChange={(e) => set("dob", formatDob(e.target.value))}
           />
         </Field>
-        <Fieldset legend="Sex assigned at birth">
+        <Fieldset legend="Sex assigned at birth" error={err("sex")}>
           <div className="grid grid-cols-2 gap-[10px]">
             {["Male", "Female"].map((s) => (
               <ChoiceCard
@@ -1184,6 +1334,7 @@ function IntroStep({
   );
 }
 
+
 function Confirmation() {
   return (
     <div className="mt-8 text-center">
@@ -1194,7 +1345,7 @@ function Confirmation() {
         Thanks — your intake is in.
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-[#103942]/70">
-        A licensed provider will review your information and Chubby No More will follow up by
+        Our licensed provider will review your information and Chubby No More will follow up by
         email or text. No charge today.
       </p>
       <div className="mt-6">

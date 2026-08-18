@@ -7,11 +7,13 @@ import { cn } from "@/lib/utils";
 export function Fieldset({
   legend,
   hint,
+  error,
   children,
   className,
 }: {
   legend: string;
   hint?: string;
+  error?: string | null;
   children: ReactNode;
   className?: string;
 }) {
@@ -22,9 +24,15 @@ export function Fieldset({
       </legend>
       {hint ? <p className="-mt-2 mb-3 text-[13px] text-[#103942]/60">{hint}</p> : null}
       <div className="flex flex-col gap-[10px]">{children}</div>
+      {error ? (
+        <p role="alert" className="mt-2 text-[12px] font-medium text-red-600">
+          {error}
+        </p>
+      ) : null}
     </fieldset>
   );
 }
+
 
 const cardBase =
   "w-full min-h-[44px] rounded-xl border bg-white px-4 py-[18px] text-left text-[15px] leading-snug transition-all duration-150 " +
@@ -122,7 +130,11 @@ export function Field({
     <label className={cn("block", className)}>
       <span className="mb-1.5 block text-[13px] font-semibold text-[#103942]">{label}</span>
       {children}
-      {error ? <span className="mt-1 block text-[12px] text-red-600">{error}</span> : null}
+      {error ? (
+        <span role="alert" className="mt-1 block text-[12px] font-medium text-red-600">
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
@@ -131,6 +143,15 @@ export const inputClass =
   "w-full min-h-[44px] rounded-xl border border-[#103942]/15 bg-white px-3.5 py-3 text-[15px] text-[#103942] " +
   "placeholder:text-[#103942]/35 transition-colors focus-visible:outline-none focus:border-[#42D1C3] " +
   "focus:ring-2 focus:ring-[#42D1C3]/40";
+
+export const inputErrorClass =
+  "border-red-500 bg-red-50/40 focus:border-red-500 focus:ring-red-500/30";
+
+/** Input classes with an error state applied when `error` is truthy. */
+export function inputCls(error?: string | null, extra?: string) {
+  return cn(inputClass, error ? inputErrorClass : "", extra);
+}
+
 
 export function PrimaryButton({
   children,

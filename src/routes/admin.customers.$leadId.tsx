@@ -176,7 +176,7 @@ function CustomerDetail({ leadId }: { leadId: string }) {
           <Row label="Started" value={fmt(data.clinical.created_at)} />
           <Row label="Submitted" value={fmt(data.clinical.submitted_at)} />
           <p className="sm:col-span-2 mt-2 text-xs text-muted-foreground">
-            Provider decisions are recorded separately by a licensed provider. No status
+            Provider decisions are recorded separately by our licensed provider. No status
             here indicates qualification, approval, eligibility, or a prescription.
           </p>
         </Section>

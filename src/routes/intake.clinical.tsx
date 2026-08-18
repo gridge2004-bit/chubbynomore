@@ -23,13 +23,13 @@ export const Route = createFileRoute("/intake/clinical")({
       {
         name: "description",
         content:
-          "Complete your Chubby No More health assessment. A licensed provider reviews your information before any treatment decision.",
+          "Complete your Chubby No More health assessment. Our licensed provider reviews your information before any treatment decision.",
       },
       { property: "og:title", content: "Health Assessment | Chubby No More" },
       {
         property: "og:description",
         content:
-          "Complete your Chubby No More health assessment. A licensed provider reviews your information before any treatment decision.",
+          "Complete your Chubby No More health assessment. Our licensed provider reviews your information before any treatment decision.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -242,10 +242,10 @@ function ClinicalIntake() {
       <main className="mx-auto w-full max-w-2xl px-5 py-16 sm:px-6 sm:py-24">
         {IS_DEV && <DevWarning preview />}
         <h1 className="font-serif text-3xl leading-tight text-[#103942] sm:text-4xl">
-          Your information has been submitted for review by a licensed provider.
+          Your information has been submitted for review by our licensed provider.
         </h1>
         <p className="mt-4 text-base leading-relaxed text-[#103942]/70">
-          A licensed provider will review your health information and determine whether any
+          Our licensed provider will review your health information and determine whether any
           available treatment option may be medically appropriate.
         </p>
         <a
@@ -432,7 +432,7 @@ function DevWarning({ preview }: { preview?: boolean }) {
       </p>
       <p className="mt-2 text-sm leading-relaxed text-[#103942]/80">
         {preview
-          ? "This is a preview of the confirmation screen. No intake has been sent to a licensed provider."
+          ? "This is a preview of the confirmation screen. No intake has been sent to our licensed provider."
           : "Answers are saved to the access-controlled clinical store, but no licensed-provider review destination is connected, so final submission is disabled and nothing is transmitted."}
       </p>
       <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[#103942]/80">
@@ -622,7 +622,7 @@ function ReviewStep({
         </div>
       ))}
       <p className="text-sm leading-relaxed text-[#103942]/70">
-        A licensed provider reviews your information before any treatment decision. No treatment or
+        Our licensed provider reviews your information before any treatment decision. No treatment or
         medication is recommended or confirmed at this stage.
       </p>
     </div>
