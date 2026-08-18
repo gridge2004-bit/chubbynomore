@@ -177,12 +177,18 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const product = (productSlug && PRODUCTS[productSlug]) || DEFAULT_PRODUCT;
 
   const [step, setStep] = useState(1);
-  const [fading, setFading] = useState(false);
   const [a, setA] = useState<Answers>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [stopped, setStopped] = useState(false);
 
   const topRef = useRef<HTMLDivElement>(null);
+  const stepRefs = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
 
   /* progressive lead capture — saved as soon as email + phone are valid */
   const savePartial = useServerFn(savePartialLead);
@@ -192,17 +198,25 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((prev) => ({ ...prev, [key]: value }));
 
-
+  // Track which section is in view while the user scrolls through the form.
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [step, submitted]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = stepRefs.findIndex((r) => r.current === entry.target);
+            if (index >= 0) setStep(index + 1);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 },
+    );
+    stepRefs.forEach((r) => r.current && observer.observe(r.current));
+    return () => observer.disconnect();
+  }, []);
 
-  const go = (next: number) => {
-    setFading(true);
-    window.setTimeout(() => {
-      setStep(next);
-      setFading(false);
-    }, 200);
+  const scrollToStep = (next: number) => {
+    stepRefs[next - 1]?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // silent BMI
@@ -268,8 +282,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
     a.consentTerms &&
     a.consentCompounded;
 
-  const valid = [step1Valid, step2Valid, step3Valid, step4Valid, step5Valid][step - 1];
-
   const contactReady = emailOk(a.email) && digits(a.phone).length === 10;
 
   const persistContact = useCallback(
@@ -330,22 +342,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   };
 
   const handleContinue = async () => {
-    if (step === 2 && hardStop) {
-      void persistContact("step_2_safety_stop");
-      setStopped(true);
-      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    void persistContact(`step_${step}_completed`);
-
-    if (step < 5) {
-      go(step + 1);
-      return;
-    }
-
     await persistContact("intake_submitted");
-
 
     const payload = {
       product: { slug: productSlug ?? "compounded-tirzepatide-injection", ...product },
@@ -377,9 +374,9 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
 
   return (
-    <div className="min-h-screen bg-white" ref={topRef}>
+    <div className="min-h-[100dvh] overflow-visible bg-white pb-20" ref={topRef}>
       {/* top bar */}
-      <header className="mx-auto flex max-w-[560px] items-center justify-between px-5 pt-5">
+      <header className="sticky top-0 z-10 mx-auto flex max-w-[560px] items-center justify-between bg-white/95 px-5 pt-5 pb-3 backdrop-blur-sm">
         <Link to="/" aria-label="Chubby No More home">
           <img src={cnmHeaderLogoAsset.url} alt="Chubby No More" className="h-7 w-auto max-w-[150px] object-contain" />
         </Link>
@@ -413,49 +410,134 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
           </p>
         </div>
 
-        {/* card */}
-        <div
-          className={cn(
-            "relative mt-6 transition-opacity duration-200",
-            fading ? "opacity-0" : "opacity-100",
-          )}
-        >
-          {!submitted && !stopped && step > 1 ? (
-            <button
-              type="button"
-              onClick={() => go(step - 1)}
-              aria-label="Go back"
-              className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#103942]/15 bg-white text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-          ) : null}
-
-          {submitted ? (
+        {submitted ? (
+          <div className="mt-6">
             <Confirmation />
-          ) : stopped ? (
-            <NotEligible onBack={() => setStopped(false)} />
-          ) : (
-
-            <>
-              {step === 1 && <Step1 a={a} set={set} toggleMulti={toggleMulti} dobError={dobError} />}
-              {step === 2 && <Step2 a={a} set={set} needsPregnancy={needsPregnancy} />}
-              {step === 3 && <Step3 a={a} set={set} toggleMulti={toggleMulti} />}
-              {step === 4 && <Step4 a={a} set={set} />}
-              {step === 5 && <Step5 a={a} set={set} />}
-
-              <div className={cn("mt-8", step === 1 && "pb-12")}>
-                <PrimaryButton disabled={!valid} onClick={handleContinue}>
-                  {step === 5 ? "Submit for provider review" : "Continue"}
-                  {step === 5 ? null : <ArrowRight className="h-4 w-4" />}
+          </div>
+        ) : stopped ? (
+          <div className="mt-6">
+            <NotEligible onBack={() => { setStopped(false); scrollToStep(step); }} />
+          </div>
+        ) : (
+          <div className="relative mt-6 space-y-12">
+            {/* Step 1 — Goals & contact */}
+            <section
+              ref={stepRefs[0]}
+              id="step-1"
+              className="scroll-mt-32"
+            >
+              <Step1 a={a} set={set} toggleMulti={toggleMulti} dobError={dobError} />
+              <div className="mt-8 pb-4">
+                <PrimaryButton disabled={!step1Valid} onClick={() => scrollToStep(2)}>
+                  Continue <ArrowRight className="h-4 w-4" />
                 </PrimaryButton>
               </div>
-            </>
-          )}
-        </div>
+            </section>
+
+            {/* Step 2 — Safety */}
+            <section
+              ref={stepRefs[1]}
+              id="step-2"
+              className="scroll-mt-32"
+            >
+              <button
+                type="button"
+                onClick={() => scrollToStep(1)}
+                aria-label="Go back"
+                className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#103942]/15 bg-white text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <Step2 a={a} set={set} needsPregnancy={needsPregnancy} />
+              <div className="mt-8 pb-4">
+                <PrimaryButton
+                  disabled={!step2Valid}
+                  onClick={() => {
+                    if (hardStop) {
+                      void persistContact("step_2_safety_stop");
+                      setStopped(true);
+                      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      return;
+                    }
+                    void persistContact("step_2_completed");
+                    scrollToStep(3);
+                  }}
+                >
+                  Continue <ArrowRight className="h-4 w-4" />
+                </PrimaryButton>
+              </div>
+            </section>
+
+            {/* Step 3 — Medical history */}
+            <section
+              ref={stepRefs[2]}
+              id="step-3"
+              className="scroll-mt-32"
+            >
+              <button
+                type="button"
+                onClick={() => scrollToStep(2)}
+                aria-label="Go back"
+                className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#103942]/15 bg-white text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <Step3 a={a} set={set} toggleMulti={toggleMulti} />
+              <div className="mt-8 pb-4">
+                <PrimaryButton disabled={!step3Valid} onClick={() => { void persistContact("step_3_completed"); scrollToStep(4); }}>
+                  Continue <ArrowRight className="h-4 w-4" />
+                </PrimaryButton>
+              </div>
+            </section>
+
+            {/* Step 4 — Plan */}
+            <section
+              ref={stepRefs[3]}
+              id="step-4"
+              className="scroll-mt-32"
+            >
+              <button
+                type="button"
+                onClick={() => scrollToStep(3)}
+                aria-label="Go back"
+                className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#103942]/15 bg-white text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <Step4 a={a} set={set} />
+              <div className="mt-8 pb-4">
+                <PrimaryButton disabled={!step4Valid} onClick={() => { void persistContact("step_4_completed"); scrollToStep(5); }}>
+                  Continue <ArrowRight className="h-4 w-4" />
+                </PrimaryButton>
+              </div>
+            </section>
+
+            {/* Step 5 — Shipping & payment */}
+            <section
+              ref={stepRefs[4]}
+              id="step-5"
+              className="scroll-mt-32"
+            >
+              <button
+                type="button"
+                onClick={() => scrollToStep(4)}
+                aria-label="Go back"
+                className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#103942]/15 bg-white text-[#103942] transition-colors hover:border-[#103942]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <Step5 a={a} set={set} />
+              <div className="mt-8 pb-4">
+                <PrimaryButton disabled={!step5Valid} onClick={handleContinue}>
+                  Submit for provider review
+                </PrimaryButton>
+              </div>
+            </section>
+          </div>
+        )}
       </div>
 
-      {step !== 1 && <ComplianceFooter />}
+      <ComplianceFooter />
     </div>
   );
 }
