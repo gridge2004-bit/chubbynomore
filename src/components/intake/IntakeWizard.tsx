@@ -177,7 +177,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const product = (productSlug && PRODUCTS[productSlug]) || DEFAULT_PRODUCT;
 
   const [step, setStep] = useState(1);
-  const [fading, setFading] = useState(false);
   const [a, setA] = useState<Answers>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [stopped, setStopped] = useState(false);
@@ -218,14 +217,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const scrollToStep = (next: number) => {
     stepRefs[next - 1]?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const go = (next: number) => {
-    setFading(true);
-    window.setTimeout(() => {
-      setStep(next);
-      setFading(false);
-    }, 200);
   };
 
   // silent BMI
