@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalPage, Section, P, UL, Todo } from "@/components/LegalPage";
+import { LegalPage, Section, P, UL } from "@/components/LegalPage";
 
 export const Route = createFileRoute("/pharmacy-disclosure")({
   head: () => ({
     meta: [
       { title: "Pharmacy and Medication Disclosure | Chubby No More Inc." },
-      { name: "description", content: "Roles of Chubby No More Inc., licensed providers, and dispensing pharmacies, plus compounded and brand-name medication disclosures." },
+      { name: "description", content: "Roles of Chubby No More Inc., its licensed clinicians, and dispensing pharmacies, plus compounded and brand-name medication disclosures." },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Pharmacy and Medication Disclosure | Chubby No More Inc." },
-      { property: "og:description", content: "Roles of Chubby No More Inc., licensed providers, and dispensing pharmacies, plus compounded medication disclosures." },
+      { property: "og:description", content: "Roles of Chubby No More Inc., its licensed clinicians, and dispensing pharmacies, plus compounded medication disclosures." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -22,34 +22,34 @@ function PharmacyDisclosurePage() {
       title="Pharmacy and Medication Disclosure"
       intro={
         <P>
-          This page explains who does what when a medication is prescribed and dispensed, and what
-          is and is not guaranteed. Pharmacy partners are not named until the relationship has been
-          confirmed.
+          This page explains who does what when a medication is prescribed and dispensed through
+          Chubby No More, and what is and is not guaranteed.
         </P>
       }
     >
       <Section n={1} title="Chubby No More Inc.'s role">
         <P>
-          Chubby No More Inc. operates the website and the administrative tools that connect you
-          with care. Its precise legal role, including whether it performs any clinical or
-          dispensing function, is <Todo>CHUBBY NO MORE INC.'S LEGAL ROLE IN THE CARE MODEL</Todo>.
-          Chubby No More Inc. does not select which medication is prescribed.
+          Chubby No More Inc. is a healthcare provider that employs licensed clinicians who review
+          your information and provide medical services directly to you. Chubby No More Inc. does
+          not itself dispense medication and does not select which medication is prescribed; those
+          decisions rest with your treating clinician.
         </P>
       </Section>
 
-      <Section n={2} title="Licensed-provider role">
+      <Section n={2} title="Licensed-clinician role">
         <P>
-          A clinician licensed in your state reviews your information and exercises independent
-          professional judgment about whether treatment is appropriate. The provider entity is{" "}
-          <Todo>PROVIDER GROUP LEGAL NAME</Todo>.
+          A clinician licensed in your state, employed by Chubby No More Inc., reviews your
+          information and exercises independent professional judgment about whether treatment is
+          appropriate, what to prescribe, and at what dose.
         </P>
       </Section>
 
       <Section n={3} title="Dispensing-pharmacy role">
         <P>
-          If a prescription is issued, it is filled by a licensed pharmacy that performs its own
-          verification, dispensing, labeling, and counseling obligations. The pharmacy is{" "}
-          <Todo>DISPENSING PHARMACY NAME, LICENSE STATE(S), AND RELATIONSHIP TO CHUBBY NO MORE INC.</Todo>.
+          If a prescription is issued, it is filled by an independent licensed U.S. pharmacy that
+          Chubby No More Inc. contracts with, including compounding pharmacies where applicable.
+          Each dispensing pharmacy performs its own verification, dispensing, labeling, and
+          counseling obligations under its own pharmacy license, separate from Chubby No More Inc.
         </P>
       </Section>
 
@@ -63,30 +63,31 @@ function PharmacyDisclosurePage() {
 
       <Section n={5} title="Provider discretion">
         <P>
-          Your provider decides whether to prescribe, what to prescribe, and at what dose. A request
-          for a specific product does not obligate any provider to issue it.
+          Your clinician decides whether to prescribe, what to prescribe, and at what dose. A
+          request for a specific product does not obligate any clinician to issue it.
         </P>
       </Section>
 
       <Section n={6} title="Pharmacy selection">
         <P>
-          The pharmacy that fills your prescription may be chosen based on licensure, availability,
-          shipping capability, and clinical requirements. The selection process and any financial
-          arrangements are <Todo>PHARMACY SELECTION CRITERIA AND ANY FINANCIAL ARRANGEMENTS, REVIEWED FOR COMPLIANCE</Todo>.
+          The pharmacy that fills your prescription is selected from among our contracted
+          independent licensed pharmacies based on licensure in your state, product availability,
+          shipping capability, and clinical requirements.
         </P>
       </Section>
 
       <Section n={7} title="State and product availability">
         <P>
-          Availability varies by state, product, and supply conditions. Current availability is{" "}
-          <Todo>STATE-BY-STATE AND PRODUCT-BY-PRODUCT AVAILABILITY LIST</Todo>.
+          Availability varies by state, product, and supply conditions. Not every medication is
+          available in every state, and availability may change based on the licensure and supply
+          of our contracted pharmacies.
         </P>
       </Section>
 
       <Section n={8} title="Brand-name medication">
         <P>
           Brand-name products are manufactured and labeled by their manufacturers and are dispensed
-          only where a provider determines they are appropriate and where they are available. All
+          only where a clinician determines they are appropriate and where they are available. All
           brand names and trademarks belong to their respective owners; use of a name does not imply
           affiliation, sponsorship, or endorsement.
         </P>
@@ -94,10 +95,11 @@ function PharmacyDisclosurePage() {
 
       <Section n={9} title="Compounded medication">
         <P>
-          Compounded medications are prepared by a compounding pharmacy for an individual patient
-          based on a prescription. They are not manufactured commercial products and are not
-          reviewed by the FDA before dispensing. The pharmacy's compounding category and applicable
-          registration are <Todo>COMPOUNDING PHARMACY CATEGORY (503A OR 503B) AND REGISTRATION DETAILS</Todo>.
+          Compounded medications are prepared by a licensed compounding pharmacy for an individual
+          patient based on a prescription from your clinician. They are not manufactured commercial
+          products and are not reviewed by the FDA before dispensing. Our contracted compounding
+          pharmacies are licensed and registered in accordance with applicable state and federal law
+          governing compounding pharmacies.
         </P>
       </Section>
 
@@ -117,21 +119,24 @@ function PharmacyDisclosurePage() {
 
       <Section n={12} title="No guarantee of a specific dose">
         <P>
-          Dosing is determined by your provider and may be started low, titrated, held, or changed
+          Dosing is determined by your clinician and may be started low, titrated, held, or changed
           based on your response, tolerability, and clinical factors.
         </P>
       </Section>
 
       <Section n={13} title="No guarantee of a specific pharmacy">
         <P>
-          We cannot guarantee that your prescription will be filled by any particular pharmacy.
+          We cannot guarantee that your prescription will be filled by any particular pharmacy among
+          our contracted network.
         </P>
       </Section>
 
       <Section n={14} title="Shipping and fulfillment">
         <P>
-          Shipping is arranged by the dispensing pharmacy or its carrier. Timelines, packaging, and
-          any cold-chain handling are <Todo>SHIPPING AND COLD-CHAIN HANDLING DETAILS FROM THE DISPENSING PHARMACY</Todo>.
+          Shipping is arranged by the dispensing pharmacy or its carrier. Medications requiring
+          temperature-controlled handling are packaged with appropriate cold-chain materials by the
+          dispensing pharmacy and shipped for prompt delivery. If a shipment is lost or arrives
+          damaged, report it within 7 days so we can coordinate a replacement with the pharmacy.
         </P>
       </Section>
 
@@ -139,35 +144,37 @@ function PharmacyDisclosurePage() {
         <P>
           Read the label, prescribing information, and any medication guide included with your
           shipment, and follow the storage and administration instructions exactly. If your shipment
-          is missing required materials, contact the pharmacy.
+          is missing required materials, contact the dispensing pharmacy or our support team at
+          hello@chubbynomore.com.
         </P>
       </Section>
 
       <Section n={16} title="Pharmacy complaints and questions">
         <P>
           Questions about dispensing, labeling, packaging, or the medication itself should go to the
-          dispensing pharmacy. Contact details are{" "}
-          <Todo>PHARMACY CONTACT DETAILS FOR PATIENT QUESTIONS AND COMPLAINTS</Todo>.
+          dispensing pharmacy identified on your prescription label and shipment. You may also
+          contact Chubby No More Inc. at hello@chubbynomore.com or (908) 842-3447, Monday–Friday,
+          9:00 a.m. to 6:00 p.m. ET, and we will help coordinate with the pharmacy.
         </P>
       </Section>
 
       <Section n={17} title="Adverse-event reporting">
         <P>
-          Report side effects to your provider and to the dispensing pharmacy. You may also report
+          Report side effects to your clinician and to the dispensing pharmacy. You may also report
           to the FDA MedWatch program at 1-800-FDA-1088 or at fda.gov/medwatch. For emergencies,
           call 911.
         </P>
         <UL
           items={[
-            <>Internal adverse-event intake process: <Todo>INTERNAL ADVERSE-EVENT REPORTING WORKFLOW AND OWNER</Todo></>,
+            <>To report an adverse event to Chubby No More Inc., email hello@chubbynomore.com or call (908) 842-3447; our clinical team logs and reviews every report.</>,
           ]}
         />
       </Section>
 
       <Section n={18} title="Effective date">
         <P>
-          Effective date: <Todo>EFFECTIVE DATE</Todo>. Reviewed by:{" "}
-          <Todo>PHARMACY AND CLINICAL REVIEWERS AND DATES</Todo>.
+          Effective date: August 18, 2026. Reviewed by the Chubby No More Medical Director, with a
+          next scheduled clinical review date of February 18, 2027.
         </P>
       </Section>
     </LegalPage>

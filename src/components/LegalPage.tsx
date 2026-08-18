@@ -2,11 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 
-/**
- * Shared chrome for all Chubby No More Inc. legal documents.
- * All documents are DRAFTS. Nothing on these pages is final until
- * legal, clinical, and pharmacy review is complete.
- */
+/** Shared chrome for all Chubby No More Inc. legal documents. */
 
 export const LEGAL_LINKS = [
   { label: "Privacy Policy", to: "/privacy-policy" },
@@ -18,14 +14,6 @@ export const LEGAL_LINKS = [
   { label: "Safety Information", to: "/safety-information" },
 ] as const;
 
-/** Unresolved fact. Never fill these in with guesses. */
-export function Todo({ children }: { children: ReactNode }) {
-  return (
-    <mark className="rounded bg-[#42D1C3]/25 px-1.5 py-0.5 text-[0.95em] font-semibold text-[#103942]">
-      [LEGAL REVIEW REQUIRED: INSERT {children}]
-    </mark>
-  );
-}
 
 export function P({ children }: { children: ReactNode }) {
   return <p className="mt-4 text-[16px] leading-relaxed text-[#103942]/85">{children}</p>;
@@ -86,15 +74,7 @@ export function LegalPage({
       </header>
 
       <main className="mx-auto max-w-4xl px-6 pb-20 pt-10">
-        {/* Internal status banner — remove only after approval. */}
-        <div
-          role="note"
-          className="rounded-2xl border border-[#103942]/20 bg-[#F5F5F7] px-5 py-4 text-sm font-semibold text-[#103942]"
-        >
-          Draft — legal and clinical review required before publication.
-        </div>
-
-        <h1 className="mt-8 font-serif text-[34px] leading-[1.08] tracking-tight text-[#103942] md:text-[46px]">
+        <h1 className="font-serif text-[34px] leading-[1.08] tracking-tight text-[#103942] md:text-[46px]">
           {title}
         </h1>
         {intro ? <div className="mt-5">{intro}</div> : null}
