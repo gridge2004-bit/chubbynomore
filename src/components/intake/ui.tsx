@@ -161,7 +161,7 @@ export function PrimaryButton({
 
 export function ComplianceFooter() {
   return (
-    <div className="mx-auto mt-8 max-w-[560px] space-y-3 px-5 pb-16 text-[11px] leading-relaxed text-[#103942]/55">
+    <div className="mx-auto mt-8 max-w-[560px] space-y-3 px-5 pb-16 text-[11px] leading-relaxed text-[#103942]/80">
       <p>
         Compounded medications are not approved by the FDA and are not reviewed by the FDA for
         safety, effectiveness, or quality. ChubbyNoMore is not a medical practice or a pharmacy.
