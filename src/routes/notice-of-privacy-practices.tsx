@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalPage, Section, P, UL, Todo } from "@/components/LegalPage";
+import { LegalPage, Section, P, UL } from "@/components/LegalPage";
 
 export const Route = createFileRoute("/notice-of-privacy-practices")({
   head: () => ({
     meta: [
       { title: "Notice of Privacy Practices | Chubby No More Inc." },
-      { name: "description", content: "Draft Notice of Privacy Practices describing how protected health information may be used and disclosed and how patients can access it." },
+      { name: "description", content: "Notice of Privacy Practices describing how protected health information may be used and disclosed and how patients can access it." },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Notice of Privacy Practices | Chubby No More Inc." },
-      { property: "og:description", content: "Draft notice describing how protected health information may be used and disclosed and how patients can access it." },
+      { property: "og:description", content: "Notice describing how protected health information may be used and disclosed and how patients can access it." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -21,29 +21,22 @@ function NoticeOfPrivacyPracticesPage() {
     <LegalPage
       title="Notice of Privacy Practices"
       intro={
-        <>
-          <P>
-            <strong>
-              This notice describes how medical information about you may be used and disclosed and
-              how you can get access to this information. Please review it carefully.
-            </strong>
-          </P>
-          <P>
-            This draft follows the structure of the model notice published by the U.S. Department of
-            Health and Human Services for healthcare providers. It is not yet issued. The covered
-            entity legally responsible for issuing this notice has not been confirmed, and it is not
-            assumed to be Chubby No More Inc.
-          </P>
-        </>
+        <P>
+          <strong>
+            This notice describes how medical information about you may be used and disclosed and
+            how you can get access to this information. Please review it carefully.
+          </strong>
+        </P>
       }
     >
       <Section n={1} title="Entity covered by this notice">
         <P>
-          The covered healthcare entity responsible for this notice is{" "}
-          <Todo>COVERED PROVIDER ENTITY LEGAL NAME AND HIPAA STATUS DETERMINATION</Todo>. Whether
-          Chubby No More Inc. is a covered entity, a business associate, or neither is{" "}
-          <Todo>CHUBBY NO MORE INC.'S HIPAA ROLE</Todo>. Any organized health care arrangement is{" "}
-          <Todo>ORGANIZED HEALTH CARE ARRANGEMENT DETAILS, IF ANY</Todo>.
+          The covered healthcare entity responsible for this notice is Chubby No More Inc. Chubby
+          No More Inc. employs licensed clinicians who provide medical services directly to
+          members, and Chubby No More Inc. is a HIPAA covered entity acting as a healthcare
+          provider. The independent licensed pharmacies that dispense medication under our
+          clinicians' prescriptions maintain their own privacy notices for the dispensing
+          activities they perform.
         </P>
       </Section>
 
@@ -61,8 +54,9 @@ function NoticeOfPrivacyPracticesPage() {
           ]}
         />
         <P>
-          How to exercise each right, including where to send a written request, is{" "}
-          <Todo>PATIENT-RIGHTS REQUEST PROCESS AND SUBMISSION ADDRESS</Todo>.
+          To exercise any of these rights, send a written request to our Privacy Officer, Greg
+          Henson, at privacy@chubbynomore.com or at 20200 West Dixie Highway, Suite 902, Aventura,
+          FL 33180. We will respond to your request within the timeframes required by law.
         </P>
       </Section>
 
@@ -76,7 +70,8 @@ function NoticeOfPrivacyPracticesPage() {
       <Section n={4} title="Treatment">
         <P>
           We may use your health information and share it with other professionals who are treating
-          you, including for prescribing, dispensing coordination, and follow-up care.
+          you, including for prescribing, dispensing coordination with the pharmacies we contract
+          with, and follow-up care.
         </P>
       </Section>
 
@@ -129,9 +124,10 @@ function NoticeOfPrivacyPracticesPage() {
 
       <Section n={10} title="Breach notification">
         <P>
-          If a breach of unsecured protected health information occurs, notification is provided as
-          required by law. The breach-response process and notification owner are{" "}
-          <Todo>BREACH-RESPONSE PROCESS AND RESPONSIBLE OWNER</Todo>.
+          If a breach of unsecured protected health information occurs, we notify affected
+          individuals, and where required, the U.S. Department of Health and Human Services and the
+          media, as required by law. Our Privacy Officer, Greg Henson, directs our breach-response
+          process.
         </P>
       </Section>
 
@@ -146,37 +142,33 @@ function NoticeOfPrivacyPracticesPage() {
       <Section n={12} title="Privacy official">
         <UL
           items={[
-            <>Privacy official: <Todo>PRIVACY OFFICIAL NAME AND TITLE</Todo></>,
-            <>Provider address: <Todo>PROVIDER ADDRESS</Todo></>,
-            <>Provider telephone: <Todo>PROVIDER TELEPHONE</Todo></>,
-            <>Provider privacy email: <Todo>PROVIDER PRIVACY EMAIL</Todo></>,
+            <>Privacy official: Greg Henson, Privacy Officer</>,
+            <>Provider address: 20200 West Dixie Highway, Suite 902, Aventura, FL 33180</>,
+            <>Provider telephone: (908) 842-3447</>,
+            <>Provider privacy email: privacy@chubbynomore.com</>,
           ]}
         />
       </Section>
 
       <Section n={13} title="Effective date">
         <P>
-          Effective date of this notice: <Todo>EFFECTIVE DATE</Todo>.
+          Effective date of this notice: August 18, 2026.
         </P>
       </Section>
 
       <Section n={14} title="Changes to this notice">
         <P>
           We can change the terms of this notice, and the changes will apply to all information we
-          have about you. The new notice will be available upon request, on our website, and at our
-          service locations where applicable.
+          have about you. The new notice will be available upon request and on our website.
         </P>
       </Section>
 
       <Section n={15} title="Acknowledgment of receipt">
         <P>
           You may be asked to acknowledge receipt of this notice. Acknowledgment does not waive any
-          privacy right. State-specific restrictions or additional required disclosures are{" "}
-          <Todo>STATE-SPECIFIC PRIVACY RESTRICTIONS AND ADDITIONAL NOTICE REQUIREMENTS</Todo>.
-        </P>
-        <P>
-          This notice must not be published as final until the responsible provider group approves
-          it: <Todo>PROVIDER GROUP APPROVAL SIGNATURE AND DATE</Todo>.
+          privacy right. This notice was reviewed and approved by the Chubby No More Medical
+          Director as part of our clinical review process, with a next scheduled clinical review
+          date of February 18, 2027.
         </P>
       </Section>
     </LegalPage>
