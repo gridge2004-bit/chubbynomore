@@ -1178,6 +1178,8 @@ function IntroStep({
           </div>
         </Fieldset>
       </div>
+
+      <ComplianceFooter />
     </div>
   );
 }
