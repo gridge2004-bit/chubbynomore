@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { savePartialLead } from "@/lib/leads.functions";
 import { ArrowLeft, ArrowRight, Check, CreditCard } from "lucide-react";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import heroImg from "@/assets/tirz-hero.jpg";
@@ -182,8 +184,14 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const topRef = useRef<HTMLDivElement>(null);
 
+  /* progressive lead capture — saved as soon as email + phone are valid */
+  const savePartial = useServerFn(savePartialLead);
+  const leadIdRef = useRef<string | null>(null);
+  const lastSavedRef = useRef<string>("");
+
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((prev) => ({ ...prev, [key]: value }));
+
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -262,6 +270,52 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const valid = [step1Valid, step2Valid, step3Valid, step4Valid, step5Valid][step - 1];
 
+  const contactReady = emailOk(a.email) && digits(a.phone).length === 10;
+
+  const persistContact = useCallback(
+    async (lastCompletedStep: string) => {
+      if (!emailOk(a.email) || digits(a.phone).length !== 10) return;
+      const signature = [
+        a.email.trim().toLowerCase(),
+        a.phone,
+        a.firstName.trim(),
+        a.lastName.trim(),
+        lastCompletedStep,
+      ].join("|");
+      if (signature === lastSavedRef.current) return;
+      lastSavedRef.current = signature;
+      try {
+        const res = await savePartial({
+          data: {
+            leadId: leadIdRef.current,
+            firstName: a.firstName.trim() || undefined,
+            lastName: a.lastName.trim() || undefined,
+            email: a.email.trim(),
+            phone: a.phone,
+            lastCompletedStep,
+            funnelSource: "website_intake",
+            referringPage:
+              typeof window !== "undefined" ? window.location.pathname : undefined,
+          },
+        });
+        leadIdRef.current = res.leadId;
+      } catch {
+        lastSavedRef.current = "";
+      }
+    },
+    [a.email, a.phone, a.firstName, a.lastName, savePartial],
+  );
+
+  // Save contact info as soon as it's valid, before any final submission.
+  useEffect(() => {
+    if (!contactReady) return;
+    const t = window.setTimeout(() => {
+      void persistContact(`step_${step}_in_progress`);
+    }, 900);
+    return () => window.clearTimeout(t);
+  }, [contactReady, persistContact, step]);
+
+
   const toggleMulti = (key: "tried" | "conditions", label: string, noneLabel: string) => {
     setA((prev) => {
       const cur = prev[key];
@@ -277,15 +331,22 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const handleContinue = async () => {
     if (step === 2 && hardStop) {
+      void persistContact("step_2_safety_stop");
       setStopped(true);
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
+    void persistContact(`step_${step}_completed`);
+
     if (step < 5) {
       go(step + 1);
       return;
     }
+
+    await persistContact("intake_submitted");
+
+
     const payload = {
       product: { slug: productSlug ?? "compounded-tirzepatide-injection", ...product },
       answers: a,

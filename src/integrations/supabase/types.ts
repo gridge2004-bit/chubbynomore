@@ -241,6 +241,7 @@ export type Database = {
           funnel_status: string
           id: string
           last_activity_at: string
+          last_completed_step: string | null
           last_name: string
           marketing_consent: boolean
           marketing_consent_at: string | null
@@ -251,6 +252,7 @@ export type Database = {
           marketing_sync_status: string
           operational_consent: boolean
           operational_consent_at: string | null
+          partial_captured_at: string | null
           phone: string
           referring_page: string | null
           state: string
@@ -271,6 +273,7 @@ export type Database = {
           funnel_status?: string
           id?: string
           last_activity_at?: string
+          last_completed_step?: string | null
           last_name: string
           marketing_consent?: boolean
           marketing_consent_at?: string | null
@@ -281,6 +284,7 @@ export type Database = {
           marketing_sync_status?: string
           operational_consent?: boolean
           operational_consent_at?: string | null
+          partial_captured_at?: string | null
           phone: string
           referring_page?: string | null
           state: string
@@ -301,6 +305,7 @@ export type Database = {
           funnel_status?: string
           id?: string
           last_activity_at?: string
+          last_completed_step?: string | null
           last_name?: string
           marketing_consent?: boolean
           marketing_consent_at?: string | null
@@ -311,6 +316,7 @@ export type Database = {
           marketing_sync_status?: string
           operational_consent?: boolean
           operational_consent_at?: string | null
+          partial_captured_at?: string | null
           phone?: string
           referring_page?: string | null
           state?: string
