@@ -233,7 +233,7 @@ export function ContactCaptureStep({
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-[#103942]/70">
         Fields marked <span aria-hidden="true">*</span> are required. This is
-        not a determination of eligibility — a licensed provider reviews your
+        not a determination of eligibility — our licensed provider reviews your
         full health information before any treatment decision.
       </p>
 

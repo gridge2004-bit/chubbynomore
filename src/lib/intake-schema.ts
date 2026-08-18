@@ -4,7 +4,7 @@
  * No clinical questions, contraindication rules, eligibility logic, or
  * branching logic have been authored here. Sections marked
  * `awaitingClinicalApproval: true` render a provider-review placeholder and
- * collect NO data until a licensed provider supplies approved content.
+ * collect NO data until our licensed provider supplies approved content.
  *
  * Administrative sections (identity, contact, measurements, shipping,
  * acknowledgments, signature) collect operational information only.
@@ -47,7 +47,7 @@ export interface IntakeSection {
    * licensed provider. The UI renders a placeholder and collects no answers.
    */
   awaitingClinicalApproval?: boolean;
-  /** What a licensed provider must supply before this section can be built. */
+  /** What our licensed provider must supply before this section can be built. */
   requiredFromProvider?: string[];
   /** Review-and-submit step. */
   isReview?: boolean;
@@ -194,7 +194,7 @@ export const INTAKE_SECTIONS: IntakeSection[] = [
   {
     id: "pharmacy",
     title: "Pharmacy and shipping",
-    intro: "Where treatment would be sent if a licensed provider determines it is appropriate.",
+    intro: "Where treatment would be sent if our licensed provider determines it is appropriate.",
     fields: [
       { id: "ship_address1", label: "Street address", type: "text", required: true, autoComplete: "address-line1" },
       { id: "ship_address2", label: "Apartment, suite, etc. (optional)", type: "text", autoComplete: "address-line2" },

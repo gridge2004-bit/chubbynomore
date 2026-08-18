@@ -121,18 +121,18 @@ const products = [
 
 const steps = [
   { n: "01", img: intakeManAsset.url, title: "Complete your intake", imgAlt: "Man completing his online health intake on his phone while seated at a desk", desc: "Fill out your health history online in about 60 seconds. No awkward waiting rooms. Your health information is submitted through a private online intake." },
-  { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "A licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
+  { n: "02", img: step2Img, title: "Clinical review", imgAlt: "Licensed provider reviewing a patient’s health information", desc: "Our licensed provider reviews your health history, evaluates your eligibility, and determines whether an available treatment option may be medically appropriate for you." },
   { n: "03", img: cnmBoxAsset.url, title: "Receive your medication", imgAlt: "Plain white shipping box with a subtle CNM logo on a kitchen counter", desc: "Your medication is dispensed by a licensed US pharmacy and shipped discreetly to your door — with ongoing support." },
 ];
 
 
 const faqs = [
-  { q: "What are the common side effects of GLP-1 medications?", a: "Common side effects may include nausea, diarrhea, vomiting, constipation, and stomach discomfort, particularly when beginning treatment or increasing a dose. Side effects vary by person. A licensed provider will review the potential risks and help determine an appropriate treatment and titration plan." },
+  { q: "What are the common side effects of GLP-1 medications?", a: "Common side effects may include nausea, diarrhea, vomiting, constipation, and stomach discomfort, particularly when beginning treatment or increasing a dose. Side effects vary by person. Our licensed provider will review the potential risks and help determine an appropriate treatment and titration plan." },
   { q: "How much weight can I expect to lose?", a: "Results vary significantly from person to person, and no specific result is guaranteed. Your provider can discuss what may be realistic based on your medication, starting weight, medical history, lifestyle, and consistency with your treatment plan." },
-  { q: "What determines whether I qualify for treatment?", a: "A licensed provider will review factors including your medical history, current medications, height, weight, BMI, existing health conditions, and treatment goals. Completing the questionnaire does not guarantee approval or a prescription." },
+  { q: "What determines whether I qualify for treatment?", a: "Our licensed provider will review factors including your medical history, current medications, height, weight, BMI, existing health conditions, and treatment goals. Completing the questionnaire does not guarantee approval or a prescription." },
   { q: "Can I eventually stop taking GLP-1 medication?", a: "The appropriate length of treatment differs for each patient. Your provider will help determine whether continuing, adjusting, or stopping treatment is appropriate. Do not stop or change a prescribed medication without medical guidance." },
-  { q: "What happens if GLP-1 treatment is not right for me?", a: "A prescription will not be issued if a licensed provider determines that treatment is not medically appropriate. The provider may discuss other possible next steps or recommend that you follow up with your primary-care provider or another specialist." },
-  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. If you are currently taking semaglutide, tirzepatide, or another GLP-1 medication, you can complete our online intake and provide information about your current medication, dose, treatment history, and prescribing provider. A licensed provider will review your information and determine whether continuing treatment, changing medications, or adjusting your dose may be medically appropriate. Continuation of treatment or a particular dose is not guaranteed." },
+  { q: "What happens if GLP-1 treatment is not right for me?", a: "A prescription will not be issued if our licensed provider determines that treatment is not medically appropriate. The provider may discuss other possible next steps or recommend that you follow up with your primary-care provider or another specialist." },
+  { q: "Can I switch from my current GLP-1 provider?", a: "Yes. If you are currently taking semaglutide, tirzepatide, or another GLP-1 medication, you can complete our online intake and provide information about your current medication, dose, treatment history, and prescribing provider. Our licensed provider will review your information and determine whether continuing treatment, changing medications, or adjusting your dose may be medically appropriate. Continuation of treatment or a particular dose is not guaranteed." },
   {
     q: "How is my information handled?",
     a: (
@@ -146,7 +146,7 @@ const faqs = [
     ),
   },
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
-  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Brand-name medications are priced separately by the pharmacy and depend on prescription, insurance or savings-program eligibility, and availability. Your final cost depends on what a licensed provider prescribes." },
+  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Brand-name medications are priced separately by the pharmacy and depend on prescription, insurance or savings-program eligibility, and availability. Your final cost depends on what our licensed provider prescribes." },
   { q: "Will a GLP-1 affect my muscle mass or gym performance?", a: "Weight lost on any calorie deficit, including with GLP-1 treatment, can include lean mass as well as fat. Research on strategies to limit lean-mass loss generally points to adequate protein intake and regular resistance training, though individual results vary. Some men also notice lower energy during hard training early on, particularly while appetite and food intake are dropping. Discuss your training goals with your licensed provider so your plan and titration pace can account for them." },
   { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. There are also once-daily oral options, including Wegovy® tablets and Foundayo™ (orforglipron). Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
   { q: "How private and discreet is the process?", a: "The intake, provider review, and follow-up messaging all happen online — there is no in-person visit and no waiting room. Medication is shipped in plain packaging with no medication branding on the outside of the box. Your health information is used to evaluate and coordinate your care and is shared only with the providers, pharmacies, and service partners involved in delivering it, as described in the Privacy Policy." },
@@ -693,7 +693,7 @@ const FLAT_DOSE_COPY = "Flat pricing across available prescribed doses.";
 const COMPOUNDED_FDA_QUALIFIER =
   "Compounded medications are not FDA-approved for safety, effectiveness, or quality.";
 const PRESCRIPTION_QUALIFIER =
-  "Prescription required. A licensed provider determines whether treatment is medically appropriate. Medication and dose are not guaranteed.";
+  "Prescription required. Our licensed provider determines whether treatment is medically appropriate. Medication and dose are not guaranteed.";
 const SUPPLY_PERIOD_QUALIFIER =
   "Prices shown apply to the stated supply period and may vary if the prescribed treatment, pharmacy, or product changes.";
 
@@ -1171,7 +1171,7 @@ function MedicationInfoPanel({
             </p>
           )}
           <p className="mt-3 text-[12px] leading-relaxed text-[#103942]/70">
-            Individual results vary. Weight loss is not guaranteed. A licensed provider determines whether any treatment is medically appropriate.
+            Individual results vary. Weight loss is not guaranteed. Our licensed provider determines whether any treatment is medically appropriate.
           </p>
         </div>
         <div className="border-t border-[#103942]/10 px-6 py-4">
@@ -1583,7 +1583,7 @@ function MedicationOptions() {
             See which treatment may be right for me
           </button>
           <p className="text-[12px] text-[#103942]/60">
-            Educational information only. This list is not a product selector — a licensed provider decides what may be appropriate.
+            Educational information only. This list is not a product selector — our licensed provider decides what may be appropriate.
           </p>
         </div>
       </div>
@@ -1631,7 +1631,7 @@ function SwitchingCare() {
               Switching your care can be simple.
             </h2>
             <p className="mt-5 text-[16px] leading-relaxed text-[#103942]/85 md:text-[17px]">
-              Already taking semaglutide or tirzepatide through another provider? Complete a brief online intake and share your current medication, dose, and treatment history. A licensed provider will review whether continuing your treatment—and at what dose—is medically appropriate.
+              Already taking semaglutide or tirzepatide through another provider? Complete a brief online intake and share your current medication, dose, and treatment history. Our licensed provider will review whether continuing your treatment—and at what dose—is medically appropriate.
             </p>
           </div>
           <div className="flex flex-col items-start md:items-start">
@@ -1861,7 +1861,7 @@ function CompoundedVsBrand() {
 
         <Reveal className="mt-10 text-center md:mt-14">
           <p className="font-semibold text-[#103942]">
-            A licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
+            Our licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
           </p>
           <p className="mt-3 text-sm text-[#103942]/70">
             Compounded medications are not FDA-approved for safety, efficacy, or quality.
@@ -1888,7 +1888,7 @@ function WhyChoose() {
     },
     {
       title: "Consistency, not another crash diet.",
-      body: "A licensed provider titrates your dose, tracks how you're tolerating it, and adjusts — so you can keep training and keep going.",
+      body: "Our licensed provider titrates your dose, tracks how you're tolerating it, and adjusts — so you can keep training and keep going.",
     },
   ];
 
@@ -2327,7 +2327,7 @@ function WhoQualifies() {
             Eligibility depends on the specific medication, your medical history, current medications, treatment goals, and other clinical factors. Certain treatments may not be appropriate during pregnancy or breastfeeding, or for people with particular medical conditions or risk factors.
           </p>
           <p>
-            A licensed provider will review your complete health history and determine whether any available treatment option is medically appropriate for you. If you do not qualify, you will not be charged.
+            Our licensed provider will review your complete health history and determine whether any available treatment option is medically appropriate for you. If you do not qualify, you will not be charged.
           </p>
         </Reveal>
         <Reveal delay={140} className="mt-8">
@@ -2383,7 +2383,7 @@ function WhoNotFor() {
 
         <Reveal delay={180} className="mt-10 border-t border-[#103942]/10 pt-6 md:mt-12 md:pt-8">
           <p className="max-w-4xl text-[15px] leading-relaxed text-[#103942]/80 md:text-[16px]">
-            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so a licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
+            This is not a complete list of risks, warnings, or reasons a medication may be inappropriate. Complete the private online intake so our licensed provider can review your health history and determine whether an available treatment option may be medically appropriate. Do not start, stop, or change a prescription medication without guidance from a qualified healthcare professional.
           </p>
         </Reveal>
       </div>

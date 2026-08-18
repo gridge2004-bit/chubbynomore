@@ -40,7 +40,7 @@ function TermsOfUsePage() {
         <P>
           You must be a resident of a state where the services are available and at least{" "}
           <Todo>MINIMUM AGE</Todo> years old. Clinical eligibility is separate and is determined by
-          a licensed provider.
+          our licensed provider.
         </P>
       </Section>
 
@@ -77,7 +77,7 @@ function TermsOfUsePage() {
 
       <Section n={7} title="No guarantee of prescription">
         <P>
-          No prescription is promised. A licensed provider may decline to prescribe, may prescribe a
+          No prescription is promised. Our licensed provider may decline to prescribe, may prescribe a
           different medication or dose than you expected, or may recommend an alternative approach.
         </P>
       </Section>

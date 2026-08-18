@@ -157,7 +157,7 @@ function ChoiceGroup({
 }
 
 const BMI_NOTE =
-  "BMI is one screening measure. A licensed provider considers your complete health information when determining whether treatment may be appropriate.";
+  "BMI is one screening measure. Our licensed provider considers your complete health information when determining whether treatment may be appropriate.";
 
 const adultStep: QuestionStep = {
   id: "is_adult",
@@ -648,7 +648,7 @@ export function QualifyQuiz() {
 
       <p className="mx-auto mt-6 max-w-md text-center text-xs leading-relaxed text-[#103942]/70">
         This questionnaire is not a determination of eligibility and does not
-        guarantee a prescription. A licensed provider reviews your complete
+        guarantee a prescription. Our licensed provider reviews your complete
         health information before any treatment decision.
       </p>
     </div>
@@ -662,13 +662,13 @@ const RESULT_COPY: Record<
   possible_fit: {
     eyebrow: "YOUR NEXT STEP",
     headline: "We may be a good fit for you.",
-    body: "Based on what you’ve shared so far, Chubby No More may be able to help. A licensed provider would still need to review your complete health information before deciding whether treatment is appropriate.",
+    body: "Based on what you’ve shared so far, Chubby No More may be able to help. Our licensed provider would still need to review your complete health information before deciding whether treatment is appropriate.",
     primary: "Join the list",
   },
   provider_review: {
     eyebrow: "LET’S FIND THE RIGHT PATH",
     headline: "A provider can help determine your next step.",
-    body: "Your BMI is only one part of the picture. A licensed provider can review your health history and determine whether a weight-management treatment may be appropriate.",
+    body: "Your BMI is only one part of the picture. Our licensed provider can review your health history and determine whether a weight-management treatment may be appropriate.",
     primary: "Join the list",
   },
   alternative_path: {

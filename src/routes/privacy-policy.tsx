@@ -106,7 +106,7 @@ function PrivacyPolicyPage() {
         <P>
           The short eligibility quiz and the longer clinical intake are handled separately. Quiz
           answers support routing and are not used to make a clinical determination. Intake answers
-          are collected for review by a licensed provider. We do not place quiz or intake answers
+          are collected for review by our licensed provider. We do not place quiz or intake answers
           into page URLs, and we do not send them to advertising or analytics tools.
         </P>
       </Section>
@@ -134,7 +134,7 @@ function PrivacyPolicyPage() {
         <UL
           items={[
             "To operate the website, quiz, intake, and account features.",
-            "To route your submission to a licensed provider for review.",
+            "To route your submission to our licensed provider for review.",
             "To coordinate fulfillment, shipping, and support with the parties involved in your care.",
             "To process payments and manage subscriptions.",
             "To detect fraud, abuse, and security incidents.",

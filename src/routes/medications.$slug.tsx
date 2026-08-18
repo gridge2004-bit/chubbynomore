@@ -233,7 +233,7 @@ function MedicationDetail() {
           </p>
         )}
         <p className="mt-3 text-[13px] leading-relaxed text-[#103942]/70">
-          Prescription required. A licensed provider determines whether treatment is medically
+          Prescription required. Our licensed provider determines whether treatment is medically
           appropriate. Medication and dose are not guaranteed. Prices shown apply to the stated
           supply period and may vary if the prescribed treatment, pharmacy, or product changes.
         </p>

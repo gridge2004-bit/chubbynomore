@@ -52,7 +52,7 @@ function SafetyInformationPage() {
       <Section n={2} title="Purpose and limits of this page">
         <P>
           This page summarizes safety topics for weight-management medications that may be
-          prescribed following a licensed provider's review. It is not a complete list of warnings,
+          prescribed following our licensed provider's review. It is not a complete list of warnings,
           interactions, or side effects, and it is not individualized to you.
         </P>
       </Section>

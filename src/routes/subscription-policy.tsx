@@ -123,7 +123,7 @@ function SubscriptionPolicyPage() {
 
       <Section n={13} title="Prescription denial">
         <P>
-          If a licensed provider determines treatment is not appropriate, charges associated with
+          If our licensed provider determines treatment is not appropriate, charges associated with
           medication are handled as <Todo>REFUND TREATMENT WHEN A PRESCRIPTION IS DENIED, BY CHARGE TYPE</Todo>.
         </P>
       </Section>
