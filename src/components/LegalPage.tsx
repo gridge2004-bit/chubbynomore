@@ -2,11 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
 
-/**
- * Shared chrome for all Chubby No More Inc. legal documents.
- * All documents are DRAFTS. Nothing on these pages is final until
- * legal, clinical, and pharmacy review is complete.
- */
+/** Shared chrome for all Chubby No More Inc. legal documents. */
 
 export const LEGAL_LINKS = [
   { label: "Privacy Policy", to: "/privacy-policy" },
