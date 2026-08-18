@@ -2217,8 +2217,8 @@ function FinalCTA() {
   return (
     <section id="start" className="w-full bg-[#F5F5F7]">
       <div className="grid w-full md:grid-cols-[45fr_55fr]">
-        <div className="relative min-h-[360px] overflow-hidden md:min-h-[520px]">
-          <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-cover object-top" loading="lazy" />
+        <div className="relative min-h-[360px] overflow-hidden bg-[#103942] md:min-h-[520px]">
+          <img src={dinnerCoupleAsset.url} alt="Couple enjoying a candlelit dinner at an upscale restaurant" className="absolute inset-0 h-full w-full object-contain object-center" loading="lazy" />
         </div>
         <div className="flex flex-col justify-center px-8 py-16 md:px-16">
           <h2 className="font-serif text-4xl leading-[1.1] text-[#103942] md:text-5xl lg:text-[52px]">
