@@ -877,9 +877,6 @@ function Step4({ a, set }: { a: Answers; set: SetFn }) {
             </li>
           ))}
         </ul>
-        <p className="mt-3 border-t border-[#103942]/10 pt-3 text-[13px] text-[#103942]/60">
-          {"{{PHARMACY_DISCLOSURE}}"}
-        </p>
       </div>
 
       <p className="text-[12px] text-[#103942]/55">
