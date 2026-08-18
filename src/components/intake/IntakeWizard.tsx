@@ -112,11 +112,6 @@ const EMPTY: Answers = {
   consentCompounded: false,
 };
 
-const PLANS = [
-  { id: "6-month", title: "6-month", price: "$249/mo", note: "Best value, billed monthly", best: true },
-  { id: "3-month", title: "3-month", price: "$269/mo", note: "Billed monthly" },
-  { id: "monthly", title: "Month-to-month", price: "$289/mo", note: "Cancel anytime" },
-];
 
 /* ─────────────── helpers ─────────────── */
 
