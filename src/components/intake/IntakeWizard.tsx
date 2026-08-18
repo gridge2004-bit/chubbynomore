@@ -344,6 +344,9 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
       return;
     }
 
+    await persistContact("intake_submitted");
+
+
     const payload = {
       product: { slug: productSlug ?? "compounded-tirzepatide-injection", ...product },
       answers: a,
