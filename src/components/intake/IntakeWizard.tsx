@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { savePartialLead } from "@/lib/leads.functions";
-import { ArrowLeft, ArrowRight, CreditCard } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CreditCard } from "lucide-react";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import heroImg from "@/assets/tirz-hero.jpg";
 import {
@@ -867,6 +867,17 @@ function Step4({ a, set }: { a: Answers; set: SetFn }) {
         </div>
       </fieldset>
 
+      <div className="rounded-xl border border-[#103942]/15 p-4">
+        <p className="text-[15px] font-semibold text-[#103942]">What&apos;s included</p>
+        <ul className="mt-3 space-y-2.5">
+          {included.map((i) => (
+            <li key={i} className="flex gap-2.5 text-[14px] leading-snug text-[#103942]/80">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#42D1C3]" strokeWidth={3} />
+              <span>{i}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <p className="text-[12px] text-[#103942]/55">
         $0 today. You are not charged until a licensed provider approves your prescription.
