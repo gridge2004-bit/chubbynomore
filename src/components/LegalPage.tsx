@@ -78,15 +78,7 @@ export function LegalPage({
       </header>
 
       <main className="mx-auto max-w-4xl px-6 pb-20 pt-10">
-        {/* Internal status banner — remove only after approval. */}
-        <div
-          role="note"
-          className="rounded-2xl border border-[#103942]/20 bg-[#F5F5F7] px-5 py-4 text-sm font-semibold text-[#103942]"
-        >
-          Draft — legal and clinical review required before publication.
-        </div>
-
-        <h1 className="mt-8 font-serif text-[34px] leading-[1.08] tracking-tight text-[#103942] md:text-[46px]">
+        <h1 className="font-serif text-[34px] leading-[1.08] tracking-tight text-[#103942] md:text-[46px]">
           {title}
         </h1>
         {intro ? <div className="mt-5">{intro}</div> : null}
