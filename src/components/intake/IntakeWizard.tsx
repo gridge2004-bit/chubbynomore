@@ -331,15 +331,19 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const handleContinue = async () => {
     if (step === 2 && hardStop) {
+      void persistContact("step_2_safety_stop");
       setStopped(true);
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
+    void persistContact(`step_${step}_completed`);
+
     if (step < 5) {
       go(step + 1);
       return;
     }
+
     const payload = {
       product: { slug: productSlug ?? "compounded-tirzepatide-injection", ...product },
       answers: a,
