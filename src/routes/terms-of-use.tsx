@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalPage, Section, P, UL, Todo } from "@/components/LegalPage";
+import { LegalPage, Section, P, UL } from "@/components/LegalPage";
 
 export const Route = createFileRoute("/terms-of-use")({
   head: () => ({
@@ -23,8 +23,7 @@ function TermsOfUsePage() {
       intro={
         <P>
           These terms govern your use of the Chubby No More Inc. website and related online
-          services. Read them carefully. Facts that have not yet been confirmed appear as bracketed
-          placeholders and must be resolved by counsel before publication.
+          services. Read them carefully before using the website, quiz, intake, or checkout.
         </P>
       }
     >
@@ -38,18 +37,18 @@ function TermsOfUsePage() {
 
       <Section n={2} title="Eligibility and minimum age">
         <P>
-          You must be a resident of a state where the services are available and at least{" "}
-          <Todo>MINIMUM AGE</Todo> years old. Clinical eligibility is separate and is determined by
-          our licensed provider.
+          You must be a resident of a state where the services are available and at least 18 years
+          old. Clinical eligibility is separate and is determined by our licensed provider.
         </P>
       </Section>
 
       <Section n={3} title="Description of the website and services">
         <P>
-          The website provides educational content, an eligibility questionnaire, an intake form,
-          account tools, and administrative coordination for online weight-management care. Whether
-          Chubby No More Inc. itself is or is not a healthcare provider, and the precise services it
-          performs, is <Todo>WHETHER CHUBBY NO MORE INC. IS A MEDICAL PROVIDER OR A NON-CLINICAL ADMINISTRATIVE COMPANY</Todo>.
+          Chubby No More Inc. is a Delaware corporation that employs licensed clinicians and
+          provides medical services directly through them. The website provides educational
+          content, an eligibility questionnaire, an intake form, account tools, and coordination
+          of your care, including connecting you with the independent, licensed U.S. pharmacies,
+          including compounding pharmacies, that we contract with to dispense medication.
         </P>
       </Section>
 
@@ -79,6 +78,8 @@ function TermsOfUsePage() {
         <P>
           No prescription is promised. Our licensed provider may decline to prescribe, may prescribe a
           different medication or dose than you expected, or may recommend an alternative approach.
+          If a provider declines to prescribe, you are charged $0 and any payment pre-authorization
+          is released.
         </P>
       </Section>
 
@@ -90,18 +91,21 @@ function TermsOfUsePage() {
         </P>
       </Section>
 
-      <Section n={9} title="Relationship between Chubby No More Inc. and healthcare providers">
+      <Section n={9} title="Our clinicians">
         <P>
-          The contractual and corporate relationship between Chubby No More Inc. and any provider or
-          provider group is <Todo>PROVIDER-GROUP RELATIONSHIP, INCLUDING ENTITY NAME, CONTRACT TYPE, AND ANY MANAGEMENT-SERVICES STRUCTURE</Todo>.
+          Chubby No More Inc. directly employs the licensed clinicians who evaluate you and, where
+          clinically appropriate, prescribe treatment. We are not a purely administrative company;
+          your medical care is delivered by our own clinical staff, subject to their independent
+          professional judgment.
         </P>
       </Section>
 
       <Section n={10} title="Relationship between Chubby No More Inc. and pharmacies">
         <P>
-          The relationship with any dispensing pharmacy is{" "}
-          <Todo>PHARMACY RELATIONSHIP, INCLUDING WHETHER PHARMACIES ARE INDEPENDENT THIRD PARTIES AND HOW THEY ARE SELECTED</Todo>.
-          Pharmacies are not named on this page until confirmed.
+          Medications are dispensed by independent, licensed U.S. pharmacies, including compounding
+          pharmacies, that Chubby No More Inc. contracts with to fill and ship prescriptions. These
+          pharmacies are separate legal entities that operate under their own pharmacy licenses and
+          are responsible for accurately filling and safely dispensing your prescription.
         </P>
       </Section>
 
@@ -169,14 +173,20 @@ function TermsOfUsePage() {
 
       <Section n={19} title="Recurring subscriptions">
         <P>
-          Some plans bill on a recurring basis until cancelled. Billing cadence, prepaid plan terms,
-          and renewal mechanics are described in the Return, Refund & Subscription Policy.
+          Subscription plans bill every 28 days on your plan anniversary until cancelled. We send a
+          renewal reminder by email at least 7 days before each renewal charge. Billing cadence,
+          prepaid plan terms, and renewal mechanics are described in the Return, Refund &
+          Subscription Policy.
         </P>
       </Section>
 
       <Section n={20} title="Cancellations and refunds">
         <P>
-          Cancellation deadlines and refund eligibility are governed by the Return, Refund &
+          You may cancel your subscription at least 3 business days before your renewal date to
+          avoid the next charge. Because prescription medication cannot be returned or resold once
+          dispensed, charges become non-refundable once the pharmacy accepts the order and creates a
+          shipping label. Eligible refunds are processed within 5 to 10 business days. Full
+          cancellation deadlines and refund eligibility are governed by the Return, Refund &
           Subscription Policy, which is incorporated into these terms by reference.
         </P>
       </Section>
@@ -234,31 +244,38 @@ function TermsOfUsePage() {
 
       <Section n={27} title="Limitation of liability">
         <P>
-          The limitation of liability applicable to these terms is{" "}
-          <Todo>LIMITATION-OF-LIABILITY LANGUAGE AND ANY DAMAGES CAP, DRAFTED AND APPROVED BY COUNSEL</Todo>.
-          No limitation is asserted in this draft.
+          To the fullest extent permitted by law, Chubby No More Inc. and its officers, employees,
+          and contracted pharmacies will not be liable for indirect, incidental, consequential, or
+          punitive damages arising from your use of the website or services. Nothing in this section
+          limits liability for the professional negligence of a treating licensed clinician, which is
+          governed by applicable medical malpractice law rather than by this limitation.
         </P>
       </Section>
 
       <Section n={28} title="Indemnification">
         <P>
-          Any indemnification obligation is <Todo>INDEMNIFICATION TERMS DRAFTED AND APPROVED BY COUNSEL</Todo>.
+          You agree to indemnify and hold harmless Chubby No More Inc. and its officers and
+          employees from claims, losses, and expenses, including reasonable attorneys' fees, arising
+          from your breach of these terms, your misuse of the services, or information you submit
+          that is false or misleading.
         </P>
       </Section>
 
       <Section n={29} title="Dispute resolution">
         <P>
-          Dispute-resolution terms are <Todo>DISPUTE-RESOLUTION PROCESS</Todo>. Arbitration terms
-          are <Todo>ARBITRATION TERMS, IF ANY</Todo>, and any class-action waiver is{" "}
-          <Todo>CLASS-ACTION WAIVER LANGUAGE, IF ANY</Todo>. Arbitration and a class-action waiver
-          are <strong>not</strong> in effect in this draft and must not be activated without written
-          legal approval.
+          Before filing a claim, you agree to contact us at legal@chubbynomore.com so we can attempt
+          to resolve the dispute informally. Claims not resolved informally may be brought in the
+          state or federal courts located in Delaware, as described in the Governing Law section
+          below. There is no mandatory arbitration requirement and no class-action waiver under
+          these terms.
         </P>
       </Section>
 
       <Section n={30} title="Governing law">
         <P>
-          Governing law is <Todo>GOVERNING LAW</Todo>. Venue is <Todo>VENUE</Todo>.
+          These terms are governed by the laws of the State of Delaware, without regard to its
+          conflict-of-laws principles. Venue for any dispute lies in the state or federal courts
+          located in Delaware.
         </P>
       </Section>
 
@@ -280,17 +297,17 @@ function TermsOfUsePage() {
       <Section n={33} title="Contact information">
         <UL
           items={[
-            <>Company address: <Todo>LEGAL BUSINESS ADDRESS</Todo></>,
-            <>Legal contact: <Todo>LEGAL CONTACT NAME AND EMAIL</Todo></>,
+            <>Company address: Chubby No More Inc., 20200 West Dixie Highway, Suite 902, Aventura, FL 33180</>,
+            <>Legal contact: Greg Henson, legal@chubbynomore.com</>,
             <>Support email: hello@chubbynomore.com</>,
-            <>Telephone: <Todo>TELEPHONE NUMBER</Todo></>,
+            <>Telephone: (908) 842-3447</>,
           ]}
         />
       </Section>
 
       <Section n={34} title="Effective date">
         <P>
-          Effective date: <Todo>EFFECTIVE DATE</Todo>. Version: <Todo>TERMS VERSION NUMBER</Todo>.
+          Effective date: August 18, 2026. Version: 1.0.
         </P>
       </Section>
     </LegalPage>

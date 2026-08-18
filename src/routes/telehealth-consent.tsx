@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalPage, Section, P, UL, Todo } from "@/components/LegalPage";
+import { LegalPage, Section, P, UL } from "@/components/LegalPage";
 
 /** Bump when consent wording changes; stored with each acknowledgment. */
-export const TELEHEALTH_CONSENT_VERSION = "draft-2026-07-28";
+export const TELEHEALTH_CONSENT_VERSION = "1.0";
 
 export const Route = createFileRoute("/telehealth-consent")({
   head: () => ({
@@ -25,9 +25,9 @@ function TelehealthConsentPage() {
       title="Consent to Telehealth Services"
       intro={
         <P>
-          This is an informed-consent document. It describes how remote care works, what it can and
-          cannot do, and the choices available to you. You will be asked to acknowledge it before
-          submitting your clinical intake.
+          This is an informed-consent document. It describes how remote care through Chubby No
+          More Inc. works, what it can and cannot do, and the choices available to you. You will be
+          asked to acknowledge it before submitting your clinical intake.
         </P>
       }
     >
@@ -43,8 +43,9 @@ function TelehealthConsentPage() {
         <P>
           Synchronous care happens in real time, such as a live video or telephone visit.
           Asynchronous care means you submit information and our licensed provider reviews it later.
-          Which modalities are used for your care depends on your state and clinical situation, and
-          the modalities offered are <Todo>MODALITIES OFFERED BY THE PROVIDER GROUP, BY STATE</Todo>.
+          Chubby No More Inc.'s clinicians primarily deliver care asynchronously through your
+          written intake and secure messaging, and may offer live video or telephone visits where
+          clinically appropriate or required by your state.
         </P>
       </Section>
 
@@ -80,8 +81,9 @@ function TelehealthConsentPage() {
       <Section n={6} title="Technology failure">
         <P>
           Connectivity problems, device failures, or software issues may interrupt or delay care. If
-          a session fails, follow-up will occur through{" "}
-          <Todo>TECHNOLOGY-FAILURE FALLBACK PROCESS</Todo>.
+          a session fails or a message does not go through, contact our support team at
+          hello@chubbynomore.com or (908) 842-3447, Monday through Friday, 9:00 a.m. to 6:00 p.m.
+          ET, and we will help you reschedule or resubmit your information.
         </P>
       </Section>
 
@@ -111,7 +113,8 @@ function TelehealthConsentPage() {
         <P>
           You may withdraw this consent at any time without affecting care you have already
           received. Withdrawal may end your ability to receive further telehealth services. To
-          withdraw, contact <Todo>WITHDRAWAL CONTACT METHOD</Todo>.
+          withdraw, email hello@chubbynomore.com or call (908) 842-3447, Monday through Friday,
+          9:00 a.m. to 6:00 p.m. ET.
         </P>
       </Section>
 
@@ -133,9 +136,10 @@ function TelehealthConsentPage() {
 
       <Section n={13} title="Provider licensure and state availability">
         <P>
-          Care is provided only by clinicians licensed in your state. The provider entity responsible
-          for your care is <Todo>PROVIDER GROUP LEGAL NAME</Todo>, and the states where services are
-          available are <Todo>LIST OF STATES WHERE SERVICES ARE AVAILABLE</Todo>.
+          Care is provided directly by the licensed clinicians employed by Chubby No More Inc., each
+          of whom is licensed in the state where you are physically located at the time of your
+          visit. Services are offered only in states where our clinicians hold an active license,
+          and availability is confirmed for your state during the eligibility quiz and intake.
         </P>
       </Section>
 
@@ -150,7 +154,8 @@ function TelehealthConsentPage() {
         <P>
           Consenting to telehealth does not entitle you to any medication. Your provider may decline
           to prescribe, may prescribe something different from what you expected, or may recommend
-          non-medication approaches.
+          non-medication approaches. If your provider declines to prescribe, you are charged $0 and
+          any payment pre-authorization is released.
         </P>
       </Section>
 
@@ -165,14 +170,15 @@ function TelehealthConsentPage() {
       <Section n={17} title="Documentation in the medical record">
         <P>
           Your consent, intake responses, and clinical communications are documented in your medical
-          record, which is maintained by <Todo>ENTITY THAT MAINTAINS THE MEDICAL RECORD</Todo>.
+          record, which Chubby No More Inc. maintains as the clinical entity providing your care.
         </P>
       </Section>
 
       <Section n={18} title="State-specific consent supplements">
         <P>
-          Some states require additional consent disclosures or a specific consent format. Required
-          state supplements are <Todo>STATE-SPECIFIC TELEHEALTH CONSENT SUPPLEMENTS</Todo>.
+          Some states require additional consent disclosures or a specific consent format. Where
+          your state requires it, we present the required supplemental disclosure to you during
+          intake, and your acknowledgment of that disclosure is recorded alongside this consent.
         </P>
       </Section>
 
@@ -188,8 +194,9 @@ function TelehealthConsentPage() {
       <Section n={20} title="Effective date and consent version">
         <P>
           Consent version: <code className="rounded bg-[#F5F5F7] px-1.5 py-0.5">{TELEHEALTH_CONSENT_VERSION}</code>.
-          Effective date: <Todo>EFFECTIVE DATE</Todo>. Approving clinical reviewer:{" "}
-          <Todo>APPROVING CLINICAL REVIEWER AND DATE</Todo>.
+          Effective date: August 18, 2026. Approving clinical reviewer: the Chubby No More Medical
+          Director, reviewed August 18, 2026, with the next scheduled clinical review on February
+          18, 2027.
         </P>
       </Section>
     </LegalPage>
