@@ -183,6 +183,13 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const [stopped, setStopped] = useState(false);
 
   const topRef = useRef<HTMLDivElement>(null);
+  const stepRefs = [
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null),
+  ];
 
   /* progressive lead capture — saved as soon as email + phone are valid */
   const savePartial = useServerFn(savePartialLead);
@@ -192,10 +199,26 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((prev) => ({ ...prev, [key]: value }));
 
-
+  // Track which section is in view while the user scrolls through the form.
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [step, submitted]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = stepRefs.findIndex((r) => r.current === entry.target);
+            if (index >= 0) setStep(index + 1);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 },
+    );
+    stepRefs.forEach((r) => r.current && observer.observe(r.current));
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToStep = (next: number) => {
+    stepRefs[next - 1]?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const go = (next: number) => {
     setFading(true);
