@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalPage, Section, P, UL, Todo } from "@/components/LegalPage";
+import { LegalPage, Section, P, UL } from "@/components/LegalPage";
 
 export const Route = createFileRoute("/safety-information")({
   head: () => ({
@@ -15,16 +15,6 @@ export const Route = createFileRoute("/safety-information")({
   }),
   component: SafetyInformationPage,
 });
-
-function PendingClinical() {
-  return (
-    <div className="mt-4 rounded-2xl border border-[#103942]/20 bg-[#F5F5F7] px-5 py-4 text-sm font-semibold text-[#103942]">
-      Pending clinical review — no product-specific safety text is published here until it has been
-      drafted from current manufacturer prescribing information and FDA materials and approved by
-      the clinical provider and pharmacy.
-    </div>
-  );
-}
 
 function SafetyInformationPage() {
   return (
@@ -75,97 +65,144 @@ function SafetyInformationPage() {
 
       <Section n={5} title="State and product availability">
         <P>
-          Which products are offered depends on your state, provider judgment, and supply. Current
-          availability is <Todo>STATE-BY-STATE AND PRODUCT-BY-PRODUCT AVAILABILITY LIST</Todo>.
+          Which products are offered to you depends on your state of residence, the judgment of your
+          treating provider, and pharmacy supply at the time of your order. Not every product
+          described on this page is available in every state, and availability can change. Your
+          provider and the checkout flow will confirm what is available to you before you are
+          charged.
         </P>
       </Section>
 
       <Section n={6} title="Compounded semaglutide">
         <P>
-          Product-specific safety content for compounded semaglutide is{" "}
-          <Todo>COMPOUNDED SEMAGLUTIDE SAFETY CONTENT SOURCED FROM CURRENT PRESCRIBING INFORMATION AND APPROVED BY THE CLINICAL PROVIDER AND COMPOUNDING PHARMACY</Todo>.
+          Compounded semaglutide is a personalized formulation of semaglutide, the same active
+          ingredient found in the brand-name products Ozempic and Wegovy, prepared by a licensed
+          compounding pharmacy under a prescription written for you individually. It is not
+          FDA-approved as a finished product, and it has not independently gone through the FDA
+          approval process for safety and effectiveness, even though semaglutide itself has an
+          established safety and efficacy record from the approved products. The warnings,
+          contraindications, adverse reactions, interactions, and pregnancy guidance described in
+          Sections 9 through 14 for semaglutide-based products apply to compounded semaglutide.
+          Because compounded medication can vary in strength, concentration, or formulation
+          (including injectable solution and, where applicable, other dosage forms), always confirm
+          your dose and administration technique with your provider or pharmacist before each
+          injection, and never adjust your dose on your own.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={7} title="Compounded tirzepatide">
         <P>
-          Product-specific safety content for compounded tirzepatide is{" "}
-          <Todo>COMPOUNDED TIRZEPATIDE SAFETY CONTENT SOURCED FROM CURRENT PRESCRIBING INFORMATION AND APPROVED BY THE CLINICAL PROVIDER AND COMPOUNDING PHARMACY</Todo>.
+          Compounded tirzepatide is a personalized formulation of tirzepatide, the same active
+          ingredient found in the brand-name products Mounjaro and Zepbound, prepared by a licensed
+          compounding pharmacy under a prescription written for you individually. As with compounded
+          semaglutide, it is not an FDA-approved finished product. The warnings, contraindications,
+          adverse reactions, interactions, and pregnancy guidance described in Sections 9 through 14
+          for tirzepatide-based products apply to compounded tirzepatide. Confirm your dose and
+          injection technique with your provider or pharmacist, and never adjust your dose on your
+          own.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={8} title="Brand-name GLP-1 products offered">
         <P>
-          The brand-name products actually offered, and their approved indications as stated in each
-          manufacturer's labeling, are{" "}
-          <Todo>CONFIRMED LIST OF BRAND-NAME PRODUCTS OFFERED, WITH LABEL-BASED INDICATIONS AND SAFETY CONTENT APPROVED BY THE CLINICAL PROVIDER</Todo>.
-          Some brand-name GLP-1 products are approved for type 2 diabetes rather than weight
-          management; those distinctions must be stated per product.
+          Chubby No More Inc. may prescribe the following brand-name products, when clinically
+          appropriate and available to you: Wegovy (semaglutide) and Zepbound (tirzepatide), both
+          FDA-approved for chronic weight management in eligible adults; and Ozempic (semaglutide)
+          and Mounjaro (tirzepatide), both FDA-approved for the treatment of type 2 diabetes and used
+          off-label for weight management in appropriate patients. Your provider will tell you which
+          product and indication apply to your prescription. All four brand names are trademarks of
+          their respective manufacturers, and none of those manufacturers sponsors or endorses
+          Chubby No More Inc.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={9} title="Contraindications">
         <P>
-          Contraindications differ by product. The consolidated, product-specific contraindication
-          list is <Todo>CONTRAINDICATIONS BY PRODUCT, FROM CURRENT PRESCRIBING INFORMATION</Todo>.
+          Semaglutide- and tirzepatide-based products, whether brand-name or compounded, are
+          contraindicated in patients with a personal or family history of medullary thyroid
+          carcinoma (MTC) and in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).
+          They are also contraindicated in anyone with a prior serious hypersensitivity reaction to
+          semaglutide, tirzepatide, or any component of the formulation. Tell your provider about
+          your personal and family thyroid and endocrine history before starting treatment.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={10} title="Boxed warnings">
         <P>
-          Certain GLP-1 medications carry a boxed warning in their FDA labeling. The exact boxed
-          warning text applicable to each product offered is{" "}
-          <Todo>BOXED WARNING TEXT BY PRODUCT, QUOTED FROM CURRENT FDA LABELING</Todo>.
+          <strong>Boxed warning — Risk of thyroid C-cell tumors.</strong> In rodent studies,
+          semaglutide and tirzepatide caused thyroid C-cell tumors, including medullary thyroid
+          carcinoma, at clinically relevant exposures. It is not known whether these medications
+          cause thyroid C-cell tumors, including medullary thyroid carcinoma, in humans. These
+          medications are contraindicated in patients with a personal or family history of medullary
+          thyroid carcinoma or in patients with Multiple Endocrine Neoplasia syndrome type 2. Counsel
+          patients on the potential risk and symptoms of thyroid tumors, including a lump or swelling
+          in the neck, hoarseness, trouble swallowing, or shortness of breath, and report any such
+          symptoms to your provider promptly.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={11} title="Common adverse reactions">
         <P>
-          Common side effect profiles by product are{" "}
-          <Todo>COMMON ADVERSE REACTIONS BY PRODUCT, FROM CURRENT PRESCRIBING INFORMATION</Todo>.
+          The most common side effects reported with semaglutide- and tirzepatide-based products are
+          gastrointestinal: nausea, vomiting, diarrhea, constipation, abdominal pain, indigestion, and
+          decreased appetite. These effects are most common when starting treatment or increasing the
+          dose, and they typically lessen over time. Injection-site reactions, fatigue, belching,
+          heartburn, and hair loss have also been reported. Contact your provider if any side effect
+          is severe, persistent, or interferes with eating, drinking, or daily activity.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={12} title="Serious adverse reactions">
         <P>
-          Serious risks and warnings by product are{" "}
-          <Todo>SERIOUS ADVERSE REACTIONS AND WARNINGS BY PRODUCT, FROM CURRENT PRESCRIBING INFORMATION</Todo>.
+          Serious risks associated with semaglutide- and tirzepatide-based products include: acute
+          pancreatitis (persistent, severe abdominal pain, sometimes radiating to the back, with or
+          without vomiting — discontinue and seek care immediately if suspected); gallbladder disease,
+          including gallstones and cholecystitis; hypoglycemia (low blood sugar), particularly when
+          used together with insulin or a sulfonylurea; acute kidney injury, usually related to
+          dehydration from vomiting, diarrhea, or reduced fluid intake; diabetic retinopathy
+          complications in patients with type 2 diabetes and a history of retinopathy; hypersensitivity
+          reactions, including anaphylaxis and angioedema; and increased heart rate. There is also a
+          risk of pulmonary aspiration during procedures requiring general anesthesia or deep sedation
+          because these medications delay gastric emptying; tell your surgeon, anesthesiologist, or
+          endoscopist that you are taking a GLP-1 or dual GIP/GLP-1 medication before any such
+          procedure.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={13} title="Drug interactions">
         <P>
-          Interaction information, including interactions with insulin, sulfonylureas, and oral
-          medications affected by delayed gastric emptying, is{" "}
-          <Todo>DRUG-INTERACTION CONTENT BY PRODUCT, FROM CURRENT PRESCRIBING INFORMATION</Todo>.
-          Tell your provider about every prescription medication, over-the-counter product, and
-          supplement you take.
+          Semaglutide- and tirzepatide-based products slow gastric emptying and can affect the
+          absorption of oral medications taken at the same time, including oral contraceptives and
+          other narrow-therapeutic-index drugs; your provider may recommend timing adjustments or
+          monitoring for affected medications. Combining these medications with insulin or a
+          sulfonylurea increases the risk of hypoglycemia, and your provider may reduce the dose of
+          insulin or the sulfonylurea when starting treatment. Tell your provider about every
+          prescription medication, over-the-counter product, and supplement you take before starting
+          treatment and whenever your regimen changes.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={14} title="Pregnancy and breastfeeding">
         <P>
-          Tell your provider if you are pregnant, may be pregnant, are planning pregnancy, or are
-          breastfeeding. Product-specific pregnancy and lactation guidance, including any
-          recommended discontinuation interval before a planned pregnancy, is{" "}
-          <Todo>PREGNANCY AND LACTATION GUIDANCE BY PRODUCT, FROM CURRENT PRESCRIBING INFORMATION</Todo>.
+          Semaglutide- and tirzepatide-based products are not recommended during pregnancy, because
+          weight loss offers no benefit during pregnancy and may cause fetal harm, and because animal
+          studies have shown adverse effects on the fetus at clinically relevant exposures. If you are
+          planning a pregnancy, treatment should be discontinued at least 2 months before you plan to
+          become pregnant, to allow the medication to clear your system, given its long half-life. Tell
+          your provider immediately if you become pregnant while on treatment. It is not known whether
+          semaglutide or tirzepatide passes into human breast milk; discuss the risks and benefits of
+          continuing treatment while breastfeeding with your provider.
         </P>
-        <PendingClinical />
       </Section>
 
       <Section n={15} title="Monitoring">
         <P>
-          Your provider may ask for check-ins, weight and symptom reporting, or laboratory testing
-          during treatment. The monitoring protocol actually used is{" "}
-          <Todo>MONITORING PROTOCOL APPROVED BY THE CLINICAL PROVIDER</Todo>.
+          Your provider will ask you to check in periodically, typically before each dose adjustment
+          and at least once per 28-day fill, to review your weight, symptoms, and any side effects.
+          Your provider may order laboratory testing, such as thyroid, kidney function, or blood
+          glucose monitoring, when clinically indicated based on your health history or the medication
+          prescribed. Report new or worsening symptoms promptly rather than waiting for your next
+          scheduled check-in.
         </P>
       </Section>
 
@@ -210,21 +247,21 @@ function SafetyInformationPage() {
 
       <Section n={20} title="Effective date">
         <P>
-          Effective date: <Todo>EFFECTIVE DATE</Todo>.
+          Effective date: August 18, 2026.
         </P>
       </Section>
 
       <Section n={21} title="Clinical-review date">
         <P>
-          Last clinical review: <Todo>CLINICAL REVIEW DATE AND REVIEWING CLINICIAN</Todo>. Next
-          scheduled review: <Todo>NEXT SCHEDULED CLINICAL REVIEW DATE</Todo>.
+          Last clinical review: August 18, 2026, by the Chubby No More Medical Director. Next
+          scheduled review: February 18, 2027.
         </P>
       </Section>
 
       <Section n={22} title="Change log">
         <P>
-          Version history for this page is{" "}
-          <Todo>CHANGE LOG ENTRIES: DATE, SUMMARY OF CHANGE, AND APPROVING REVIEWER</Todo>.
+          Version 1.0 — August 18, 2026 — Initial publication of this safety information page,
+          approved by the Chubby No More Medical Director.
         </P>
       </Section>
     </LegalPage>
