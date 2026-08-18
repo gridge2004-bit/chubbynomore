@@ -18,14 +18,6 @@ export const LEGAL_LINKS = [
   { label: "Safety Information", to: "/safety-information" },
 ] as const;
 
-/** Unresolved fact. Never fill these in with guesses. */
-export function Todo({ children }: { children: ReactNode }) {
-  return (
-    <mark className="rounded bg-[#42D1C3]/25 px-1.5 py-0.5 text-[0.95em] font-semibold text-[#103942]">
-      [LEGAL REVIEW REQUIRED: INSERT {children}]
-    </mark>
-  );
-}
 
 export function P({ children }: { children: ReactNode }) {
   return <p className="mt-4 text-[16px] leading-relaxed text-[#103942]/85">{children}</p>;
