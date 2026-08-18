@@ -282,8 +282,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
     a.consentTerms &&
     a.consentCompounded;
 
-  const valid = [step1Valid, step2Valid, step3Valid, step4Valid, step5Valid][step - 1];
-
   const contactReady = emailOk(a.email) && digits(a.phone).length === 10;
 
   const persistContact = useCallback(
