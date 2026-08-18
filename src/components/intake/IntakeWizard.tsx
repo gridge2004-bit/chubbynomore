@@ -986,8 +986,6 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
             </div>
           </>
         )}
-
-        <ComplianceFooter />
       </div>
     </div>
   );
