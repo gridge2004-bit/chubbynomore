@@ -270,6 +270,52 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   const valid = [step1Valid, step2Valid, step3Valid, step4Valid, step5Valid][step - 1];
 
+  const contactReady = emailOk(a.email) && digits(a.phone).length === 10;
+
+  const persistContact = useCallback(
+    async (lastCompletedStep: string) => {
+      if (!emailOk(a.email) || digits(a.phone).length !== 10) return;
+      const signature = [
+        a.email.trim().toLowerCase(),
+        a.phone,
+        a.firstName.trim(),
+        a.lastName.trim(),
+        lastCompletedStep,
+      ].join("|");
+      if (signature === lastSavedRef.current) return;
+      lastSavedRef.current = signature;
+      try {
+        const res = await savePartial({
+          data: {
+            leadId: leadIdRef.current,
+            firstName: a.firstName.trim() || undefined,
+            lastName: a.lastName.trim() || undefined,
+            email: a.email.trim(),
+            phone: a.phone,
+            lastCompletedStep,
+            funnelSource: "website_intake",
+            referringPage:
+              typeof window !== "undefined" ? window.location.pathname : undefined,
+          },
+        });
+        leadIdRef.current = res.leadId;
+      } catch {
+        lastSavedRef.current = "";
+      }
+    },
+    [a.email, a.phone, a.firstName, a.lastName, savePartial],
+  );
+
+  // Save contact info as soon as it's valid, before any final submission.
+  useEffect(() => {
+    if (!contactReady) return;
+    const t = window.setTimeout(() => {
+      void persistContact(`step_${step}_in_progress`);
+    }, 900);
+    return () => window.clearTimeout(t);
+  }, [contactReady, persistContact, step]);
+
+
   const toggleMulti = (key: "tried" | "conditions", label: string, noneLabel: string) => {
     setA((prev) => {
       const cur = prev[key];
