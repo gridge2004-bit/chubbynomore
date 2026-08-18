@@ -112,11 +112,6 @@ const EMPTY: Answers = {
   consentCompounded: false,
 };
 
-const PLANS = [
-  { id: "6-month", title: "6-month", price: "$249/mo", note: "Best value, billed monthly", best: true },
-  { id: "3-month", title: "3-month", price: "$269/mo", note: "Billed monthly" },
-  { id: "monthly", title: "Month-to-month", price: "$289/mo", note: "Cancel anytime" },
-];
 
 /* ─────────────── helpers ─────────────── */
 
@@ -504,7 +499,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
-              <Step4 a={a} set={set} />
+              <Step4 a={a} />
               <div className="mt-8 pb-4">
                 <PrimaryButton disabled={!step4Valid} onClick={() => { void persistContact("step_4_completed"); scrollToStep(5); }}>
                   Continue <ArrowRight className="h-4 w-4" />
@@ -818,7 +813,7 @@ function Step3({
   );
 }
 
-function Step4({ a, set }: { a: Answers; set: SetFn }) {
+function Step4({ a }: { a: Answers }) {
   const included = [
     "Licensed provider review, available in all 50 states",
     "Medication from a licensed U.S. compounding pharmacy",
@@ -829,43 +824,11 @@ function Step4({ a, set }: { a: Answers; set: SetFn }) {
   return (
     <div className="space-y-6">
       <div>
-        <H>Choose your plan</H>
+        <H>What&apos;s included</H>
         <p className="mt-2 text-[14px] text-[#103942]/60">
-          Your price is flat across every dose. It does not go up when your dose does.
+          One flat monthly charge with no membership fees and no consultation fees.
         </p>
       </div>
-
-      <fieldset>
-        <legend className="sr-only">Choose your plan</legend>
-        <div className="flex flex-col gap-[10px]">
-          {PLANS.map((p) => {
-            const selected = a.plan === p.id;
-            return (
-              <button
-                key={p.id}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => set("plan", p.id)}
-                className={cn(
-                  "relative w-full rounded-xl border bg-white px-4 py-[18px] text-left transition-all duration-150",
-                  "hover:-translate-y-px hover:border-[#103942]/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#42D1C3]",
-                  selected ? "border-[#42D1C3] bg-[#42D1C3]/12" : "border-[#103942]/15",
-                )}
-              >
-                {p.best ? (
-                  <span className="absolute right-3 top-3 rounded-full bg-[#42D1C3] px-2.5 py-1 text-[11px] font-bold text-white">
-                    Best value
-                  </span>
-                ) : null}
-                <span className="block text-[16px] font-semibold text-[#103942]">{p.title}</span>
-                <span className="mt-1 block text-[18px] font-bold text-[#103942]">{p.price}</span>
-                <span className="mt-0.5 block text-[13px] text-[#103942]/60">{p.note}</span>
-              </button>
-            );
-          })}
-        </div>
-      </fieldset>
 
       <div className="rounded-xl border border-[#103942]/15 p-4">
         <p className="text-[15px] font-semibold text-[#103942]">What&apos;s included</p>
