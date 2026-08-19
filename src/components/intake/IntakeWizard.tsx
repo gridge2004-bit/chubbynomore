@@ -404,26 +404,50 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
       ].join("|");
       if (signature === lastSavedRef.current) return;
       lastSavedRef.current = signature;
-      try {
-        const res = await savePartial({
-          data: {
-            leadId: leadIdRef.current,
-            firstName: a.firstName.trim() || undefined,
-            lastName: a.lastName.trim() || undefined,
-            email: a.email.trim(),
-            phone: a.phone,
-            lastCompletedStep,
-            funnelSource: "website_intake",
-            referringPage:
-              typeof window !== "undefined" ? window.location.pathname : undefined,
-          },
-        });
-        leadIdRef.current = res.leadId;
-      } catch (err) {
-        console.error("[partial-save] save failed", err);
-        lastSavedRef.current = "";
-      }
 
+      const payload = {
+        leadId: leadIdRef.current,
+        firstName: a.firstName.trim() || undefined,
+        lastName: a.lastName.trim() || undefined,
+        email: a.email.trim(),
+        phone: a.phone,
+        lastCompletedStep,
+        funnelSource: "website_intake",
+        referringPage:
+          typeof window !== "undefined" ? window.location.pathname : undefined,
+      };
+
+      const attempt = () => savePartial({ data: payload });
+
+      try {
+        setSaveState("saving");
+        let res;
+        try {
+          res = await attempt();
+        } catch (err) {
+          // One retry, only for transient network/timeout failures.
+          if (!isTransientClientError(err)) throw err;
+          console.warn("[lead-capture] transient save failure, retrying once", err);
+          setSaveState("retrying");
+          await new Promise((r) => setTimeout(r, 1500));
+          res = await attempt();
+        }
+        leadIdRef.current = res.leadId;
+        setSaveState("saved");
+        setSaveError(null);
+      } catch (err) {
+        // Background autosave: log loudly, never surface to the user.
+        console.error("[lead-capture] partial save failed", {
+          error: err,
+          message: err instanceof Error ? err.message : String(err),
+          stack: err instanceof Error ? err.stack : undefined,
+          lastCompletedStep,
+          leadId: leadIdRef.current,
+        });
+        lastSavedRef.current = "";
+        setSaveState("failed");
+        setSaveError(err instanceof Error ? err.message : String(err));
+      }
     },
     [a.email, a.phone, a.firstName, a.lastName, savePartial],
   );
