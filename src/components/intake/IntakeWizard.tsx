@@ -261,6 +261,48 @@ function Helper({ children }: { children: React.ReactNode }) {
   return <p className="mt-2 text-[13px] leading-relaxed text-[#103942]/60">{children}</p>;
 }
 
+/* ───────── background lead-capture observability ───────── */
+
+type LeadSaveState = "idle" | "saving" | "retrying" | "saved" | "failed";
+
+/** Transient = worth exactly one retry. Validation/constraint errors are not. */
+function isTransientClientError(err: unknown) {
+  const msg = err instanceof Error ? err.message : String(err ?? "");
+  return /failed to fetch|networkerror|network request failed|timeout|timed out|load failed|502|503|504/i.test(
+    msg,
+  );
+}
+
+/** Dev-only feedback loop. Never rendered in production builds. */
+function LeadSaveChip({ state, error }: { state: LeadSaveState; error: string | null }) {
+  if (!import.meta.env.DEV) return null;
+  if (state === "idle") return null;
+  const label =
+    state === "saved"
+      ? "lead saved"
+      : state === "failed"
+        ? "lead save failed"
+        : state === "retrying"
+          ? "retrying"
+          : "saving";
+  const tone =
+    state === "failed"
+      ? "bg-red-600 text-white"
+      : state === "saved"
+        ? "bg-[#103942] text-white"
+        : "bg-[#42D1C3] text-[#103942]";
+  return (
+    <div
+      data-testid="lead-save-chip"
+      data-state={state}
+      title={error ?? undefined}
+      className={`fixed bottom-3 left-3 z-50 rounded-full px-3 py-1 text-[11px] font-semibold shadow-lg ${tone}`}
+    >
+      {label}
+    </div>
+  );
+}
+
 /* ─────────────── wizard ─────────────── */
 
 export function IntakeWizard({ product: productSlug }: { product?: string }) {
