@@ -1132,7 +1132,7 @@ function CheckRow({
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
-  label: string;
+  label: ReactNode;
   error?: string | null;
 }) {
   return (
