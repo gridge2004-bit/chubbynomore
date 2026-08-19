@@ -311,7 +311,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
         ? "Height must be between 3 and 8 feet."
         : null,
     heightIn: a.heightIn === ""
-      ? "Enter the remaining inches (0–11)."
+      ? "Enter the remaining inches (0 to 11)."
       : Number(a.heightIn) > 11
         ? "Inches must be between 0 and 11."
         : null,
@@ -1380,7 +1380,7 @@ function Confirmation() {
         <Check className="h-7 w-7 text-[#42D1C3]" strokeWidth={3} />
       </div>
       <h1 className="mt-5 font-serif text-[26px] leading-tight text-[#103942]">
-        Thanks — your intake is in.
+        Thanks, your intake is in.
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-[#103942]/70">
         Our licensed provider will review your information and Chubby No More will follow up by

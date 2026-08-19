@@ -20,7 +20,7 @@ export const Route = createFileRoute("/intake")({
       {
         property: "og:description",
         content:
-          "Complete your 60-second health intake — reviewed by our licensed provider within 24 hours.",
+          "Complete your 60-second health intake, reviewed by our licensed provider within 24 hours.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

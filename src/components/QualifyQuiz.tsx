@@ -262,7 +262,7 @@ const heightStep: QuestionStep = {
         {touched && (!ftValid || !inValid) && (
           <p className="mt-2 text-sm text-[#B00020]">
             {!ftValid
-              ? "Please enter your height in feet (3–8)."
+              ? "Please enter your height in feet (3 to 8)."
               : "Inches must be a whole number between 0 and 11."}
           </p>
         )}
