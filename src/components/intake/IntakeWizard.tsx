@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { savePartialLead } from "@/lib/leads.functions";
@@ -1076,7 +1076,31 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                         checked={a.consentTelehealth}
                         onChange={(v) => set("consentTelehealth", v)}
                         error={err("consentTelehealth")}
-                        label="I consent to receive care through telehealth from an independent licensed provider and agree to Chubby No More’s Telehealth Consent and Terms of Use."
+                        label={
+                          <span>
+                            I consent to receive care through telehealth from an independent licensed provider and agree to Chubby No More’s{" "}
+                            <Link
+                              to="/telehealth-consent"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="font-semibold underline underline-offset-2 hover:text-[#42D1C3]"
+                            >
+                              Telehealth Consent
+                            </Link>{" "}
+                            and{" "}
+                            <Link
+                              to="/terms-of-use"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="font-semibold underline underline-offset-2 hover:text-[#42D1C3]"
+                            >
+                              Terms of Use
+                            </Link>
+                            .
+                          </span>
+                        }
                       />
                       <CheckRow
                         checked={a.consentCompounded}
@@ -1088,7 +1112,21 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
                         checked={a.consentPrivacy}
                         onChange={(v) => set("consentPrivacy", v)}
                         error={err("consentPrivacy")}
-                        label="I have reviewed the Notice of Privacy Practices and consent to Chubby No More contacting me about my care."
+                        label={
+                          <span>
+                            I have reviewed the{" "}
+                            <Link
+                              to="/notice-of-privacy-practices"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="font-semibold underline underline-offset-2 hover:text-[#42D1C3]"
+                            >
+                              Notice of Privacy Practices
+                            </Link>{" "}
+                            and consent to Chubby No More contacting me about my care.
+                          </span>
+                        }
                       />
                     </div>
 
@@ -1132,7 +1170,7 @@ function CheckRow({
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
-  label: string;
+  label: ReactNode;
   error?: string | null;
 }) {
   return (
