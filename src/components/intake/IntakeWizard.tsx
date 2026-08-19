@@ -265,12 +265,12 @@ function Helper({ children }: { children: React.ReactNode }) {
 
 export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const product = (productSlug && PRODUCTS[productSlug]) || DEFAULT_PRODUCT;
-  console.log("[IntakeWizard] render");
 
   const [step, setStep] = useState(1);
   const [a, setA] = useState<Answers>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+
 
 
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
