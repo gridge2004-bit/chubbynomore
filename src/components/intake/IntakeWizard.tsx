@@ -426,11 +426,14 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   useEffect(() => {
     if (!contactReady) return;
+    console.log("[partial-save] contact ready, scheduling save");
     const t = window.setTimeout(() => {
+      console.log("[partial-save] firing persistContact");
       void persistContact(`step_${step}_in_progress`);
     }, 900);
     return () => window.clearTimeout(t);
   }, [contactReady, persistContact, step]);
+
 
   useEffect(() => {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
