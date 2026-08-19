@@ -115,11 +115,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      {/* Browser extensions (Grammarly, password managers) inject attributes/styles
+          into <body> and form fields before React hydrates. Suppress that noise so
+          real hydration mismatches stay visible. */}
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>
