@@ -647,6 +647,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   return (
     <div className="min-h-[100dvh] bg-white pb-10">
+      <LeadSaveChip state={saveState} error={saveError} />
       <header className="sticky top-0 z-10 mx-auto flex max-w-[560px] items-center justify-between bg-white/95 px-5 pt-5 pb-3 backdrop-blur-sm">
         <Link to="/" aria-label="Chubby No More home">
           <img
