@@ -1,0 +1,2 @@
+ALTER TABLE public.leads DROP CONSTRAINT IF EXISTS leads_funnel_status_check;
+ALTER TABLE public.leads ADD CONSTRAINT leads_funnel_status_check CHECK (funnel_status = ANY (ARRAY['quiz_started','quiz_completed','contact_captured','screening_saved','clinical_started','clinical_in_progress','clinical_completed','submitted_for_provider_review','partial_contact']));
