@@ -386,7 +386,7 @@ function ClinicalIntake() {
         <p className="text-sm font-semibold text-[#103942]">Save and return later</p>
         <p className="mt-1 text-sm leading-relaxed text-[#103942]/70">
           Your progress is saved securely as you go. Create a private return link that expires in 72
-          hours — you'll confirm your last name and date of birth before anything is shown again.
+          hours. You'll confirm your last name and date of birth before anything is shown again.
         </p>
         <button
           type="button"
