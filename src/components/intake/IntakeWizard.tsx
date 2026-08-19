@@ -419,9 +419,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
           },
         });
         leadIdRef.current = res.leadId;
-      } catch {
+      } catch (err) {
+        console.error("[partial-save] save failed", err);
         lastSavedRef.current = "";
       }
+
     },
     [a.email, a.phone, a.firstName, a.lastName, savePartial],
   );
