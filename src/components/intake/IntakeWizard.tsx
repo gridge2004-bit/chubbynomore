@@ -271,6 +271,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
+
+
   const set = <K extends keyof Answers>(key: K, value: Answers[K]) =>
     setA((prev) => ({ ...prev, [key]: value }));
 
@@ -417,9 +419,11 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
           },
         });
         leadIdRef.current = res.leadId;
-      } catch {
+      } catch (err) {
+        console.error("[partial-save] save failed", err);
         lastSavedRef.current = "";
       }
+
     },
     [a.email, a.phone, a.firstName, a.lastName, savePartial],
   );
@@ -431,6 +435,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
     }, 900);
     return () => window.clearTimeout(t);
   }, [contactReady, persistContact, step]);
+
+
 
   useEffect(() => {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
