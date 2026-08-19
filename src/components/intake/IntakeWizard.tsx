@@ -280,6 +280,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const savePartial = useServerFn(savePartialLead);
   const leadIdRef = useRef<string | null>(null);
   const lastSavedRef = useRef<string>("");
+  const [saveState, setSaveState] = useState<LeadSaveState>("idle");
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const bmi = useMemo(() => {
     const ft = Number(a.heightFt);
