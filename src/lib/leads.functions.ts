@@ -158,6 +158,18 @@ export type PartialLeadInput = z.infer<typeof partialLeadSchema>;
  * Saves/updates a recoverable partial lead as soon as email + phone exist.
  * Contact data only — never clinical answers, never marketing sync.
  */
+const CHECK_CONSTRAINT = "23514";
+const FALLBACK_STATUS = "contact_captured";
+
+function isTransient(err: unknown) {
+  const msg = err instanceof Error ? err.message : String(err ?? "");
+  return /fetch failed|network|ETIMEDOUT|ECONNRESET|socket hang up|timeout|503|502|504/i.test(
+    msg,
+  );
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export const savePartialLead = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => partialLeadSchema.parse(data))
   .handler(async ({ data }) => {
@@ -188,44 +200,76 @@ export const savePartialLead = createServerFn({ method: "POST" })
     }
 
     if (leadId) {
-      const { error } = await supabaseAdmin
-        .from("leads")
-        .update({
-          ...base,
-          ...(data.firstName ? { first_name: data.firstName } : {}),
-          ...(data.lastName ? { last_name: data.lastName } : {}),
-        })
-        .eq("id", leadId);
+      const update = () =>
+        supabaseAdmin
+          .from("leads")
+          .update({
+            ...base,
+            ...(data.firstName ? { first_name: data.firstName } : {}),
+            ...(data.lastName ? { last_name: data.lastName } : {}),
+          })
+          .eq("id", leadId as string);
+
+      let { error } = await update();
+      if (error && isTransient(error)) {
+        console.warn("[lead-capture] transient update failure, retrying once");
+        await sleep(1500);
+        ({ error } = await update());
+      }
       if (error) {
-        console.error("[leads] partial update failed", error.message);
+        console.error("[lead-capture] partial update failed", error.message);
         throw new Error("We couldn't save your progress. Please try again.");
       }
       return { leadId, funnelStatus: "partial_contact" as const };
     }
 
-    const { data: row, error } = await supabaseAdmin
-      .from("leads")
-      .insert({
-        ...base,
-        first_name: data.firstName || "",
-        last_name: data.lastName || "",
-        state: "",
-        funnel_source: data.funnelSource ?? "website_intake",
-        referring_page: data.referringPage ?? null,
-        funnel_status: "partial_contact",
-        operational_consent: false,
-        marketing_consent: false,
-        marketing_sync_status: "not_requested",
-        consent_text_version: CONSENT_TEXT_VERSION,
-        partial_captured_at: now,
-      })
-      .select("id")
-      .single();
+    const insert = (funnelStatus: string) =>
+      supabaseAdmin
+        .from("leads")
+        .insert({
+          ...base,
+          first_name: data.firstName || "",
+          last_name: data.lastName || "",
+          state: "",
+          funnel_source: data.funnelSource ?? "website_intake",
+          referring_page: data.referringPage ?? null,
+          funnel_status: funnelStatus,
+          operational_consent: false,
+          marketing_consent: false,
+          marketing_sync_status: "not_requested",
+          consent_text_version: CONSENT_TEXT_VERSION,
+          partial_captured_at: now,
+        })
+        .select("id")
+        .single();
+
+    let status = "partial_contact";
+    let { data: row, error } = await insert(status);
+
+    // Transient (network/timeout) failures: exactly one retry with backoff.
+    if (error && isTransient(error)) {
+      console.warn("[lead-capture] transient insert failure, retrying once");
+      await sleep(1500);
+      ({ data: row, error } = await insert(status));
+    }
+
+    // Constraint rejects 'partial_contact': keep the lead, downgrade the status.
+    if (error && error.code === CHECK_CONSTRAINT) {
+      console.warn(
+        `[lead-capture] funnel_status check constraint rejected '${status}', falling back to '${FALLBACK_STATUS}'`,
+        error.message,
+      );
+      status = FALLBACK_STATUS;
+      ({ data: row, error } = await insert(status));
+    }
 
     if (error || !row) {
-      console.error("[leads] partial insert failed", error?.message);
+      console.error("[lead-capture] partial insert failed", error?.message);
       throw new Error("We couldn't save your progress. Please try again.");
     }
 
-    return { leadId: row.id as string, funnelStatus: "partial_contact" as const };
+    return {
+      leadId: row.id as string,
+      funnelStatus: status as "partial_contact" | "contact_captured",
+    };
   });

@@ -261,6 +261,48 @@ function Helper({ children }: { children: React.ReactNode }) {
   return <p className="mt-2 text-[13px] leading-relaxed text-[#103942]/60">{children}</p>;
 }
 
+/* ───────── background lead-capture observability ───────── */
+
+type LeadSaveState = "idle" | "saving" | "retrying" | "saved" | "failed";
+
+/** Transient = worth exactly one retry. Validation/constraint errors are not. */
+function isTransientClientError(err: unknown) {
+  const msg = err instanceof Error ? err.message : String(err ?? "");
+  return /failed to fetch|networkerror|network request failed|timeout|timed out|load failed|502|503|504/i.test(
+    msg,
+  );
+}
+
+/** Dev-only feedback loop. Never rendered in production builds. */
+function LeadSaveChip({ state, error }: { state: LeadSaveState; error: string | null }) {
+  if (!import.meta.env.DEV) return null;
+  if (state === "idle") return null;
+  const label =
+    state === "saved"
+      ? "lead saved"
+      : state === "failed"
+        ? "lead save failed"
+        : state === "retrying"
+          ? "retrying"
+          : "saving";
+  const tone =
+    state === "failed"
+      ? "bg-red-600 text-white"
+      : state === "saved"
+        ? "bg-[#103942] text-white"
+        : "bg-[#42D1C3] text-[#103942]";
+  return (
+    <div
+      data-testid="lead-save-chip"
+      data-state={state}
+      title={error ?? undefined}
+      className={`fixed bottom-3 left-3 z-50 rounded-full px-3 py-1 text-[11px] font-semibold shadow-lg ${tone}`}
+    >
+      {label}
+    </div>
+  );
+}
+
 /* ─────────────── wizard ─────────────── */
 
 export function IntakeWizard({ product: productSlug }: { product?: string }) {
@@ -280,6 +322,8 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
   const savePartial = useServerFn(savePartialLead);
   const leadIdRef = useRef<string | null>(null);
   const lastSavedRef = useRef<string>("");
+  const [saveState, setSaveState] = useState<LeadSaveState>("idle");
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const bmi = useMemo(() => {
     const ft = Number(a.heightFt);
@@ -404,26 +448,50 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
       ].join("|");
       if (signature === lastSavedRef.current) return;
       lastSavedRef.current = signature;
-      try {
-        const res = await savePartial({
-          data: {
-            leadId: leadIdRef.current,
-            firstName: a.firstName.trim() || undefined,
-            lastName: a.lastName.trim() || undefined,
-            email: a.email.trim(),
-            phone: a.phone,
-            lastCompletedStep,
-            funnelSource: "website_intake",
-            referringPage:
-              typeof window !== "undefined" ? window.location.pathname : undefined,
-          },
-        });
-        leadIdRef.current = res.leadId;
-      } catch (err) {
-        console.error("[partial-save] save failed", err);
-        lastSavedRef.current = "";
-      }
 
+      const payload = {
+        leadId: leadIdRef.current,
+        firstName: a.firstName.trim() || undefined,
+        lastName: a.lastName.trim() || undefined,
+        email: a.email.trim(),
+        phone: a.phone,
+        lastCompletedStep,
+        funnelSource: "website_intake",
+        referringPage:
+          typeof window !== "undefined" ? window.location.pathname : undefined,
+      };
+
+      const attempt = () => savePartial({ data: payload });
+
+      try {
+        setSaveState("saving");
+        let res;
+        try {
+          res = await attempt();
+        } catch (err) {
+          // One retry, only for transient network/timeout failures.
+          if (!isTransientClientError(err)) throw err;
+          console.warn("[lead-capture] transient save failure, retrying once", err);
+          setSaveState("retrying");
+          await new Promise((r) => setTimeout(r, 1500));
+          res = await attempt();
+        }
+        leadIdRef.current = res.leadId;
+        setSaveState("saved");
+        setSaveError(null);
+      } catch (err) {
+        // Background autosave: log loudly, never surface to the user.
+        console.error("[lead-capture] partial save failed", {
+          error: err,
+          message: err instanceof Error ? err.message : String(err),
+          stack: err instanceof Error ? err.stack : undefined,
+          lastCompletedStep,
+          leadId: leadIdRef.current,
+        });
+        lastSavedRef.current = "";
+        setSaveState("failed");
+        setSaveError(err instanceof Error ? err.message : String(err));
+      }
     },
     [a.email, a.phone, a.firstName, a.lastName, savePartial],
   );
@@ -579,6 +647,7 @@ export function IntakeWizard({ product: productSlug }: { product?: string }) {
 
   return (
     <div className="min-h-[100dvh] bg-white pb-10">
+      <LeadSaveChip state={saveState} error={saveError} />
       <header className="sticky top-0 z-10 mx-auto flex max-w-[560px] items-center justify-between bg-white/95 px-5 pt-5 pb-3 backdrop-blur-sm">
         <Link to="/" aria-label="Chubby No More home">
           <img
