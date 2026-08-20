@@ -93,7 +93,7 @@ const products = [
     bullets: ["Once-weekly injection", "Physician-titrated dosing", "Free shipping, cancel anytime"],
       options: [
       { label: "GLP-1 + GIP (Tirzepatide)", price: "$279", period: "/ 28-day supply" },
-      { label: "GLP-1 (Semaglutide)", price: "$149.99", period: "/ 28-day supply" },
+      { label: "GLP-1 (Semaglutide)", price: "$179.99", period: "/ 28-day supply" },
     ],
     img: cnmSemaVialsAsset.url,
   },
@@ -125,8 +125,8 @@ const faqs = [
       </>
     ),
   },
-  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
-  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Your final cost depends on what our licensed provider prescribes." },
+  { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $179.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
+  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $179.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Your final cost depends on what our licensed provider prescribes." },
   { q: "Will a GLP-1 affect my muscle mass or gym performance?", a: "Weight lost on any calorie deficit, including with GLP-1 treatment, can include lean mass as well as fat. Research on strategies to limit lean-mass loss generally points to adequate protein intake and regular resistance training, though individual results vary. Some men also notice lower energy during hard training early on, particularly while appetite and food intake are dropping. Discuss your training goals with your licensed provider so your plan and titration pace can account for them." },
   { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
   { q: "How private and discreet is the process?", a: "The intake, provider review, and follow-up messaging all happen online — there is no in-person visit and no waiting room. Medication is shipped in plain packaging with no medication branding on the outside of the box. Your health information is used to evaluate and coordinate your care and is shared only with the providers, pharmacies, and service partners involved in delivering it, as described in the Privacy Policy." },
@@ -322,7 +322,7 @@ function Hero() {
           Lose the weight your willpower couldn't. Clinician-guided GLP-1 for men.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#103942] sm:text-lg">
-          60-second intake. Licensed provider review. If prescribed, medication from a U.S. pharmacy ships to your door. Compounded plans from $149.99/28 days. Not everyone qualifies.
+          60-second intake. Licensed provider review. If prescribed, medication from a U.S. pharmacy ships to your door. Compounded plans from $179.99/28 days. Not everyone qualifies.
         </p>
         <div>
           <a
@@ -535,7 +535,7 @@ function StickyMobileCTA() {
           <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#103942]/60">
             Plans from
           </div>
-          <div className="text-[15px] font-semibold text-[#103942]">$149.99 / 28 days</div>
+          <div className="text-[15px] font-semibold text-[#103942]">$179.99 / 28 days</div>
         </div>
         <a
           href="/intake"
@@ -683,7 +683,7 @@ const detailedCards: DetailedCard[] = [
     desc: "A clinician-prescribed GLP-1 treatment option that may support appetite regulation and weight management as part of a medically supervised plan. Individual results vary.",
     img: cnmSemaVialsAsset.url,
     imgAlt: "Compounded semaglutide vials with discreet CNM branding",
-    fullSupplyPrice: 149.99,
+    fullSupplyPrice: 179.99,
     supplyLabel: "28-day supply",
     dosesPerSupply: 4,
     doseLabel: "weekly dose",
@@ -1415,7 +1415,7 @@ function MedicationOptions() {
       <div className="mx-auto flex max-w-6xl flex-col">
         <Reveal className="mb-6 text-center">
           <h2 className="font-serif text-3xl leading-tight text-[#103942] sm:text-4xl md:text-5xl">
-            Plans start at $149.99 / 28-day supply.
+            Plans start at $179.99 / 28-day supply.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#103942]/70 sm:text-lg">
             Your licensed provider will determine which available treatment option may be medically appropriate for you.
