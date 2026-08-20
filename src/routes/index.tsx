@@ -104,19 +104,6 @@ const products = [
     ],
     img: cnmSemaVialsAsset.url,
   },
-  {
-    id: "brand",
-    tag: "FDA-APPROVED",
-    name: "Brand-name Weight Loss",
-    subtitle: "FDA-approved name brand",
-    medications: ["Ozempic", "Mounjaro", "Wegovy", "Zepbound"],
-    desc: "Brand-name GLP-1 medications dispensed by a licensed US pharmacy. Prescribed online by a board-certified physician based on your eligibility and goals.",
-    bullets: ["Authentic manufacturer product", "Physician-managed care", "Shipped discreetly to your door"],
-    options: [
-      { label: "Insurance & cash-pay options available — see pricing during intake", price: "", period: "" },
-    ],
-    img: tirzepatideImg,
-  },
 ];
 
 const steps = [
