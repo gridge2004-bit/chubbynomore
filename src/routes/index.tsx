@@ -649,16 +649,10 @@ type DetailedCard = {
 };
 
 
-const FEATURED_IDS = ["semaglutide", "wegovy-tablets", "zepbound"];
+const FEATURED_IDS = ["semaglutide", "tirzepatide"];
 const CARD_META: Record<string, { format: string; activeIngredient: string }> = {
   semaglutide: { format: "Weekly injection", activeIngredient: "Semaglutide" },
   tirzepatide: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
-  foundayo: { format: "Once-daily tablet", activeIngredient: "Orforglipron" },
-  "wegovy-tablets": { format: "Once-daily tablet", activeIngredient: "Semaglutide" },
-  zepbound: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
-  "wegovy-pens": { format: "Weekly injection", activeIngredient: "Semaglutide" },
-  ozempic: { format: "Weekly injection", activeIngredient: "Semaglutide" },
-  mounjaro: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
 };
 
 const PER_DOSE_INFO =
