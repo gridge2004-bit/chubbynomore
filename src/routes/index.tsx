@@ -14,12 +14,6 @@ import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
-import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
-import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
-import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
-import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
-import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
-import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 
