@@ -5,7 +5,6 @@ import { Reveal, useParallax } from "@/components/Reveal";
 import { LEGAL_LINKS } from "@/components/LegalPage";
 
 import heroImg from "@/assets/hero.jpg";
-import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
 import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step2Img from "@/assets/step2.jpg";
@@ -15,12 +14,6 @@ import cnmTirzVialsAsset from "@/assets/cnm-tirz-vials.jpg.asset.json";
 import cnmBoxAsset from "@/assets/cnm-box.png.asset.json";
 import cnmHeaderLogoAsset from "@/assets/cnm-header-logo.png.asset.json";
 import cnmLogoFullAsset from "@/assets/cnm-logo-full.png.asset.json";
-import foundayoPillAsset from "@/assets/foundayo-pill.png.asset.json";
-import wegovyPillAsset from "@/assets/wegovy-pill.png.asset.json";
-import zepboundPenAsset from "@/assets/zepbound-pen.png.asset.json";
-import wegovyPenAsset from "@/assets/wegovy-pen.png.asset.json";
-import ozempicPenAsset from "@/assets/ozempic-pen.png.asset.json";
-import mounjaroPenAsset from "@/assets/mounjaro-pen.png.asset.json";
 import feelLikeYourselfAsset from "@/assets/feel-like-yourself.jpg.asset.json";
 import loveWhatYouSeeAsset from "@/assets/love-what-you-see.jpg.asset.json";
 
@@ -35,13 +28,13 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide, tirzepatide, and select FDA-approved brand-name options." },
+      { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide and compounded tirzepatide options." },
       { property: "og:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care with compounded semaglutide and tirzepatide options." },
       { property: "og:site_name", content: "Chubby No More" },
       { property: "og:url", content: "https://chubbynomore.com/" },
       { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care with compounded semaglutide and tirzepatide options." },
       { property: "og:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
       { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
@@ -104,19 +97,6 @@ const products = [
     ],
     img: cnmSemaVialsAsset.url,
   },
-  {
-    id: "brand",
-    tag: "FDA-APPROVED",
-    name: "Brand-name Weight Loss",
-    subtitle: "FDA-approved name brand",
-    medications: ["Ozempic", "Mounjaro", "Wegovy", "Zepbound"],
-    desc: "Brand-name GLP-1 medications dispensed by a licensed US pharmacy. Prescribed online by a board-certified physician based on your eligibility and goals.",
-    bullets: ["Authentic manufacturer product", "Physician-managed care", "Shipped discreetly to your door"],
-    options: [
-      { label: "Insurance & cash-pay options available — see pricing during intake", price: "", period: "" },
-    ],
-    img: tirzepatideImg,
-  },
 ];
 
 const steps = [
@@ -146,9 +126,9 @@ const faqs = [
     ),
   },
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
-  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Brand-name medications are priced separately by the pharmacy and depend on prescription, insurance or savings-program eligibility, and availability. Your final cost depends on what our licensed provider prescribes." },
+  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Your final cost depends on what our licensed provider prescribes." },
   { q: "Will a GLP-1 affect my muscle mass or gym performance?", a: "Weight lost on any calorie deficit, including with GLP-1 treatment, can include lean mass as well as fat. Research on strategies to limit lean-mass loss generally points to adequate protein intake and regular resistance training, though individual results vary. Some men also notice lower energy during hard training early on, particularly while appetite and food intake are dropping. Discuss your training goals with your licensed provider so your plan and titration pace can account for them." },
-  { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. There are also once-daily oral options, including Wegovy® tablets and Foundayo™ (orforglipron). Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
+  { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
   { q: "How private and discreet is the process?", a: "The intake, provider review, and follow-up messaging all happen online — there is no in-person visit and no waiting room. Medication is shipped in plain packaging with no medication branding on the outside of the box. Your health information is used to evaluate and coordinate your care and is shared only with the providers, pharmacies, and service partners involved in delivering it, as described in the Privacy Policy." },
 ];
 
@@ -178,7 +158,6 @@ function Index() {
 
       <WeightLossScale />
       <WhoQualifies />
-      <CompoundedVsBrand />
       <WhoNotFor />
 
       <TrustedCare />
@@ -611,7 +590,7 @@ const tiles: Tile[] = [
     variant: "image-hero",
   },
   { id: "compounded", tag: "POPULAR", title: "Compounded GLP-1", img: cnmSemaVialsAsset.url, imgAlt: "Compounded GLP-1 medication", variant: "row" },
-  { id: "brand", tag: "FDA-APPROVED", title: "Brand-name GLP-1", img: tirzepatideImg, imgAlt: "Brand-name GLP-1 medication", variant: "row" },
+  
   { id: "cravings", title: "Curb cravings & appetite", img: oralTablets1Img, imgAlt: "Oral weight-loss tablets", variant: "half" },
   { id: "metabolic", title: "Metabolic health", img: oralTablets2Img, imgAlt: "Oral metabolic health tablets", variant: "half" },
   { id: "dosing", title: "Personalized dosing", img: ctaImg, imgAlt: "Personalized dosing care", variant: "row" },
@@ -662,16 +641,10 @@ type DetailedCard = {
 };
 
 
-const FEATURED_IDS = ["semaglutide", "wegovy-tablets", "zepbound"];
+const FEATURED_IDS = ["semaglutide", "tirzepatide"];
 const CARD_META: Record<string, { format: string; activeIngredient: string }> = {
   semaglutide: { format: "Weekly injection", activeIngredient: "Semaglutide" },
   tirzepatide: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
-  foundayo: { format: "Once-daily tablet", activeIngredient: "Orforglipron" },
-  "wegovy-tablets": { format: "Once-daily tablet", activeIngredient: "Semaglutide" },
-  zepbound: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
-  "wegovy-pens": { format: "Weekly injection", activeIngredient: "Semaglutide" },
-  ozempic: { format: "Weekly injection", activeIngredient: "Semaglutide" },
-  mounjaro: { format: "Weekly injection", activeIngredient: "Tirzepatide" },
 };
 
 const PER_DOSE_INFO =
@@ -703,19 +676,6 @@ function formatUSD(n: number) {
 
 const detailedCards: DetailedCard[] = [
   {
-    id: "wegovy-tablets",
-    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
-    tagTone: "lavender",
-    name: "Wegovy® Tablets",
-    desc: "Wegovy® tablets are a once-daily oral semaglutide treatment FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults.",
-    img: wegovyPillAsset.url,
-    imgAlt: "Wegovy tablet",
-    supplyLabel: "30-day supply",
-    dosesPerSupply: 30,
-    doseLabel: "daily dose",
-    priceMode: "pending",
-  },
-  {
     id: "semaglutide",
     tags: ["COMPOUNDED", "GLP-1"],
     tagTone: "tan",
@@ -732,20 +692,6 @@ const detailedCards: DetailedCard[] = [
     prepay: { total: 399, perSupply: 133, savings: 50.97 },
   },
   {
-    id: "foundayo",
-    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
-    tagTone: "lavender",
-    name: "Foundayo™ Tablets",
-    desc: "Foundayo™ (orforglipron) is a once-daily oral GLP-1 medication FDA-approved, together with a reduced-calorie diet and increased physical activity, to reduce excess body weight and maintain weight reduction long term in eligible adults.",
-    img: foundayoPillAsset.url,
-    imgAlt: "Foundayo tablet",
-    fullSupplyPrice: 199.99,
-    priceMode: "fixed",
-    supplyLabel: "30-day supply",
-    dosesPerSupply: 30,
-    doseLabel: "daily dose",
-  },
-  {
     id: "tirzepatide",
     tags: ["COMPOUNDED", "GLP-1 + GIP"],
     tagTone: "tan",
@@ -760,58 +706,6 @@ const detailedCards: DetailedCard[] = [
     priceMode: "fixed",
     flatDosePricing: true,
     prepay: { total: 747, perSupply: 249, savings: 90 },
-  },
-  {
-    id: "zepbound",
-    tags: ["BRAND-NAME", "GLP-1 + GIP", "FDA-APPROVED"],
-    tagTone: "lavender",
-    name: "Zepbound®",
-    desc: "Zepbound® (tirzepatide) is a once-weekly injection FDA-approved, together with a reduced-calorie diet and increased physical activity, for chronic weight management in eligible adults and for moderate-to-severe obstructive sleep apnea in adults with obesity.",
-    img: zepboundPenAsset.url,
-    imgAlt: "Zepbound injection pen",
-    supplyLabel: "28-day supply",
-    priceMode: "onRequest",
-    dosesPerSupply: 4,
-    doseLabel: "weekly dose",
-  },
-  {
-    id: "wegovy-pens",
-    tags: ["BRAND-NAME", "GLP-1", "FDA-APPROVED"],
-    tagTone: "lavender",
-    name: "Wegovy® Pens",
-    desc: "Wegovy® is a once-weekly semaglutide injection FDA-approved for chronic weight management in eligible adults. It is also approved to reduce the risk of major cardiovascular events in certain adults with cardiovascular disease and overweight or obesity.",
-    img: wegovyPenAsset.url,
-    imgAlt: "Wegovy injection pen",
-    supplyLabel: "28-day supply",
-    priceMode: "onRequest",
-    dosesPerSupply: 4,
-    doseLabel: "weekly dose",
-  },
-  {
-    id: "ozempic",
-    tags: ["BRAND-NAME", "GLP-1"],
-    tagTone: "lavender",
-    name: "Ozempic®",
-    desc: "Ozempic® (semaglutide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
-    img: ozempicPenAsset.url,
-    imgAlt: "Ozempic injection pen",
-    supplyLabel: "28-day supply",
-    priceMode: "onRequest",
-    dosesPerSupply: 4,
-    doseLabel: "weekly dose",
-  },
-  {
-    id: "mounjaro",
-    tags: ["BRAND-NAME", "GLP-1 + GIP"],
-    tagTone: "lavender",
-    name: "Mounjaro®",
-    desc: "Mounjaro® (tirzepatide) is a once-weekly injection FDA-approved for adults with type 2 diabetes. It is not FDA-approved for chronic weight management.",
-    img: mounjaroPenAsset.url,
-    imgAlt: "Mounjaro injection pen",
-    supplyLabel: "28-day supply",
-    priceMode: "onRequest",
-    dosesPerSupply: 4,
-    doseLabel: "weekly dose",
   },
 ];
 
@@ -1785,88 +1679,6 @@ function WeightLossScale() {
           This is an educational illustration of clinical-trial averages ({trialLabel}), not a prediction or promise of personal results. Individual results vary. Weight loss is not guaranteed. These results do not establish the safety, effectiveness, or quality of compounded medications.
         </p>
 
-      </div>
-    </section>
-  );
-}
-
-function CompoundedVsBrand() {
-  const cards = [
-    {
-      tag: "COMPOUNDED",
-      title: "Prepared by a compounding pharmacy",
-      meds: "Tirzepatide, Semaglutide",
-      rows: [
-        ["Regulation", "Prepared by licensed US compounding pharmacies."],
-        ["Cost", "$149.99–$279 / 28-day supply, out of pocket. No insurance required."],
-        ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
-        ["Supply", "Availability varies and is confirmed at the time of prescribing."],
-      ],
-    },
-    {
-      tag: "BRAND-NAME",
-      title: "FDA-approved brand-name medications",
-      meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
-      rows: [
-        ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "Insurance & cash-pay options available — see pricing during intake. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
-        ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
-        ["Supply", "Subject to manufacturer shortages from time to time."],
-      ],
-    },
-  ];
-
-  return (
-    <section className="bg-[#F5F5F7] px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
-            Compounded vs Brand-name
-          </div>
-          <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#103942] md:text-[64px]">
-            <em className="italic text-[#103942]">Different treatment options.</em>{" "}
-            Different regulatory pathways.
-          </h2>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
-          {cards.map((c, idx) => (
-            <Reveal
-              key={c.tag}
-              delay={idx * 120}
-              className="rounded-3xl bg-[#F5F5F7] p-7 md:p-10"
-            >
-              <div className="flex justify-center">
-                <span className="inline-block rounded-md bg-[#103942] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-                  {c.tag}
-                </span>
-              </div>
-              <h3 className="mt-7 font-serif text-[32px] leading-tight text-[#103942] md:text-[40px]">
-                {c.title}
-              </h3>
-              <p className="mt-4 text-[16px] font-medium text-[#103942]">{c.meds}</p>
-              <ul className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#103942]/85 md:text-[16px]">
-                {c.rows.map(([label, body]) => (
-                  <li key={label} className="flex gap-3">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#103942]" />
-                    <span>
-                      <strong className="font-semibold text-[#103942]">{label}:</strong> {body}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-10 text-center md:mt-14">
-          <p className="font-semibold text-[#103942]">
-            Our licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
-          </p>
-          <p className="mt-3 text-sm text-[#103942]/70">
-            Compounded medications are not FDA-approved for safety, efficacy, or quality.
-          </p>
-        </Reveal>
       </div>
     </section>
   );

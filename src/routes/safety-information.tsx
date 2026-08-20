@@ -103,22 +103,9 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={8} title="Brand-name GLP-1 products offered">
+      <Section n={8} title="Contraindications">
         <P>
-          Chubby No More Inc. may prescribe the following brand-name products, when clinically
-          appropriate and available to you: Wegovy (semaglutide) and Zepbound (tirzepatide), both
-          FDA-approved for chronic weight management in eligible adults; and Ozempic (semaglutide)
-          and Mounjaro (tirzepatide), both FDA-approved for the treatment of type 2 diabetes and used
-          off-label for weight management in appropriate patients. Your provider will tell you which
-          product and indication apply to your prescription. All four brand names are trademarks of
-          their respective manufacturers, and none of those manufacturers sponsors or endorses
-          Chubby No More Inc.
-        </P>
-      </Section>
-
-      <Section n={9} title="Contraindications">
-        <P>
-          Semaglutide- and tirzepatide-based products, whether brand-name or compounded, are
+          Semaglutide- and tirzepatide-based products are
           contraindicated in patients with a personal or family history of medullary thyroid
           carcinoma (MTC) and in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).
           They are also contraindicated in anyone with a prior serious hypersensitivity reaction to
@@ -127,7 +114,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={10} title="Boxed warnings">
+      <Section n={9} title="Boxed warnings">
         <P>
           <strong>Boxed warning — Risk of thyroid C-cell tumors.</strong> In rodent studies,
           semaglutide and tirzepatide caused thyroid C-cell tumors, including medullary thyroid
@@ -141,7 +128,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={11} title="Common adverse reactions">
+      <Section n={10} title="Common adverse reactions">
         <P>
           The most common side effects reported with semaglutide- and tirzepatide-based products are
           gastrointestinal: nausea, vomiting, diarrhea, constipation, abdominal pain, indigestion, and
@@ -152,7 +139,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={12} title="Serious adverse reactions">
+      <Section n={11} title="Serious adverse reactions">
         <P>
           Serious risks associated with semaglutide- and tirzepatide-based products include: acute
           pancreatitis (persistent, severe abdominal pain, sometimes radiating to the back, with or
@@ -169,7 +156,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={13} title="Drug interactions">
+      <Section n={12} title="Drug interactions">
         <P>
           Semaglutide- and tirzepatide-based products slow gastric emptying and can affect the
           absorption of oral medications taken at the same time, including oral contraceptives and
@@ -182,7 +169,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={14} title="Pregnancy and breastfeeding">
+      <Section n={13} title="Pregnancy and breastfeeding">
         <P>
           Semaglutide- and tirzepatide-based products are not recommended during pregnancy, because
           weight loss offers no benefit during pregnancy and may cause fetal harm, and because animal
@@ -195,7 +182,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={15} title="Monitoring">
+      <Section n={14} title="Monitoring">
         <P>
           Your provider will ask you to check in periodically, typically before each dose adjustment
           and at least once per 28-day fill, to review your weight, symptoms, and any side effects.
@@ -206,7 +193,7 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={16} title="When to contact your provider">
+      <Section n={15} title="When to contact your provider">
         <UL
           items={[
             "Side effects that persist, worsen, or interfere with eating, drinking, or daily activity.",
@@ -219,7 +206,7 @@ function SafetyInformationPage() {
         />
       </Section>
 
-      <Section n={17} title="When to call 911">
+      <Section n={16} title="When to call 911">
         <UL
           items={[
             "Trouble breathing, swelling of the face, lips, tongue, or throat, or another severe allergic reaction.",
@@ -230,7 +217,7 @@ function SafetyInformationPage() {
         />
       </Section>
 
-      <Section n={18} title="FDA MedWatch reporting">
+      <Section n={17} title="FDA MedWatch reporting">
         <P>
           You and your provider may report suspected side effects to the FDA MedWatch program at
           1-800-FDA-1088 or at fda.gov/medwatch. Reporting to the FDA does not replace contacting
@@ -238,27 +225,27 @@ function SafetyInformationPage() {
         </P>
       </Section>
 
-      <Section n={19} title="Trademark attribution">
+      <Section n={18} title="Trademark attribution">
         <P>
           All brand names referenced are trademarks of their respective owners. Reference to a brand
           does not imply affiliation with, sponsorship by, or endorsement by the trademark owner.
         </P>
       </Section>
 
-      <Section n={20} title="Effective date">
+      <Section n={19} title="Effective date">
         <P>
           Effective date: August 18, 2026.
         </P>
       </Section>
 
-      <Section n={21} title="Clinical-review date">
+      <Section n={20} title="Clinical-review date">
         <P>
           Last clinical review: August 18, 2026, by the Chubby No More Medical Director. Next
           scheduled review: February 18, 2027.
         </P>
       </Section>
 
-      <Section n={22} title="Change log">
+      <Section n={21} title="Change log">
         <P>
           Version 1.0 — August 18, 2026 — Initial publication of this safety information page,
           approved by the Chubby No More Medical Director.
