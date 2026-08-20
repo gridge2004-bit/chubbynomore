@@ -164,7 +164,6 @@ function Index() {
 
       <WeightLossScale />
       <WhoQualifies />
-      <CompoundedVsBrand />
       <WhoNotFor />
 
       <TrustedCare />
@@ -1686,88 +1685,6 @@ function WeightLossScale() {
           This is an educational illustration of clinical-trial averages ({trialLabel}), not a prediction or promise of personal results. Individual results vary. Weight loss is not guaranteed. These results do not establish the safety, effectiveness, or quality of compounded medications.
         </p>
 
-      </div>
-    </section>
-  );
-}
-
-function CompoundedVsBrand() {
-  const cards = [
-    {
-      tag: "COMPOUNDED",
-      title: "Prepared by a compounding pharmacy",
-      meds: "Tirzepatide, Semaglutide",
-      rows: [
-        ["Regulation", "Prepared by licensed US compounding pharmacies."],
-        ["Cost", "$149.99–$279 / 28-day supply, out of pocket. No insurance required."],
-        ["Customization", "Prepared in prescribed strengths and dispensed in a vial-and-syringe format."],
-        ["Supply", "Availability varies and is confirmed at the time of prescribing."],
-      ],
-    },
-    {
-      tag: "BRAND-NAME",
-      title: "FDA-approved brand-name medications",
-      meds: "Wegovy®, Zepbound®, Foundayo™, Ozempic®, Mounjaro®",
-      rows: [
-        ["Regulation", "FDA-approved and manufactured by Novo Nordisk or Eli Lilly."],
-        ["Cost", "Insurance & cash-pay options available — see pricing during intake. Brand-name medication pricing depends on prescription, insurance or savings-program eligibility, pharmacy pricing, and availability."],
-        ["Available formats", "Product-specific oral tablets or pre-filled injection pens."],
-        ["Supply", "Subject to manufacturer shortages from time to time."],
-      ],
-    },
-  ];
-
-  return (
-    <section className="bg-[#F5F5F7] px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#103942]">
-            Compounded vs Brand-name
-          </div>
-          <h2 className="mt-5 font-serif text-[40px] leading-[1.05] tracking-tight text-[#103942] md:text-[64px]">
-            <em className="italic text-[#103942]">Different treatment options.</em>{" "}
-            Different regulatory pathways.
-          </h2>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2 md:gap-6">
-          {cards.map((c, idx) => (
-            <Reveal
-              key={c.tag}
-              delay={idx * 120}
-              className="rounded-3xl bg-[#F5F5F7] p-7 md:p-10"
-            >
-              <div className="flex justify-center">
-                <span className="inline-block rounded-md bg-[#103942] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-                  {c.tag}
-                </span>
-              </div>
-              <h3 className="mt-7 font-serif text-[32px] leading-tight text-[#103942] md:text-[40px]">
-                {c.title}
-              </h3>
-              <p className="mt-4 text-[16px] font-medium text-[#103942]">{c.meds}</p>
-              <ul className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#103942]/85 md:text-[16px]">
-                {c.rows.map(([label, body]) => (
-                  <li key={label} className="flex gap-3">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#103942]" />
-                    <span>
-                      <strong className="font-semibold text-[#103942]">{label}:</strong> {body}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-10 text-center md:mt-14">
-          <p className="font-semibold text-[#103942]">
-            Our licensed provider will determine whether a compounded or FDA-approved treatment option may be medically appropriate based on your individual needs and product availability.
-          </p>
-          <p className="mt-3 text-sm text-[#103942]/70">
-            Compounded medications are not FDA-approved for safety, efficacy, or quality.
-          </p>
-        </Reveal>
       </div>
     </section>
   );
