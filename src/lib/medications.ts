@@ -29,7 +29,7 @@ export const medications: Medication[] = [
     drugClass: "GLP-1 receptor agonist",
     form: "Vial + syringe (subcutaneous injection)",
     frequency: "Once weekly",
-    price: "$149.99",
+    price: "$179.99",
     period: " / 28-day supply",
     img: cnmSemaVialsAsset.url,
     imgAlt: "Compounded semaglutide vials with discreet CNM branding",

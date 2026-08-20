@@ -28,7 +28,7 @@ const PRODUCTS: Record<string, ProductInfo> = {
   },
   "compounded-semaglutide-injection": {
     name: "Compounded Semaglutide Injection",
-    from: "from $149.99/mo",
+    from: "from $179.99/mo",
   },
 };
 
