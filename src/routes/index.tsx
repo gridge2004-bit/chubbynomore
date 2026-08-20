@@ -2028,12 +2028,12 @@ function FinalCTA() {
   ];
   return (
     <section id="start" className="w-full bg-[#F5F5F7] py-16 md:py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-14 lg:gap-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-[1.15fr_0.85fr] md:gap-14 lg:gap-20">
         <div className="overflow-hidden rounded-[1.75rem] bg-[#103942] shadow-[0_30px_60px_-40px_rgba(16,57,66,0.55)]">
           <img
             src={dinnerCoupleAsset.url}
             alt="Couple enjoying a candlelit dinner at an upscale restaurant"
-            className="aspect-[4/3] h-full w-full object-cover object-center md:aspect-[5/6] lg:aspect-[4/5]"
+            className="aspect-[4/3] h-full w-full object-cover object-center md:aspect-[3/2] lg:aspect-[3/2]"
             loading="lazy"
           />
         </div>
