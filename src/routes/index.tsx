@@ -5,7 +5,6 @@ import { Reveal, useParallax } from "@/components/Reveal";
 import { LEGAL_LINKS } from "@/components/LegalPage";
 
 import heroImg from "@/assets/hero.jpg";
-import tirzepatideImg from "@/assets/brand-weightloss.jpg";
 import oralTablets1Img from "@/assets/oral-tablets-1.png";
 import oralTablets2Img from "@/assets/oral-tablets-2.png";
 import step2Img from "@/assets/step2.jpg";
@@ -35,13 +34,13 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide, tirzepatide, and select FDA-approved brand-name options." },
+      { name: "description", content: "Online GLP-1 weight-management care with licensed-provider review. Explore compounded semaglutide and compounded tirzepatide options." },
       { property: "og:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { property: "og:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care with compounded semaglutide and tirzepatide options." },
       { property: "og:site_name", content: "Chubby No More" },
       { property: "og:url", content: "https://chubbynomore.com/" },
       { name: "twitter:title", content: "Online GLP-1 Weight Loss Program | Chubby No More" },
-      { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care, with compounded and select FDA-approved brand-name options where available." },
+      { name: "twitter:description", content: "Licensed-provider-reviewed online GLP-1 weight-management care with compounded semaglutide and tirzepatide options." },
       { property: "og:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
       { name: "twitter:image", content: "https://chubbynomore.com/__l5e/assets-v1/b99e2d31-702f-4a98-b1b7-9bca6ef9f964/cnm-social.jpg" },
     ],
@@ -133,9 +132,9 @@ const faqs = [
     ),
   },
   { q: "How much does the program cost?", a: "ChubbyNoMore is a cash-pay program, and insurance is not required. Plans start at $149.99 / 28-day supply. Your final cost depends on the treatment prescribed and the current price of that treatment." },
-  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Brand-name medications are priced separately by the pharmacy and depend on prescription, insurance or savings-program eligibility, and availability. Your final cost depends on what our licensed provider prescribes." },
+  { q: "What does a typical month actually cost, all in?", a: "For compounded plans, the medication price shown covers the 28-day supply, the online provider review, and standard shipping — there is no separate consult fee or delivery charge. Compounded semaglutide starts at $149.99 per 28-day supply and compounded tirzepatide at $279 per 28-day supply. Your final cost depends on what our licensed provider prescribes." },
   { q: "Will a GLP-1 affect my muscle mass or gym performance?", a: "Weight lost on any calorie deficit, including with GLP-1 treatment, can include lean mass as well as fat. Research on strategies to limit lean-mass loss generally points to adequate protein intake and regular resistance training, though individual results vary. Some men also notice lower energy during hard training early on, particularly while appetite and food intake are dropping. Discuss your training goals with your licensed provider so your plan and titration pace can account for them." },
-  { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. There are also once-daily oral options, including Wegovy® tablets and Foundayo™ (orforglipron). Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
+  { q: "Do I have to use needles, or are there oral options?", a: "Both formats exist. Compounded semaglutide and tirzepatide are once-weekly injections using a short, fine needle placed under the skin of the abdomen or thigh — most patients self-administer at home in under a minute. Which format is appropriate depends on your medical history, tolerance, and provider judgment; a specific medication or format is not guaranteed." },
   { q: "How private and discreet is the process?", a: "The intake, provider review, and follow-up messaging all happen online — there is no in-person visit and no waiting room. Medication is shipped in plain packaging with no medication branding on the outside of the box. Your health information is used to evaluate and coordinate your care and is shared only with the providers, pharmacies, and service partners involved in delivering it, as described in the Privacy Policy." },
 ];
 
