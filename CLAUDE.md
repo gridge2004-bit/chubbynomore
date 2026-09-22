@@ -66,8 +66,8 @@ changes are a compliance surface, not just a conversion surface.
   `showTrustedCareSection` / `testimonialsEnabled` flags in `content.tsx` are
   deliberately `false` — leave them off unless explicitly told otherwise.
 - Do not name brand drugs (Ozempic, Wegovy, Mounjaro, Zepbound) as products
-  offered. They were deliberately removed; unused brand assets still sit in
-  `src/assets/`.
+  offered. They were deliberately removed, and their orphaned imagery in
+  `src/assets/` has since been deleted too — don't re-add it.
 
 ## Commands
 
